@@ -1,0 +1,256 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(100, 95, 95);
+}
+
+.tudo{
+    background-color: rgba(243, 252, 250, 0.973);
+    width: 1260px;
+    text-align: center;
+    margin: auto;
+}
+
+a{
+    text-decoration: none;
+}
+
+hr{
+    width: 285px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black;
+    border-radius: 50px;
+    border: none;
+}
+
+/*Barra de rolagem------------------------------------------------------------*/
+body::-webkit-scrollbar{
+    width: 8px;
+    background-color: rgb(236, 234, 234);
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: black;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+    background-color: gray;
+}
+
+body::-webkit-scrollbar-button{
+    width: 0;
+    height: 0;
+}
+/*------------------------------------------------------------------------------*/
+
+/*Cabeçalho----------------------------------------------------------------------------------*/
+.cabecalho{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 10%;
+}
+
+.logo{
+    display: flex;
+    margin-left: 15px;
+}
+
+.img-logo{
+    width: 100px;
+}
+
+.logo h2{
+    padding-top: 40px;
+    margin-left: -10px;
+}
+
+.pags{
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: right;
+    margin-right: 10%;
+}
+
+.pags a{
+    color: #555;
+    font-size: 30px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+/*Corpo-------------------------------------------------------------------------*/
+.propaganda{
+    background: linear-gradient(to right,rgb(88, 211, 248), #2096f7);
+    width: 100%;
+    text-align: center;
+    color: antiquewhite;
+}
+
+.propaganda h2{
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 70px;
+}
+
+.propaganda p{
+    font-size: 30px;
+    padding-top: 30px;
+}
+
+.propaganda a button{
+    margin-top: 50px;
+    margin-bottom: 60px;
+    padding: 20px 70px;
+    border-radius: 30px;
+    border: 1px solid #555;
+    cursor: pointer;
+    outline: 0;
+    background-color: rgb(240, 196, 76);
+}
+
+.propaganda a button:hover{
+    background-color: rgb(228, 205, 128);
+}
+
+.propaganda a button{
+    font-size: 25;
+    color: black;
+    font-weight: bolder;
+}
+
+.explicacao{
+    background-color: rgb(20, 20, 20);
+    color: white;
+    display: flex;
+}
+
+.explicacao img{
+    width: 750px;
+    margin: 40px 0 40px 40px;
+}
+
+.explic{
+    margin-top: 80px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.explic h1{
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.explic p{
+    font-size: 20px;
+}
+
+.funcionalidades, .desenvolvedores{
+    text-align: center;
+    margin-top: 35px;
+}
+
+.funcionalidades h2, .desenvolvedores h2{
+    font-size: 40px
+}
+
+.infos{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding-bottom: 60px;
+}
+
+.card{
+    border: 1px solid #555;
+    width: 270px;
+    height: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px #555;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.icon-card{
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.infos h3{
+    font-size: 25px; 
+    margin-bottom: 20px;
+}
+
+.desc{
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desenvolvedores{
+    padding-bottom: 100px;
+}
+
+.cards{
+    display: flex;
+}
+
+.bloco{
+    border: 1px solid #555;
+    box-shadow: -5px 5px 5px #555;
+    width: 320px;
+    height: 400px;
+    padding-top: 60px;
+    border-radius: 15px;
+}
+
+.b1{
+    margin: 0 auto;
+}
+
+.b2{
+    margin-top: 40px;
+    margin-left: 250px;
+}
+
+.b3{
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+.bloco h3{
+    margin: 10px auto;
+}
+
+/*Rodapé----------------------------------------------------------------------------------*/
+.rodape{
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.hr{
+    width: 100%;
+}
+
+.text{
+    padding-top: 40px;
+    padding-right: 30px;
+}
+
+
