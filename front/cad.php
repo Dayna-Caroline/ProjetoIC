@@ -31,7 +31,7 @@
             </div>
         
             <div class="fantasia">
-                <input type="text" name="fantasia" id="fantasia" placeholder="Nome de usuário" required autocomplete="off">
+                <input type="text" name="fantasia" id="fantasia" placeholder="Nome Fantasia" required autocomplete="off">
             </div>
 
             <div class="cep">
@@ -39,18 +39,18 @@
             </div>
 
             <div class="conj">
-                <input type="text" class="uf" id="uf" placeholder="UF" required autocomplete="off">
-                <input type="text" class="cidade" id="cidade" placeholder="Cidade" required autocomplete="off">
-                <input type="text" class="bairro" id="bairro" placeholder="Bairro" required autocomplete="off">
+                <input type="text" class="uf" name="uf" id="uf" placeholder="UF" required autocomplete="off">
+                <input type="text" class="cidade" name="cidade" id="cidade" placeholder="Cidade" required autocomplete="off">
+                <input type="text" class="bairro" name="bairro" id="bairro" placeholder="Bairro" required autocomplete="off">
             </div>
 
             <div class="conj">
-                <input type="text" class="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
-                <input type="text" class="num" id="num" placeholder="N°" required autocomplete="off">
+                <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
+                <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off">
             </div>
         
             <div class="conj">
-                <input type="text" class="complemento" id="complemento" placeholder="Complemento" autocomplete="off">
+                <input type="text" class="complemento"  name="complemento" id="complemento" placeholder="Complemento" autocomplete="off">
             </div>
             
             <div class="cnpj">
@@ -58,8 +58,8 @@
             </div>
 
             <div class="conj">
-                <input type="text" class="cnae" id="cnae" placeholder="CNAE" required autocomplete="off">
-                <input type="text" class="ie" id="ie" placeholder="IE" required autocomplete="off">
+                <input type="text"   name="cnae" class="cnae" id="cnae" placeholder="CNAE" required autocomplete="off">
+                <input type="text"  name="ie" class="ie" id="ie" placeholder="IE" required autocomplete="off">
             </div>
     
             <div class="senha">

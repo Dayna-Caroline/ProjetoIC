@@ -1,5 +1,6 @@
 <?php 
     include "conexao_local.php";
+    session_start();
     $razao=$_POST['razao'];
     $fantasia=$_POST['fantasia'];
     $cep=$_POST['cep'];
@@ -30,7 +31,7 @@
     if($linhas > 0)
     {
         echo '<script language="javascript">';
-        echo "alert('Funfou o cad')";
+        echo "alert('Empresa cadastrada com sucesso!')";
         echo '</script>';
         pg_close($conecta);
     }
@@ -40,4 +41,6 @@
         echo '</script>';
         pg_close($conecta);
     }
+
+
 ?>

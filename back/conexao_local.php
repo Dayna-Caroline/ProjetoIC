@@ -6,7 +6,7 @@
 </head>
 <body>
     <?php
-    $conecta = pg_connect("host=localhost port=5432 dbname=teste_ic user=postgres password=dayna120704");
+    $conecta = pg_connect("host=localhost port=5432 dbname=teste_ic user=postgres password=fer081203");
     if (!$conecta)
     {
         echo '<script language="javascript">';
