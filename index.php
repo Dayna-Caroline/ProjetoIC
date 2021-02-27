@@ -12,7 +12,7 @@
     <div class="tudo">
         <div class="cabecalho">
             <div class="logo">
-                <img src="imgs/logo.png" alt="Logo da empresa" class="img-logo">
+            <a href="index.php"><img src="imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                 <h2>Smart Grids</h2>
             </div>
             <div class="pags">
@@ -27,7 +27,7 @@
                 <p>
                     Use nosso site e encontre sua resposta.
                 </p>
-                <a href=""><button><h3>Usar &#8594;</h3></button></a>
+                <a href="front/cad.php"><button><h3>Usar &#8594;</h3></button></a>
             </div>  
     
             <div class="funcionalidades">

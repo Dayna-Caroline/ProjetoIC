@@ -18,6 +18,7 @@ body{
 
 a{
     text-decoration: none;
+    outline: 0;
 }
 
 hr{
@@ -252,5 +253,6 @@ ul{
     padding-top: 40px;
     padding-right: 30px;
 }
+
 
 
