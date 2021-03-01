@@ -17,7 +17,7 @@
                 </div>
                 <div class="pags">
                     <ul>
-                        <li><a href="">Fazer login &#8594;</a></li>
+                        <li><a href="./login.php">Fazer login &#8594;</a></li>
                     </ul>
                 </div>
             </div>

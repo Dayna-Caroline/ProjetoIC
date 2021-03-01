@@ -1,0 +1,24 @@
+.cabecalho{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 10%;
+}
+
+.logo{
+    display: flex;
+    margin-left: 15px;
+}
+
+.img-logo{
+    width: 100px;
+}
+
+.logo h2{
+    padding-top: 40px;
+    margin-left: -10px;
+}
+
+
+ul{
+    list-style-type: none;
+}

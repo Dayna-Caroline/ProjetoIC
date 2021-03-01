@@ -17,7 +17,7 @@
             </div>
             <div class="pags">
                 <ul>
-                    <li><a href="">Entrar</a></li>
+                    <li><a href="./front/login.php">Entrar</a></li>
                 </ul>
             </div>
         </div>
