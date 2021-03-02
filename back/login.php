@@ -39,7 +39,7 @@ if (isset($_POST['btnLogar']))
         }
         else
         {
-            $falha = "Senha Incorreta!";
+            $falha = "Email ou senha incorretos!";
         }
     }
     if(strlen($falha)>0)

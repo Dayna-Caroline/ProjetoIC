@@ -32,7 +32,7 @@
 
             <form class="form" action="../back/login.php" method="POST">
                 <div class="cnpj">
-                    <input type="CNPJ/CNAE" name="cnpjCnae" id="cnpjCnae" autocomplete="off" placeholder="CNPJ/CNAE" value="">
+                    <input type="CNPJ" name="cnpj" id="cnpj" autocomplete="off" placeholder="CNPJ" value="">
                 </div>
 
                 <div class="senha">
