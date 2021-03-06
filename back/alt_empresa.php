@@ -1,9 +1,9 @@
 <?php
 
-include "../back/conexao_local.php";
-            //session_start();
-            //$id_empresa=$_SESSION['id'];
-            $id_empresa=9;
+    include "conexao_local.php";
+        //session_start();
+        //$id_empresa=$_SESSION['id'];
+        $id_empresa=9;
 
         $sql="SELECT * FROM empresa WHERE id_empresa = '$id_empresa';";
         $resultado=pg_query($conecta,$sql);

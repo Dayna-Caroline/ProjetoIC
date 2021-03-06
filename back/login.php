@@ -1,54 +1,17 @@
 <?php
-    include "conexao_local.php";
     session_start();
-    $falha = "";
-    
+    include "conexao_local.php";
 
-if (isset($_POST['btnLogar']))
-{
-    $cnpj = $_POST['cnpj'];
-    $senha = $_POST['senha'];
-    
-    if(strlen($cnpj)==0)
-    {
-        $falha = "Insira seu CNPJ";
-    }
-    if(strlen($senha)==0)
-    {
-        $falha = "Insira sua senha";
-    }
-    $senha = md5($senha);
-    $cnpj_query = pg_query("SELECT * FROM empresa WHERE cnpj = '$cnpj'");
-    $dados_cnpj = pg_fetch_array($cnpj_query);
-    $linhas_cnpj = pg_num_rows($verifica_email);
-    if($linhas_cnpj == 0)
-    {
-        $falha = "CNPJ Inválido";
-    }
-    else
-    {
-        if($dados_cnpj['senha']==$senha)
-        {
-            $_SESSION['logado'] = true;
-            $_SESSION['id'] = $dados_cnpj['id_empresa'];
-            $_SESSION['nome']= $dados_cnpj['fantasia'];
-            echo '<script language="javascript">';
-            echo "alert('Login Feito com sucesso')";
-            echo '</script>';
-            header("Location: index.php");
-        }
-        else
-        {
-            $falha = "Email ou senha incorretos!";
-        }
-    }
-    if(strlen($falha)>0)
-    {
-        echo '<script language="javascript">';
-        echo "alert('Ocorreu um erro ".$falha."')";
-        echo '</script>';
-    }
+    $cnpj = mysqli_real_escape_string($conecta, $_POST['cnpj']);
+    $senha = mysqli_real_escape_string($conecta, $_POST['senha']);
 
-}
-    
+    $query = "SELECT * FROM empresa WHERE cnpj = '{$cnpj}' and senha = md5('{$senha}') and ativo = 's'";
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+    if($row == 1){
+        $_SESSION['cnpj'] = $cnpj;
+    }
+    else{
+        echo "Cnpj ou senha incorretos.";
+    }
 ?>

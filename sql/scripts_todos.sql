@@ -8,56 +8,6 @@ drop table if exists projeto;
 drop table if exists profissional;
 drop table if exists empresa;
 
-drop sequence if exists id_empresa;
-drop sequence if exists id_projeto;
-drop sequence if exists id_profissional;
-drop sequence if exists id_equipamento;
-drop sequence if exists id_requisito;
-drop sequence if exists id_mud;
-drop sequence if exists id_consumo;
-
-create sequence id_empresa
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_projeto
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_profissional
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_equipamento
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_requisito
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_mud
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
-create sequence id_consumo
-minvalue 1
-maxvalue 9223372036854775807
-start 1
-cache 1;
-
 create table empresa
 (
     id_empresa integer not null default nextval('id_empresa'),

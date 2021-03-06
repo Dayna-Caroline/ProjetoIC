@@ -6,15 +6,7 @@
     $cep=$_POST['cep'];
     $endereco=$_POST['endereco'];
     $bairro=$_POST['bairro'];
-    $num=$_POST['num'];
-    
-    /*if($_POST['complemento']==" ")
-    {
-        $complemento=null;
-    }
-    else 
-        $complemento=$_POST['complemento'];*/
-        
+    $num=$_POST['num'];        
     $complemento=$_POST['complemento'];
 
     $cidade=$_POST['cidade'];
@@ -25,22 +17,14 @@
     $senha=$_POST['senha'];
     $senha=md5($senha);
 
-    $sql = "INSERT INTO empresa VALUES( nextval('id_empresa'), '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
-    $resultado=pg_query($conecta,$sql);
-    $linhas=pg_affected_rows($resultado);
-    if($linhas > 0)
-    {
+    $sql = "INSERT INTO empresa VALUES( null, '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
+    if (mysqli_query($conecta, $sql)) {
+        $_SESSION['cnpj'] = $cnpj;
+        echo "funfou";
+    } else {
         echo '<script language="javascript">';
-        echo "alert('Empresa cadastrada com sucesso!')";
+        echo "alert('Error: Ocorreu um erro no cadastro.')";
         echo '</script>';
-        pg_close($conecta);
     }
-    else{
-        echo '<script language="javascript">';
-        echo "alert('Deu ruim no cad')";
-        echo '</script>';
-        pg_close($conecta);
-    }
-
-
+    mysqli_close($conecta);
 ?>

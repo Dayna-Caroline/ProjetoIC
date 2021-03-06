@@ -6,13 +6,10 @@
 </head>
 <body>
     <?php
-    $conecta = pg_connect("host=localhost port=5432 dbname=teste_ic user=postgres password=fer081203");
-    if (!$conecta)
-    {
-        echo '<script language="javascript">';
-        echo "alert('Falha na conexão com o Banco de Dados.')";
-        echo '</script>';
-    }
+        $conecta = mysqli_connect("localhost", "root", "", "projetoic");
+        if (!$conecta) {
+            die("Não foi possível conectar: " . mysqli_connect_error());
+        }
     ?>
 </body>
 </html>

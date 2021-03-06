@@ -32,11 +32,11 @@
 
             <form class="form" action="../back/login.php" method="POST">
                 <div class="cnpj">
-                    <input type="CNPJ" name="cnpj" id="cnpj" autocomplete="off" placeholder="CNPJ" value="">
+                    <input type="CNPJ" name="cnpj" id="cnpj" autocomplete="off" placeholder="CNPJ" value="" required>
                 </div>
 
                 <div class="senha">
-                    <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off">
+                    <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off" required>
                     <button type="button" onclick="mostrarSenha()" class="ver"><i class="fas fa-eye"></i></button>
                 </div>
                 <input type="submit" name="btnLogar" class="botao" value="Login">
