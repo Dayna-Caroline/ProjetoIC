@@ -20,11 +20,9 @@
     $sql = "INSERT INTO empresa VALUES( null, '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
     if (mysqli_query($conecta, $sql)) {
         $_SESSION['cnpj'] = $cnpj;
-        echo "funfou";
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
     } else {
-        echo '<script language="javascript">';
-        echo "alert('Error: Ocorreu um erro no cadastro.')";
-        echo '</script>';
+        header("location: ../front/cad_empresa.php?success=false");
     }
     mysqli_close($conecta);
 ?>

@@ -10,8 +10,9 @@
     $row = mysqli_num_rows($result);
     if($row == 1){
         $_SESSION['cnpj'] = $cnpj;
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
     }
     else{
-        echo "Cnpj ou senha incorretos.";
+        header("location: ../front/login.php?success=false");
     }
 ?>

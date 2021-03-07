@@ -1,3 +1,15 @@
+<?php
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == 'false')
+        {
+            echo '<script language="javascript">';
+            echo "alert(' Erro no cadastro! Tente novamente...')";
+            echo '</script>';
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,6 +20,7 @@
     <link rel="stylesheet" href="../styles/cad_empresa.css">
     <title>Cadastro</title>
 </head>
+
 <body>
     <div class="tudo">
         <div class="cabecalho">

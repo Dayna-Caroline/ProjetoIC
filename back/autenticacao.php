@@ -1,7 +1,7 @@
-<?
+<?php
     session_start();
     if(!$_SESSION['cnpj']) {
-        header['Location: ../index.php'];
+        header("location: ../index.php");
         exit();
     }
 ?>

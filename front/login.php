@@ -1,3 +1,14 @@
+<?php
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == 'false')
+        {
+            echo '<script language="javascript">';
+            echo "alert('CNPJ ou senha incorretos! Tente novamente...')";
+            echo '</script>';
+        }
+    }
+?>
 <!DOCTYPE html>
 
 <html lang="pt-br">

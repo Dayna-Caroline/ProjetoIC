@@ -27,7 +27,7 @@
                 <p>
                     Use nosso site e encontre sua resposta.
                 </p>
-                <a href="front/cad.php"><button><h3>Usar &#8594;</h3></button></a>
+                <a href="front/cad_empresa.php"><button><h3>Usar &#8594;</h3></button></a>
             </div>  
     
             <div class="funcionalidades">
