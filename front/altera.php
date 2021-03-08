@@ -29,27 +29,29 @@
          include "../back/conexao_local.php";
             //session_start();
             //$id_empresa=$_SESSION['id'];
-            $id_empresa=9;
+            $id_empresa=1;
            
         
          $sql="SELECT * FROM empresa WHERE id_empresa = '$id_empresa';";
-          $resultado = pg_query($conecta, $sql);
-         $qtde=pg_num_rows($resultado);
-         if ( $qtde == 0 )
+          $resultado = mysqli_query($conecta, $sql);
+        
+         if ( mysqli_num_rows($resultado) > 0 )
          {        
-             echo "<script type='text/javascript' language='javascript'> alert('Empresa não encontrada!!'); </script>";
-               echo"<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cad.php'>";
-         exit;
-             
+            
+             $linha = mysqli_fetch_assoc($resultado);
          }
 
-         if($qtde > 0)
+        else
          {
             
-             $linha = pg_fetch_array($resultado);
+             
+              echo "<script type='text/javascript' language='javascript'> alert('Empresa não encontrada!!'); </script>";
+               echo"<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cad.php'>";
+            exit;
     
 
          }
+         mysqli_close($conecta);
          ?>
         
         <form class="cadastro"  action="../back/alt_empresa.php" method="post" onsubmit="return verifica_senha()">

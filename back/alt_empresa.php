@@ -1,24 +1,31 @@
 <?php
 
     include "conexao_local.php";
-        //session_start();
-        //$id_empresa=$_SESSION['id'];
-        $id_empresa=9;
+        session_start();
+        //$cnpj=$_SESSION['cnpj'];
+        $id_empresa=1;
 
-        $sql="SELECT * FROM empresa WHERE id_empresa = '$id_empresa';";
-        $resultado=pg_query($conecta,$sql);
-        $qtde=pg_num_rows($resultado);
-        if ( $qtde == 0 )
-        {        
-            echo "<script type='text/javascript' language='javascript'> alert('Você ainda não possui um cadastro!'); </script>";
-               
+        // $sql="SELECT * FROM empresa WHERE cnpj= '$cnpj';";
+         $sql="SELECT * FROM empresa WHERE id_empresa = '$id_empresa';";
+          $resultado = mysqli_query($conecta, $sql);
+        
+         if ( mysqli_num_rows($resultado) > 0 )
+         {        
             
-        }
-        if($qtde > 0)
-        {
-           $linha = pg_fetch_array($resultado);
-          $senha_original=$linha['senha'];
-        }
+             $linha = mysqli_fetch_assoc($resultado);
+             $senha_original=$linha['senha'];
+         }
+
+        else
+         {
+            
+             
+              echo "<script type='text/javascript' language='javascript'> alert('Empresa não encontrada!!'); </script>";
+               echo"<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cad.php'>";
+            exit;
+    
+
+         }
 
     $razao=$_POST['razao'];
     $fantasia=$_POST['fantasia'];
@@ -37,16 +44,18 @@
    if($nova_senha==$senha_original)//nao alterou a senha
    {
        $sql2=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf' where id_empresa='$id_empresa'; ";
-       $resultado2 = pg_query($conecta, $sql2);
-       $linhas2 = pg_affected_rows($resultado2);
-       if($linhas2>0)
+       if (mysqli_query($conecta, $sql2)) 
        {
            
-          
                 echo "<script type='text/javascript'>alert('Atualização dos dados feita com sucesso!')</script>";
                 echo "<meta HTTP-EQUIV='refresh' CONTENT='0;";
    
        }
+       
+       else 
+       {
+            echo "Error updating record: " . mysqli_error($conecta);
+        }
    }
 
    if($nova_senha!=$confirma_senha)
@@ -58,19 +67,24 @@
    else
    {
     $senha = md5($confirma_senha);
-    $sql2=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf', senha='$senha' where id_empresa='$id_empresa'; ";
-    $resultado2 = pg_query($conecta, $sql2);
-    $linhas2 = pg_affected_rows($resultado2);
-    if($linhas2>0)
-    {
-        
+    $sql3=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf', senha='$senha' where id_empresa='$id_empresa'; ";
+    if (mysqli_query($conecta, $sql3)) 
+       {
+           
+                echo "<script type='text/javascript'>alert('Atualização dos dados feita com sucesso!')</script>";
+                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;";
+   
+       }
        
-             echo "<script type='text/javascript'>alert('Atualização dos dados feita com sucesso!')</script>";
-             echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=altera.php'>";
+       else 
+       {
+            echo "Error updating record: " . mysqli_error($conecta);
+        }
+            
 
     }
 
-   }
+   
 
 
 
