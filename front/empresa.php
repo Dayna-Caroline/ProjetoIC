@@ -97,8 +97,9 @@
                 </div>
                 
                 <a href=""><button class="botao">Alterar dados</button></a> <br>
-                <a href=""><button class="botao">Desativar empresa</button></a> <br>
+                <a href="desativa.php"><button class="botao">Desativar empresa</button></a> <br>
                 <a href=""><button class="botao">Logout</button></a>
+                
             </div>
         </div>
     </div>

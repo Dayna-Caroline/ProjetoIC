@@ -9,6 +9,7 @@
         }
     }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -39,7 +40,7 @@
             </div>
 
             <h1>Insira seus dados</h1>
-            <hr size=4>
+            <hr size=5>
 
             <form class="form" action="../back/login.php" method="POST">
                 <div class="cnpj">
