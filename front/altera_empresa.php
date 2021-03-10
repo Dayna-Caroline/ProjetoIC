@@ -20,6 +20,10 @@
             echo '<script language="javascript">';
             echo "alert('Senha incorreta, tente novamente.')";
             echo '</script>';
+        }else if($_GET['success'] == 5){
+            echo '<script language="javascript">';
+            echo "alert('Senha alterada com sucesso.')";
+            echo '</script>';
         }
     }
     $query = "SELECT * FROM empresa WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";

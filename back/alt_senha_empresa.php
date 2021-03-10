@@ -9,13 +9,14 @@
 
     if ( mysqli_num_rows($resultado) > 0 )
     {        
-        $linha = mysqli_fetch_assoc($resultado);
+        $linha = mysqli_fetch_array($resultado);
         $senha_original=$linha['senha'];
         
         if(md5($atual)==$senha_original)
         {
             if($nova == $confirma){
-                $sql2=" update empresa set senha='md5($nova)' WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
+                $salva = md5($nova);
+                $sql2=" update empresa set senha='$salva' WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
                 if (mysqli_query($conecta, $sql2)) 
                 {
                     header("location: ../front/conf_avan_empresa.php?success=4");            

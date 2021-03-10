@@ -34,7 +34,7 @@
                 </div>
                 <div class="pags">
                     <ul>
-                        <li><a href="./cad.php">Criar Conta &#8594;</a></li>
+                        <li><a href="cad_empresa.php">Criar Conta &#8594;</a></li>
                     </ul>
                 </div>
             </div>

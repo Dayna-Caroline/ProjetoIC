@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include "../back/autenticacao.php";
     include "../back/conexao_local.php";
     $query = "SELECT * FROM empresa WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
     $result = mysqli_query($conecta, $query);
@@ -15,12 +15,17 @@
         $rua = $linha['endereco'];
         $num = $linha['numero'];
         $complemento = $linha['complemento'];
+        if($complemento == null){
+            $complemento = "Sem complemento";
+        }
         $cnpj = $linha['cnpj'];
         $cnae = $linha['cnae'];
         $ie = $linha['ie'];
-        $senha = md5($linha['senha']);
     }
     else{
+        echo '<script language="javascript">';
+        echo "alert('Erro na conexão com o banco de dados.')";
+        echo '</script>';
     }
 ?>
 
@@ -35,7 +40,7 @@
     <title>Smart grid</title>
 </head>
 <body>
-<div class="tudo">
+    <div class="tudo">
         <div class="aba">
             <div class="logo">
                 <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
@@ -52,55 +57,63 @@
         </div>
         <div class="conteudo">
             <h1>Dados - <?php echo $empresa;?></h1>
-            
-            <div class="cadastro">
+            <div class="dados">
                 <div class="razao">
-                    <input type="text" name="razao" id="razao" placeholder="<?php echo $empresa;?>" required autocomplete="off" autocomplete="off" readonly>
+                    <span>Empresa:</span>
+                    <a class="input"><?php echo $empresa;?></a>
                 </div>
             
                 <div class="fantasia">
-                    <input type="text" name="fantasia" id="fantasia" placeholder="<?php echo $fantasia;?>" required autocomplete="off" readonly>
+                    <span>Usuário:</span>
+                    <a class="input"><?php echo $fantasia;?></a>
                 </div>
 
                 <div class="cep">
-                    <input type="text" name="cep" id="cep" placeholder="<?php echo $cep;?>" required autocomplete="off" readonly>
+                    <span>CEP:</span>
+                    <a class="input"><?php echo $cep;?></a>
                 </div>
 
                 <div class="conj">
-                    <input type="text" class="uf" name="uf" id="uf" placeholder="<?php echo $uf;?>" required autocomplete="off" readonly>
-                    <input type="text" class="cidade" name="cidade" id="cidade" placeholder="<?php echo $cidade;?>" required autocomplete="off" readonly>
+                    <span>UF:</span>
+                    <a class="input uf"><?php echo $uf;?></a>
+                    <span>Cidade:</span>
+                    <a class="input cidade"><?php echo $cidade;?></a>
                 </div>
 
-                <input type="text" class="bairro" name="bairro" id="bairro" placeholder="<?php echo $bairro;?>" required autocomplete="off" readonly>
+                <div class="bairro">
+                    <span>Bairro:</span>
+                    <a class="input bairro"><?php echo $bairro;?></a>
+                </div>
 
                 <div class="conj">
-                    <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="<?php echo $rua;?>" required autocomplete="off" readonly>
-                    <input type="text" class="num"  name="num" id="num" placeholder="<?php echo $num;?>" required autocomplete="off" readonly>
+                    <span>Endereço:</span>
+                    <a class="input endereco"><?php echo $rua;?></a>
+                    <span>N°:</span>
+                    <a class="input num"><?php echo $num;?></a>
                 </div>
             
                 <div class="conj">
-                    <input type="text" class="complemento"  name="complemento" id="complemento" placeholder="<?php echo $complemento;?>" autocomplete="off" readonly>
+                    <span>Complemtento:</span>
+                    <a class="input complemento"><?php echo $complemento;?></a>
                 </div>
                 
                 <div class="cnpj">
-                    <input type="text" name="cnpj" id="cnpj" placeholder="<?php echo $cnpj;?>" required autocomplete="off" readonly>
+                    <span>CNPJ:</span>
+                    <a class="input"><?php echo $cnpj;?></a>
                 </div>
 
                 <div class="conj">
-                    <input type="text"   name="cnae" class="cnae" id="cnae" placeholder="<?php echo $cnae;?>" required autocomplete="off" readonly>
-                    <input type="text"  name="ie" class="ie" id="ie" placeholder="<?php echo $ie;?>" required autocomplete="off" readonly>
+                    <span>CNAE:</span>
+                    <a class="input cnae"><?php echo $cnae;?></a>
+                    <span>IE:</span>
+                    <a class="input ie"><?php echo $ie;?></a>
                 </div>
-        
-                <div class="senha">
-                    <input type="password" name="senha" id="senha" placeholder="<?php echo $senha;?>" required autocomplete="off" readonly>
-                    <button type="button" onclick="mostrarSenha()" class="ver"><i class="fas fa-eye"></i></button>
-                </div>
-                
-                <a href=""><button class="botao">Alterar dados</button></a> <br>
-                <a href="desativa.php"><button class="botao">Desativar empresa</button></a> <br>
-                <a href=""><button class="botao">Logout</button></a>
-                
             </div>
+            
+            <br>
+            <a href="altera_empresa.php"><button class="botao">Alterar dados</button></a> <br>
+            <a href=""><button class="botao">Desativar empresa</button></a> <br>
+            <a href=""><button class="botao">Logout</button></a>
         </div>
     </div>
 </body>

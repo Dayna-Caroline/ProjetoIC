@@ -1,32 +1,9 @@
 <?php
-
+    include "autenticacao.php";
     include "conexao_local.php";
-        session_start();
-        //$cnpj=$_SESSION['cnpj'];
-        $id_empresa=1;
-
-        // $sql="SELECT * FROM empresa WHERE cnpj= '$cnpj';";
-         $sql="SELECT * FROM empresa WHERE id_empresa = '$id_empresa';";
-          $resultado = mysqli_query($conecta, $sql);
-        
-         if ( mysqli_num_rows($resultado) > 0 )
-         {        
-            
-             $linha = mysqli_fetch_assoc($resultado);
-             $senha_original=$linha['senha'];
-         }
-
-        else
-         {
-            
-             
-              echo "<script type='text/javascript' language='javascript'> alert('Empresa não encontrada!!'); </script>";
-               echo"<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cad.php'>";
-            exit;
-    
-
-         }
-
+    //$cnpj=$_SESSION['cnpj'];
+    // $sql="SELECT * FROM empresa WHERE cnpj= '$cnpj';";
+    $nova_senha=$_POST['senha'];
     $razao=$_POST['razao'];
     $fantasia=$_POST['fantasia'];
     $cep=$_POST['cep'];
@@ -36,58 +13,30 @@
     $complemento=$_POST['complemento'];
     $cidade=$_POST['cidade'];
     $uf=$_POST['uf'];
-    
-    $nova_senha=$_POST['senha'];
-    $confirma_senha=$_POST['senha2'];
-   // $senha=md5($senha);
+    $sql = "SELECT * FROM empresa WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
+    $resultado = mysqli_query($conecta, $sql);
 
-   if($nova_senha==$senha_original)//nao alterou a senha
-   {
-       $sql2=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf' where id_empresa='$id_empresa'; ";
-       if (mysqli_query($conecta, $sql2)) 
-       {
-           
-                echo "<script type='text/javascript'>alert('Atualização dos dados feita com sucesso!')</script>";
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;";
-   
-       }
-       
-       else 
-       {
-            echo "Error updating record: " . mysqli_error($conecta);
+    if ( mysqli_num_rows($resultado) > 0 )
+    {        
+        $linha = mysqli_fetch_assoc($resultado);
+        $senha_original=$linha['senha'];
+        
+        if(md5($nova_senha)==$senha_original)
+        {
+            $sql2=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf' WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
+            if (mysqli_query($conecta, $sql2)) 
+            {
+                header("location: ../front/altera_empresa.php?success=2");            
+            }else 
+            {
+                header("location: ../front/altera_empresa.php?success=3");
+            }
         }
-   }
-
-   if($nova_senha!=$confirma_senha)
-   {
-    echo "<script type='text/javascript'>alert('As senhas são diferentes, por favor redigite!')</script>";
-    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=altera.php'>"; //vai para alteração de dados de novo
-   }
-
-   else
-   {
-    $senha = md5($confirma_senha);
-    $sql3=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf', senha='$senha' where id_empresa='$id_empresa'; ";
-    if (mysqli_query($conecta, $sql3)) 
-       {
-           
-                echo "<script type='text/javascript'>alert('Atualização dos dados feita com sucesso!')</script>";
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;";
-   
-       }
-       
-       else 
-       {
-            echo "Error updating record: " . mysqli_error($conecta);
+        else{
+            header("location: ../front/altera_empresa.php?success=4");
         }
-            
-
+    }else
+    {
+        header("location: ../front/altera_empresa.php?success=3");
     }
-
-   
-
-
-
-
-
 ?>

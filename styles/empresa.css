@@ -21,17 +21,6 @@ a{
     outline: 0;
 }
 
-hr{
-    width: 285px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: black;
-    border-radius: 50px;
-    border: none;
-}
-
 /*Barra de rolagem------------------------------------------------------------*/
 body::-webkit-scrollbar{
     width: 8px;
@@ -111,72 +100,38 @@ li a:hover{
 
 /*Corpo-------------------------------------------------------------------------*/
 .conteudo{
+    padding-top: 100px;
+}
+
+.conteudo h1{
     text-align: center;
-    padding-top: 50px;
+}
+
+.dados{
+    margin-left: 630px;
 }
 
 h1{
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
-input{
-    border: none;
-    border-bottom: 1px solid rgb(94, 85, 121);
-    margin: 10px auto;
+span{
+    font-size: 23px;
+}
+
+.input{
     background-color: transparent;
-    width: 400px;
     font-size: 20px;
-    padding-left: 10px;
-    outline: 0;
-}
-
-.uf{
-    width: 90px;
+    color: #555;
     margin-right: 20px;
 }
-
-.cidade{
-    width: 290px;
-}
-
-.endereco{
-    width: 290px;
-    margin-right: 20px
-}
-
-.num{
-    width: 90px;
-}
-
-.cnae{
-    width: 150px;
-    margin-right: 20px;
-}
-
-.ie{
-    width: 230px;
-}
-
-.senha{
-    margin-left: -8px;
-    margin-bottom: 30px;
-}
-
-.ver{
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    margin-left: -30px;
-    font-size: 18px;
-    outline: 0;
-} 
 
 .botao{
     border: 1px solid #555;
     margin-top: 10px;
-    width: 300px;
+    width: 400px;
     padding: 8px 0;
-    margin-left: 5px;
+    margin-left: 250px;
     border-radius: 15px;
     background-color: #2096f7;
     font-weight: bold;
@@ -201,4 +156,8 @@ input{
 
 .botao:hover{
     background-color: rgb(88, 211, 248);
+}
+
+.dados div{
+    margin-bottom: 15px;
 }

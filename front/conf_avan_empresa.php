@@ -17,10 +17,7 @@
             echo "alert('Nova senha e confirma nova senha são diferentes.')";
             echo '</script>';
         }else if($_GET['success'] == 4){
-            echo '<script language="javascript">';
-            echo "alert('Senha alterada com sucesso')";
-            echo '</script>';
-            header("location: ../front/altera_empresa.php");
+            header("location: ../front/altera_empresa.php?success=5");
         }
     }
 ?>
