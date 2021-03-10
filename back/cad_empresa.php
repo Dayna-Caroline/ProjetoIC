@@ -8,7 +8,6 @@
     $bairro=$_POST['bairro'];
     $num=$_POST['num'];        
     $complemento=$_POST['complemento'];
-
     $cidade=$_POST['cidade'];
     $uf=$_POST['uf'];
     $cnpj=$_POST['cnpj'];
@@ -17,12 +16,20 @@
     $senha=$_POST['senha'];
     $senha=md5($senha);
 
-    $sql = "INSERT INTO empresa VALUES( null, '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
-    if (mysqli_query($conecta, $sql)) {
-        $_SESSION['cnpj'] = $cnpj;
-        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
-    } else {
-        header("location: ../front/cad_empresa.php?success=false");
+    $sql = "SELECT * FROM empresa WHERE cnpj = '$cnpj' AND ativo = 's'";
+    $resultado = mysqli_query($conecta, $sql);
+    if ( mysqli_num_rows($resultado) > 0 )
+    {        
+        header("location: ../front/cad_empresa.php?success=2");
+    }else
+    {
+        $sql = "INSERT INTO empresa VALUES( null, '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
+        if (mysqli_query($conecta, $sql)) {
+            $_SESSION['cnpj'] = $cnpj;
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
+        } else {
+            header("location: ../front/cad_empresa.php?success=1");
+        }
     }
     mysqli_close($conecta);
 ?>

@@ -10,7 +10,7 @@ drop table if exists empresa;
 
 create table empresa
 (
-    id_empresa integer not null default nextval('id_empresa'),
+    id_empresa integer not null AUTO_INCREMENT,
     razao varchar(100) not null,
     fantasia varchar(50) not null,
     cep varchar(9) not null,
@@ -20,7 +20,7 @@ create table empresa
     complemento varchar(100) ,
     cidade varchar(100) not null,
     uf varchar(2) not null,
-    cnpj varchar(18) not null,
+    cnpj varchar(18) not null UNIQUE,
     ie varchar(16) not null,
     cnae varchar(10) not null,
     ativo varchar(1) not null,
@@ -31,7 +31,7 @@ create table empresa
 
 create table profissional
 (
-    id_profissional integer not null default nextval('id_profissional'),
+    id_profissional integer not null AUTO_INCREMENT,
     nome varchar(100) not null,
     cpf varchar(14) not null,
     doc varchar(14) not null,
@@ -52,7 +52,7 @@ create table profissional
 
 create table projeto
 (   
-    id_projeto integer not null default nextval('id_projeto'),
+    id_projeto integer not null AUTO_INCREMENT,
     descricao varchar(100) not null,
     finalidade varchar(100) not null,
     orcamento float(24) not null,
@@ -71,7 +71,7 @@ create table projeto
 
 create table equipamentos 
 (
-     id_equipamento integer not null default nextval('id_equipamento'),
+     id_equipamento integer not null AUTO_INCREMENT,
      descricao varchar(100) not null,
      marca varchar(50) not null,
      fabricante varchar(50) not null,
@@ -88,7 +88,7 @@ create table equipamentos
 
 create table requisitos
 (
-    id_requisito integer not null default nextval('id_requisito'),
+    id_requisito integer not null AUTO_INCREMENT,
     projeto integer not null,
     titulo varchar(50) not null,
     processo varchar(50) not null,
@@ -102,7 +102,7 @@ create table requisitos
 
 create table mudancas
 (
-    id_mudanca integer not null default nextval ('id_mud'),
+    id_mudanca integer not null AUTO_INCREMENT,
     projeto integer not null,
     pedido date,
     tipo varchar(1),
@@ -118,7 +118,7 @@ create table mudancas
 
 create table consumo
 (
-    id_consumo integer not null default nextval ('id_consumo'),
+    id_consumo integer not null AUTO_INCREMENT,
     empresa integer not null,
     equipamento integer not null,
     mes integer not null,

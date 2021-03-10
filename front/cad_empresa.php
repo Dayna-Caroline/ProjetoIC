@@ -1,10 +1,15 @@
 <?php
     if(isset($_GET['success']))
     {
-        if($_GET['success'] == 'false')
+        if($_GET['success'] == '1')
         {
             echo '<script language="javascript">';
             echo "alert(' Erro no cadastro! Tente novamente...')";
+            echo '</script>';
+        }else if($_GET['success'] == '2')
+        {
+            echo '<script language="javascript">';
+            echo "alert('Esse cnpj ja foi cadastrado.')";
             echo '</script>';
         }
     }
