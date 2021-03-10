@@ -138,22 +138,6 @@ span{
     cursor: pointer;
 }
 
-.confirm{
-    border: 1px solid #555;
-    margin-top: 10px;
-    width: 300px;
-    padding: 8px 0;
-    margin-left: 5px;
-    border-radius: 15px;
-    background-color: rgb(223, 88, 88);
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.confirm:hover{
-    background-color: lightcoral;
-}
-
 .botao:hover{
     background-color: rgb(88, 211, 248);
 }

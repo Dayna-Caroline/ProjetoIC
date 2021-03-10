@@ -1,7 +1,23 @@
 <?php
-
-    session_start();
+    include "../back/autenticacao.php";
     include "../back/conexao_local.php";
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == 1)
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao acessar o banco de dados.')";
+            echo '</script>';
+        }else if($_GET['success'] == 2){
+            echo '<script language="javascript">';
+            echo "alert('Senha incorreta, tente novamente.')";
+            echo '</script>';
+        }else if($_GET['success'] == 3){
+            echo '<script language="javascript">';
+            echo "alert('Erro na desativação, tente novamente.')";
+            echo '</script>';
+        }
+    }
 
     $query = "SELECT * FROM empresa WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
     $result = mysqli_query($conecta, $query);
@@ -10,9 +26,11 @@
     if($row == 1){
         $linha = mysqli_fetch_array($result);
         $empresa = $linha['razao'];
+    }else{
+        echo '<script language="javascript">';
+        echo "alert('Erro ao acessar o banco de dados.')";
+        echo '</script>';
     }
-    else{ }
-
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +43,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../styles/empresa.css">
+        <link rel="stylesheet" href="../styles/altera_empresa.css">
         <title>Smart grid</title>
 
     </head>
@@ -52,15 +70,17 @@
 
             </div>
 
-            <div class="conteudo">
+            <a href="empresa.php"><p class="volt">&#8592;  Voltar</p></a>
+
+            <div class="cont">
 
                 <h1>Desativar meu cadastro - <?php echo $empresa;?></h1>
-                <hr style="width:400px;" size=5>
-
                 <p style="color: red;"><b>Deseja desativar o cadastro da sua empresa no nosso sistema?</b></p><br>
                 <p><b>Esta não é uma exclusão permanente e pode ser revertida posteriormente.</b></p><br><br>
 
+
                 <form class="cadastro" action="../back/desativa_empresa.php" method="post">
+                    <input type="password" name="senha" placeholder="Confirme sua senha"> <br>    
                     <button type="submit" class="confirm">Desativar empresa</button><br>
                 </form>
 

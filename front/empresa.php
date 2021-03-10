@@ -112,8 +112,8 @@
             
             <br>
             <a href="altera_empresa.php"><button class="botao">Alterar dados</button></a> <br>
-            <a href=""><button class="botao">Desativar empresa</button></a> <br>
-            <a href=""><button class="botao">Logout</button></a>
+            <a href="desativa.php"><button class="botao">Desativar empresa</button></a> <br>
+            <a href="../back/logout.php"><button class="botao">Logout</button></a>
         </div>
     </div>
 </body>

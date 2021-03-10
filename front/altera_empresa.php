@@ -78,6 +78,7 @@
                 <li><a href=""><i class="fas fa-chart-pie"></i>Resultados</a></li>
             </ul>
         </div>
+        <a href="empresa.php"><p class="volt alt">&#8592;  Voltar</p></a>
         <a href="conf_avan_empresa.php"><p class="ir">Configurações avançadas&#8594;</p></a>
         <form action="../back/alt_empresa.php" method="post" class="conteudo">
             <h1>Alteração - <?php echo $empresa;?></h1>
