@@ -10,6 +10,7 @@
     $row = mysqli_num_rows($result);
     if($row == 1){
         $_SESSION['cnpj'] = $cnpj;
+        $_SESSION['id_empresa']=$row['id_empresa']; 
         echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
     }
     else{
