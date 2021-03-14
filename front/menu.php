@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include "../back/autenticacao.php";
     include "../back/conexao_local.php";
     if(!$_GET['pagina']||$_GET['pagina']=="0")
@@ -47,6 +47,14 @@
 
                 <h1>Meus Projetos</h1>
 
+                <form class="projetos" action="../front/menu.php" method="get">
+                
+                    <div class="busca">
+                        <input type="text" style="width:750px; height:40px; background-color: transparent; border: 0px;font-size: 20px; outline: 0; border-right: 1px solid #2096f7;" name="busca" id="busca" placeholder="Buscar por ID, Descrição ou Responsável" autocomplete="off">
+                    </div>
+                
+                </form>
+
                 <form class="projetos" action="../back/projetos.php" method="get">
 
                     <?php
@@ -76,9 +84,10 @@
                                 $top=$pagina*10;
                                 
                                 if($top>$row){
-
-                                    echo "<div class=\"botoes\">
-                                        <div style=\"margin-top:15px; margin-left:220px;  margin-right:20px;\"><b>Exibindo resultados ".$bot." até ".$row.".</b></div>
+                                    
+                                    echo "<div class=\"botoes\">";
+                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
+                                        echo "<div style=\"margin-top:15px; margin-left:150px;  margin-right:20px;\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>
                                     "; 
                                     
                                         if($pagina!=1)
@@ -97,9 +106,10 @@
 
                                 else{
 
-                                    echo "<div class=\"botoes\">
-                                        <div style=\"margin-top:15px; margin-left:220px;  margin-right:20px;\"><b>Exibindo resultados ".$bot." até ".$top.".</b></div>
-                                    "; 
+                                    echo "<div class=\"botoes\">";
+                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
+                                        echo "<div style=\"margin-top:15px; margin-left:150px;  margin-right:20px;\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>
+                                    ";
                                     
                                         if($pagina!=1)
                                         {
