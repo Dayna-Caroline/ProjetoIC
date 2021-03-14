@@ -9,9 +9,13 @@
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
     if($row == 1){
+
+        $linha = mysqli_fetch_array($result);
         $_SESSION['cnpj'] = $cnpj;
-        $_SESSION['id_empresa']=$row['id_empresa']; 
-        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
+        $_SESSION['id_empresa']=$linha['id_empresa'];
+        
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
+
     }
     else{
         header("location: ../front/login.php?success=false");

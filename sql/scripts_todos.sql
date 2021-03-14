@@ -63,8 +63,8 @@ create table projeto
     empresa integer not null,
     primary key(id_projeto),
     foreign key (empresa) references empresa(id_empresa),
-    foreign key(responsavel) references profissional(id_profissional)
-
+    foreign key(responsavel) references profissional(id_profissional),
+    ativo varchar(1) not null
 );
 
 
