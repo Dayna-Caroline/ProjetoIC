@@ -6,6 +6,7 @@
             echo '<script language="javascript">';
             echo "alert('CNPJ ou senha incorretos! Tente novamente...')";
             echo '</script>';
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/login.php'>";
         }
     }
 ?>
