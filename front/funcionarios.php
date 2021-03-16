@@ -21,7 +21,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body>
+    <body onclick="verifica()">
 
         <div class="tudo">
 
@@ -73,7 +73,7 @@
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND nome LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND nome LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -223,7 +223,7 @@
 
                     <div class="botoes">
                         <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo Funcionário</button>
-                        <button type="submit" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
                     </div>
 
                 </form>
@@ -232,7 +232,7 @@
 
         </div>
 
-        <script src="../js/funcs_menu.js"></script>
+        <script src="../js/funcs_funcionarios.js"></script>
 
     </body>
 

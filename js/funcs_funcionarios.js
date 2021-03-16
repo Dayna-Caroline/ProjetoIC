@@ -15,14 +15,10 @@ function verifica() {
   });
 
   if(a==0) {
-    document.getElementById('conclui').disabled = true;
-    document.getElementById('conclui').style.cursor = "default";
     document.getElementById('arquiva').disabled = true;
     document.getElementById('arquiva').style.cursor = "default";
   }
   else{
-    document.getElementById('conclui').disabled = false;
-    document.getElementById('conclui').style.cursor = "pointer";
     document.getElementById('arquiva').disabled = false;
     document.getElementById('arquiva').style.cursor = "pointer";
   }

@@ -1,10 +1,44 @@
 ﻿<?php
+
     include "../back/autenticacao.php";
     include "../back/conexao_local.php";
-    if(!$_GET['pagina']||$_GET['pagina']=="0")
-    {
-       echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
-    }
+
+    // Verifica o filtro usado na busca
+
+        if(!$_GET['pagina']||$_GET['pagina']=="")
+        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1&busca=".$_GET['busca']."'>"; }
+
+        if(@$_GET['busca'])
+        {
+            $aux = $_GET['busca'];
+            for ($i = 0; $i < strlen($aux); $i++)
+                {
+                    $char = $aux[$i];
+                    if (is_numeric($char)) 
+                    {
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
+                    } 
+                    else 
+                    {
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND  descricao LIKE '%{$_GET['busca']}%';";
+                        break;
+                    }
+                }
+        }
+    //
+
+    // sem filtros
+
+        else
+        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'"; }
+
+        $result = mysqli_query($conecta, $query);
+        $row = mysqli_num_rows($result);
+
+        if($row==0&&$_GET['pagina']>1)
+        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1&busca=".$_GET['busca']."'>"; }
+    //
+
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +54,11 @@
         <title>Smart Grid</title>
     </head>
 
-    <body>
+    <body onclick="verifica()" onload="verifica()">
 
         <div class="tudo">
 
+            <!-- NAVBAR -->
             <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
@@ -40,56 +75,30 @@
                 </ul>
             </div>
 
+            <!-- PAGINA -->
             <div class="conteudo">
 
                 <h1>Meus Projetos</h1>
 
-                <!-- ------------------------------- BUSCA ----------------------------- -->
-                <form class="projetos" action="../front/menu.php?pagina=1" method="post">
+                <!--  BUSCA  -->
+                <form class="projetos" action="../front/menu.php" method="get">
                     <div class="busca">
-                        <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID, Descrição ou Responsável" autocomplete="off">
+                        <input type="text" class="busca" value="<?php if(@$_GET['busca']) echo $_GET['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID, Descrição ou Responsável" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
+                        <input type="text" style="visibility:hidden; height:0px; width:0px;" value="<?php if(@$_GET['pagina']) echo $_GET['pagina']; ?>" name="pagina">
                     </div>
                 </form>
 
-                <!-- ------------------------------ TABELA ----------------------------- -->
+                <!--  TABELA  -->
                 <form class="projetos" action="../back/projetos.php" method="post">
 
                     <?php
-
-                        // Verifica o filtro usado na busca
-
-                        if(@$_POST['busca'])
-                        {
-                            $aux = $_POST['busca'];
-                            for ($i = 0; $i < strlen($aux); $i++)
-                            {
-                                $char = $aux[$i];
-                                if (is_numeric($char)) 
-                                {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_POST['busca']}%' OR descricao LIKE '%{$_POST['busca']}%';";
-                                } 
-                                else 
-                                {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND  descricao LIKE '%{$_POST['busca']}%';";
-                                    break;
-                                }
-                            }
-                        }
-
-                        else // sem filtros
-                        {
-                            $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'";
-                        }
-
-                        $result = mysqli_query($conecta, $query);
-                        $row = mysqli_num_rows($result);
                         
                         if($row != 0)
                         {
-                            // Caso não haja filtro ou existam mais de 11 projetos cadastrados, exibe resultados em páginas
+                            // Caso existam mais de 11 projetos cadastrados, exibe resultados em páginas
 
-                            if( $row>10 && @!$_POST['busca'] )
+                            if( $row>10 )
                             {
 
                                 $numpag=ceil($row/10);
@@ -112,9 +121,9 @@
                                     echo "<div class=\"botoes\">";
                                         echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
                                         echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:20px;\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
                                     echo "</div>";
                                 }
 
@@ -122,9 +131,9 @@
                                     echo "<div class=\"botoes\">";
                                         echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
                                         echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:30px;\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
                                     echo "</div>";
                                 }
                                 
@@ -152,9 +161,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$descricao."</div>
-                                        <div class=\"item-res\">".$responsavel."</div>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-res\">".$responsavel."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -197,9 +206,9 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$descricao."</div>
-                                        <div class=\"item-res\">".$responsavel."</div>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-res\">".$responsavel."</div></a>
                                         </div>";
                                 }
                             }
@@ -219,7 +228,7 @@
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
-                            <div class=\"item-desc\">Sua empresa não possuí projetos cadastrados</div>
+                            <div class=\"item-desc\">Nenhum projeto foi encontrado.</div>
                             <div class=\"item-res\">---</div>
                             </div>";
                         }
@@ -228,8 +237,8 @@
 
                     <div class="botoes">
                         <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo Projeto</button>
-                        <button type="submit" value="conclui" name="conclui" class="conclui" style="cursor: pointer;">Concluir Selecionados</button>
-                        <button type="submit" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <button type="submit" disabled id="conclui" value="conclui" name="conclui" class="conclui">Concluir Selecionados</button>
+                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir Selecionados</button>
                     </div>
 
                 </form>
