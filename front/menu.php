@@ -31,8 +31,8 @@
                 </div>
                 <ul>
                     <li><a href="empresa.php"><i class="fas fa-city"></i></i>Empresa</a></li>
-                    <li><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i>Projetos</a></li>
-                    <li><a href=""><i class="fas fa-users"></i>Funcionários</a></li>
+                    <li class="pag"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i>Projetos</a></li>
+                    <li><a href="funcionarios.php"><i class="fas fa-users"></i>Funcionários</a></li>
                     <li><a href=""><i class="fas fa-battery-three-quarters"></i>Equipamentos</a></li>
                     <li><a href="requisitos.php"><i class="fas fa-edit"></i>Requisitos</a></li>
                     <li><a href=""><i class="fas fa-cogs"></i>Controle</a></li>
@@ -67,11 +67,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_POST['busca']}%' OR descricao LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_POST['busca']}%' OR descricao LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND  descricao LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's' AND  descricao LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -79,15 +79,14 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'";
+                            $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
                         }
 
                         $result = mysqli_query($conecta, $query);
                         $row = mysqli_num_rows($result);
-
+                        
                         if($row != 0)
                         {
-
                             // Caso não haja filtro ou existam mais de 11 projetos cadastrados, exibe resultados em páginas
 
                             if( $row>10 && @!$_POST['busca'] )
