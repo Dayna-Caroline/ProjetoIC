@@ -5,7 +5,7 @@
 
     // Verifica o filtro usado na busca
 
-        if(!$_GET['pagina']||$_GET['pagina']=="")
+        if(!$_GET['pagina'])
         { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1&busca=".$_GET['busca']."'>"; }
 
         if(@$_GET['busca'])
