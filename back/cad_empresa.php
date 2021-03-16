@@ -33,7 +33,7 @@
                 $linha = mysqli_fetch_array($resultado);
                 $_SESSION['id_empresa'] = $linha['id_empresa'];
             }
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
         } else {
             header("location: ../front/cad_empresa.php?success=1");
         }

@@ -49,7 +49,7 @@
             <ul>
                 <li class="pag"><a href="empresa.php"><i class="fas fa-city"></i></i>Empresa</a></li>
                 <li><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i>Projetos</a></li>
-                <li><a href="funcionarios.php"><i class="fas fa-users"></i>Funcionários</a></li>
+                <li><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i>Funcionários</a></li>
                 <li><a href=""><i class="fas fa-battery-three-quarters"></i>Equipamentos</a></li>
                 <li><a href="requisitos.php"><i class="fas fa-edit"></i>Requisitos</a></li>
                 <li><a href=""><i class="fas fa-cogs"></i>Controle</a></li>
