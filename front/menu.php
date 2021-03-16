@@ -60,26 +60,30 @@
         <div class="tudo">
 
             <!-- NAVBAR -->
+
             <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2>Smart Grids</h2>
                 </div>
                 <ul>
-                    <li><a href="empresa.php"><i class="fas fa-city"></i></i>Empresa</a></li>
-                    <li class="pag"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i>Projetos</a></li>
-                    <li><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i>Funcionários</a></li>
-                    <li><a href=""><i class="fas fa-battery-three-quarters"></i>Equipamentos</a></li>
-                    <li><a href="requisitos.php"><i class="fas fa-edit"></i>Requisitos</a></li>
-                    <li><a href=""><i class="fas fa-cogs"></i>Controle</a></li>
-                    <li><a href=""><i class="fas fa-chart-pie"></i>Resultados</a></li>
+                    <li><a href="empresa.php"><i class="fas fa-city"></i></i><span class="nav-text">Empresa</span></a></li>
+                    <li class="pag"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i><span class="nav-text">Projetos</span></a></li>
+                    <li><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
+                    <li><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                    <li><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
+                    <li><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
 
             <!-- PAGINA -->
+
             <div class="conteudo">
 
-                <h1>Meus Projetos</h1>
+                <div>
+                    <h1>Meus Projetos</h1>
+                </div>
 
                 <!--  BUSCA  -->
                 <form class="projetos" action="../front/menu.php" method="get">
@@ -121,8 +125,8 @@
                                 if($top>$row){
                                     echo "<div class=\"botoes\">";
                                         echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                        echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:20px;\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)."<i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
                                     echo "</div>";
@@ -131,7 +135,7 @@
                                 else{
                                     echo "<div class=\"botoes\">";
                                         echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                        echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:30px;\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
@@ -140,10 +144,10 @@
                                 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
-                                    <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                    <div class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
+                                    <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                    <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -191,10 +195,10 @@
 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
-                                    <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                    <div class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
+                                    <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                    <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
@@ -221,11 +225,12 @@
                         else{
                             echo "
                             <div class=\"legenda\">
-                                <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
-                                <div class=\"leg-id\"><b>ID</b></div>
-                                <div class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                <div class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" disabled> </div>
+                                <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
+                                <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
                             </div>
+
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
