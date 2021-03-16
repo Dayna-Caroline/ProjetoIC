@@ -67,11 +67,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_POST['busca']}%' OR descricao LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_POST['busca']}%' OR descricao LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's' AND  descricao LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['id_empresa']}' AND ativo = 's' AND  descricao LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -79,7 +79,7 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
+                            $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE cnpj = '{$_SESSION['id_empresa']}' AND ativo = 's'";
                         }
 
                         $result = mysqli_query($conecta, $query);

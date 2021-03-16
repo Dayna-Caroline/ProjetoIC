@@ -12,6 +12,7 @@
 
         $linha = mysqli_fetch_array($result);
         $_SESSION['cnpj'] = $cnpj;
+        $_SESSION['id_empresa'] = $linha['id_empresa'];
         
         echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
 
