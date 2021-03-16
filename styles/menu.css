@@ -71,7 +71,7 @@
         display: flex;
         margin-left: 45px;
         margin-right: 45px;
-        margin-bottom: 70px;
+        margin-bottom: 50px;
     }
 
     .logo h2{
@@ -121,7 +121,7 @@
 
     .conteudo{
         width: 882px;
-        margin-left:385px;
+        margin-left:378px;
         margin-top: 6px;
         padding-top: 50px;
         margin-bottom:10px;
