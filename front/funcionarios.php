@@ -1,6 +1,7 @@
 <?php
     include "../back/autenticacao.php";
     include "../back/conexao_local.php";
+
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/funcionarios.php?pagina=1'>";
@@ -58,6 +59,7 @@
                     <?php
 
                         // Verifica o filtro usado na busca
+                    
 
                         if(@$_POST['busca'])
                         {
@@ -67,11 +69,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND nome LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND nome LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -79,7 +81,7 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'";
+                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' ;";
                         }
 
                         $result = mysqli_query($conecta, $query);
@@ -216,7 +218,7 @@
                             <div class=\"item-res\">---</div>
                             </div>";
                         }
-
+                    
                     ?>
 
                     <div class="botoes">
