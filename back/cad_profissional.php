@@ -26,7 +26,7 @@
       // header("location: ../front/empresa.php?success=1");
     }else
     {
-        $sql = "INSERT INTO profissional VALUES( null, '$nome', '$cpf', '$rg','$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$registro','$orgão', '$empresa');";
+        $sql = "INSERT INTO profissional VALUES( null, '$nome', '$cpf', '$rg','$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$registro','$orgao', '$empresa');";
         if (mysqli_query($conecta, $sql)) {
             echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/empresa.php'>";
         } else {
