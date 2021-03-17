@@ -1,6 +1,30 @@
 <?php
+
     include "../back/autenticacao.php";
     include "../back/conexao_local.php";
+
+    $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND md5(id_projeto) = '{$_GET['id']}';";
+
+    // executa a query
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+    if($row>0)
+    {
+        $linha = mysqli_fetch_array($result);
+        $id=$linha['id_projeto'];
+        $descricao=$linha['descricao'];
+        $finalidade=$linha['finalidade'];
+        $orcamento=$linha['orcamento'];
+        $responsavel=$linha['responsavel'];
+        $aprovacao=$linha['aprovacao'];
+        $inicio=$linha['inicio'];
+        $fim=$linha['fim'];
+        $c_final=$linha['c_final'];
+        $id_empresa=$linha['empresa'];
+        $ativo=$linha['ativo'];
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -13,10 +37,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <link rel="stylesheet" href="../styles/menu.css">
+        <link rel="stylesheet" href="../styles/projeto.css">
         <title>Smart Grid</title>
     </head>
 
-    <body onclick="verifica()">
+    <body>
 
         <div class="tudo">
 
@@ -40,16 +65,75 @@
 
             <div class="conteudo">
 
-                <h1>Projeto </h1>
+                <div  class="titulo">
+                    <h1>Detalhes do projeto</h1>
+                </div>
 
                 <!--  PROJETO (LER, ALTERAR, EXCLUIR, CONCLUIR)  -->
-                
+                <div class="projetos2">
+                    <?php
+                        echo "<div class=\"item2\">
+                            <div style=\"color:rgb(92, 91, 91);cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" disabled value=\"".$id."\"></div>
+                        </div>";
+                        
+                        echo "<div class=\"item2\">
+                            <div style=\"color:rgb(92, 91, 91);cursor:default;\" class=\"leg-id2\"><b>ID Empresa</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" disabled value=\"".$id_empresa."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>ID Responsável</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$responsavel."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Descrição do projeto</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$descricao."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Finalidade do projeto</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$finalidade."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Orçamento</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$orcamento."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Data de Início</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$inicio."\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" value=\"".$aprovacao."\"></div>
+                        </div>";
+
+                        if($ativo!='s'){
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Data do término</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" value=\"".$fim."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Custo final</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" value=\"".$c_final."\"></div>
+                            </div>";
+                            
+                        }
+
+                    ?>
+                </div>
             
             </div>
 
         </div>
 
-        <script src="../js/funcs_menu.js"></script>
+        <script src="../js/funcs_projetos.js"></script>
 
     </body>
 

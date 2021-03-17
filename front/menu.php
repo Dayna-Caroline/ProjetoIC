@@ -32,7 +32,9 @@
 
         else
         { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'"; }
+    //
 
+    // executa a query
         $result = mysqli_query($conecta, $query);
         $row = mysqli_num_rows($result);
 
@@ -166,9 +168,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -211,9 +213,9 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".$id."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
                                         </div>";
                                 }
                             }
