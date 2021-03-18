@@ -22,8 +22,14 @@
         $fim=$linha['fim'];
         $c_final=$linha['c_final'];
         $id_empresa=$linha['empresa'];
-        $ativo=$linha['ativo'];
     }
+
+    $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}';";
+
+    // executa a query
+
+    $result2 = mysqli_query($conecta, $query2);
+    $row2 = mysqli_num_rows($result2);
 
 
 ?>
@@ -42,7 +48,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body>
+    <body onload="visualizar()">
 
         <div class="tudo">
 
@@ -72,58 +78,86 @@
 
                 <!--  PROJETO (LER, ALTERAR, EXCLUIR, CONCLUIR)  -->
                 <div class="projetos2">
-                    <?php
-                        echo "<div class=\"item2\">
-                            <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
-                            <div style=\"cursor:not-allowed;\" class=\"item-id2\"><input style=\"cursor:not-allowed;\" type=\"text\" disabled value=\"".$id."\"></div>
-                        </div>";
-                        
-                        echo "<div class=\"item2\">
-                            <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Empresa</b></div>
-                            <div style=\"cursor:not-allowed;\" class=\"item-id2\"><input type=\"text\" style=\"cursor:not-allowed;\" disabled value=\"".$id_empresa."\"></div>
-                        </div>";
 
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>ID Responsável</b></div>
-                            <div class=\"item-id2\"><input type=\"text\" name=\"responsavel\" value=\"".$responsavel."\"></div>
-                        </div>";
+                    <div class="botoes">
+                        <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
+                        <button id="visualizar" onclick="visualizar()" class="visualizar" style="cursor: pointer;">visualizar</button>
+                    </div>
 
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Descrição do projeto</b></div>
-                            <div class=\"item-id2\"><input type=\"text\" name=\"descricao\" value=\"".$descricao."\"></div>
-                        </div>";
+                    <form action="../back/projetos.php" method="post">
 
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Finalidade do projeto</b></div>
-                            <div class=\"item-id2\"><input type=\"text\" name=\"finalidade\" value=\"".$finalidade."\"></div>
-                        </div>";
+                        <?php
+                            echo "<div class=\"item2\">
+                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
+                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id."\">".$id."</option></select></div>
+                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Empresa</b></div>
+                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id_empresa."\">".$id_empresa."</option></select></div>
+                            </div>";
 
-                        echo "<div class=\"item2\">
-                        
-                            <div class=\"leg-id2\"><b>Orçamento (R$)</b></div>
-                            <div style=\"width:140px;\" class=\"item-id2\"><input class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>ID Responsável</b></div>
+
+                                <div style=\"width:150px;\" class=\"item-id2\">
+                                    <select name=\"profissional\" required id=\"profissional\">";
+
+                                    for($i=0;$i<$row2;$i++){
+                                        $linha2 = mysqli_fetch_array($result2);
+                                        echo "<option "; 
+                                            if($linha2['id_profissional']==$responsavel)
+                                            { echo "selected "; } 
+                                        echo " value=\"".$linha2['id_profissional']."\">".$linha2['id_profissional']." - ".$linha2['nome']."</option>";
+                                    }
+
+                                    echo "</select>
+                                </div>
+
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Descrição do projeto</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" name=\"descricao\" value=\"".$descricao."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Finalidade do projeto</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"finalidade\"  name=\"finalidade\" value=\"".$finalidade."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
                             
-                            <div class=\"leg-id2\" style=\"margin-right: 10px;\"><b>Custo final (R$)</b></div>
-                            <div style=\"width:140px;\" class=\"item-id2\"><input class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
-                        
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                        
-                            <div class=\"leg-id2\"><b>Data de Início</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input name=\"inicio\" type=\"date\" value=\"".$inicio."\"></div>
+                                <div class=\"leg-id2\"><b>Orçamento (R$)</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"orcamento\" class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
+                                
+                                <div class=\"leg-id2\" style=\"margin-right: 10px;\"><b>Custo final (R$)</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"c_final\"  class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
                             
-                            <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input name=\"aprovacao\" type=\"date\" value=\"".$aprovacao."\"></div>
-                        
-                        </div>";
+                            </div>";
 
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Data do término</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
-                        </div>";
+                            echo "<div class=\"item2\">
+                            
+                                <div class=\"leg-id2\"><b>Data de Início</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" type=\"date\" value=\"".$inicio."\"></div>
+                                
+                                <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"aprovacao\" name=\"aprovacao\" type=\"date\" value=\"".$aprovacao."\"></div>
+                            
+                            </div>";
 
-                    ?>
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Data do término</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"fim\" name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
+                            </div><br><br>";
+
+                        ?>
+
+                        <div class="botoes">
+                            <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
+                            <button type="submit" value="req" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
+                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir Projeto</button>
+                        </div>
+
+                    </form>
+
                 </div>
             
             </div>
