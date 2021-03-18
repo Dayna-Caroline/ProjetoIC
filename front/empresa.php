@@ -44,19 +44,19 @@
 
     <body>
         <div class="tudo">
-            <div class="aba">
+        <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
-                    <h2>Smart Grids</h2>
+                    <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
-                    <li class="pag"><a href="empresa.php"><i class="fas fa-city"></i></i><span class="nav-text">Empresa</span></a></li>
-                    <li><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i><span class="nav-text">Projetos</span></a></li>
-                    <li><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
-                    <li><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
-                    <li><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
-                    <li><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
+                    <li class="pag navitem"><a href="empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
+                    <li class="navitem"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
+                    <li class="navitem"><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                    <li class="navitem"><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
 

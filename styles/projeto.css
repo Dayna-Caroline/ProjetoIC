@@ -1,12 +1,113 @@
 /* LEGENDA DA TABELA */
 
+.leg-id2{
+    width: 190px;
+    height: 40px;
+
+    text-align: center;
+    color: rgb(0, 0, 0);
+        
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+
+/**/
+
+/* TABELA */
+
+.item2{
+    display: inline-flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.item-id2{
+    cursor: pointer;
+    border-bottom: 0px;
+    background-color: whitesmoke;
+    width: 600px;
+    height: 40px;
+}
+
+/**/
+
+/**/
+
+.projetos2{
+    display: grid;
+    width: 845px;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    border: 1px solid #0011ff;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.projetos2 input[type=text]{
+    border:0px;
+    border-bottom: 1px solid #999999;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+    width:590px; 
+    height:40px;
+    background-color: transparent;
+    font-size: 20px;
+    outline: 0;
+}
+
+.projetos2 input[type=text]:focus{
+    cursor: text;
+    background-color: #dcdcff;
+    border-bottom: 1px solid #0000ff;
+}
+
+.projetos2 input[type=date]{
+    height: 40px;
+    margin-top: 4px;
+    padding-left: 5px;
+    font-size:15px;
+    width: 150px;
+}
+
+.projetos2 input[type=number]{
+    height: 40px;
+    width: 150px;
+    margin-top: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size:15px;
+}
+
+.projetos2 input[type=number]:hover::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 30px;
+}
+
+.tudo{
+    width: 1260px;
+    height: 100%;
+    margin: auto;
+}
+
+/**/
+
+@media only screen and (max-width: 800px){
+
+/* LEGENDA DA TABELA */
+
     .leg-id2{
         width: 190px;
         height: 40px;
 
         text-align: center;
         color: rgb(0, 0, 0);
-            
+        
         padding-top: 15px;
         margin-bottom: 10px;
     }
@@ -16,20 +117,13 @@
 /* TABELA */
 
     .item2{
-        display: inline-flex;
         margin-left: 10px;
         margin-right: 10px;
-        text-align: center;
-        height: 40px;
         margin-bottom: 12px;
     }
 
     .item-id2{
-        cursor: pointer;
-        border-bottom: 0px;
-        background-color: whitesmoke;
-        width: 600px;
-        height: 40px;
+        width: 500px;
     }
 
 /**/
@@ -37,101 +131,28 @@
 /**/
 
     .projetos2{
-        display: grid;
-        width: 845px;
-        margin-top: 5px;
-        margin-left: 20px;
-        padding-top: 40px;
+        width: 750px;
+        margin-top: 50px;
+        margin-left: 35px;
         padding-bottom: 20px;
-        border: 1px solid #0011ff;
-        border-radius: 10px;
-        background-color: transparent;
     }
 
     .projetos2 input[type=text]{
-        border:0px;
-        border-bottom: 1px solid #999999;
-        cursor: pointer;
-        padding-left: 5px;
-        padding-right: 5px;
-        width:590px; 
-        height:40px;
-        background-color: transparent;
-        font-size: 20px;
-        outline: 0;
+        margin-left: 10px;
+        width:500px; 
     }
 
-    .projetos2 input[type=text]:focus{
-        cursor: text;
-        background-color: #dcdcff;
-        border-bottom: 1px solid #0000ff;
+    .titulo{
+        margin-top: 50px;
     }
 
-    .projetos2 input[type=date]{
-        height: 40px;
-        margin-top: 4px;
-        padding-left: 5px;
+    .tudo{
+        width: 823px;
+        height: 100%;
+        margin: auto;
     }
 
-    .projetos2 input[type=number]{
-        height: 40px;
-        width: 150px;
-        margin-top: 4px;
-        padding-left: 5px;
-    }
 
 /**/
-
-@media only screen and (max-width: 800px){
-
-    /* LEGENDA DA TABELA */
-
-        .leg-id2{
-            width: 190px;
-            height: 40px;
-
-            text-align: center;
-            color: rgb(0, 0, 0);
-            
-            padding-top: 15px;
-            margin-bottom: 10px;
-        }
-
-    /**/
-
-    /* TABELA */
-
-        .item2{
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-bottom: 12px;
-        }
-
-        .item-id2{
-            width: 550px;
-        }
-
-    /**/
-
-    /**/
-
-        .projetos2{
-            width: 800px;
-            margin-top: 50px;
-            margin-left: 10px;
-            padding-bottom: 20px;
-        }
-
-        .projetos2 input[type=text]{
-            margin-left: 10px;
-            width:550px; 
-        }
-
-        .titulo{
-            margin-top: 50px;
-        }
-
-
-    /**/
 
 }

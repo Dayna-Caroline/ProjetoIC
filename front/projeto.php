@@ -51,7 +51,7 @@
             <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
-                    <h2>Smart Grids</h2>
+                    <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
                     <li class="navitem"><a href="empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>

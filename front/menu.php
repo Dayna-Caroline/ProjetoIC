@@ -16,11 +16,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
                     } 
                     else 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND  descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND  descricao LIKE '%{$_GET['busca']}%';";
                         break;
                     }
                 }
@@ -31,7 +31,7 @@
     // sem filtros
 
         else
-        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's'"; }
+        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}';"; }
     //
 
     // executa a query
@@ -66,7 +66,7 @@
             <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
-                    <h2>Smart Grids</h2>
+                    <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
                     <li class="navitem"><a href="empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
@@ -126,7 +126,7 @@
                                 
                                 if($top>$row){
                                     echo "<div class=\"botoes\">";
-                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
+                                        echo "<div class=\"num-projetos\">".$row." projetos</div>";
                                         echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)."<i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
@@ -136,7 +136,7 @@
 
                                 else{
                                     echo "<div class=\"botoes\">";
-                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
+                                        echo "<div class=\"num-projetos\">".$row." projetos</div>";
                                         echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"menu.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
@@ -185,13 +185,13 @@
                                 echo "<div class=\"botoes\">";
                                 if($row>1)
                                 {
-                                    echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                    echo "<div style=\"margin-top:15px; margin-left:230px;  margin-right:20px;\"><b>Exibindo ".$row." Projetos</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." projetos</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projetos</b></div>";
                                 }
                                 else
                                 {
-                                    echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projeto</div>";
-                                    echo "<div style=\"margin-top:15px; margin-left:230px;  margin-right:20px;\"><b>Exibindo ".$row." Projeto</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." projeto</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projeto</b></div>";
                                 }
                                 echo "</div>";
 
@@ -245,7 +245,6 @@
 
                     <div class="botoes">
                         <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo Projeto</button>
-                        <button type="submit" disabled id="conclui" value="conclui" name="conclui" class="conclui">Concluir Selecionados</button>
                         <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir Selecionados</button>
                     </div>
 

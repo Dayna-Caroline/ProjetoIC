@@ -25,19 +25,19 @@
 
         <div class="tudo">
 
-            <div class="aba">
+        <div class="aba">
                 <div class="logo">
                     <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
-                    <h2>Smart Grids</h2>
+                    <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
-                    <li><a href="empresa.php"><i class="fas fa-city"></i></i><span class="nav-text">Empresa</span></a></li>
-                    <li><a href="menu.php?pagina=1"><i class="fas fa-stream"></i></i><span class="nav-text">Projetos</span></a></li>
-                    <li class="pag"><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
-                    <li><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
-                    <li><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
-                    <li><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
+                    <li class="navitem"><a href="empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
+                    <li class="navitem"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
+                    <li class="navitem pag"><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                    <li class="navitem"><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li class="navitem"><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
 
@@ -112,8 +112,8 @@
                                 
                                 if($top>$row){
                                     echo "<div class=\"botoes\">";
-                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                        echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:20px;\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
+                                        echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Funcionarios ".$bot." até ".$row."</b></div>"; 
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
@@ -122,8 +122,8 @@
 
                                 else{
                                     echo "<div class=\"botoes\">";
-                                        echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                        echo "<div style=\"margin-top:15px; margin-left:120px;  margin-right:30px;\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
+                                        echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
+                                        echo "class=\"exibir-resultados\"><b>Exibindo Funcionarios ".$bot." até ".$top."</b></div>";    
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
@@ -168,13 +168,13 @@
                                 echo "<div class=\"botoes\">";
                                 if($row>1)
                                 {
-                                    echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projetos</div>";
-                                    echo "<div style=\"margin-top:15px; margin-left:230px;  margin-right:20px;\"><b>Exibindo ".$row." Projetos</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Funcionarios</b></div>";
                                 }
                                 else
                                 {
-                                    echo "<div style=\"color:blue; margin-left: 5px; margin-top:15px;\">".$row." projeto</div>";
-                                    echo "<div style=\"margin-top:15px; margin-left:230px;  margin-right:20px;\"><b>Exibindo ".$row." Projeto</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." Funcionario</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Funcionario</b></div>";
                                 }
                                 echo "</div>";
 
