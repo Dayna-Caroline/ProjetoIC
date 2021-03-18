@@ -135,7 +135,7 @@ i{
     height: 100%;
     margin-left:378px;
     margin-top: 6px;
-    padding-top: 100px;
+    padding-top: 50px;
     margin-bottom:10px;
     padding-bottom: 20px;
     min-height: 700px;
@@ -151,49 +151,7 @@ i{
     text-align:center;
 }
 
-.dados{
-    margin-left: 250px;
-}
-
-h1{
-    margin-bottom: 50px;
-}
-
-span{
-    font-size: 23px;
-}
-
-.input{
-    background-color: transparent;
-    font-size: 20px;
-    color: #555;
-    margin-right: 20px;
-}
-
-.botao{
-    border: 1px solid #555;
-    margin-top: 10px;
-    width: 400px;
-    padding: 8px 0;
-    margin-left: 250px;
-    border-radius: 15px;
-    background-color: #2096f7;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.botao:hover{
-    background-color: rgb(88, 211, 248);
-}
-
-.dados div{
-    margin-bottom: 15px;
-}
-
 /**/
-
-
-
 
 @media only screen and (max-width: 800px){
 
@@ -273,12 +231,82 @@ span{
         border-radius: 10px;
     }
 
+    .projetos{
+        width:770px;
+    }
+
     .conteudo h1{
         margin-top:90px;
         margin-bottom:30px;
     }
 
 /**/
+
+/* TABELA */
+
+    .item{
+        width:745px;
+    }
+
+    input[type=checkbox]{
+        z-index:2;
+    }
+
+    .item-desc{
+        width: 500px;
+    }
+
+    .item-res{
+        width: 50px;
+    }
+
+/**/
+
+/* BUSCA */
+
+    .busca input[type=text]{
+        width:680px; 
+    }
+
+/**/
+
+
+/* LEGENDA DA TABELA */
+
+    .legenda{
+        width:745px;
+    }
+
+    .leg-desc{
+        width: 500px;
+        overflow:hidden;
+    }
+
+    .leg-res{
+    width: 50px;
+    overflow: hidden;
+}
+
+/**/
+
+/* BOTÕES */
+
+    .exibir-resultados{
+        margin-right:155px;
+    }
+
+    .next{
+        font-size: 15px;
+        margin-top:17px;
+        margin-right:-10px;
+    }
+
+    .atual{
+        margin-right: 0px;
+    }
+
+/**/
+
 }
 
 @media only screen and (max-width: 700px){

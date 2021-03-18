@@ -222,8 +222,8 @@
                     ?>
 
                     <div class="botoes">
-                        <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo Funcionário</button>
-                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <a href="cad_funcs.php"><button value="novo" name="novo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
+                        <button type="submit" id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
                     </div>
 
                 </form>
