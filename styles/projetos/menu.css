@@ -9,7 +9,7 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-color: rgb(64, 82, 95);
-    height: 98.5vh;
+    height: 100%;
 }
 
 a{
@@ -135,12 +135,12 @@ i{
     margin-top: 6px;
     padding-top: 50px;
     margin-bottom:10px;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     min-height: 700px;
     background-color: whitesmoke;
     border-radius: 10px;
     border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px; 
 }
 
 .conteudo h1{

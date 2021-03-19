@@ -42,7 +42,7 @@
     margin-top: 5px;
     margin-left: 80px;
     padding-top: 40px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     border: 1px solid #0011ff;
     border-radius: 10px;
     background-color: transparent;
@@ -51,9 +51,12 @@
     height: 100%;
 }
 
+.projetos2 input{
+    border: 1px solid #999999;
+    border-radius: 5px;
+}
+
 .projetos2 input[type=text]{
-    border:0px;
-    border-bottom: 1px solid #999999;
     cursor: pointer;
     padding-left: 5px;
     padding-right: 5px;
@@ -67,10 +70,11 @@
 .projetos2 input[type=text]:focus{
     cursor: text;
     background-color: #dcdcff;
-    border-bottom: 1px solid #0000ff;
+    border: 1px solid #0000ff;
 }
 
 .projetos2 input[type=date]{
+    border-radius: 0px;
     height: 40px;
     margin-top: 4px;
     padding-left: 5px;
@@ -138,7 +142,7 @@
     background-color: #bebebe;
     font-weight: bold;
     margin-top: 15px;
-    margin-left:250px;
+    margin-left:25px;
     margin-bottom: 20px;
     height: 35px;
     width: 100px;
@@ -152,7 +156,7 @@
     background-color: #f1f1f1;
     font-weight: bold;
     margin-top: 15px;
-    margin-left: 25px;
+    margin-left: 250px;
     height: 35px;
     width: 100px;
     outline: 0;

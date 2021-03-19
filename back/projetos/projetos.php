@@ -6,11 +6,23 @@
     if(@$_POST['novo']){
         header("location: ../../front/projetos/cad_projeto.php");
     }
-    
+
+    if(@$_POST['req']){
+        $id=md5($_POST['req']);
+        header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1");
+    }
+
+    if(@$_POST['conclui']){
+        echo 'a';
+    }
+
     if(@$_POST['arquiva']){
         $aux=0;
-        if(@$_POST['checklist']){
-            foreach($_POST['check_list'] as $id){
+
+        if(@$_POST['check_list']){
+
+            echo "cu de pombo";
+            foreach(@$_POST['check_list'] as $id){
                 $query = "DELETE FROM projeto WHERE id_projeto = $id;";
                 $resultado = mysqli_query($conecta, $query);
                 if ($resultado == true )$aux++;
@@ -25,7 +37,8 @@
         }
 
         else{
-            $query = "DELETE FROM projeto WHERE id_projeto = '{$_POST['arquiva']}';";
+            $id=@$_POST['arquiva'];
+            $query = "DELETE FROM projeto WHERE id_projeto = $id;";
             $resultado = mysqli_query($conecta, $query);
 
             if ( $resultado == true ){

@@ -22,4 +22,5 @@ function verifica() {
     document.getElementById('arquiva').disabled = false;
     document.getElementById('arquiva').style.cursor = "pointer";
   }
+  
 }

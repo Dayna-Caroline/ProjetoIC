@@ -64,7 +64,6 @@
                     <li class="pag navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                     <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                     <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="../requisitos/requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
                     <li class="navitem"><a href="../controle/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
@@ -80,8 +79,8 @@
                 <div class="projetos2">
 
                     <div class="botoes">
-                        <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                         <button id="visualizar" onclick="visualizar()" class="visualizar" style="cursor: pointer;">visualizar</button>
+                        <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
 
                     <form action="../../back/projetos/projetos.php" method="post">
@@ -151,8 +150,8 @@
                         ?>
 
                         <div class="botoes">
-                            <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
-                            <button type="submit" value="req" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
+                            <button type="submit" value="<?php echo $id; ?>" name="conclui" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
+                            <button type="submit" value="<?php echo $id; ?>" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
                             <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir Projeto</button>
                         </div>
 
