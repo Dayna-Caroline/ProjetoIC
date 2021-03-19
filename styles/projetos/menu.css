@@ -53,6 +53,8 @@ body::-webkit-scrollbar-button{
     float: left;
     background-color: #2096f7;
     z-index: 1;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .img-logo{
@@ -135,6 +137,8 @@ i{
     min-height: 700px;
     background-color: whitesmoke;
     border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .conteudo h1{

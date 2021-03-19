@@ -50,6 +50,8 @@ body::-webkit-scrollbar-button{
     padding: 0;
     float: left;
     background-color: #2096f7;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .logo{
@@ -103,6 +105,8 @@ li a:hover{
 
 .conteudo{
     padding-top: 100px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .conteudo h1{
