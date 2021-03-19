@@ -20,7 +20,7 @@
         <div class="tudo">
         <div class="aba">
                 <div class="logo">
-                    <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
+                    <a href="../../front/projetos/menu.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
@@ -35,8 +35,13 @@
             </div>
 
             <div class="conteudo">
-
-                <h1>Novo funcionário</h1>
+                <a href="funcionarios.php"><p class="volt alt">&#8592;  Voltar</p></a>
+                <form action="../../back/funcs/alt_funcs.php" method="post" class="form">
+                    <h1>Novo funcionário</h1>
+                   
+                </form>
+        
+                
             </div>
 
         </div>

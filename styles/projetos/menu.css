@@ -9,6 +9,7 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-color: rgb(64, 82, 95);
+    height: 98.5vh;
 }
 
 a{
@@ -129,6 +130,7 @@ i{
 
 .conteudo{
     width: 882px;
+    height: 100%;
     margin-left:378px;
     margin-top: 6px;
     padding-top: 50px;

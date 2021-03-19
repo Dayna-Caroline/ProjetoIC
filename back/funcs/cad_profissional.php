@@ -3,7 +3,6 @@
     include "../conexao_local.php";
     session_start();
     
-
     $nome=$_POST['nome'];
     $cpf=$_POST['cpf'];
     $rg=$_POST['rg'];
