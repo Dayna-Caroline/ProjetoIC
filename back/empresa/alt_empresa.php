@@ -1,6 +1,6 @@
 <?php
-    include "autenticacao.php";
-    include "conexao_local.php";
+    include "../autenticacao.php";
+    include "../conexao_local.php";
     //$cnpj=$_SESSION['cnpj'];
     // $sql="SELECT * FROM empresa WHERE cnpj= '$cnpj';";
     $nova_senha=$_POST['senha'];
@@ -26,17 +26,17 @@
             $sql2=" update empresa set razao='$razao', fantasia='$fantasia', cep='$cep', endereco='$endereco', bairro='$bairro', numero='$num', complemento='$complemento', cidade='$cidade', uf='$uf' WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
             if (mysqli_query($conecta, $sql2)) 
             {
-                header("location: ../front/altera_empresa.php?success=2");            
+                header("location: ../../front/empresa/altera_empresa.php?success=2");            
             }else 
             {
-                header("location: ../front/altera_empresa.php?success=3");
+                header("location: ../../front/empresa/altera_empresa.php?success=3");
             }
         }
         else{
-            header("location: ../front/altera_empresa.php?success=4");
+            header("location: ../../front/empresa/altera_empresa.php?success=4");
         }
     }else
     {
-        header("location: ../front/altera_empresa.php?success=3");
+        header("location: ../../front/empresa/altera_empresa.php?success=3");
     }
 ?>

@@ -17,7 +17,7 @@
             </div>
             <div class="pags">
                 <ul>
-                    <li><a href="./front/login.php">Entrar</a></li>
+                    <li><a href="front/empresa/login.php">Entrar</a></li>
                 </ul>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <p>
                     Use nosso site e encontre sua resposta.
                 </p>
-                <a href="front/cad_empresa.php"><button><h3>Usar &#8594;</h3></button></a>
+                <a href="front/empresa/cad_empresa.php"><button><h3>Usar &#8594;</h3></button></a>
             </div>  
     
             <div class="funcionalidades">

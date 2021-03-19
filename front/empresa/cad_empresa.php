@@ -22,7 +22,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="../styles/cad_empresa.css">
+    <link rel="stylesheet" href="../../styles/empresa/cad_empresa.css">
     <title>Smart grid</title>
 </head>
 
@@ -30,12 +30,12 @@
     <div class="tudo">
         <div class="cabecalho">
                 <div class="logo">
-                    <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
+                    <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2>Smart Grids</h2>
                 </div>
                 <div class="pags">
                     <ul>
-                        <li><a href="./login.php">Fazer login &#8594;</a></li>
+                        <li><a href="login.php">Fazer login &#8594;</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <h1>Cadastre sua empresa</h1>
         <hr size=5>
         
-        <form class="cadastro"  action="../back/cad_empresa.php" method="post" onsubmit="return verifica_senha()">
+        <form class="cadastro"  action="../../back/empresa/cad_empresa.php" method="post" onsubmit="return verifica_senha()">
             <div class="razao">
                 <input type="text" name="razao" id="razao" placeholder="Razão social" required autocomplete="off" autocomplete="off">
             </div>
@@ -95,8 +95,8 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-    <script src="../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
-    <script src="../js/funcs_cad_empresa.js"></script>
+    <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+    <script src="../../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
+    <script src="../../js/funcs_cad_empresa.js"></script>
 </body>
 </html>

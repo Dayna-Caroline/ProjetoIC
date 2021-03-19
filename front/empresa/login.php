@@ -6,7 +6,7 @@
             echo '<script language="javascript">';
             echo "alert('CNPJ ou senha incorretos! Tente novamente...')";
             echo '</script>';
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/login.php'>";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/empresa/login.php'>";
         }
     }
 ?>
@@ -20,7 +20,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../styles/login.css">
+        <link rel="stylesheet" href="../../styles/empresa/login.css">
         <title>Smart grid</title>
     </head>
 
@@ -30,7 +30,7 @@
 
             <div class="cabecalho">
                 <div class="logo">
-                    <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
+                    <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2>Smart Grids</h2>
                 </div>
                 <div class="pags">
@@ -43,7 +43,7 @@
             <h1>Insira seus dados</h1>
             <hr size=5>
 
-            <form class="form" action="../back/login.php" method="POST">
+            <form class="form" action="../../back/empresa/login.php" method="POST">
                 <div class="cnpj">
                     <input type="CNPJ" name="cnpj" id="cnpj" autocomplete="off" placeholder="CNPJ" value="" required>
                 </div>
@@ -58,9 +58,9 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-        <script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-        <script src="../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
-        <script src="../js/funcs_login.js"></script>
+        <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+        <script src="../../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
+        <script src="../../js/funcs_login.js"></script>
 
     </body>
 

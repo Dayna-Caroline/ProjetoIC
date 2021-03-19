@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "conexao_local.php";
+    include "../conexao_local.php";
 
     $cnpj = mysqli_real_escape_string($conecta, $_POST['cnpj']);
     $senha = mysqli_real_escape_string($conecta, $_POST['senha']);
@@ -14,10 +14,10 @@
         $_SESSION['cnpj'] = $cnpj;
         $_SESSION['id_empresa'] = $linha['id_empresa'];
         
-        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php?pagina=1'>";
 
     }
     else{
-        header("location: ../front/login.php?success=false");
+        header("location: ../../front/empresa/login.php?success=false");
     }
 ?>

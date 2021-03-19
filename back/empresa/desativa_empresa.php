@@ -1,6 +1,6 @@
 <?php
-    include "autenticacao.php";
-    include "conexao_local.php";
+    include "../autenticacao.php";
+    include "../conexao_local.php";
     $senha=$_POST['senha'];
     $sql = "SELECT * FROM empresa WHERE cnpj = '{$_SESSION['cnpj']}' AND ativo = 's'";
     $resultado = mysqli_query($conecta, $sql);
@@ -17,17 +17,17 @@
             if (mysqli_query($conecta, $sql2)) 
             {
                 session_destroy();
-                header("Location: ../index.php");           
+                header("Location: ../../index.php");           
             }else 
             {
-                header("location: ../front/desativa.php?success=3");
+                header("location: ../../front/empresa/desativa.php?success=3");
             }
         }
         else{
-            header("location: ../front/desativa.php?success=2");
+            header("location: ../../front/empresa/desativa.php?success=2");
         }
     }else
     {
-        header("location: ../front/desativa.php?success=1");
+        header("location: ../../front/empresa/desativa.php?success=1");
     }
 ?>

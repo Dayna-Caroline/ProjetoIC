@@ -1,5 +1,5 @@
 <?php 
-    include "conexao_local.php";
+    include "../conexao_local.php";
     session_start();
     $razao=$_POST['razao'];
     $fantasia=$_POST['fantasia'];
@@ -20,7 +20,7 @@
     $resultado = mysqli_query($conecta, $sql);
     if ( mysqli_num_rows($resultado) > 0 )
     {        
-        header("location: ../front/cad_empresa.php?success=2");
+        header("location: ../../front/empresa/cad_empresa.php?success=2");
     }else
     {
         $sql = "INSERT INTO empresa VALUES( null, '$razao', '$fantasia', '$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$cnpj','$ie', '$cnae','s','$senha');";
@@ -33,9 +33,9 @@
                 $linha = mysqli_fetch_array($resultado);
                 $_SESSION['id_empresa'] = $linha['id_empresa'];
             }
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php?pagina=1'>";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php?pagina=1'>";
         } else {
-            header("location: ../front/cad_empresa.php?success=1");
+            header("location: ../../front/empresa/cad_empresa.php?success=1");
         }
     }
     mysqli_close($conecta);

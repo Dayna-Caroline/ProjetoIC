@@ -1,10 +1,10 @@
 <?php
-    include "../back/autenticacao.php";
-    include "../back/conexao_local.php";
+    include "../../back/autenticacao.php";
+    include "../../back/conexao_local.php";
 
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
-       echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/funcionarios.php?pagina=1'>";
+       echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
     }
 ?>
 
@@ -17,7 +17,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../styles/menu.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <title>Smart Grid</title>
     </head>
 
@@ -27,17 +27,17 @@
 
         <div class="aba">
                 <div class="logo">
-                    <a href="../index.php"><img src="../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
+                    <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2 class="nav-text">Smart Grids</h2>
                 </div>
                 <ul>
-                    <li class="navitem"><a href="empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
-                    <li class="navitem"><a href="menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
-                    <li class="navitem pag"><a href="funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
-                    <li class="navitem"><a href=""><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
-                    <li class="navitem"><a href=""><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
-                    <li class="navitem"><a href=""><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
+                    <li class="navitem"><a href="../empresa/empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
+                    <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
+                    <li class="pag navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
+                    <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                    <li class="navitem"><a href="../requisitos/requisitos.php"><i class="fas fa-edit"></i><span class="nav-text">Requisitos</span></a></li>
+                    <li class="navitem"><a href="../controle/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
 
@@ -46,7 +46,7 @@
                 <h1>Meus Funcionários</h1>
 
                 <!-- ------------------------------- BUSCA ----------------------------- -->
-                <form class="projetos" action="../front/funcionarios.php?pagina=1" method="post">
+                <form class="projetos" action="../../front/funcs/funcionarios.php?pagina=1" method="post">
                     <div class="busca">
                         <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou nome" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
@@ -54,7 +54,7 @@
                 </form>
 
                 <!-- ------------------------------ TABELA ----------------------------- -->
-                <form class="projetos" action="../back/projetos.php" method="post">
+                <form class="projetos" action="../../back/projetos/projetos.php" method="post">
 
                     <?php
 
@@ -102,7 +102,7 @@
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
                                     echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/funcionarios.php?pagina=1'>";
+                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -232,7 +232,7 @@
 
         </div>
 
-        <script src="../js/funcs_funcionarios.js"></script>
+        <script src="../../js/funcs_funcionarios.js"></script>
 
     </body>
 

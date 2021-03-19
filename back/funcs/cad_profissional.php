@@ -1,6 +1,6 @@
 <?php
     //cadastro de funcionarios 
-    include "conexao_local.php";
+    include "../conexao_local.php";
     session_start();
     
 
@@ -28,7 +28,7 @@
     {
         $sql = "INSERT INTO profissional VALUES( null, '$nome', '$cpf', '$rg','$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$registro','$orgao', '$empresa');";
         if (mysqli_query($conecta, $sql)) {
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/empresa.php'>";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php'>";
         } else {
             echo("Nao foi possivel cadastrar o profissional!");
             //header("location: ../front/empresa.php?success=1");

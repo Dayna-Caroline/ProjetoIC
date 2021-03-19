@@ -1,10 +1,10 @@
 <?php
 
-    include "autenticacao.php";
-    include "conexao_local.php";
+    include "../autenticacao.php";
+    include "../conexao_local.php";
 
     if(@$_POST['novo']){
-        header("location: ../front/cad_projeto.php");
+        header("location: ../../front/projetos/cad_projeto.php");
     }
     
     if(@$_POST['arquiva']){
@@ -16,11 +16,11 @@
                 if ($resultado == true )$aux++;
             }
             if ( $aux>0 ){
-                header("location: ../front/menu.php");
+                header("location: ../../front/projetos/menu.php");
             }
             else{
                 echo '<script language=\"javascript\">alert(\'Erro ao tentar excluir\')</script>';
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
+                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>";
             }
         }
 
@@ -29,11 +29,11 @@
             $resultado = mysqli_query($conecta, $query);
 
             if ( $resultado == true ){
-                header("location: ../front/menu.php");
+                header("location: ../../front/projetos/menu.php");
             }
             else{
                 echo '<script language=\"javascript\">alert(\'Erro ao tentar excluir\')</script>';
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/menu.php'>";
+                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>";
             }
         }  
               
