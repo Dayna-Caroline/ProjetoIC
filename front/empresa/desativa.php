@@ -68,9 +68,8 @@
                 </ul>
             </div>
 
-            <a href="empresa.php"><p class="volt">&#8592;  Voltar</p></a>
-
-            <div class="cont">
+            <div class="conteudo">
+                <a href="empresa.php"><p class="voltar">&#8592;  Voltar</p></a>
 
                 <h1>Desativar meu cadastro - <?php echo $empresa;?></h1>
                 <p style="color: red;"><b>Deseja desativar o cadastro da sua empresa no nosso sistema?</b></p><br>

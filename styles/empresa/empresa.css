@@ -51,13 +51,10 @@ body::-webkit-scrollbar-button{
     width: 30%;
     height: 100%;
     min-height: 700px;
-    padding: 0 !important;
     border-radius: 10px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
     float: left;
     background-color: #2096f7;
-    z-index:4;
+    z-index: 1;
 }
 
 .img-logo{
@@ -136,14 +133,11 @@ i{
     margin-left:378px;
     margin-top: 6px;
     padding-top: 100px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     padding-bottom: 20px;
     min-height: 700px;
     background-color: whitesmoke;
     border-radius: 10px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    z-index:4;
 }
 
 .conteudo h1{

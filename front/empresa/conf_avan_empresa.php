@@ -49,22 +49,24 @@
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
-        <a href="altera_empresa.php"><p class="volt">&#8592;  Voltar</p></a>
-        <form action="../../back/empresa/alt_senha_empresa.php" method="post" class="conteudo sen">
-            <h1>Alteração avançada</h1>
-            <div class="antiga">
-                <input type="password" name="antiga" class="input" placeholder="Senha atual" required>
-            </div>
-            <div class="nova">
-                <input type="password" name="nova" class="input" placeholder="Senha nova" required>
-            </div>
-            <div class="confirma">
-                <input type="password" name="confirma" class="input" placeholder="Confirme sua senha nova" required>
-            </div>
+            <div class="conteudo">
+                <a href="altera_empresa.php"><p class="volt">&#8592;  Voltar</p></a>
+                <form action="../../back/empresa/alt_senha_empresa.php" method="post" class="sen">
+                    <h1>Alteração avançada</h1>
+                    <div class="antiga">
+                        <input type="password" name="antiga" class="input" placeholder="Senha atual" required>
+                    </div>
+                    <div class="nova">
+                        <input type="password" name="nova" class="input" placeholder="Senha nova" required>
+                    </div>
+                    <div class="confirma">
+                        <input type="password" name="confirma" class="input" placeholder="Confirme sua senha nova" required>
+                    </div>
 
-            <br>
-            <input type="submit" value="Alterar senha" class="botao">
-        </form>
+                    <br>
+                    <input type="submit" value="Alterar senha" class="botao">
+                </form>
+            </div>
     </div>
 </body>
 </html>

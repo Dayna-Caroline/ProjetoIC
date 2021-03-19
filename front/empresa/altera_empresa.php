@@ -64,7 +64,7 @@
 </head>
 <body>
 <div class="tudo">
-<div class="aba">
+    <div class="aba">
                 <div class="logo">
                     <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2 class="nav-text">Smart Grids</h2>
@@ -79,48 +79,50 @@
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
-        <a href="empresa.php"><p class="volt alt">&#8592;  Voltar</p></a>
-        <a href="conf_avan_empresa.php"><p class="ir">Configurações avançadas&#8594;</p></a>
-        <form action="../../back/empresa/alt_empresa.php" method="post" class="conteudo">
-            <h1>Alteração - <?php echo $empresa;?></h1>
-            
-            <div class="cadastro">
-                <div class="razao">
-                    <input type="text" name="razao" id="razao" value="<?php echo $empresa;?>" required autocomplete="off" autocomplete="off">
-                </div>
-            
-                <div class="fantasia">
-                    <input type="text" name="fantasia" id="fantasia" value="<?php echo $fantasia;?>" required autocomplete="off">
-                </div>
+            <div class="conteudo">
+                <a href="empresa.php"><p class="volt alt">&#8592;  Voltar</p></a>
+                <a href="conf_avan_empresa.php"><p class="ir">Configurações avançadas&#8594;</p></a>
+                <form action="../../back/empresa/alt_empresa.php" method="post" class="form">
+                    <h1>Alteração - <?php echo $empresa;?></h1>
+                    
+                    <div class="cadastro">
+                        <div class="razao">
+                            <input type="text" name="razao" id="razao" value="<?php echo $empresa;?>" required autocomplete="off" autocomplete="off">
+                        </div>
+                    
+                        <div class="fantasia">
+                            <input type="text" name="fantasia" id="fantasia" value="<?php echo $fantasia;?>" required autocomplete="off">
+                        </div>
 
-                <div class="cep">
-                    <input type="text" name="cep" id="cep" value="<?php echo $cep;?>" required autocomplete="off">
-                </div>
+                        <div class="cep">
+                            <input type="text" name="cep" id="cep" value="<?php echo $cep;?>" required autocomplete="off">
+                        </div>
 
-                <div class="conj">
-                    <input type="text" class="uf" name="uf" id="uf" value="<?php echo $uf;?>" required autocomplete="off">
-                    <input type="text" class="cidade" name="cidade" id="cidade" value="<?php echo $cidade;?>" required autocomplete="off">
-                </div>
+                        <div class="conj">
+                            <input type="text" class="uf" name="uf" id="uf" value="<?php echo $uf;?>" required autocomplete="off">
+                            <input type="text" class="cidade" name="cidade" id="cidade" value="<?php echo $cidade;?>" required autocomplete="off">
+                        </div>
 
-                <input type="text" class="bairro" name="bairro" id="bairro" value="<?php echo $bairro;?>" required autocomplete="off">
+                        <input type="text" class="bairro" name="bairro" id="bairro" value="<?php echo $bairro;?>" required autocomplete="off">
 
-                <div class="conj">
-                    <input type="text" class="endereco"  name="endereco" id="endereco" value="<?php echo $rua;?>" required autocomplete="off">
-                    <input type="text" class="num"  name="num" id="num" value="<?php echo $num;?>" required autocomplete="off">
-                </div>
-            
-                <div class="conj">
-                    <input type="text" class="complemento"  name="complemento" id="complemento" value="<?php echo $complemento;?>" autocomplete="off">
-                </div>
+                        <div class="conj">
+                            <input type="text" class="endereco"  name="endereco" id="endereco" value="<?php echo $rua;?>" required autocomplete="off">
+                            <input type="text" class="num"  name="num" id="num" value="<?php echo $num;?>" required autocomplete="off">
+                        </div>
+                    
+                        <div class="conj">
+                            <input type="text" class="complemento"  name="complemento" id="complemento" value="<?php echo $complemento;?>" autocomplete="off">
+                        </div>
 
-                <div class="div">
-                    <input type="password" name="senha" id="senha" placeholder="Confirme sua senha para alteração" required> 
-                </div>
+                        <div class="div">
+                            <input type="password" name="senha" id="senha" placeholder="Confirme sua senha para alteração" required> 
+                        </div>
 
-                <br>
-                <input type="submit" value="Alterar dados" class="botao">
+                        <br>
+                        <input type="submit" value="Alterar dados" class="botao">
+                    </div>
+                </form>
             </div>
-        </form>
     </div>
 </body>
 </html>
