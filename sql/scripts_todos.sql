@@ -101,6 +101,7 @@ create table requisitos
 create table mudancas
 (
     id_mudanca integer not null AUTO_INCREMENT,
+    empresa integer not null,
     projeto integer not null,
     pedido date,
     tipo varchar(1),
@@ -111,7 +112,9 @@ create table mudancas
     custo float(24),
     primary key(id_mudanca),
     foreign key (projeto) references projeto(id_projeto),
-    foreign key (requisito) references requisitos(id_requisito)
+    foreign key (requisito) references requisitos(id_requisito),
+    foreign key (empresa) references empresa(id_empresa)
+    
 );
 
 create table consumo

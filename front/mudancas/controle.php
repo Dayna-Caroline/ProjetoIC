@@ -4,7 +4,7 @@
 
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
-       echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
+       echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/mudancas/controle.php?pagina=1'>";
     }
 ?>
 
@@ -42,10 +42,10 @@
 
             <div class="conteudo">
 
-                <h1>Meus Funcionários</h1>
+                <h1>Controle de Mudanças</h1>
 
                 <!-- ------------------------------- BUSCA ----------------------------- -->
-                <form class="projetos" action="../../front/funcs/funcionarios.php?pagina=1" method="post">
+                <form class="projetos" action="../../front/mudancas/controle.php?pagina=1" method="post">
                     <div class="busca">
                         <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou nome" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
@@ -53,14 +53,25 @@
                 </form>
 
                 <!-- ------------------------------ TABELA ----------------------------- -->
-                <form class="projetos" action="../../back/projetos/projetos.php" method="post">
+                <form class="projetos" action="../../back/mudancas/contr_mudancas.php" method="post">
 
                     <?php
 
                         // Verifica o filtro usado na busca
                     
 
-                        if(@$_POST['busca'])
+                       /* if(@$_POST['busca'])
+                        {
+                            $aux = $_POST['busca'];
+                            
+                                    
+                                    $query = "SELECT id_projeto, descricao FROM mudancas WHERE empresa = '{$_SESSION['id_empresa']}' AND id_projeto= '%{$_POST['busca']}%';";
+                                   
+                           
+                        }
+                    */
+                    
+                    if(@$_POST['busca'])
                         {
                             $aux = $_POST['busca'];
                             for ($i = 0; $i < strlen($aux); $i++)
@@ -68,19 +79,16 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT projeto, descricao FROM mudancas WHERE empresa = '{$_SESSION['id_empresa']}' AND CAST(projeto AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                     
                                 } 
-                                else 
-                                {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND nome LIKE '%{$_POST['busca']}%';";
-                                    break;
-                                }
+                                break;
                             }
                         }
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' ;";
+                            $query = "SELECT projeto, descricao FROM mudanca WHERE empresa = '{$_SESSION['id_empresa']}' ;";
                         }
 
                         $result = mysqli_query($conecta, $query);
@@ -101,7 +109,7 @@
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
                                     echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
+                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/mudancas/controle.php?pagina=1'>";
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -111,29 +119,29 @@
                                 
                                 if($top>$row){
                                     echo "<div class=\"botoes\">";
-                                        echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
-                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Funcionarios ".$bot." até ".$row."</b></div>"; 
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<div class=\"num-projetos\">".$row." Mudanças</div>";
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo mudancas ".$bot." até ".$row."</b></div>"; 
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"controle.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"controle.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
                                     echo "</div>";
                                 }
 
                                 else{
                                     echo "<div class=\"botoes\">";
-                                        echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
-                                        echo "class=\"exibir-resultados\"><b>Exibindo Funcionarios ".$bot." até ".$top."</b></div>";    
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<div class=\"num-projetos\">".$row." Mudanças</div>";
+                                        echo "class=\"exibir-resultados\"><b>Exibindo mudanças ".$bot." até ".$top."</b></div>";    
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"controle.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"funcionarios.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"controle.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
                                     echo "</div>";
                                 }
                                 
                                 echo "
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
-                                    <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
+                                    <div class=\"leg-id\"><b>ID PROJ </b></div>
+                                    <div class=\"leg-desc\"><b>Mudanças Solicitadas</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -142,17 +150,17 @@
                                 {
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_profissional'];
-                                    $nome = $linha['nome'];
+                                    $id_proj = $linha['projeto'];
+                                    $desc = $linha['descricao'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
                                     {
                                         echo "
                                         <div class=\"item\">
-                                        <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-box\"> <input id=".$id_proj." value=".$id_proj." name=\"check_list[]\" type=\"checkbox\"> </div>
+                                        <div class=\"item-id\">".$id_proj."</div>
+                                        <div class=\"item-desc\">".$desc."</div>
                                         </div>";
                                     }                                        
                             
@@ -167,34 +175,34 @@
                                 echo "<div class=\"botoes\">";
                                 if($row>1)
                                 {
-                                    echo "<div class=\"num-projetos\">".$row." Funcionarios</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Funcionarios</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." Mudanças</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Mudanças</b></div>";
                                 }
                                 else
                                 {
-                                    echo "<div class=\"num-projetos\">".$row." Funcionario</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Funcionario</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." Mudança</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Mudanças</b></div>";
                                 }
                                 echo "</div>";
 
                                 echo "
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
-                                    <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
+                                    <div class=\"leg-id\"><b>ID PROJ</b></div>
+                                    <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_profissional'];
-                                    $nome = $linha['nome'];
+                                    $id_proj = $linha['projeto'];
+                                    $desc = $linha['descricao'];
 
                                     echo "
                                         <div class=\"item\">
-                                        <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-box\"> <input id=".$id_proj." value=".$id_proj." name=\"check_list[]\" type=\"checkbox\"> </div>
+                                        <div class=\"item-id\">".$id_proj."</div>
+                                        <div class=\"item-desc\">".$desc."</div>
                                         </div>";
                                 }
                             }
@@ -207,32 +215,27 @@
                             echo "
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
-                                <div class=\"leg-id\"><b>ID</b></div>
-                                <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
+                                <div class=\"leg-id\"><b>ID PROJ</b></div>
+                                <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
                             </div>
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
-                            <div class=\"item-desc\">Sua empresa não possuí funcionários cadastrados</div>
+                            <div class=\"item-desc\">Sua empresa não possuí mudanças pendentes</div>
                             <div class=\"item-res\">---</div>
                             </div>";
                         }
                     
                     ?>
 
-                    <div class="botoes">
-                        <a href="cad_funcs.php"><button value="novo" name="novo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
-                        <button type="submit" id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
-                    </div>
-
+                   
                 </form>
             
             </div>
 
         </div>
 
-        <script src="../../js/funcs_funcionarios.js"></script>
-
+     
     </body>
 
 </html>
