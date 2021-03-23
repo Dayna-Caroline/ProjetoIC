@@ -1,21 +1,6 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-
-    if(isset($_GET['success']))
-    {
-        if($_GET['success'] == '1')
-        {
-            echo '<script language="javascript">';
-            echo "alert('Erro no cadastro! Tente novamente...')";
-            echo '</script>';
-        }else if($_GET['success'] == '2')
-        {
-            echo '<script language="javascript">';
-            echo "alert('Esse funcionario ja foi cadastrado.')";
-            echo '</script>';
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -49,44 +34,44 @@
             </div>
 
             <div class="conteudo">
-                <a href="funcionarios.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
-                <form action="../../back/funcs/cad_profissional.php" method="post" class="form">
+                <a href="funcionarios.php"><p class="volt alt">&#8592;  Voltar</p></a>
+                <form action="../../back/funcs/alt_funcs.php" method="post" class="form">
                     <h1>Novo funcionário</h1>
                     
                     <div class="nome">
-                        <input type="text" name="nome" id="nome" placeholder="Nome do funcionário" required autocomplete="off" autocomplete="off">
+                        <input type="text" name="nome" id="nome" value="Nome do funcionário" required autocomplete="off" autocomplete="off">
                     </div>
 
                     <div class="nome">
-                        <input type="text" name="orgao" id="orgao" placeholder="Órgao" required autocomplete="off" autocomplete="off">
+                        <input type="text" name="orgao" id="orgao" value="Órgao" required autocomplete="off" autocomplete="off">
                     </div>
                 
                     <div class="conj">
-                        <input type="text"   name="rg" class="rg" id="rg" placeholder="RG" required autocomplete="off">
-                        <input type="text"  name="cpf" class="cpf" id="cpf" placeholder="CPF" required autocomplete="off">
+                        <input type="text"   name="rg" class="rg" id="rg" value="RG" required autocomplete="off">
+                        <input type="text"  name="cpf" class="cpf" id="cpf" value="CPF" required autocomplete="off">
                     </div>
 
                     <div class="nome">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" required autocomplete="off">
+                        <input type="text" name="cep" id="cep" value="CEP" required autocomplete="off">
                     </div>
 
                     <div class="conj">
-                        <input type="text" class="uf" name="uf" id="uf" placeholder="UF" required autocomplete="off">
-                        <input type="text" class="cidade" name="cidade" id="cidade" placeholder="Cidade" required autocomplete="off">
-                        <input type="text" class="bairro" name="bairro" id="bairro" placeholder="Bairro" required autocomplete="off">
+                        <input type="text" class="uf" name="uf" id="uf" value="UF" required autocomplete="off">
+                        <input type="text" class="cidade" name="cidade" id="cidade" value="Cidade" required autocomplete="off">
+                        <input type="text" class="bairro" name="bairro" id="bairro" value="Bairro" required autocomplete="off">
                     </div>
 
                     <div class="conj">
-                        <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
-                        <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off">
+                        <input type="text" class="endereco"  name="endereco" id="endereco" value="Rua" required autocomplete="off">
+                        <input type="text" class="num"  name="num" id="num" value="N°" required autocomplete="off">
                     </div>
                 
                     <div class="nome">
-                        <input type="text" class="complemento"  name="complemento" id="complemento" placeholder="Complemento" autocomplete="off">
+                        <input type="text" class="complemento"  name="complemento" id="complemento" value="Complemento" autocomplete="off">
                     </div>
                     
                     <div class="nome">
-                        <input type="text" name="registro" id="registro" placeholder="Registro" required autocomplete="off">
+                        <input type="text" name="registro" id="registro" value="Registro" required autocomplete="off">
                     </div>
 
                     <input type="submit" class="botao" value="Cadastrar">

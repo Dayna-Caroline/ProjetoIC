@@ -21,16 +21,14 @@
     $resultado = mysqli_query($conecta, $sql);
     if ( mysqli_num_rows($resultado) > 0 )
     {        
-       echo("Profissional já cadastrado!");
-      // header("location: ../front/empresa.php?success=1");
+        header("location: ../front/empresa.php?success=2");
     }else
     {
         $sql = "INSERT INTO profissional VALUES( null, '$nome', '$cpf', '$rg','$cep','$endereco','$num','$bairro', '$complemento', '$cidade', '$uf', '$registro','$orgao', '$empresa');";
         if (mysqli_query($conecta, $sql)) {
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php'>";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
         } else {
-            echo("Nao foi possivel cadastrar o profissional!");
-            //header("location: ../front/empresa.php?success=1");
+            header("location: ../front/empresa.php?success=1");
         }
     }
     mysqli_close($conecta);

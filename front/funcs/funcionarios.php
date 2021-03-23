@@ -6,6 +6,16 @@
     {
        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
     }
+
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == '1')
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao deletar funcionario. Tente novamente...')";
+            echo '</script>';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +27,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../../styles/projetos/menu.css">
+        <link rel="stylesheet" href="../../styles/funcs/funcionarios.css">
         <title>Smart Grid</title>
     </head>
 
@@ -221,8 +231,8 @@
                     ?>
 
                     <div class="botoes">
-                        <a href="cad_funcs.php"><button value="novo" name="novo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
-                        <button type="submit" id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <a href="cad_funcs.php"><button value="fnovo" name="fnovo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
+                        <button type="submit" id="delete_funcs" value="delete_funcs" name="delete_funcs" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
                     </div>
 
                 </form>
