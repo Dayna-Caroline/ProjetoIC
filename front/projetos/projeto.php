@@ -79,11 +79,14 @@
                 <div class="projetos2">
 
                     <div class="botoes">
-                        <button id="visualizar" onclick="visualizar()" class="visualizar" style="cursor: pointer;">visualizar</button>
+                        <button id="visualizar" onclick="visualizar();cancelar();" class="visualizar" style="cursor: pointer;">visualizar</button>
                         <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
 
                     <form action="../../back/projetos/projetos.php" method="post">
+
+                        <button id="salvar" type="submit" value="salvar" class="salvar" style="cursor: pointer;"><i class="fas fa-check"></i></button>
+                        <button id="cancelar" onclick="cancelar()" class="cancelar" style="cursor: pointer;"><i class="fas fa-times"></i></button>
 
                         <?php
                             echo "<div class=\"item2\">

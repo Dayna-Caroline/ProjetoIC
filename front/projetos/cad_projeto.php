@@ -53,13 +53,13 @@
                     <h1>Criar projeto</h1>
                 </div>
 
-                <!--  PROJETO (LER, ALTERAR, EXCLUIR, CONCLUIR)  -->
-                <div class="projetos2">
+                <form class="projetos2" method="post" action="../../back/projetos/projetos.php">
+
                     <?php
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>ID Responsável</b></div>
                             <div class=\"item-id2\">
-                                <select name=\"profissional\" required id=\"profissional\">";
+                                <select name=\"profissional\" style=\"cursor: pointer\" required id=\"profissional\">";
 
                                 for($i=0;$i<$row;$i++){
                                     $linha = mysqli_fetch_array($result);
@@ -86,7 +86,7 @@
                             <div style=\"width:140px;\" class=\"item-id2\"><input required class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\"></div>
                             
                             <div class=\"leg-id2\" style=\"margin-right: 10px;\"><b>Custo final (R$)</b></div>
-                            <div style=\"width:140px;\" class=\"item-id2\"><input class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\"></div>
+                            <div style=\"width:140px;\" class=\"item-id2\"><input required class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\"></div>
                         
                         </div>";
 
@@ -96,23 +96,26 @@
                             <div style=\"width:150px;\" class=\"item-id2\"><input required name=\"inicio\" type=\"date\"></div>
                             
                             <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input name=\"aprovacao\" type=\"date\"></div>
+                            <div style=\"width:150px;\" class=\"item-id2\"><input required name=\"aprovacao\" type=\"date\"></div>
                         
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Data do término</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input name=\"fim\" type=\"date\"></div>
+                            <div style=\"width:150px;\" class=\"item-id2\"><input required name=\"fim\" type=\"date\"></div>
                         </div>";
 
                     ?>
+
+                    <br><div class="botoes">
+                        <button type="submit" value="cadastrar" name="cadastrar" class="novo" style="cursor: pointer;margin-left:300px;">Concluír Cadastro</button>
+                    </div>
+
                 </div>
             
             </div>
 
         </div>
-
-        <script src="../../js/funcs_projetos.js"></script>
 
     </body>
 

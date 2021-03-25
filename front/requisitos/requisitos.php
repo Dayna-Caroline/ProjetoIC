@@ -24,7 +24,7 @@
                     } 
                     else 
                     {
-                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.projeto, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND requisitos.titulo LIKE '%{$_GET['busca']}%'; OR requisitos.descricao LIKE '%{$_GET['busca']}%'";
+                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}'";
                         break;
                     }
                 }
@@ -34,7 +34,7 @@
 
     // sem filtros
         else
-        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.projeto, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}';"; }
+        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}';"; }
     //
 
     // executa a query
@@ -122,8 +122,8 @@
                                 
                                 if($top>$row){
                                     echo "<div class=\"botoes\">";
-                                        echo "<div class=\"num-projetos\">".$row." projetos</div>";
-                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$row."</b></div>"; 
+                                        echo "<div class=\"num-projetos\">".$row." requisitos</div>";
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Requisitos ".$bot." até ".$row."</b></div>"; 
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)."<i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
@@ -132,8 +132,8 @@
 
                                 else{
                                     echo "<div class=\"botoes\">";
-                                        echo "<div class=\"num-projetos\">".$row." projetos</div>";
-                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Projetos ".$bot." até ".$top."</b></div>";    
+                                        echo "<div class=\"num-projetos\">".$row." requisitos</div>";
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Requisitos ".$bot." até ".$top."</b></div>";    
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
@@ -143,9 +143,9 @@
                                 echo "
                                 <div class=\"legenda\">
                                     <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
-                                    <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
-                                    <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                    <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                    <div title=\"ID do requisito\" class=\"leg-id\"><b>ID</b></div>
+                                    <div title=\"Descrição do requisito\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                    <div title=\"Titulo do requisito\" class=\"leg-res\"><b>TÍTULO</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -154,9 +154,9 @@
                                 {
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_projeto'];
+                                    $id = $linha['id_requisito'];
                                     $descricao = $linha['descricao'];
-                                    $responsavel = $linha['responsavel'];
+                                    $titulo = $linha['titulo'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
@@ -166,7 +166,7 @@
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -181,37 +181,37 @@
                                 echo "<div class=\"botoes\">";
                                 if($row>1)
                                 {
-                                    echo "<div class=\"num-projetos\">".$row." projetos</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projetos</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." requisitos</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Requisitoss</b></div>";
                                 }
                                 else
                                 {
-                                    echo "<div class=\"num-projetos\">".$row." projeto</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projeto</b></div>";
+                                    echo "<div class=\"num-projetos\">".$row." requisito</div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Requisito</b></div>";
                                 }
                                 echo "</div>";
 
                                 echo "
                                 <div class=\"legenda\">
                                     <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
-                                    <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
-                                    <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                    <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                    <div title=\"ID do requisito\" class=\"leg-id\"><b>ID</b></div>
+                                    <div title=\"Descrição do requisito\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                    <div title=\"Titulo do requisito\" class=\"leg-res\"><b>TÍTULO</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_projeto'];
+                                    $id = $linha['id_requisito'];
                                     $descricao = $linha['descricao'];
-                                    $responsavel = $linha['responsavel'];
+                                    $titulo = $linha['titulo'];
 
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                 }
                             }
@@ -223,10 +223,10 @@
                         else{
                             echo "
                             <div class=\"legenda\">
-                                <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" disabled> </div>
-                                <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
-                                <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
-                                <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
+                                <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                <div title=\"ID do requisito\" class=\"leg-id\"><b>ID</b></div>
+                                <div title=\"Descrição do requisito\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
+                                <div title=\"Titulo do requisito\" class=\"leg-res\"><b>TÍTULO</b></div>
                             </div>
 
                             <div class=\"item\">

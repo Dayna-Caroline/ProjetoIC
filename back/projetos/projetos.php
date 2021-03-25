@@ -7,6 +7,29 @@
         header("location: ../../front/projetos/cad_projeto.php");
     }
 
+    if(@$_POST['cadastrar']){
+
+        $responsavel=$_POST['profissional'];
+        $descricao=$_POST['descricao'];
+        $finalidade=$_POST['finalidade'];
+        $orcamento=$_POST['orcamento'];
+        $inicio=$_POST['inicio'];
+        $aprovacao=$_POST['aprovacao'];
+        $c_final=$_POST['c_final'];
+        $fim=$_POST['fim'];
+        $empresa=$_SESSION['id_empresa'];
+
+        $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$fim', '$c_final', '$empresa');";
+        if (mysqli_query($conecta, $sql)) 
+        { header("location: ../../front/projetos/menu.php?");} 
+        
+        else 
+        {echo '<script language=\"javascript\">alert(\'Não foi possível finalizar o cadastro, tente novamente em algusn minutos!\')</script>'; header("location: ../../front/projetos/cad_projeto.php?"); }
+
+        mysqli_close($conecta);
+
+    }
+
     if(@$_POST['fnovo']){
         header("location: ../../front/funcs/cad_funcs.php");
     }
@@ -25,7 +48,6 @@
 
         if(@$_POST['check_list']){
 
-            echo "cu de pombo";
             foreach(@$_POST['check_list'] as $id){
                 $query = "DELETE FROM projeto WHERE id_projeto = $id;";
                 $resultado = mysqli_query($conecta, $query);
