@@ -2,6 +2,7 @@
 
     include "../autenticacao.php";
     include "../conexao_local.php";
+    include "valida_projeto.php";
 
     // REDIRECIONA PRA PAGINA DO NOVO PROJETO
 
@@ -32,7 +33,10 @@
         { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
         
         else 
-        { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
+        {
+            echo '<script language=\"javascript\">alert(\'Não foi possível alterar os dados do projeto!\')</script>'; 
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."");
+        } 
 
         mysqli_close($conecta);
 
@@ -64,7 +68,10 @@
         { header("location: ../../front/projetos/menu.php?");} 
         
         else 
-        {echo '<script language=\"javascript\">alert(\'Não foi possível finalizar o cadastro, tente novamente em algusn minutos!\')</script>'; header("location: ../../front/projetos/cad_projeto.php?"); }
+        {
+            echo '<script language=\"javascript\">alert(\'Não foi possível finalizar o cadastro, tente novamente em alguns minutos!\')</script>'; 
+            header("location: ../../front/projetos/cad_projeto.php?");
+        }
 
         mysqli_close($conecta);
 
@@ -86,7 +93,24 @@
     // MARCA OS PROJETOS COMO TERMINADOS
 
     if(@$_POST['conclui']){
-        echo 'a';
+
+        $id=$_POST['conclui'];
+        $idaux=md5($id);
+        $fim=date("Y-m-d");
+
+        $query = "UPDATE projeto SET fim = '$fim' WHERE md5(id_projeto) = '$idaux';";
+
+        $resultado2 = mysqli_query($conecta, $query);
+
+        if ( $resultado2 == true ){
+            header("location: ../../front/projetos/menu.php");
+        }
+
+        else{
+            echo '<script language=\"javascript\">alert(\'Não foi possível excluir o projeto!\')</script>';
+            header("location: ../../front/projetos/projeto.php?id=".$idaux."");
+        }
+
     }
 
     // APAGA OS PROJETOS
@@ -114,6 +138,7 @@
             }
 
             else{
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir os projetos!\')</script>';
                 header("location: ../../front/projetos/menu.php");
             }
 
@@ -134,6 +159,7 @@
             }
 
             else{
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir o projeto!\')</script>';
                 header("location: ../../front/projetos/projeto.php?id=".$idaux."");
             }
 
