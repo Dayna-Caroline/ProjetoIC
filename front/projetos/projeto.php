@@ -79,14 +79,11 @@
                 <div class="projetos2">
 
                     <div class="botoes">
-                        <button id="visualizar" onclick="visualizar();cancelar();" class="visualizar" style="cursor: pointer;">visualizar</button>
+                        <button id="visualizar" onclick="visualizar();" class="visualizar" style="cursor: pointer;">visualizar</button>
                         <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
 
-                    <form action="../../back/projetos/projetos.php" method="post">
-
-                        <button id="salvar" type="submit" value="salvar" class="salvar" style="cursor: pointer;"><i class="fas fa-check"></i></button>
-                        <button id="cancelar" onclick="cancelar()" class="cancelar" style="cursor: pointer;"><i class="fas fa-times"></i></button>
+                    <form action="../../back/projetos/projetos.php" onchange="alterou()" method="post">
 
                         <?php
                             echo "<div class=\"item2\">
@@ -117,45 +114,53 @@
 
                             echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Descrição do projeto</b></div>
-                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" name=\"descricao\" value=\"".$descricao."\"></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\" value=\"".$descricao."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Finalidade do projeto</b></div>
-                                <div class=\"item-id2\"><input type=\"text\" id=\"finalidade\"  name=\"finalidade\" value=\"".$finalidade."\"></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"finalidade\" onkeypress=\"alterou()\" required name=\"finalidade\" value=\"".$finalidade."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
                             
                                 <div class=\"leg-id2\"><b>Orçamento (R$)</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"orcamento\" class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"orcamento\" required class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
                                 
                                 <div class=\"leg-id2\" style=\"margin-right: 10px;\"><b>Custo final (R$)</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"c_final\"  class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"c_final\" required  class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
                             
                             </div>";
 
                             echo "<div class=\"item2\">
                             
                                 <div class=\"leg-id2\"><b>Data de Início</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" type=\"date\" value=\"".$inicio."\"></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" required  type=\"date\" value=\"".$inicio."\"></div>
                                 
                                 <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"aprovacao\" name=\"aprovacao\" type=\"date\" value=\"".$aprovacao."\"></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"aprovacao\" name=\"aprovacao\" required  type=\"date\" value=\"".$aprovacao."\"></div>
                             
                             </div>";
 
                             echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Data do término</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"fim\" name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
-                            </div><br><br>";
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"fim\" required name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
+                                
+                                <button type=\"submit\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
+                                <button type=\"submit\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
+                        
+                                </div><br><br>
+
+                            ";
 
                         ?>
 
                         <div class="botoes">
+
                             <button type="submit" value="<?php echo $id; ?>" name="conclui" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
                             <button type="submit" value="<?php echo $id; ?>" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
                             <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir Projeto</button>
+                        
                         </div>
 
                     </form>

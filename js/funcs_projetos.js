@@ -49,9 +49,24 @@ function visualizar() {
     document.getElementById('aprovacao').style.cursor="not-allowed";
     document.getElementById('fim').style.cursor="not-allowed";
 
+    document.getElementById('salvar').style.visibility="hidden";
+    document.getElementById('cancelar').style.visibility="hidden";
+    
+    document.getElementById('salvar').style.display="none";
+    document.getElementById('cancelar').style.display="none";
 
     document.getElementById('editar').disabled=false;
     document.getElementById('visualizar').disabled=true;
 
+}
+
+function alterou() {
+    document.getElementById('salvar').style.visibility="visible";
+    document.getElementById('cancelar').style.visibility="visible";
+    document.getElementById('salvar').style.display="flex";
+    document.getElementById('cancelar').style.display="flex";
+
+    document.getElementById('visualizar').disabled=true;
+    document.getElementById('visualizar').style.cursor = "not-allowed";
 }
 

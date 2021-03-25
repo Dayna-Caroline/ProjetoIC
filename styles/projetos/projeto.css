@@ -164,6 +164,32 @@
 
 /**/
 
+
+.cancelar{
+    color: red;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 20px;
+    outline: 0;
+    visibility: hidden;
+    display: none;
+    border: none;
+    padding-top: 20px;
+}
+
+.salvar{
+    color: green;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 50px;
+    outline: 0;
+    visibility: hidden;
+    display: none;
+    border: none;
+    padding-top: 20px;
+}
+
+
 @media only screen and (max-width: 800px){
 
 /* LEGENDA DA TABELA */

@@ -7,6 +7,38 @@
         header("location: ../../front/projetos/cad_projeto.php");
     }
 
+    if(@$_POST['salvar']){
+
+        $id=$_POST['salvar'];
+
+        $auxid=md5($_POST['salvar']);
+
+        $responsavel=$_POST['profissional'];
+        $descricao=$_POST['descricao'];
+        $finalidade=$_POST['finalidade'];
+        $orcamento=$_POST['orcamento'];
+        $inicio=$_POST['inicio'];
+        $aprovacao=$_POST['aprovacao'];
+        $c_final=$_POST['c_final'];
+        $fim=$_POST['fim'];
+
+        $sql = "UPDATE projeto SET descricao = '$descricao', finalidade = '$finalidade', orcamento = '$orcamento', responsavel = '$responsavel', aprovacao = '$aprovacao', inicio = '$inicio', fim = '$fim', c_final = '$c_final' WHERE id_projeto = $id;";
+        
+        if (mysqli_query($conecta, $sql)) 
+        { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
+        
+        else 
+        { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
+
+        mysqli_close($conecta);
+
+    }
+
+    if(@$_POST['cancelar']){
+        $auxid=md5($_POST['cancelar']);
+        { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
+    }
+
     if(@$_POST['cadastrar']){
 
         $responsavel=$_POST['profissional'];
@@ -44,36 +76,51 @@
     }
 
     if(@$_POST['arquiva']){
-        $aux=0;
 
         if(@$_POST['check_list']){
 
             foreach(@$_POST['check_list'] as $id){
-                $query = "DELETE FROM projeto WHERE id_projeto = $id;";
+
+                $idaux=md5($id);
+
+                $query = "DELETE FROM requisitos WHERE md5(projeto) = '$idaux';";
                 $resultado = mysqli_query($conecta, $query);
+
+                $query = "DELETE FROM projeto WHERE md5(id_projeto) = '$idaux';";
+
+                $resultado2 = mysqli_query($conecta, $query);
                 if ($resultado == true )$aux++;
+
             }
+
             if ( $aux>0 ){
                 header("location: ../../front/projetos/menu.php");
             }
+
             else{
-                echo '<script language=\"javascript\">alert(\'Erro ao tentar excluir\')</script>';
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>";
+                header("location: ../../front/projetos/menu.php");
             }
+
         }
 
         else{
-            $id=@$_POST['arquiva'];
-            $query = "DELETE FROM projeto WHERE id_projeto = $id;";
+
+            $idaux=md5($_POST['arquiva']);
+
+            $query = "DELETE FROM requisitos WHERE md5(projeto) = '$idaux';";
             $resultado = mysqli_query($conecta, $query);
 
-            if ( $resultado == true ){
+            $query = "DELETE FROM projeto WHERE md5(id_projeto) = '$idaux';";
+            $resultado2 = mysqli_query($conecta, $query);
+
+            if ( $resultado2 == true ){
                 header("location: ../../front/projetos/menu.php");
             }
+
             else{
-                echo '<script language=\"javascript\">alert(\'Erro ao tentar excluir\')</script>';
-                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>";
+                header("location: ../../front/projetos/projeto.php?id=".$idaux."");
             }
+
         }  
               
     }
@@ -109,4 +156,5 @@
         }  
               
     }
+
 ?>
