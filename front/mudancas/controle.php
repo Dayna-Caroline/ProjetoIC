@@ -1,26 +1,30 @@
 <?php
+    error_reporting(0);
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+
 
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/mudancas/controle.php?pagina=1'>";
     }
+
+   /*if(!@$_GET['proj'])
+        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php'>"; }*/
 ?>
 
 <!DOCTYPE html>
 
 <html lang="pt-br">
 
-    <head>
+     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../../styles/projetos/menu.css">
+       <link rel="stylesheet" href="../../styles/mud/mudancas.css">
         <title>Smart Grid</title>
     </head>
-
     <body onclick="verifica()">
 
         <div class="tudo">
@@ -35,7 +39,7 @@
                     <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                     <li class="pag navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                     <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="../mudancas/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li class="navitem"><a href="../mudancas/controle.php?pagina=1"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
@@ -47,50 +51,39 @@
                 <!-- ------------------------------- BUSCA ----------------------------- -->
                 <form class="projetos" action="../../front/mudancas/controle.php?pagina=1" method="post">
                     <div class="busca">
-                        <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou nome" autocomplete="off">
+                        <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou descricao" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
                     </div>
                 </form>
 
                 <!-- ------------------------------ TABELA ----------------------------- -->
-                <form class="projetos" action="../../back/mudancas/contr_mudancas.php" method="post">
+                <form class="projetos" action="../../front/mudancas/controle.php" method="post">
 
                     <?php
 
                         // Verifica o filtro usado na busca
-                    
-
-                       /* if(@$_POST['busca'])
-                        {
-                            $aux = $_POST['busca'];
-                            
-                                    
-                                    $query = "SELECT id_projeto, descricao FROM mudancas WHERE empresa = '{$_SESSION['id_empresa']}' AND id_projeto= '%{$_POST['busca']}%';";
-                                   
-                           
-                        }
-                    */
-                    
-                    if(@$_POST['busca'])
-                        {
-                            $aux = $_POST['busca'];
-                            for ($i = 0; $i < strlen($aux); $i++)
-                            {
-                                $char = $aux[$i];
-                                if (is_numeric($char)) 
-                                {
-                                    $query = "SELECT projeto, descricao FROM mudancas WHERE empresa = '{$_SESSION['id_empresa']}' AND CAST(projeto AS CHAR) LIKE '%{$_POST['busca']}%';";
-                                     
-                                } 
-                                break;
-                            }
-                        }
-
-                        else // sem filtros
-                        {
-                            $query = "SELECT projeto, descricao FROM mudanca WHERE empresa = '{$_SESSION['id_empresa']}' ;";
-                        }
-
+          if(@$_GET['busca'])
+          {          
+                   
+            $aux = $_GET['busca'];
+            for ($i = 0; $i < strlen($aux); $i++)
+                {
+                    $char = $aux[$i];
+                    if (is_numeric($char)) 
+                    {
+                        $query = "SELECT DISTINCT mudancas.id_mudanca, mudancas.descricao, mudanca.requisito  FROM mudancas, requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND CAST(mudancas.id_mudanca AS CHAR) LIKE '%{$_GET['busca']}%' OR mudanca.descricao LIKE '%{$_GET['busca']}%' ;";
+                    } 
+                    else 
+                    {
+                        $query = "SELECT DISTINCT mudancas.id_mudanca, mudanca.descricao, mudanca.requisito FROM mudancas, projeto, requisitos WHERE projeto.empresa = '{$_SESSION['id_empresa']}' ";
+                        break;
+                    }
+                }
+        }
+        
+                         else
+                             
+                        { $query = "SELECT DISTINCT mudancas.id_mudanca, mudanca.descricao, mudanca.requisito FROM mudancas, requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}';"; }  
                         $result = mysqli_query($conecta, $query);
                         $row = mysqli_num_rows($result);
                         
@@ -140,7 +133,8 @@
                                 echo "
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
-                                    <div class=\"leg-id\"><b>ID PROJ </b></div>
+                                    <div class=\"leg-id\"><b>ID Mudança </b></div>
+                                    <div class=\"leg-id\"><b>ID Requsiito </b></div>
                                     <div class=\"leg-desc\"><b>Mudanças Solicitadas</b></div>
                                 </div>";
 
@@ -150,16 +144,17 @@
                                 {
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id_proj = $linha['projeto'];
+                                    $id_mudanca = $linha['id_mudanca'];
                                     $desc = $linha['descricao'];
+                                    $id_req=$linha['id_requisito'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
                                     {
                                         echo "
                                         <div class=\"item\">
-                                        <div class=\"item-box\"> <input id=".$id_proj." value=".$id_proj." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id_proj."</div>
+                                        <div class=\"item-box\"> <input id=".$id_mudanca." value=".$id_mudanca." name=\"check_list[]\" type=\"checkbox\"> </div>
+                                        <div class=\"item-id\">".$id_mudanca."</div>
                                         <div class=\"item-desc\">".$desc."</div>
                                         </div>";
                                     }                                        
@@ -195,13 +190,13 @@
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id_proj = $linha['projeto'];
+                                    $id_mudanca = $linha['id_mudanca'];
                                     $desc = $linha['descricao'];
 
                                     echo "
                                         <div class=\"item\">
-                                        <div class=\"item-box\"> <input id=".$id_proj." value=".$id_proj." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <div class=\"item-id\">".$id_proj."</div>
+                                        <div class=\"item-box\"> <input id=".$id_mudanca." value=".$id_mudanca." name=\"check_list[]\" type=\"checkbox\"> </div>
+                                        <div class=\"item-id\">".$id_mudanca."</div>
                                         <div class=\"item-desc\">".$desc."</div>
                                         </div>";
                                 }
@@ -209,23 +204,22 @@
 
                         }
 
-                        // Não encontrou nenhum projeto
+                          // Não encontrou nenhum projeto
 
                         else{
                             echo "
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
-                                <div class=\"leg-id\"><b>ID PROJ</b></div>
-                                <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
+                                <div class=\"leg-id\"><b>ID</b></div>
+                                <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
                             </div>
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
-                            <div class=\"item-desc\">Sua empresa não possuí mudanças pendentes</div>
+                            <div class=\"item-desc\">Sua empresa não possuí funcionários cadastrados</div>
                             <div class=\"item-res\">---</div>
                             </div>";
                         }
-                    
                     ?>
 
                    
@@ -235,7 +229,7 @@
 
         </div>
 
-     
+     <script src="../../js/funcs_menu.js"></script>
     </body>
 
 </html>
