@@ -3,9 +3,13 @@
     include "../autenticacao.php";
     include "../conexao_local.php";
 
+    // REDIRECIONA PRA PAGINA DO NOVO PROJETO
+
     if(@$_POST['novo']){
         header("location: ../../front/projetos/cad_projeto.php");
     }
+
+    // SALVAR ALTERAÇÕES NO PROJETO
 
     if(@$_POST['salvar']){
 
@@ -34,10 +38,14 @@
 
     }
 
+    // CANCELAR ALTERAÇÕES NO PROJETO
+
     if(@$_POST['cancelar']){
         $auxid=md5($_POST['cancelar']);
         { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
     }
+
+    // CADASTRAR NOVO PROJETO
 
     if(@$_POST['cadastrar']){
 
@@ -62,18 +70,26 @@
 
     }
 
+    // REDIRECIONA PRA PAGINA DE CADASTRO DE FUNCIONARIOS
+
     if(@$_POST['fnovo']){
         header("location: ../../front/funcs/cad_funcs.php");
     }
+
+    // REDIRECIONA PRA PAGINA DE REQUISITOS
 
     if(@$_POST['req']){
         $id=md5($_POST['req']);
         header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1");
     }
 
+    // MARCA OS PROJETOS COMO TERMINADOS
+
     if(@$_POST['conclui']){
         echo 'a';
     }
+
+    // APAGA OS PROJETOS
 
     if(@$_POST['arquiva']){
 
@@ -124,6 +140,8 @@
         }  
               
     }
+
+    // APAGA OS FUNCIONARIOS
 
     if(@$_POST['delete_funcs']){
         $aux=0;
