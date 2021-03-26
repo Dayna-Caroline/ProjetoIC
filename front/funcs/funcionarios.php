@@ -1,20 +1,9 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
-    }
-
-    if(isset($_GET['success']))
-    {
-        if($_GET['success'] == '1')
-        {
-            echo '<script language="javascript">';
-            echo "alert('Erro ao deletar funcionario. Tente novamente...')";
-            echo '</script>';
-        }
     }
 ?>
 
@@ -232,7 +221,8 @@
 
                     <div class="botoes">
                         <a href="cad_funcs.php"><button value="fnovo" name="fnovo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
-                        <button type="submit" id="delete_funcs" value="delete_funcs" name="delete_funcs" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <button type="submit" value="<?php echo $id; ?>" name="fdelete" style="cursor: pointer;" class="arq">Excluir Funcionários</button>
+                        <button type="submit" id="faltera" value="faltera" name="faltera" class="alt" style="cursor: pointer;">Alterar funcionário</button>
                     </div>
 
                 </form>

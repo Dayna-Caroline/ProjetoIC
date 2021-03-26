@@ -83,6 +83,11 @@
         header("location: ../../front/funcs/cad_funcs.php");
     }
 
+    // ALTERA FUNCIONÁRIOS
+    if(@$_POST['faltera']){
+        header("location: ../../front/funcs/escolha_func.php");
+    }
+
     // REDIRECIONA PRA PAGINA DE REQUISITOS
 
     if(@$_POST['req']){
@@ -167,36 +172,48 @@
               
     }
 
-    // APAGA OS FUNCIONARIOS
+    // APAGA OS FUNCIONARIOS 
 
-    if(@$_POST['delete_funcs']){
-        $aux=0;
-
+    if(@$_POST['fdelete']){
         if(@$_POST['check_list']){
+
             foreach(@$_POST['check_list'] as $id){
-                $query = "DELETE FROM profissional WHERE id_profisional = $id;";
+
+                $idaux=md5($id);
+
+                $query = "DELETE FROM profissional WHERE md5(id_profissional) = '$idaux';";
                 $resultado = mysqli_query($conecta, $query);
+
                 if ($resultado == true )$aux++;
             }
+
             if ( $aux>0 ){
                 header("location: ../../front/funcs/funcionarios.php?pagina=1");
             }
+
             else{
-                header("location: ../../front/funcs/funcionarios.php?pagina=1&sucess=1");
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir os funcionários!\')</script>';
+                header("location: ../../front/funcs/funcionarios.php?pagina=1");
             }
+
         }
 
         else{
-            $id=@$_POST['delete_funcs'];
-            $query = "DELETE FROM profissional WHERE id_profisional = $id;";
+
+            $idaux=md5($_POST['fdelete']);
+
+            $query = "DELETE FROM requisitos WHERE md5(projeto) = '$idaux';";
             $resultado = mysqli_query($conecta, $query);
 
             if ( $resultado == true ){
                 header("location: ../../front/funcs/funcionarios.php?pagina=1");
             }
+
             else{
-                header("location: ../../front/funcs/funcionarios.php?pagina=1&sucess=1");
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir o funcionário\')</script>';
+                header("location: ../../front/funcs/funcionarios.php?pagina=1");
             }
+
         }  
               
     }

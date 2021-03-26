@@ -1,6 +1,31 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == '2')
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao realizar a alteração, tente novamente.')";
+            echo '</script>';
+        }
+    }
+
+    $id = $_POST['profissional'];
+    $query = "SELECT * FROM profissional WHERE id_profissional=$id";
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+    if($row==1){
+        $linha=mysqli_fetch_array($result);
+        $comp = $linha['complemento'];
+
+        if($comp == null){
+            $comp = "Sem complemento";
+        }
+    }else{
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/escolha_func.php'>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -35,46 +60,37 @@
 
             <div class="conteudo">
                 <a href="funcionarios.php"><p class="volt alt">&#8592;  Voltar</p></a>
-                <form action="../../back/funcs/alt_funcs.php" method="post" class="form">
-                    <h1>Novo funcionário</h1>
+                <form action="../../back/funcs/alt_profissional.php?id=<?php echo $id;?>" method="post" class="form">
+                    <h1>Alterar funcionário</h1>
                     
                     <div class="nome">
-                        <input type="text" name="nome" id="nome" value="Nome do funcionário" required autocomplete="off" autocomplete="off">
+                        <input type="text" name="nome" id="nome" value="<?php echo $linha['nome'];?>" required autocomplete="off" autocomplete="off">
                     </div>
 
                     <div class="nome">
-                        <input type="text" name="orgao" id="orgao" value="Órgao" required autocomplete="off" autocomplete="off">
-                    </div>
-                
-                    <div class="conj">
-                        <input type="text"   name="rg" class="rg" id="rg" value="RG" required autocomplete="off">
-                        <input type="text"  name="cpf" class="cpf" id="cpf" value="CPF" required autocomplete="off">
+                        <input type="text" name="orgao" id="orgao" value="<?php echo $linha['orgao'];?>" required autocomplete="off" autocomplete="off">
                     </div>
 
                     <div class="nome">
-                        <input type="text" name="cep" id="cep" value="CEP" required autocomplete="off">
+                        <input type="text" name="cep" id="cep" value="<?php echo $linha['cep'];?>" required autocomplete="off">
                     </div>
 
                     <div class="conj">
-                        <input type="text" class="uf" name="uf" id="uf" value="UF" required autocomplete="off">
-                        <input type="text" class="cidade" name="cidade" id="cidade" value="Cidade" required autocomplete="off">
-                        <input type="text" class="bairro" name="bairro" id="bairro" value="Bairro" required autocomplete="off">
+                        <input type="text" class="uf" name="uf" id="uf" value="<?php echo $linha['uf'];?>" required autocomplete="off">
+                        <input type="text" class="cidade" name="cidade" id="cidade" value="<?php echo $linha['cidade'];?>" required autocomplete="off">
+                        <input type="text" class="bairro" name="bairro" id="bairro" value="<?php echo $linha['bairro'];?>" required autocomplete="off">
                     </div>
 
                     <div class="conj">
-                        <input type="text" class="endereco"  name="endereco" id="endereco" value="Rua" required autocomplete="off">
-                        <input type="text" class="num"  name="num" id="num" value="N°" required autocomplete="off">
+                        <input type="text" class="endereco"  name="endereco" id="endereco" value="<?php echo $linha['endereco'];?>" required autocomplete="off">
+                        <input type="text" class="num"  name="num" id="num" value="<?php echo $linha['numero'];?>" required autocomplete="off">
                     </div>
                 
                     <div class="nome">
-                        <input type="text" class="complemento"  name="complemento" id="complemento" value="Complemento" autocomplete="off">
-                    </div>
-                    
-                    <div class="nome">
-                        <input type="text" name="registro" id="registro" value="Registro" required autocomplete="off">
+                        <input type="text" class="complemento"  name="complemento" id="complemento" value="<?php echo $comp;?>" autocomplete="off">
                     </div>
 
-                    <input type="submit" class="botao" value="Cadastrar">
+                    <input type="submit" class="botao" value="Alterar">
                 </form>
         
                 
