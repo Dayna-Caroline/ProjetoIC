@@ -25,9 +25,9 @@
         $inicio=$_POST['inicio'];
         $aprovacao=$_POST['aprovacao'];
         $c_final=$_POST['c_final'];
-        $fim=$_POST['fim'];
+        $previa=$_POST['previa'];
 
-        $sql = "UPDATE projeto SET descricao = '$descricao', finalidade = '$finalidade', orcamento = '$orcamento', responsavel = '$responsavel', aprovacao = '$aprovacao', inicio = '$inicio', fim = '$fim', c_final = '$c_final' WHERE id_projeto = $id;";
+        $sql = "UPDATE projeto SET descricao = '$descricao', finalidade = '$finalidade', orcamento = '$orcamento', responsavel = '$responsavel', aprovacao = '$aprovacao', inicio = '$inicio', previa = '$previa', c_final = '$c_final' WHERE id_projeto = $id;";
         
         if (mysqli_query($conecta, $sql)) 
         { header("location: ../../front/projetos/projeto.php?id=".$auxid."");} 
@@ -60,10 +60,12 @@
         $inicio=$_POST['inicio'];
         $aprovacao=$_POST['aprovacao'];
         $c_final=$_POST['c_final'];
-        $fim=$_POST['fim'];
+        $fim="0000-00-00";
+        $previa=$_POST['previa'];
         $empresa=$_SESSION['id_empresa'];
 
-        $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$fim', '$c_final', '$empresa');";
+        $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$previa', '$fim', '$c_final', '$empresa');";
+                
         if (mysqli_query($conecta, $sql)) 
         { header("location: ../../front/projetos/menu.php?");} 
         

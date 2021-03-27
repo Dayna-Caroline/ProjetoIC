@@ -10,7 +10,7 @@ function editar() {
     document.getElementById('c_final').disabled=false;
     document.getElementById('inicio').disabled=false;
     document.getElementById('aprovacao').disabled=false;
-    document.getElementById('fim').disabled=false;
+    document.getElementById('previa').disabled=false;
 
     document.getElementById('profissional').style.cursor="pointer";
     document.getElementById('descricao').style.cursor="text";
@@ -19,7 +19,7 @@ function editar() {
     document.getElementById('c_final').style.cursor="text";
     document.getElementById('inicio').style.cursor="text";
     document.getElementById('aprovacao').style.cursor="text";
-    document.getElementById('fim').style.cursor="text";
+    document.getElementById('previa').style.cursor="text";
 
     document.getElementById('editar').disabled=true;
     document.getElementById('visualizar').disabled=false;
@@ -38,7 +38,7 @@ function visualizar() {
     document.getElementById('c_final').disabled=true;
     document.getElementById('inicio').disabled=true;
     document.getElementById('aprovacao').disabled=true;
-    document.getElementById('fim').disabled=true;
+    document.getElementById('previa').disabled=true;
 
     document.getElementById('profissional').style.cursor="not-allowed";
     document.getElementById('descricao').style.cursor="not-allowed";
@@ -47,7 +47,7 @@ function visualizar() {
     document.getElementById('c_final').style.cursor="not-allowed";
     document.getElementById('inicio').style.cursor="not-allowed";
     document.getElementById('aprovacao').style.cursor="not-allowed";
-    document.getElementById('fim').style.cursor="not-allowed";
+    document.getElementById('previa').style.cursor="not-allowed";
 
     document.getElementById('salvar').style.visibility="hidden";
     document.getElementById('cancelar').style.visibility="hidden";

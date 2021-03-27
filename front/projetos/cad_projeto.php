@@ -105,8 +105,8 @@
                         </div>";
 
                         echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Data do término</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input required name=\"fim\" type=\"date\"></div>
+                            <div class=\"leg-id2\"><b>Prévia do término</b></div>
+                            <div style=\"width:150px;\" class=\"item-id2\"><input required name=\"previa\" type=\"date\"></div>
                         </div>";
 
                     ?>

@@ -9,6 +9,7 @@
 
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
+    
     if($row>0)
     {
         $linha = mysqli_fetch_array($result);
@@ -19,6 +20,7 @@
         $responsavel=$linha['responsavel'];
         $aprovacao=$linha['aprovacao'];
         $inicio=$linha['inicio'];
+        $previa=$linha['previa'];
         $fim=$linha['fim'];
         $c_final=$linha['c_final'];
         $id_empresa=$linha['empresa'];
@@ -143,8 +145,9 @@
                             </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2\"><b>Data do término</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"fim\" required name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
+
+                                <div class=\"leg-id2\"><b>Previa do término</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"previa\" required name=\"previa\" type=\"date\" value=\"".$previa."\"></div>
                                 
                                 <button type=\"submit\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
                                 <button type=\"submit\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
