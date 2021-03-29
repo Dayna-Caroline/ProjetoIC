@@ -9,7 +9,7 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-color: rgb(64, 82, 95);
-    height: 98.5vh;
+    height: 100%;
 }
 
 a{
@@ -189,7 +189,7 @@ i{
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 100px;
+    width: 200px;
     border-right: 1px solid white;
     border-left: 1px solid white;
 }
@@ -198,16 +198,7 @@ i{
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 450px;
-    border-right: 1px solid white;
-}
-
-.leg-res{
-    padding-top: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    width: 150px;
+    width: 550px;
 }
 
 /**/
@@ -243,29 +234,19 @@ i{
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 100px;
+    width: 200px;
     border-left: 1px solid rgb(201, 201, 201);
     border-right: 1px solid rgb(201, 201, 201);
 }
 
 .item-desc{
     cursor: pointer;
-    height: 20px;
+    height: 30px;
     overflow-y: hidden;
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 450px;
-    border-right: 1px solid rgb(201, 201, 201);
-}
-
-.item-res{
-    cursor: pointer;
-    padding-top: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    width: 150px;
+    width: 550px;
 }
 
 .item a{
@@ -288,6 +269,8 @@ input[type=checkbox]
 
 .botoes{
     display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .novo{
@@ -297,7 +280,6 @@ input[type=checkbox]
     background-color: #a6d7ff;
     font-weight: bold;
     margin-top: 15px;
-    margin-left: 230px;
     padding: 10px;
     height: 50px;
     width: 170px;
@@ -308,6 +290,20 @@ input[type=checkbox]
     padding: 8px 0;
     border-radius: 5px;
     background-color: #ffc2c2;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 10px;
+    height: 50px;
+    width: 170px;
+    cursor:default;
+}
+
+.alt{
+    border: 1px solid #555;
+    padding: 8px 0;
+    border-radius: 5px;
+    background-color: #daffc2;
     font-weight: bold;
     margin-top: 15px;
     margin-left: 10px;
@@ -473,15 +469,10 @@ input[type=checkbox]
     }
         
     .item-desc{
-        width: 455px;
+        width: 505px;
         height: 55px;
         padding-bottom: 10px;
         overflow-y: scroll;
-    }
-
-    .item-res{
-        width: 50px;
-        padding-left:30px;
     }
 
 /**/
@@ -523,13 +514,6 @@ input[type=checkbox]
         margin-bottom: 10px;
         width: 700px;
         padding-top:8px;
-    }
-
-    .leg-res{
-        margin-top: 12px;
-        padding-top:8px;
-        overflow-y: hidden;
-        overflow-x:scroll;
     }
 
 /**/

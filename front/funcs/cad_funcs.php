@@ -28,6 +28,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <link rel="stylesheet" href="../../styles/funcs/cad_funcs.css">
+        
         <title>Smart Grid</title>
     </head>
 
@@ -62,8 +63,8 @@
                     </div>
                 
                     <div class="conj">
-                        <input type="text"   name="rg" class="rg" id="rg" placeholder="RG" required autocomplete="off">
-                        <input type="text"  name="cpf" class="cpf" id="cpf" placeholder="CPF" required autocomplete="off">
+                        <input type="text"   name="rg" class="rg" id="rg" placeholder="RG" required autocomplete="off" >
+                        <input type="text"  name="cpf" class="cpf form-control cpf-mask" id="cpf" placeholder="CPF" required autocomplete="off">
                     </div>
 
                     <div class="nome">
@@ -98,6 +99,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.maskedinput-1.3.min.js"></script>
         <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
         <script src="../../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
         <script src="../../js/funcs_cad_profissional.js"></script>

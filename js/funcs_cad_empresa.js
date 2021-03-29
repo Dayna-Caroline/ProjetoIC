@@ -34,6 +34,10 @@ $(document).ready(function()
 	$("#cnae").mask("9999-9/99");
 });
 
+$(document).ready(function(){
+		$("#cep").mask("99999-999");
+	});
+
 $("#cep").blur(function(){
 	// Remove tudo o que não é número para fazer a pesquisa
 	var cep = this.value.replace(/[^0-9]/, "");
