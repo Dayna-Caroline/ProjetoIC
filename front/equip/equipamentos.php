@@ -39,7 +39,7 @@
         <div class="conteudo">
             <h1>Meus Equipamentos</h1>
                <!-- ------------------------------- BUSCA ----------------------------- -->
-               <form class="projetos" action="../../front/funcs/equipamentos.php?pagina=1" method="post">
+               <form class="projetos" action="../../front/equip/equipamentos.php?pagina=1" method="post">
                     <div class="busca">
                         <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou nome" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
@@ -95,7 +95,7 @@
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
                                     echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/equipamentos.php?pagina=1'>";
+                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/equip/equipamentos.php?pagina=1'>";
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -177,20 +177,20 @@
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
+                                    <div class=\"leg-desc\"><b>Equipamentos</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_profissional'];
-                                    $nome = $linha['nome'];
+                                    $id = $linha['id_equipamento'];
+                                    $descricao = $linha['descricao'];
 
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-desc\">".$descricao."</div>
                                         </div>";
                                 }
                             }
@@ -217,7 +217,7 @@
                     ?>
 
                     <div class="botoes">
-                    <a href="cad_equipamento.php"><button value="novo" name="novo" class="novo func" style="cursor: pointer;">Novo Equipamento</button></a>
+                    <a href="cad_equipamento.php"><button value="novo" name="novo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button></a>
                         <button type="submit" id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
                     </div>
 

@@ -73,12 +73,23 @@
                         </div>";
 
                         echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>Consumo(kWh)</b></div>
+                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\"></div>
+                        </div>";
+
+                        echo "<div class=\"item2\">
                         <div class=\"leg-id2\"><b>Classe</b></div>
-                        <div class=\"item-id2\"><input required type=\"text\" name=\"classe\"></div>
+                        <div class=\"item-id2\">
+                        <select required type=\"text\" name=\"classe\">
+                            <option value=\"A\">A</option>
+                            <option value=\"B\">B</option>
+                            <option value=\"C\">C</option>
+                            <option value=\"D\">D</option>
+                            <option value=\"E\">E</option>
+                        </select>
+                        </div>
                         </div>"
-
                     ?>
-
                     <br><div class="botoes">
                         <button type="submit" value="cadastrar" name="cadastrar" class="novo" style="cursor: pointer;margin-left:300px;">Concluír Cadastro</button>
                     </div>
