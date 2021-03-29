@@ -1,8 +1,13 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    $query = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}';";
     
-    
+    // executa a query
+
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="../../styles/equipamentos/equipamentos.css">
+    <link rel="stylesheet" href="../../styles/equip/equipamentos.css">
     <title>Smart Grid</title>
 </head>
 <body>
@@ -24,9 +29,9 @@
             </div>
             <ul>
                 <li class="navitem"><a href="../empresa/empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
-                <li class="pag navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
+                <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                 <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
-                <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                <li class="pag navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
                 <li class="navitem"><a href="../mudancas/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
@@ -57,11 +62,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_equipamento AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(descricao AS CHAR) LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'  AND nome LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND descricao LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -69,7 +74,7 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' ;";
+                            $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}' ;";
                         }
 
                         $result = mysqli_query($conecta, $query);
@@ -122,7 +127,7 @@
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
                                     <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
+                                    <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -131,8 +136,9 @@
                                 {
 
                                     $linha = mysqli_fetch_array($result);
-                                    $id = $linha['id_profissional'];
-                                    $nome = $linha['nome'];
+                                    $id = $linha['id_equipamento'];
+                                    $descricao = $linha['descricao'];
+                                    $tensao = $linha['tensao'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
@@ -141,7 +147,8 @@
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$id."</div>
-                                        <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-desc\">".$descricao."</div>
+                                        <div class=\"item-id\">".$tensao."</div>
                                         </div>";
                                     }                                        
                             
@@ -202,7 +209,7 @@
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
-                            <div class=\"item-desc\">Sua empresa não possui esse equipamento cadastrado</div>
+                            <div class=\"item-desc\">Nenhum equipamento cadastrado</div>
                             <div class=\"item-res\">---</div>
                             </div>";
                         }

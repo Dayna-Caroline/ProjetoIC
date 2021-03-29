@@ -1,0 +1,262 @@
+/* LEGENDA DA TABELA */
+
+.leg-id2{
+    width: 190px;
+    height: 40px;
+
+    text-align: center;
+    color: rgb(0, 0, 0);
+        
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+
+/**/
+
+/* TABELA */
+
+.item2{
+    display: inline-flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+
+.item-id2{
+    border-bottom: 0px;
+    background-color: whitesmoke;
+    width: 500px;
+    height: 40px;
+}
+
+/**/
+
+/**/
+
+.form_equipamentos{
+    display: grid;
+    width: 720px;
+    margin-top: 5px;
+    margin-left: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border: 1px solid #0011ff;
+    border-radius: 10px;
+    background-color: transparent;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    height: 100%;
+}
+
+.form_equipamentos input{
+    border: 1px solid #999999;
+    border-radius: 5px;
+}
+
+.form_equipamentos input[type=text]{
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+    width:490px; 
+    height:40px;
+    font-size: 20px;
+    outline: 0;
+}
+
+.form_equipamentos input[type=text]:focus{
+    cursor: text;
+    background-color: #dcdcff;
+    border: 1px solid #0000ff;
+}
+
+.form_equipamentos input[type=date]{
+    border-radius: 0px;
+    height: 40px;
+    margin-top: 4px;
+    padding-left: 5px;
+    font-size:15px;
+    width: 150px;
+}
+
+.form_equipamentos select{
+    height: 40px;
+    padding-left: 10px;
+    font-size:15px;
+    width: 150px;
+    overflow: hidden;
+    outline: 0;
+}
+
+.form_equipamentosoption{
+    overflow: hidden;
+}
+
+.form_equipamentos input[type=number]{
+    height: 40px;
+    width: 150px;
+    margin-top: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size:15px;
+}
+
+.form_equipamentos input[type=number]:hover::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 30px;
+}
+
+.form_equipamentos input[type=number]:focus::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 30px;
+}
+
+
+.tudo{
+    width: 1260px;
+    height: 100%;
+    margin: auto;
+}
+
+.req{
+    border: 1px solid #555;
+    padding: 8px 0;
+    border-radius: 5px;
+    background-color: #a4c5a6;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 5px;
+    padding: 10px;
+    height: 50px;
+    width: 170px;
+}
+
+.editar{
+    color: black;
+    border: 1px solid #555;
+    border-radius: 15px;
+    background-color: #bebebe;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left:25px;
+    margin-bottom: 20px;
+    height: 35px;
+    width: 100px;
+    outline: 0;
+}
+
+.visualizar{
+    color: black;
+    border: 1px solid #555;
+    border-radius: 15px;
+    background-color: #f1f1f1;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 250px;
+    height: 35px;
+    width: 100px;
+    outline: 0;
+}
+
+/**/
+
+
+.cancelar{
+    color: red;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 20px;
+    outline: 0;
+    visibility: hidden;
+    display: none;
+    border: none;
+    padding-top: 20px;
+}
+
+.salvar{
+    color: green;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 50px;
+    outline: 0;
+    visibility: hidden;
+    display: none;
+    border: none;
+    padding-top: 20px;
+}
+
+
+@media only screen and (max-width: 800px){
+
+/* LEGENDA DA TABELA */
+
+    .leg-id2{
+        width: 190px;
+        height: 40px;
+
+        text-align: center;
+        color: rgb(0, 0, 0);
+        
+        padding-top: 15px;
+        margin-bottom: 10px;
+    }
+
+/**/
+
+/* TABELA */
+
+    .item2{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 12px;
+    }
+
+    .item-id2{
+        width: 500px;
+    }
+
+/**/
+
+/**/
+
+    .form_equipamentos{
+        width: 710px;
+        margin-top: 50px;
+        margin-left: 35px;
+        padding-bottom: 20px;
+    }
+
+    .form_equipamentos input[type=text]{
+        margin-left: 10px;
+        width:450px; 
+    }
+
+    .form_equipamentos input[type=date]{
+        margin-left:0px;
+    }
+
+    .form_equipamentos input[type=number]{
+        margin-left:0px;
+    }
+
+    .form_equipamentos input[type=select]{
+        margin-left:0px;
+    }
+
+    .titulo{
+        margin-top: 50px;
+    }
+
+    .tudo{
+        width: 823px;
+        height: 100%;
+        margin: auto;
+    }
+
+
+/**/
+
+}
