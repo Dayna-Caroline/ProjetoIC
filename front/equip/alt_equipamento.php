@@ -1,21 +1,21 @@
 <?php
+
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-    /*
-    $query = "SELECT * FROM equipamentos WHERE id_profissional=$id";
+    $id=$_POST['ealtera'];
+    $query = "SELECT * FROM equipamentos WHERE id_equipamento='$id'";
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
-    if($row==1){
+    if($row==1)
+    {
         $linha=mysqli_fetch_array($result);
-        $comp = $linha['complemento'];
-
-        if($comp == null){
-            $comp = "Sem complemento";
-        }
-    }else{
-        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/escolha_func.php'>";
-    }*/
+    }
+    else
+    {
+        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/equip/equipamentos.php'>";
+    }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -54,52 +54,57 @@
             <div class="conteudo">
 
                 <div  class="titulo">
-                    <h1>Cadastrar Equipamento</h1>
+                    <h1>Alteração Equipamento</h1>
                 </div>
 
                 <!--  Campos(Descrição, Marca, fabricante, tipo, modelo, tensao,consumo,classe)  -->
-                <form class="form_equipamentos" method="post" action="../../back/equip/cad_equipamento.php">
+                <form class="form_equipamentos" method="post" action="../../back/equip/alt_equipamento.php">
                     <?php
-                    
+
+                        echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>ID</b></div>
+                            <div class=\"item-id2\"><input disabled autocomplete=\"off\" type=\"text\" value=".$id."name=\"id\"></div>
+                        </div>";
+
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Descrição do equipamento</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"descricao\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"descricao\" value=".$linha['descricao']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Marca</b></div>
-                            <div class=\"item-id2\"><input required type=\"text\" name=\"marca\"></div>
+                            <div class=\"item-id2\"><input required type=\"text\" name=\"marca\" value=".$linha['marca']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Fabricante</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"fabricante\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"fabricante\" value=".$linha['fabricante']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Tipo</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"tipo\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"tipo\" value=".$linha['tipo']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Modelo</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"modelo\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"modelo\" value=".$linha['modelo']."></div>
                         </div>";
                         
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Tensão(Volts)</b></div>
-                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"tensao\"></div>
+                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"tensao\"value=".$linha['tensao']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2\"><b>Consumo(kWh)</b></div>
-                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\"></div>
+                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\"value=".$linha['consumo']."></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                         <div class=\"leg-id2\"><b>Classe</b></div>
                         <div class=\"item-id2\">
-                        <select required type=\"text\" name=\"classe\">
+                        <select required type=\"text\" name=\"classe\"value=".$linha['classe'].">
                             <option value=\"A\">A</option>
                             <option value=\"B\">B</option>
                             <option value=\"C\">C</option>

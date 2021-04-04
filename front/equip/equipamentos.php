@@ -1,15 +1,7 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-    $query = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}';";
-    
-    // executa a query
-
-    $result = mysqli_query($conecta, $query);
-    $row = mysqli_num_rows($result);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +12,7 @@
     <link rel="stylesheet" href="../../styles/equip/equipamentos.css">
     <title>Smart Grid</title>
 </head>
-<body>
+<body onclick="verifica()">
     <div class="tudo">
         <div class="aba">
             <div class="logo">
@@ -47,7 +39,7 @@
                 </form>
 
                 <!-- ------------------------------ TABELA ----------------------------- -->
-                <form class="projetos" action="../../front/equip/cad_equipamento.php" method="post">
+                <form class="projetos" action="../../back/equip/equipamentos.php" method="post">
 
                     <?php
 
@@ -62,11 +54,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_equipamento AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(descricao AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_equipamento, descricao, consumo FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_equipamento AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(descricao AS CHAR) LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND descricao LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_equipamento, descricao, consumo FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND descricao LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -74,7 +66,7 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_equipamento, descricao, tensao FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}' ;";
+                            $query = "SELECT id_equipamento, descricao, consumo FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}' ;";
                         }
 
                         $result = mysqli_query($conecta, $query);
@@ -128,6 +120,7 @@
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
+                                    <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -138,17 +131,18 @@
                                     $linha = mysqli_fetch_array($result);
                                     $id = $linha['id_equipamento'];
                                     $descricao = $linha['descricao'];
-                                    $tensao = $linha['tensao'];
+                                    $consumo = $linha['consumo'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
                                     {
                                         echo "
+                                        
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$id."</div>
                                         <div class=\"item-desc\">".$descricao."</div>
-                                        <div class=\"item-id\">".$tensao."</div>
+                                        <div class=\"item-consumo\">".$consumo."</div>
                                         </div>";
                                     }                                        
                             
@@ -178,6 +172,7 @@
                                     <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>Equipamentos</b></div>
+                                    <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
@@ -185,12 +180,14 @@
                                     $linha = mysqli_fetch_array($result);
                                     $id = $linha['id_equipamento'];
                                     $descricao = $linha['descricao'];
+                                    $consumo = $linha['consumo'];
 
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$id."</div>
                                         <div class=\"item-desc\">".$descricao."</div>
+                                        <div class=\"item-consumo\">".$consumo."</div>
                                         </div>";
                                 }
                             }
@@ -205,6 +202,7 @@
                                 <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
                                 <div class=\"leg-id\"><b>ID</b></div>
                                 <div class=\"leg-desc\"><b>Equipamentos</b></div>
+                                <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
                             </div>
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
@@ -217,8 +215,9 @@
                     ?>
 
                     <div class="botoes">
-                    <a href="cad_equipamento.php"><button value="novo" name="novo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button></a>
-                        <button type="submit" id="arquiva" value="arquivar" name="arquiva" class="arq" style="cursor: pointer;">Excluir Selecionados</button>
+                        <button type="submit" value="enovo" name="enovo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button>  
+                        <button type="submit" value="<?php echo $id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
+                        <button type="submit" value="<?php echo $id; ?>" name="ealtera" class="alt" style="cursor: pointer;">Alterar Equipamentos</button>
                     </div>
 
                 </form>
@@ -227,7 +226,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-    <script src="../js/funcs_equipamentos.js"></script>
+    <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+    <script src="../../js/funcs_equipamentos.js"></script>
 </body>
 </html>

@@ -202,7 +202,8 @@ i{
     border-right: 1px solid white;
 }
 
-.leg-res{
+
+.leg-consumo{
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -259,7 +260,7 @@ i{
     border-right: 1px solid rgb(201, 201, 201);
 }
 
-.item-res{
+.item-consumo{
     cursor: pointer;
     padding-top: 5px;
     margin-top: 10px;
@@ -308,6 +309,19 @@ input[type=checkbox]
     padding: 8px 0;
     border-radius: 5px;
     background-color: #ffc2c2;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 10px;
+    height: 50px;
+    width: 170px;
+    cursor:default;
+}
+.alt{
+    border: 1px solid #555;
+    padding: 8px 0;
+    border-radius: 5px;
+    background-color: #daffc2;
     font-weight: bold;
     margin-top: 15px;
     margin-left: 10px;
