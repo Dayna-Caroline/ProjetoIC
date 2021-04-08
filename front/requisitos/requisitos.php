@@ -232,7 +232,7 @@
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                             <div class=\"item-id\">---</div>
-                            <div class=\"item-desc\">Nenhum projeto foi encontrado.</div>
+                            <div class=\"item-desc\">Nenhum requisito foi encontrado.</div>
                             <div class=\"item-res\">---</div>
                             </div>";
                         }

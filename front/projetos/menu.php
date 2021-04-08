@@ -58,7 +58,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body onclick="verifica()" onload="verifica()">
+    <body onclick="verifica()" onload="verifica()" >
 
         <div class="tudo">
 
