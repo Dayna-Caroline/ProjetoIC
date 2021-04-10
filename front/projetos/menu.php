@@ -146,7 +146,7 @@
                                 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input id=\"marcatodos\" type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
                                     <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
                                     <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>
@@ -197,7 +197,7 @@
 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input id=\"marcatodos\" type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div title=\"ID do projeto\" class=\"leg-id\"><b>ID</b></div>
                                     <div title=\"Descrição do Projeto\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
                                     <div title=\"ID do Funcionário responsável pelo projeto\" class=\"leg-res\"><b>RESPONSÁVEL</b></div>

@@ -7,8 +7,21 @@ function marca(source) {
 
 function verifica() {
   checkboxes = document.getElementsByName('check_list[]');
+  marcatodos = document.getElementById('marcatodos');
 
   let a=0;
+
+  checkboxes.forEach(element => {
+    if(element.checked==true){a++;}
+  });
+
+  if(a < checkboxes.length ){
+    marcatodos.checked = false;
+  }
+
+  else{
+    marcatodos.checked = true;
+  }
 
   checkboxes.forEach(element => {
     if(element.checked==true){a++;}

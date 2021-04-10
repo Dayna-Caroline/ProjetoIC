@@ -21,7 +21,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body onclick="verifica()">
+    <body onclick="verifica()" onload="verifica()">
 
         <div class="tudo">
 
@@ -131,7 +131,7 @@
                                 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
+                                    <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"></div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>FUNCIONÁRIO</b></div>
                                 </div>";
@@ -179,7 +179,7 @@
 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div class=\"leg-box\"><input id=\"marcatodos\" type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
                                 </div>";

@@ -59,7 +59,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body>
+    <body onclick="verifica()" onload="verifica()">
 
         <div class="tudo">
 
@@ -99,7 +99,7 @@
                         
                         if($row != 0)
                         {
-                            // Caso existam mais de 11 projetos cadastrados, exibe resultados em páginas
+                            // Caso existam mais de 11 requisitos cadastrados, exibe resultados em páginas
 
                             if( $row>10 )
                             {
@@ -107,7 +107,7 @@
                                 $numpag=ceil($row/10);
                                 $pagina=$_GET['pagina'];
 
-                                if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
+                                if( (($pagina-1)*10)+1 > $row )//URL com pagina inesistente
                                 {
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
@@ -142,7 +142,7 @@
                                 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
                                     <div title=\"ID do requisito\" class=\"leg-id\"><b>ID</b></div>
                                     <div title=\"Descrição do requisito\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
                                     <div title=\"Titulo do requisito\" class=\"leg-res\"><b>TÍTULO</b></div>
@@ -164,9 +164,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -193,7 +193,7 @@
 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div title=\"Marcar todos\" class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
                                     <div title=\"ID do requisito\" class=\"leg-id\"><b>ID</b></div>
                                     <div title=\"Descrição do requisito\" class=\"leg-desc\"><b>DESCRIÇÃO</b></div>
                                     <div title=\"Titulo do requisito\" class=\"leg-res\"><b>TÍTULO</b></div>
@@ -209,16 +209,16 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                 }
                             }
 
                         }
 
-                        // Não encontrou nenhum projeto
+                        // Não encontrou nenhum requisito
 
                         else{
                             echo "

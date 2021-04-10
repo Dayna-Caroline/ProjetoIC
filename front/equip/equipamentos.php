@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../styles/equip/equipamentos.css">
     <title>Smart Grid</title>
 </head>
-<body onclick="verifica()">
+<body onclick="verifica()" onload="verifica()">
     <div class="tudo">
         <div class="aba">
             <div class="logo">
@@ -117,7 +117,7 @@
                                 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"></div>
+                                    <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"></div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
                                     <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
@@ -169,7 +169,7 @@
 
                                 echo "
                                 <div class=\"legenda\">
-                                    <div class=\"leg-box\"><input type=\"checkbox\" onclick=\"marca(this)\"> </div>
+                                    <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>ID</b></div>
                                     <div class=\"leg-desc\"><b>Equipamentos</b></div>
                                     <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
