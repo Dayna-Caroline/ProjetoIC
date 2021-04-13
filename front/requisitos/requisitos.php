@@ -10,7 +10,7 @@
         { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>"; }
 
         if(!@$_GET['pagina'])
-        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=\"".$_GET['proj']."\"&pagina=1&busca=".@$_GET['busca']."'>"; }
+        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".@$_GET['busca']."'>"; }
 
         if(@$_GET['busca'])
         {
@@ -20,11 +20,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%' AND projeto.id_projeto = requisitos.projeto;";
                     } 
                     else 
                     {
-                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}'";
+                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;";
                         break;
                     }
                 }
@@ -34,7 +34,7 @@
 
     // sem filtros
         else
-        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}';"; }
+        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;"; }
     //
 
     // executa a query
@@ -42,7 +42,7 @@
         $row = mysqli_num_rows($result);
 
         if($row==0&&@$_GET['pagina']>1)
-        { echo "<<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?pagina=1&busca=".$_GET['busca']."'>"; }
+        { echo "<<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."'>"; }
     //
 
 ?>
@@ -80,7 +80,14 @@
 
             <div class="conteudo">
 
-                <h1>Requisitos do Projeto <?php ?></h1>
+                <h1>Requisitos do Projeto <?php 
+                
+                    $sql = "SELECT id_projeto FROM projeto WHERE md5(id_projeto) = '{$_GET['proj']}';";
+                    $resultado = mysqli_query($conecta, $sql);
+                    $linha=mysqli_fetch_array($resultado);
+                    echo $linha['id_projeto'];
+                
+                ?></h1>
 
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/requisitos/requisitos.php" method="get">
@@ -112,7 +119,7 @@
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
                                     echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?pagina=1'>";
+                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."'>";
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -124,9 +131,9 @@
                                     echo "<div class=\"botoes\">";
                                         echo "<div class=\"num-projetos\">".$row." requisitos</div>";
                                         echo "<div class=\"exibir-resultados\"><b>Exibindo Requisitos ".$bot." até ".$row."</b></div>"; 
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)."<i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?proj=".$_GET['proj']."&pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)."<i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?proj=".$_GET['proj']."&pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
                                     echo "</div>";
                                 }
 
@@ -134,9 +141,9 @@
                                     echo "<div class=\"botoes\">";
                                         echo "<div class=\"num-projetos\">".$row." requisitos</div>";
                                         echo "<div class=\"exibir-resultados\"><b>Exibindo Requisitos ".$bot." até ".$top."</b></div>";    
-                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
+                                        echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?proj=".$_GET['proj']."&pagina=".($pagina-1)."&busca=".$_GET['busca']."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
-                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
+                                        echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"requisitos.php?proj=".$_GET['proj']."&pagina=".($pagina+1)."&busca=".$_GET['busca']."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
                                     echo "</div>";
                                 }
                                 
@@ -182,7 +189,7 @@
                                 if($row>1)
                                 {
                                     echo "<div class=\"num-projetos\">".$row." requisitos</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Requisitoss</b></div>";
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Requisitos</b></div>";
                                 }
                                 else
                                 {
@@ -240,7 +247,7 @@
                     ?>
 
                     <div class="botoes">
-                        <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Adiconar Requisito</button>
+                        <button type="submit" value="<?php echo $_GET['proj']; ?>" name="novo" class="novo" style="cursor: pointer;">Adiconar Requisito</button>
                         <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir Selecionados</button>
                     </div>
 

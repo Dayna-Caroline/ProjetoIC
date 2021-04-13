@@ -38,7 +38,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body>
+    <body onload="visualizar()">
 
         <div class="tudo">
 
@@ -60,10 +60,10 @@
             <div class="conteudo">
 
                 <div  class="titulo">
-                    <h1>Detalhes do requisito</h1>
+                    <h1>Detalhes do Requisito</h1>
                 </div>
 
-                <!--  REQUISITO (LER, ALTERAR, EXCLUIR, CONCLUIR)  -->
+                <!--  REQUISITO (LER, ALTERAR, EXCLUIR)  -->
                 <div class="projetos2">
 
                     <div class="botoes">
@@ -71,43 +71,56 @@
                         <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
 
-                    <form action="../../back/projetos/projetos.php" onchange="alterou()" method="post">
+                    <form action="../../back/requisitos/requisitos.php" onchange="alterou()" method="post">
 
                         <?php
                             echo "<div class=\"item2\">
+
                                 <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Requisito</b></div>
                                 <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id."\">".$id."</option></select></div>
-                            </div>";
 
-                            echo "<div class=\"item2\">
-                                <div class=\"leg-id2\"><b>Descrição do requisito</b></div>
-                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\" value=\"".$descricao."\"></div>
-                            </div>";
-
-
-                            echo "<div class=\"item2\">
-                            
-                                <div class=\"leg-id2\"><b>Data de Início</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" required  type=\"date\" value=\"".$inicio."\"></div>
+                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
+                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
                                 
                             </div>";
 
                             echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Título</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"titulo\" onkeypress=\"alterou()\" required name=\"titulo\" value=\"".$titulo."\"></div>
+                            </div>";
 
-                                <button type=\"submit\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
-                                <button type=\"submit\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
-                        
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Descrição</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\" value=\"".$descricao."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Processo</b></div>
+                                <div class=\"item-id2\"><input type=\"text\" id=\"processo\" onkeypress=\"alterou()\" required name=\"processo\" value=\"".$processo."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                            
+                                <div class=\"leg-id2\"><b>Cadastro</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\" value=\"".$cadastro."\"></div>
+                                <div class=\"leg-id2\" style=\"margin-right: 10px; width:150px;\"><b>Tipo</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+                                <div class=\"leg-id2\"><b>Versão</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" value=\"".$versao."\"></div>
+                                
+                                <button type=\"submit\" value=\"".$id."\" id=\"altera\" name=\"altera\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
+                                <button type=\"submit\" value=\"".$id."\"  id=\"cancela\" name=\"cancela\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
                                 </div><br><br>
-
                             ";
 
                         ?>
 
                         <div class="botoes">
 
-                            <button type="submit" value="<?php echo $id; ?>" name="conclui" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
-                            <button type="submit" value="<?php echo $id; ?>" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
-                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir Projeto</button>
+                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer; margin-left:300px;" class="arq">Excluir Requisito</button>
                         
                         </div>
 
@@ -119,7 +132,7 @@
 
         </div>
 
-        <script src="../../js/funcs_projetos.js"></script>
+        <script src="../../js/funcs_requisitos.js"></script>
 
     </body>
 

@@ -136,7 +136,7 @@
                 $query = "DELETE FROM projeto WHERE md5(id_projeto) = '$idaux';";
 
                 $resultado2 = mysqli_query($conecta, $query);
-                if ($resultado == true )$aux++;
+                if ($resultado2 == true )$aux++;
 
             }
 
