@@ -121,11 +121,14 @@
                         <div class="botoes">
 
                             <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer; margin-left:300px;" class="arq">Excluir Requisito</button>
+                           
                         
                         </div>
 
                     </form>
-
+                    <form action="../../front/mudancas/solic_mud.php"  method="post">
+                    <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Solicitar Mudança</button>
+                    </form>
                 </div>
 
             </div>
