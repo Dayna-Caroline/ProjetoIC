@@ -1,7 +1,7 @@
 <?php 
 //solicitar mudança
  include "../../back/autenticacao.php";
-include "../../back/conexao_local.php";
+ include "../../back/conexao_local.php";
 
 
 $id_req=$_POST['mudanca'];
@@ -133,7 +133,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                     ?>
                   
                       <div class="botoes">
-                        <button type="submit" value="<?php $id_req;?>" name="mudanca" class="novo" style="cursor: pointer;margin-left:300px;">Solicitar Mudança</button>
+                        <button type="submit" value="<?php echo $id_req;?>" name="mudanca" class="novo" style="cursor: pointer;margin-left:300px;">Solicitar Mudança</button>
                     </div>
 
                    
