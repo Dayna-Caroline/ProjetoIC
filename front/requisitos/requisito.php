@@ -129,6 +129,9 @@
                     <form action="../../front/mudancas/solic_mud.php"  method="post">
                     <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Solicitar Mudança</button>
                     </form>
+                   <form action="../../front/mudancas/hist_mud.php"  method="post">
+                    <button type="submit" value="<?php echo $id; ?>" name="id" style="cursor: pointer; margin-left:300px;" class="arq">Historico Mudança</button>
+                    </form>
                 </div>
 
             </div>

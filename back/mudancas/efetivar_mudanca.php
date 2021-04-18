@@ -21,6 +21,7 @@ if ($row == 1)
     $projeto = $linha['projeto'];
     $tipo = $linha['tipo'];
     $versao = $linha['versao'];
+    
 }
 else
 {
@@ -28,10 +29,11 @@ else
 }
 
 
+
 $sql="INSERT INTO mudancas VALUES ( NULL,'$projeto','$pedido','$tipo','s','$solicitante','$req','$desc','$custo');";
 
     if (mysqli_query($conecta, $sql)) 
-    { 
+    {       
             echo"deu bom 2";
             //header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1"); 
            
