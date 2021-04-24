@@ -92,7 +92,7 @@ create table requisitos
     titulo varchar(50) not null,
     processo varchar(50) not null,
     cadastro date not null,
-    versao varchar(10) not null,
+    versao integer not null,
     descricao varchar(100) not null,
     tipo integer not null,
     primary key(id_requisito),

@@ -21,11 +21,12 @@ if ($row == 1)
     $projeto = $linha['projeto'];
     $tipo = $linha['tipo'];
     $versao = $linha['versao'];
+    $nova_versao=$versao+1;
     
 }
 else
 {
-    echo"deu ruim";
+    //echo"deu ruim";
 }
 
 
@@ -34,15 +35,20 @@ $sql="INSERT INTO mudancas VALUES ( NULL,'$projeto','$pedido','$tipo','s','$soli
 
     if (mysqli_query($conecta, $sql)) 
     {       
-            echo"deu bom 2";
-            //header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1"); 
+        $sql2="UPTADE requisitos set versao =  '$nova_versao' WHERE id_requisito = '$req';";
+        
+        
+            echo "<script type='text/javascript'>alert('Solicitação realizada  com sucesso!')</script>"; 
+            //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
+       
            
     } 
         
     else 
     {
-      echo '<script language=\"javascript\">alert(\'Não foi possível Solicitar a mudança, tente novamente em alguns minutos!\')</script>'; 
-       // header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1");        
+     echo "<script type='text/javascript'>alert('Nao foi possivel realizar a solicitação!')</script>"; 
+        //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
+       //       
     }
 
 

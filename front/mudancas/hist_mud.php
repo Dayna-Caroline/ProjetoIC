@@ -3,12 +3,13 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
+    $id_req=$_POST['mudanca'];
 
     if(!$_GET['pagina']||$_GET['pagina']=="0")
     {
        echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/mudancas/hist_mud.php?pagina=1'>";
     }
-$id_req=$_POST['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +60,7 @@ $id_req=$_POST['id'];
                         {
                             // Caso não haja filtro ou existam mais de 11 projetos cadastrados, exibe resultados em páginas
 
-                            if( $row>10 && @!$_POST['busca'] )
+                            if( $row>10  )
                             {
 
                                 $numpag=ceil($row/10);
@@ -70,7 +71,7 @@ $id_req=$_POST['id'];
                                     echo '<script language="javascript">';
                                     echo "alert('Página não encontrada.')";
                                     echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/mudancas/hist_mud.php?pagina=1'>";
+                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../front/mudancas/hist_mud.php?pagina=1'>";
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -189,8 +190,9 @@ $id_req=$_POST['id'];
                       
                     ?>
                     <div class="botoes">
-                        <a href=""><button value="" name="" class="novo func" style="cursor: pointer;">voltar</button></a>
-                       
+                     
+            
+                
                     </div>
                 </form>
             </div>
