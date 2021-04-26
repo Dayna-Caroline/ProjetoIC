@@ -3,8 +3,17 @@
  include "../../back/autenticacao.php";
  include "../../back/conexao_local.php";
 
+ if(isset($_GET['success']))
+ {
+     if($_GET['success'] == 1)
+     {
+         echo '<script language="javascript">';
+         echo "alert('Erro ao realizar a mudança, tente novamente.')";
+         echo '</script>';
+     }
+ }
 
-$id_req=$_POST['mudanca'];
+    $id_req=$_POST['mudanca'];
 
 
  $query = "SELECT * FROM requisitos WHERE id_requisito = '$id_req';";

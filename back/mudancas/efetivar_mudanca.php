@@ -34,19 +34,16 @@ else
 $sql="INSERT INTO mudancas VALUES ( NULL,'$projeto','$pedido','$tipo','s','$solicitante','$req','$desc','$custo');";
 
     if (mysqli_query($conecta, $sql)) 
-    {       
-        $sql2="UPTADE requisitos set versao =  '$nova_versao' WHERE id_requisito = '$req';";
+    {         
         
-        
-            echo "<script type='text/javascript'>alert('Solicitação realizada  com sucesso!')</script>"; 
-            //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
-       
-           
+        header("location: ../../front/mudancas/hist_mud.php?pagina=1&mudanca=".$req."");
+        //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
+   
     } 
         
     else 
     {
-     echo "<script type='text/javascript'>alert('Nao foi possivel realizar a solicitação!')</script>"; 
+        header("location: ../../front/mudancas/solic_mud.php?sucess=1");
         //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
        //       
     }
