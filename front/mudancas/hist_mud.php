@@ -47,7 +47,11 @@
 
              <form class="projetos" action="" method="post">
              <?php
-                
+                function data($data)
+                {
+                   return date("d/m/Y", strtotime($data));
+                }
+                 
             $query = "SELECT descricao, pedido FROM mudancas WHERE requisito = '$id_req' order by pedido;";
 
 
@@ -105,12 +109,14 @@
                                 </div>";
 
                                 // Exibe os resultados
+                                
+                                
 
                                 for($i=1; $i<=$row ; $i++ )
                                 {
 
                                     $linha = mysqli_fetch_array($result);
-                                    $data= $linha['pedido'];
+                                    $data= data($linha['pedido']);
                                     $nome = $linha['descricao'];
 
                                 
@@ -155,7 +161,7 @@
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
-                                    $data = $linha['pedido'];
+                                    $data = data($linha['pedido']);
                                     $nome = $linha['descricao'];
 
                                     echo "
