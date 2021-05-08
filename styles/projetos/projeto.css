@@ -3,12 +3,16 @@
 .leg-id2{
     width: 190px;
     height: 40px;
-
     text-align: center;
     color: rgb(0, 0, 0);
-        
-    padding-top: 15px;
-    margin-bottom: 10px;
+
+    margin-top: 10px;
+}
+
+.ab{
+    text-align: left;
+    margin-left: 5px;
+    margin-right: -5px;
 }
 
 /**/
@@ -41,9 +45,6 @@
     width: 720px;
     margin-top: 5px;
     margin-left: 80px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border: 1px solid #0011ff;
     border-radius: 10px;
     background-color: transparent;
     border-top-left-radius: 0px;
@@ -51,7 +52,7 @@
     height: 100%;
 }
 
-.projetos2 input{
+.projetos2 input, select{
     border: 1px solid #999999;
     border-radius: 5px;
 }
@@ -62,11 +63,11 @@
     padding-right: 5px;
     width:490px; 
     height:40px;
-    font-size: 20px;
+    font-size: 16px;
     outline: 0;
 }
 
-.projetos2 input[type=text]:focus{
+.projetos2 input:focus{
     cursor: text;
     background-color: #dcdcff;
     border: 1px solid #0000ff;
@@ -75,17 +76,17 @@
 .projetos2 input[type=date]{
     border-radius: 0px;
     height: 40px;
-    margin-top: 4px;
     padding-left: 5px;
     font-size:15px;
     width: 150px;
+    border: 1px solid #999999;
+    border-radius: 5px;
 }
 
 .projetos2 select{
     height: 40px;
-    padding-left: 10px;
     font-size:15px;
-    width: 150px;
+    width: 490px;
     overflow: hidden;
     outline: 0;
 }
@@ -97,10 +98,11 @@
 .projetos2 input[type=number]{
     height: 40px;
     width: 150px;
-    margin-top: 4px;
     padding-left: 5px;
     padding-right: 5px;
     font-size:15px;
+    border: 1px solid #999999;
+    border-radius: 5px;
 }
 
 .projetos2 input[type=number]:hover::-webkit-inner-spin-button {  
@@ -113,6 +115,14 @@
     height: 30px;
 }
 
+.volt{
+    font-size: 16px;
+    color: #555;
+    margin-left: 50px;
+    text-align: left;
+    margin-bottom: -20px;
+}
+
 
 .tudo{
     width: 1260px;
@@ -122,7 +132,7 @@
 
 .req{
     border: 1px solid #555;
-    padding: 8px 0;
+    padding: 8px 0; 
     border-radius: 5px;
     background-color: #a4c5a6;
     font-weight: bold;

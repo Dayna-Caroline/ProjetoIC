@@ -74,8 +74,11 @@
             <div class="conteudo">
 
                 <div  class="titulo">
+                    <a href="menu.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
                     <h1>Detalhes do projeto</h1>
                 </div>
+
+                <div class="espaco" style="margin-bottom: -40px;"></div>
 
                 <!--  PROJETO (LER, ALTERAR, EXCLUIR, CONCLUIR)  -->
                 <div class="projetos2">
@@ -88,15 +91,9 @@
                     <form action="../../back/projetos/projetos.php" onchange="alterou()" method="post">
 
                         <?php
-                            echo "<div class=\"item2\">
-                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
-                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id."\">".$id."</option></select></div>
-                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Empresa</b></div>
-                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id_empresa."\">".$id_empresa."</option></select></div>
-                            </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2\"><b>ID Responsável</b></div>
+                                <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Responsável</b></div>
 
                                 <div style=\"width:150px;\" class=\"item-id2\">
                                     <select name=\"profissional\" required id=\"profissional\">";
@@ -106,7 +103,7 @@
                                         echo "<option "; 
                                             if($linha2['id_profissional']==$responsavel)
                                             { echo "selected "; } 
-                                        echo " value=\"".$linha2['id_profissional']."\">".$linha2['id_profissional']." - ".$linha2['nome']."</option>";
+                                        echo " value=\"".$linha2['id_profissional']."\">".$linha2['nome']."</option>";
                                     }
 
                                     echo "</select>
@@ -115,42 +112,42 @@
                             </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2\"><b>Descrição do projeto</b></div>
+                                <div class=\"leg-id2 ab\"><b>Descrição do projeto</b></div>
                                 <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\" value=\"".$descricao."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2\"><b>Finalidade do projeto</b></div>
+                                <div class=\"leg-id2 ab\"><b>Finalidade do projeto</b></div>
                                 <div class=\"item-id2\"><input type=\"text\" id=\"finalidade\" onkeypress=\"alterou()\" required name=\"finalidade\" value=\"".$finalidade."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
                             
-                                <div class=\"leg-id2\"><b>Orçamento (R$)</b></div>
+                                <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Orçamento (R$)</b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"orcamento\" required class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
                                 
-                                <div class=\"leg-id2\" style=\"margin-right: 10px;\"><b>Custo final (R$)</b></div>
+                                <div class=\"leg-id2\" style=\" margin-right: 10px;\"><b>Custo final (R$)</b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"c_final\" required  class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
                             
                             </div>";
 
                             echo "<div class=\"item2\">
                             
-                                <div class=\"leg-id2\"><b>Data de Início</b></div>
+                                <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Data de Início</b></div>
                                 <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" required  type=\"date\" value=\"".$inicio."\"></div>
                                 
-                                <div class=\"leg-id2\"><b>Data de Aprovação</b></div>
+                                <div class=\"leg-id2\" style=\"margin-left: 5px; margin-right: -5px;\" ><b>Data de Aprovação</b></div>
                                 <div style=\"width:150px;\" class=\"item-id2\"><input id=\"aprovacao\" name=\"aprovacao\" required  type=\"date\" value=\"".$aprovacao."\"></div>
                             
                             </div>";
 
                             echo "<div class=\"item2\">
 
-                                <div class=\"leg-id2\"><b>Previa do término</b></div>
+                                <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Previa do término</b></div>
                                 <div style=\"width:150px;\" class=\"item-id2\"><input id=\"previa\" required name=\"previa\" type=\"date\" value=\"".$previa."\"></div>
                                 
-                                <button type=\"submit\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
-                                <button type=\"submit\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
+                                <button type=\"submit\" style=\"margin-top: -5px;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
+                                <button type=\"submit\" style=\"margin-top: -5px;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
                         
                                 </div><br><br>
 
