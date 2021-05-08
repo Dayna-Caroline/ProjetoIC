@@ -33,4 +33,20 @@
     }
     mysqli_close($conecta);
 
+
+    /*Valida cpf
+    $vcpf = preg_replace('/[^0-9]', '', $cpf);
+    $digitoA = 0;
+    $digitoB = 0;
+    for($i = 0, $x = 10; $i <= 8; $i++, $x--){
+        $digitoA += $vcpf[$i] * $x;
+    }
+    for($i = 0, $x = 11; $i <= 9; $i++, $x--){
+        if(str_repeat($i, 11) == $vcpf) return false;
+        $digitoB += $vcpf[$i] * $x; 
+    }
+    $somaA = (($digitoA%11) < 2) ? 0 : 11-($digitoA%11);
+    $somaB = (($digitoB%11) < 2) ? 0 : 11-($digitoB%11); 
+    if($somaA != $vcpf[9] || $somaB != $vcpf[10])*/
 ?>
+

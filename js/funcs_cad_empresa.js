@@ -16,21 +16,45 @@ function mostrarSenha2(){
 	}
 }
 
-function verifica_senha()
+function verifica()
 {
     if(document.getElementById('senha').value !== document.getElementById('senha2').value)
-        {
-            alert('Senhas diferentes! Por favor, confirme sua senha novamente');
-            document.getElementById('senha2').focus();
-            return false;
-        }  
+	{
+		alert('Senhas diferentes! Por favor, confirme sua senha novamente');
+		document.getElementById('senha2').focus();
+		return false;
+	}  
+	if(jsbrasil.validateBr.cep(document.getElementById('cep').value) == false)
+	{
+		alert('CEP inválido! Por favor, confirme seu CEP.');
+		document.getElementById('cep').focus();
+		return false;
+	} 
+	if(jsbrasil.validateBr.cnpj(document.getElementById('cnpj').value) == false)
+	{
+		alert('CNPJ inválido! Por favor, confirme seu CNPJ.');
+		document.getElementById('cnpj').focus();
+		return false;
+	}
+	if(jsbrasil.validateBr.cnae(document.getElementById('cnae').value) == false)
+	{
+		alert('CNAE inválida! Por favor, confirme seu CNAE.');
+		document.getElementById('cnae').focus();
+		return false;
+	}
+	if(jsbrasil.validateBr.ie(document.getElementById('ie').value) == false)
+	{
+		alert('IE inválido! Por favor, confirme seu IE.');
+		document.getElementById('ie').focus();
+		return false;
+	}
 }
 
 $(document).ready(function()
 {	
 	$("#cnpj").mask("99.999.999/9999-99");
 	//$("#cep").mask("99.999-999");
-	$("#ie").mask("999.999.999/9999"); 
+	$("#ie").mask("999.999.999.999"); 
 	$("#cnae").mask("9999-9/99");
 });
 

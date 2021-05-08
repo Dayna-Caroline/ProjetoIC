@@ -43,7 +43,7 @@
         <h1>Cadastre sua empresa</h1>
         <hr size=5>
         
-        <form class="cadastro"  action="../../back/empresa/cad_empresa.php" method="post" onsubmit="return verifica_senha()">
+        <form class="cadastro"  action="../../back/empresa/cad_empresa.php" method="post" onsubmit="return verifica()">
             <div class="razao">
                 <input type="text" name="razao" id="razao" placeholder="Razão social" required autocomplete="off" autocomplete="off">
             </div>
@@ -57,14 +57,14 @@
             </div>
 
             <div class="conj">
-                <input type="text" class="uf" name="uf" id="uf" placeholder="UF" required autocomplete="off">
+                <input type="text" class="uf" name="uf" id="uf" placeholder="UF" required autocomplete="off" maxlength="2">
                 <input type="text" class="cidade" name="cidade" id="cidade" placeholder="Cidade" required autocomplete="off">
                 <input type="text" class="bairro" name="bairro" id="bairro" placeholder="Bairro" required autocomplete="off">
             </div>
 
             <div class="conj">
                 <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
-                <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off">
+                <input type="number" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off">
             </div>
         
             <div class="conj">
@@ -94,6 +94,7 @@
         </form>
     </div>
 
+    <script src="js-brasil.js"></script>
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
     <script src="../../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
