@@ -60,6 +60,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="../../styles/empresa/altera_empresa.css">
+    <link rel="stylesheet" href="../../styles/projetos/menu.css">
     <title>Smart grid</title>
 </head>
 <body>
@@ -113,15 +114,22 @@
                             <input type="text" class="complemento"  name="complemento" id="complemento" value="<?php echo $complemento;?>" autocomplete="off">
                         </div>
 
-                        <div class="div">
-                            <input type="password" name="senha" id="senha" placeholder="Confirme sua senha para alteração" required> 
+                        <div class="senha">
+                            <input type="password" name="senha" id="senha" placeholder="Confirme sua senha para alteração" required>
+                            <button type="button" onclick="mostrarSenha()" class="ver"><i class="fas fa-eye"></i></button> 
                         </div>
 
                         <br>
-                        <input type="submit" value="Alterar dados" class="botao">
+                        <input type="submit" value="Alterar dados" class="botao" style = "margin-bottom: -10px;">
                     </div>
                 </form>
             </div>
     </div>
+
+    <script src="../../node_modules/js-brasil/js-brasil.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+    <script src="../../js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
+    <script src="../../js/funcs_cad_empresa.js"></script>
 </body>
 </html>

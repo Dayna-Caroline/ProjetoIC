@@ -44,6 +44,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <link rel="stylesheet" href="../../styles/empresa/altera_empresa.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <title>Smart grid</title>
 
     </head>
@@ -70,7 +71,7 @@
             <div class="conteudo">
                 <a href="empresa.php"><p class="voltar">&#8592;  Voltar</p></a>
 
-                <h1>Desativar meu cadastro - <?php echo $empresa;?></h1>
+                <h1>Desativar meu cadastro</h1>
                 <p style="color: red;"><b>Deseja desativar o cadastro da sua empresa no nosso sistema?</b></p><br>
                 <p><b>Esta não é uma exclusão permanente e pode ser revertida posteriormente.</b></p><br><br>
 

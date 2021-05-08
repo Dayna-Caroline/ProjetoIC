@@ -30,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="../../styles/empresa/altera_empresa.css">
+    <link rel="stylesheet" href="../../styles/projetos/menu.css">
     <title>Smart grid</title>
 </head>
 <body>

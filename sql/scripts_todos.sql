@@ -45,6 +45,7 @@ create table profissional
     registro varchar(14) not null,
     orgao varchar(10) not null,
     empresa integer not null,
+    ativo varchar(1) not null,
     primary key(id_profissional),
     foreign key(empresa) references empresa(id_empresa)
 );

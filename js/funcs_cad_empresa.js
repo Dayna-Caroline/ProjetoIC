@@ -50,6 +50,16 @@ function verifica()
 	}
 }
 
+function verifica2()
+{ 
+	if(jsbrasil.validateBr.cep(document.getElementById('cep').value) == false)
+	{
+		alert('CEP inválido! Por favor, confirme seu CEP.');
+		document.getElementById('cep').focus();
+		return false;
+	} 
+}
+
 $(document).ready(function()
 {	
 	$("#cnpj").mask("99.999.999/9999-99");
@@ -57,7 +67,7 @@ $(document).ready(function()
 	$("#ie").mask("999.999.999.999"); 
 	$("#cnae").mask("9999-9/99");
 });
-
+ 
 $(document).ready(function(){
 		$("#cep").mask("99999-999");
 	});
@@ -88,6 +98,7 @@ $("#cep").blur(function(){
 			$("#bairro").val(dadosRetorno.bairro);
 			$("#cidade").val(dadosRetorno.localidade);
 			$("#uf").val(dadosRetorno.uf);
+			document.getElementById('num').focus();
 		}catch(ex){}
 	});
 });

@@ -38,6 +38,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <link rel="stylesheet" href="../../styles/funcs/cad_funcs.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <title>Smart Grid</title>
     </head>
 
@@ -59,16 +60,12 @@
             </div>
 
             <div class="conteudo">
-                <a href="funcionarios.php"><p class="volt alt">&#8592;  Voltar</p></a>
+                <a href="escolha_func.php"><p class="volt alt">&#8592;  Voltar</p></a>
                 <form action="../../back/funcs/alt_profissional.php?id=<?php echo $id;?>" method="post" class="form">
                     <h1>Alterar funcionário</h1>
                     
                     <div class="nome">
                         <input type="text" name="nome" id="nome" value="<?php echo $linha['nome'];?>" required autocomplete="off" autocomplete="off">
-                    </div>
-
-                    <div class="nome">
-                        <input type="text" name="orgao" id="orgao" value="<?php echo $linha['orgao'];?>" required autocomplete="off" autocomplete="off">
                     </div>
 
                     <div class="nome">
@@ -88,6 +85,10 @@
                 
                     <div class="nome">
                         <input type="text" class="complemento"  name="complemento" id="complemento" value="<?php echo $comp;?>" autocomplete="off">
+                    </div>
+
+                    <div class="nome">
+                        <input type="text" name="orgao" id="orgao" value="<?php echo $linha['orgao'];?>" required autocomplete="off" autocomplete="off">
                     </div>
 
                     <input type="submit" class="botao" value="Alterar">

@@ -1,3 +1,24 @@
+function verifica()
+{  
+	if(jsbrasil.validateBr.cep(document.getElementById('cep').value) == false)
+	{
+		alert('CEP inválido! Por favor, confirme seu CEP.');
+		document.getElementById('cep').focus();
+		return false;
+	} 
+	if(jsbrasil.validateBr.cpf(document.getElementById('cpf').value) == false)
+	{
+		alert('CPF inválido! Por favor, confirme seu CPF.');
+		document.getElementById('cpf').focus();
+		return false;
+	}
+	if(jsbrasil.validateBr.ie(document.getElementById('ie').value) == false)
+	{
+		alert('IE inválido! Por favor, confirme seu IE.');
+		document.getElementById('ie').focus();
+		return false;
+	}
+}
 
 //mascaras cadastro profissisonal
 
@@ -41,6 +62,7 @@ $("#cep").blur(function(){
 			$("#bairro").val(dadosRetorno.bairro);
 			$("#cidade").val(dadosRetorno.localidade);
 			$("#uf").val(dadosRetorno.uf);
+			document.getElementById('num').focus();
 		}catch(ex){}
 	});
 });

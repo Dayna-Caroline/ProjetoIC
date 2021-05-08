@@ -15,7 +15,6 @@
             echo '</script>';
         }
     }
-    $disable = 0;
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +50,11 @@
             </div>
 
             <div class="conteudo">
-            <a href="desativados.php?pagina=1"><p class="ir">Funcionários desativados&#8594;</p></a>
-                <h1>Meus Funcionários</h1>
+            <a href="../../front/funcs/funcionarios.php?pagina=1"><p class="voltar">&#8592;  Voltar</p></a>
+                <h1>Funcionários Desativatos</h1>
 
                 <!-- ------------------------------- BUSCA ----------------------------- -->
-                <form class="projetos" action="../../front/funcs/funcionarios.php?pagina=1" method="post">
+                <form class="projetos" action="../../front/funcs/desativados.php?pagina=1" method="post">
                     <div class="busca">
                         <input type="text" class="busca" value="<?php if(@$_POST['busca']) echo $_POST['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID ou nome" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
@@ -78,11 +77,11 @@
                                 $char = $aux[$i];
                                 if (is_numeric($char)) 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n' AND CAST(id_profissional AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(nome AS CHAR) LIKE '%{$_POST['busca']}%';";
                                 } 
                                 else 
                                 {
-                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND nome LIKE '%{$_POST['busca']}%';";
+                                    $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n' AND nome LIKE '%{$_POST['busca']}%';";
                                     break;
                                 }
                             }
@@ -90,7 +89,7 @@
 
                         else // sem filtros
                         {
-                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s';";
+                            $query = "SELECT id_profissional, nome FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n';";
                         }
 
                         $result = mysqli_query($conecta, $query);
@@ -226,16 +225,12 @@
                             <div class=\"item-desc\">Sua empresa não possuí funcionários cadastrados</div>
                             <div class=\"item-res\"></div>
                             </div>";
-
-                            $disable = 1;
                         }
                     
                     ?>
 
                     <div class="botoes">
-                        <a href="cad_funcs.php"><button value="fnovo" name="fnovo" class="novo func" style="cursor: pointer;">Novo Funcionário</button></a>
-                        <button type="submit" value="<?php echo $id; ?>" <?php if($disable == 1) echo "disable color='#555';"?> name="fdelete" style="cursor: pointer;" class="arq">Desativar Funcionários</button>
-                        <button type="submit" id="faltera" <?php if($disable == 1) echo "disable color='#555';"?> value="faltera" name="faltera" class="alt" style="cursor: pointer;">Alterar funcionário</button>
+                        <button type="submit" value="<?php echo $id; ?>" name="freativa" style="cursor: pointer;" class="arq">Reativar Funcionários</button>
                     </div>
 
                 </form>

@@ -87,7 +87,14 @@
 
     // ALTERA FUNCIONÁRIOS
     if(@$_POST['faltera']){
-        header("location: ../../front/funcs/escolha_func.php");
+        $query = "SELECT * FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s'";
+        $result = mysqli_query($conecta, $query);
+        $row = mysqli_num_rows($result);
+        if($row==0){
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/funcionarios.php?pagina=1'>";
+        }else{
+            header("location: ../../front/funcs/escolha_func.php");
+        }
     }
 
     // REDIRECIONA PRA PAGINA DE REQUISITOS
@@ -178,12 +185,11 @@
 
     if(@$_POST['fdelete']){
         if(@$_POST['check_list']){
-
             foreach(@$_POST['check_list'] as $id){
 
                 $idaux=md5($id);
 
-                $query = "DELETE FROM profissional WHERE md5(id_profissional) = '$idaux';";
+                $query = "UPDATE profissional set ativo='n' WHERE md5(id_profissional) = '$idaux';";
                 $resultado = mysqli_query($conecta, $query);
 
                 if ($resultado == true )$aux++;
@@ -204,7 +210,7 @@
 
             $idaux=md5($_POST['fdelete']);
 
-            $query = "DELETE FROM requisitos WHERE md5(projeto) = '$idaux';";
+            $query = "UPDATE profissional set ativo='n' WHERE md5(projeto) = '$idaux';";
             $resultado = mysqli_query($conecta, $query);
 
             if ( $resultado == true ){
@@ -214,6 +220,49 @@
             else{
                 echo '<script language=\"javascript\">alert(\'Não foi possível excluir o funcionário\')</script>';
                 header("location: ../../front/funcs/funcionarios.php?pagina=1");
+            }
+
+        }  
+              
+    }
+
+    if(@$_POST['freativa']){
+        if(@$_POST['check_list']){
+            foreach(@$_POST['check_list'] as $id){
+
+                $idaux=md5($id);
+
+                $query = "UPDATE profissional set ativo='s' WHERE md5(id_profissional) = '$idaux';";
+                $resultado = mysqli_query($conecta, $query);
+
+                if ($resultado == true )$aux++;
+            }
+
+            if ( $aux>0 ){
+                header("location: ../../front/funcs/funcionarios.php?pagina=1");
+            }
+
+            else{
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir os funcionários!\')</script>';
+                header("location: ../../front/funcs/desativados.php?pagina=1");
+            }
+
+        }
+
+        else{
+
+            $idaux=md5($_POST['fdelete']);
+
+            $query = "UPDATE profissional set ativo='s' WHERE md5(projeto) = '$idaux';";
+            $resultado = mysqli_query($conecta, $query);
+
+            if ( $resultado == true ){
+                header("location: ../../front/funcs/funcionarios.php?pagina=1");
+            }
+
+            else{
+                echo '<script language=\"javascript\">alert(\'Não foi possível excluir o funcionário\')</script>';
+                header("location: ../../front/funcs/desativados.php?pagina=1");
             }
 
         }  

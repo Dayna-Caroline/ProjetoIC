@@ -2,7 +2,7 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
     
-    $query = "SELECT * FROM profissional";
+    $query = "SELECT * FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s'";
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
 ?>
@@ -17,6 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <link rel="stylesheet" href="../../styles/funcs/cad_funcs.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <title>Smart Grid</title>
     </head>
 
@@ -41,7 +42,7 @@
                 <a href="funcionarios.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
 
                 <br><br><br><br>
-                <h1>Escolha o funcionário</h1>
+                <h1 style="margin-top: 50px;">Escolha o funcionário</h1>
 
                 <form action="alt_funcs.php" class="item-id2" method="POST">
                     <select name="profissional" style="cursor: pointer" required id="profissional">  

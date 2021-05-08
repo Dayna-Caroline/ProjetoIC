@@ -12,13 +12,18 @@
         }else if($_GET['success'] == '2')
         {
             echo '<script language="javascript">';
-            echo "alert('Esse funcionario ja foi cadastrado.')";
+            echo "alert('Esse CPF ja foi cadastrado.')";
+            echo '</script>';
+        }else if($_GET['success'] == '7')
+        {
+            echo '<script language="javascript">';
+            echo "alert('Antes de cadastrar um projeto, você precisa cadastrar um funcionário')";
             echo '</script>';
         }
     }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 
 <html lang="pt-br">
 
@@ -27,8 +32,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <link rel="stylesheet" href="../../styles/funcs/cad_funcs.css">
-        
         <title>Smart Grid</title>
     </head>
 
@@ -51,15 +56,11 @@
 
             <div class="conteudo">
                 <a href="funcionarios.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
-                <form action="../../back/funcs/cad_profissional.php" method="post" class="form">
+                <form action="../../back/funcs/cad_profissional.php" method="post" class="form" onsubmit="return verifica()">
                     <h1>Novo funcionário</h1>
-                    
+                    <div class="espaco"></div>
                     <div class="nome">
                         <input type="text" name="nome" id="nome" placeholder="Nome do funcionário" required autocomplete="off" autocomplete="off">
-                    </div>
-
-                    <div class="nome">
-                        <input type="text" name="orgao" id="orgao" placeholder="Órgao" required autocomplete="off" autocomplete="off">
                     </div>
                 
                     <div class="conj">
@@ -79,7 +80,7 @@
 
                     <div class="conj">
                         <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
-                        <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off">
+                        <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off" maxlength="5">
                     </div>
                 
                     <div class="nome">
@@ -90,14 +91,19 @@
                         <input type="text" name="registro" id="registro" placeholder="Registro" required autocomplete="off">
                     </div>
 
+                    <div class="nome">
+                        <input type="text" name="orgao" id="orgao" placeholder="Órgao (Ex: CREA, CRA...)" required autocomplete="off" autocomplete="off">
+                    </div>
+
                     <input type="submit" class="botao" value="Cadastrar">
                 </form>
         
                 
-            </div>
+            </div> 
 
         </div>
-
+        
+        <script src="../../node_modules/js-brasil/js-brasil.js"></script>
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.maskedinput-1.3.min.js"></script>
         <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>

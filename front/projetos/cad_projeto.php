@@ -11,7 +11,7 @@
     $row = mysqli_num_rows($result);
 
     if($row==0){
-        header("location: ../../front/funcs/cad_funcs.php");
+        header("location: ../../front/funcs/cad_funcs.php?success=7");
     }
 
 ?>
