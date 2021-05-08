@@ -80,7 +80,7 @@
 
                     <div class="conj">
                         <input type="text" class="endereco"  name="endereco" id="endereco" placeholder="Rua" required autocomplete="off">
-                        <input type="text" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off" maxlength="5">
+                        <input type="number" class="num"  name="num" id="num" placeholder="N°" required autocomplete="off" maxlength="5">
                     </div>
                 
                     <div class="nome">

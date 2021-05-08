@@ -9,7 +9,7 @@
     }
 
     if(@$_POST['ealtera']){
-        header("location: ../../front/equip/alt_equipamento.php");
+        header("location: ../../front/equip/escolha_equip.php");
     }
 
     //DELETA SELECIONADOS
@@ -30,19 +30,17 @@
             mysqli_close($conecta);
 
             if ( $aux>0 ){
-                header("location: ../../front/equip/equipamentos.php?pagina=1");
+                header("location: ../../front/equip/equipamentos.php");
             }
 
             else{
-                echo '<script language=\"javascript\">alert(\'Não foi possível excluir os equipamentos!\')</script>';
-                header("location: ../../front/equip/equipamentos.php?pagina=1");
+                header("location: ../../front/equip/equipamentos.php?success=2");
             }
 
         }
         else
         {
-            echo '<script language=\"javascript\">alert(\'Nenhum equipamento selecionado!\')</script>';
-            header("location: ../../front/equip/equipamentos.php?pagina=1");
+            header("location: ../../front/equip/equipamentos.php?success=2");
         }
     }
 

@@ -287,8 +287,14 @@ input[type=checkbox]
 
 /* BOTOES */
 
+
+
 .botoes{
     display: inline-flex;
+}
+
+.botoes-1{
+    margin-left: -85px;
 }
 
 .novo{

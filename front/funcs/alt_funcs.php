@@ -80,7 +80,7 @@
 
                     <div class="conj">
                         <input type="text" class="endereco"  name="endereco" id="endereco" value="<?php echo $linha['endereco'];?>" required autocomplete="off">
-                        <input type="text" class="num"  name="num" id="num" value="<?php echo $linha['numero'];?>" required autocomplete="off">
+                        <input type="number" class="num" maxlength="5" name="num" id="num" value="<?php echo $linha['numero'];?>" required autocomplete="off">
                     </div>
                 
                     <div class="nome">

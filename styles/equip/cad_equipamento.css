@@ -1,21 +1,88 @@
+
+.titulo{
+    margin-top: 30px;
+}
+
 /* LEGENDA DA TABELA */
 
 .leg-id2{
-    width: 190px;
-    height: 40px;
-
+    padding-top: 17.5px;
+    padding-left: 200px;
+}
+.form_equipamentos{
     text-align: center;
-    color: rgb(0, 0, 0);
-        
-    padding-top: 15px;
-    margin-bottom: 10px;
 }
 
 /**/
 
 /* TABELA */
 
-.item2{
+input, select{
+    margin: 10px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    width:490px; 
+    height:40px;
+    font-size: 20px;
+    outline: 0;
+    border: 1px solid #999999;
+    border-radius: 5px;
+}
+
+select{
+    width:415px; 
+    margin-left: 10px;
+}
+.item3 input{
+    width: 237px;
+}
+
+.leg-id2 b{
+    color: #858383;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.i2{
+    margin-right: 15px;
+    margin-left: 198px;
+}
+
+.item3{
+    display: flex;
+}
+
+.volt{
+    font-size: 16px;
+    color: #555;
+    margin-left: 50px;
+    text-align: left;
+}
+
+.novo{
+    border: 1px solid #555;
+    padding: 8px 0;
+    border-radius: 5px;
+    background-color: #a6d7ff;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 170px;
+    cursor: pointer;
+}
+
+/*.item2{
+    display: inline-flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+
+.item3{
     display: inline-flex;
     margin-left: 10px;
     margin-right: 10px;
@@ -30,88 +97,11 @@
     background-color: whitesmoke;
     width: 500px;
     height: 40px;
-}
+}*/
 
 /**/
 
 /**/
-
-.form_equipamentos{
-    display: grid;
-    width: 720px;
-    margin-top: 5px;
-    margin-left: 80px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border: 1px solid #0011ff;
-    border-radius: 10px;
-    background-color: transparent;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    height: 100%;
-}
-
-.form_equipamentos input{
-    border: 1px solid #999999;
-    border-radius: 5px;
-}
-
-.form_equipamentos input[type=text]{
-    cursor: pointer;
-    padding-left: 5px;
-    padding-right: 5px;
-    width:490px; 
-    height:40px;
-    font-size: 20px;
-    outline: 0;
-}
-
-.form_equipamentos input[type=text]:focus{
-    cursor: text;
-    background-color: #dcdcff;
-    border: 1px solid #0000ff;
-}
-
-.form_equipamentos input[type=date]{
-    border-radius: 0px;
-    height: 40px;
-    margin-top: 4px;
-    padding-left: 5px;
-    font-size:15px;
-    width: 150px;
-}
-
-.form_equipamentos select{
-    height: 40px;
-    padding-left: 10px;
-    font-size:15px;
-    width: 150px;
-    overflow: hidden;
-    outline: 0;
-}
-
-.form_equipamentosoption{
-    overflow: hidden;
-}
-
-.form_equipamentos input[type=number]{
-    height: 40px;
-    width: 150px;
-    margin-top: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-size:15px;
-}
-
-.form_equipamentos input[type=number]:hover::-webkit-inner-spin-button {  
-    width: 14px;
-    height: 30px;
-}
-
-.form_equipamentos input[type=number]:focus::-webkit-inner-spin-button {  
-    width: 14px;
-    height: 30px;
-}
 
 
 .tudo{

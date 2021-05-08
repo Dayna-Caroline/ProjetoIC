@@ -35,4 +35,16 @@ function marca(source) {
       document.getElementById('arquiva').disabled = false;
       document.getElementById('arquiva').style.cursor = "pointer";
     }
+}
+
+function verifica2()
+{  
+  if(document.getElementById('tensao').value == 110 || document.getElementById('tensao').value == 220){
+    return true;
   }
+  else{
+    alert('Tensão inválida. Coloque 110V ou 220V.');
+    document.getElementById('tensao').focus();
+    return false;
+  }
+}

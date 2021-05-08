@@ -25,8 +25,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../../styles/equip/cad_equipamento.css">
         <link rel="stylesheet" href="../../styles/projetos/menu.css">
+        <link rel="stylesheet" href="../../styles/equip/cad_equipamento.css">
         <title>Smart Grid</title>
     </head>
 
@@ -54,49 +54,19 @@
             <div class="conteudo">
 
                 <div  class="titulo">
+                    <a href="equipamentos.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
                     <h1>Cadastrar Equipamento</h1>
                 </div>
 
                 <!--  Campos(Descrição, Marca, fabricante, tipo, modelo, tensao,consumo,classe)  -->
-                <form class="form_equipamentos" method="post" action="../../back/equip/cad_equipamento.php">
+                <form class="form_equipamentos" method="post" action="../../back/equip/cad_equipamento.php" onsubmit="return verifica2()">
                     <?php
                     
                         echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Descrição do equipamento</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"descricao\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Marca</b></div>
-                            <div class=\"item-id2\"><input required type=\"text\" name=\"marca\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Fabricante</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"fabricante\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Tipo</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"tipo\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Modelo</b></div>
-                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" name=\"modelo\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" placeholder=\"Equipamento\" type=\"text\" name=\"descricao\"></div>
                         </div>";
                         
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Tensão(Volts)</b></div>
-                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"tensao\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>Consumo(kWh)</b></div>
-                            <div class=\"item-id2\"><input required type=\"number\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\"></div>
-                        </div>";
-
-                        echo "<div class=\"item2\">
+                        echo "<div class=\"item3\">
                         <div class=\"leg-id2\"><b>Classe</b></div>
                         <div class=\"item-id2\">
                         <select required type=\"text\" name=\"classe\">
@@ -107,10 +77,25 @@
                             <option value=\"E\">E</option>
                         </select>
                         </div>
-                        </div>"
+                        </div>";
+
+                        echo "<div class=\"item3\">
+                            <div class=\"item-id2\"><input required  autocomplete=\"off\" type=\"text\" placeholder=\"Marca\" class=\"i2\" name=\"marca\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" type=\"text\" placeholder=\"Fabricante\" name=\"fabricante\"></div>
+                        </div>";
+
+                        echo "<div class=\"item3\">
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" class=\"i2\" placeholder=\"Tipo (Ex.Torno, prensa...)\" type=\"text\" name=\"tipo\"></div>
+                            <div class=\"item-id2\"><input required autocomplete=\"off\" placeholder=\"Modelo\" type=\"text\" name=\"modelo\"></div>
+                        </div>";
+                        
+                        echo "<div class=\"item3\">
+                            <div class=\"item-id2\"><input required type=\"number\" class=\"i2\" placeholder=\"Tensão (110 ou 220)\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" id='tensao' name=\"tensao\"></div>
+                            <div class=\"item-id2\"><input required type=\"number\" placeholder=\"Consumo(kWh)\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\" step=\"0.01\"></div>
+                        </div>";
                     ?>
                     <br><div class="botoes">
-                        <button type="submit" value="cadastrar" name="cadastrar" class="novo" style="cursor: pointer;margin-left:300px;">Concluír Cadastro</button>
+                        <button type="submit" style="margin-left: -0px;" value="cadastrar" name="cadastrar" class="novo" style="cursor: pointer;margin-left:300px;">Cadastrar</button>
                     </div>
                 </form>
             

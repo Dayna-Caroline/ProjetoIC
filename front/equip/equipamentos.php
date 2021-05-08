@@ -1,6 +1,25 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    if(isset($_GET['success']))
+    {
+        if($_GET['success'] == 1)
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao cadastrar novo equipamento.')";
+        }
+        if($_GET['success'] == 2)
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao apagar equipamentos. Tente novamente...')";
+        }
+        if($_GET['success'] == 3)
+        {
+            echo '<script language="javascript">';
+            echo "alert('Erro ao alterar equipamento.')";
+        }
+    }
+    $disable = 0;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,6 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="../../styles/equip/equipamentos.css">
+    <link rel="stylesheet" href="../../styles/projetos/menu.css">
     <title>Smart Grid</title>
 </head>
 <body onclick="verifica()" onload="verifica()">
@@ -214,10 +234,10 @@
                     
                     ?>
 
-                    <div class="botoes">
+                    <div class="botoes-1">
                         <button type="submit" value="enovo" name="enovo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button>  
                         <button type="submit" value="<?php echo $id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
-                        <button type="submit" value="<?php echo $id; ?>" name="ealtera" class="alt" style="cursor: pointer;">Alterar Equipamentos</button>
+                        <button type="submit" value="ealtera" name="ealtera" class="alt" style="cursor: pointer;">Alterar Equipamentos</button>
                     </div>
 
                 </form>
