@@ -3,7 +3,7 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
-    $query = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}';";
+    $query = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's';";
 
     // executa a query
 
@@ -11,7 +11,7 @@
     $row = mysqli_num_rows($result);
 
     if($row==0){
-        header("location: ../../front/funcs/cad_funcs.php?success=7");
+        header("location: ../../front/funcs/cad_funcs.php");
     }
 
 ?>
@@ -64,11 +64,11 @@
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2 ab\"><b>Responsável</b></div>
                             <div class=\"item-id2\">
-                                <select name=\"profissional\" style=\"cursor: pointer\" required id=\"profissional\">";
+                                <select name=\"responsavel\" style=\"cursor: pointer; padding-left:10px;\" required id=\"responsavel\">";
 
                                 for($i=0;$i<$row;$i++){
                                     $linha = mysqli_fetch_array($result);
-                                    echo "<option value=\"".$linha['id_profissional']."\">".$linha['nome']."</option>";
+                                    echo "<option value=\"".$linha['id_profissional']."\">".$linha['id_profissional']." - ".$linha['nome']."</option>";
                                 }
 
                                 echo "</select>
@@ -77,37 +77,32 @@
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2 ab\"><b>Descrição do projeto</b></div>
-                            <div class=\"item-id2\"><input required type=\"text\" name=\"descricao\" autocomplete='off'></div>
+                            <div class=\"item-id2\"><input required type=\"text\" maxlenght=\"100\" size=\"100\" style=\"padding-left:10px;\" name=\"descricao\" autocomplete='off'></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                             <div class=\"leg-id2 ab\"><b>Finalidade do projeto</b></div>
-                            <div class=\"item-id2\"><input required type=\"text\" name=\"finalidade\" autocomplete='off'></div>
+                            <div class=\"item-id2\"><input required type=\"text\" maxlenght=\"100\" style=\"padding-left:10px;\" name=\"finalidade\" autocomplete='off'></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                         
                             <div class=\"leg-id2 ab\" ><b>Orçamento (R$)</b></div>
-                            <div style=\"width:140px;\" class=\"item-id2 ab\"><input required autocomplete='off' class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\"></div>
+                            <div style=\"width:140px;\" class=\"item-id2 ab\"><input style=\"padding-left:10px;\" required autocomplete='off' class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\"></div>
                             
-                            <div class=\"leg-id2\" style=\"margin-left: 5px; margin-right: 10px;\"><b>Custo final (R$)</b></div>
-                            <div style=\"width:140px;\" class=\"item-id2\"><input required autocomplete='off' class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\"></div>
+                            <div class=\"leg-id2\" style=\"margin-left: 10px; margin-right: -5px;\" ><b>Data de Aprovação</b></div>
+                            <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" required autocomplete='off' name=\"aprovacao\" type=\"date\"></div>
                         
                         </div>";
 
                         echo "<div class=\"item2\">
                         
                             <div class=\"leg-id2 ab\"><b>Data de Início</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2 ab\"><input required autocomplete='off' name=\"inicio\" type=\"date\"></div>
+                            <div style=\"width:150px;\" class=\"item-id2 ab\"><input style=\"padding-left:10px;\" required autocomplete='off' name=\"inicio\" type=\"date\"></div>
                             
-                            <div class=\"leg-id2\" style=\"margin-left: 10px; margin-right: -5px;\" ><b>Data de Aprovação</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input required autocomplete='off' name=\"aprovacao\" type=\"date\"></div>
-                        
-                        </div>";
-
-                        echo "<div class=\"item2\">
-                            <div class=\"leg-id2 ab\" style=\"margin-right: 2px;\"><b>Prévia do término</b></div>
-                            <div style=\"width:150px;\" class=\"item-id2\"><input required autocomplete='off' name=\"previa\" type=\"date\"></div>
+                            <div class=\"leg-id2 ab\" style=\"margin-left: 25px;margin-right: -30px;\"><b>Prévia do término</b></div>
+                            <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" required autocomplete='off' name=\"previa\" type=\"date\"></div>
+                       
                         </div>";
 
                     ?>

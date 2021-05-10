@@ -1,6 +1,5 @@
 <?php
 
-    error_reporting(0);
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 

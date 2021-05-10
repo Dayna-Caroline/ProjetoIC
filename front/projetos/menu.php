@@ -1,6 +1,5 @@
 ﻿<?php
 
-    error_reporting(0);
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
@@ -186,12 +185,12 @@
                                 if($row>1)
                                 {
                                     echo "<div class=\"num-projetos\">".$row." projetos</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projetos</b></div>";
+                                    echo "<div style=\"margin-left:230px;\" class=\"exibir-resultados\"><b>Exibindo ".$row." Projetos</b></div>";
                                 }
                                 else
                                 {
                                     echo "<div class=\"num-projetos\">".$row." projeto</div>";
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo ".$row." Projeto</b></div>";
+                                    echo "<div style=\"margin-left:240px;\" class=\"exibir-resultados\"><b>Exibindo ".$row." Projeto</b></div>";
                                 }
                                 echo "</div>";
 

@@ -63,6 +63,8 @@ create table projeto
     fim date not null,
     c_final float(24) not null,
     empresa integer not null,
+    ativo varchar(1) not null,
+    concluido varchar(1) not null,
     primary key(id_projeto),
     foreign key (empresa) references empresa(id_empresa),
     foreign key(responsavel) references profissional(id_profissional)

@@ -2,7 +2,6 @@
 
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-
     $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND md5(id_projeto) = '{$_GET['id']}';";
 
     // executa a query
@@ -24,9 +23,11 @@
         $fim=$linha['fim'];
         $c_final=$linha['c_final'];
         $id_empresa=$linha['empresa'];
+        $ativo=$linha['ativo'];
+        $concluido=$linha['concluido'];
     }
 
-    $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}';";
+    $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'AND profissional.ativo = 's';";
 
     // executa a query
 
@@ -96,14 +97,14 @@
                                 <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Responsável</b></div>
 
                                 <div style=\"width:150px;\" class=\"item-id2\">
-                                    <select name=\"profissional\" required id=\"profissional\">";
+                                    <select style=\"padding-left:10px;\" name=\"responsavel\" id=\"profissional\">";
 
                                     for($i=0;$i<$row2;$i++){
                                         $linha2 = mysqli_fetch_array($result2);
                                         echo "<option "; 
                                             if($linha2['id_profissional']==$responsavel)
                                             { echo "selected "; } 
-                                        echo " value=\"".$linha2['id_profissional']."\">".$linha2['nome']."</option>";
+                                        echo " value=\"".$linha2['id_profissional']."\">".$linha2['id_profissional']." - ".$linha2['nome']."</option>";
                                     }
 
                                     echo "</select>
@@ -112,54 +113,67 @@
                             </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2 ab\"><b>Descrição do projeto</b></div>
-                                <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\" value=\"".$descricao."\"></div>
+                                <div class=\"leg-id2 ab\"><b>Descrição</b></div>
+                                <div class=\"item-id2\"><input style=\"padding-left:10px;\" type=\"text\" maxlenght=\"100\" id=\"descricao\" onkeypress=\"alterou()\" name=\"descricao\" value=\"".$descricao."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
-                                <div class=\"leg-id2 ab\"><b>Finalidade do projeto</b></div>
-                                <div class=\"item-id2\"><input type=\"text\" id=\"finalidade\" onkeypress=\"alterou()\" required name=\"finalidade\" value=\"".$finalidade."\"></div>
+                                <div class=\"leg-id2 ab\"><b>Finalidade</b></div>
+                                <div class=\"item-id2\"><input style=\"padding-left:10px;\" type=\"text\" maxlenght=\"100\" id=\"finalidade\" onkeypress=\"alterou()\" name=\"finalidade\" value=\"".$finalidade."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
                             
                                 <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Orçamento (R$)</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"orcamento\" required class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" id=\"orcamento\" class=\"numero\" type=\"number\" name=\"orcamento\" step=\".01\" value=\"".$orcamento."\"></div>
                                 
-                                <div class=\"leg-id2\" style=\" margin-right: 10px;\"><b>Custo final (R$)</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"c_final\" required  class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
-                            
+                                <div class=\"leg-id2\" style=\"margin-left: 15px; margin-right: -5px;\" ><b>Data de Aprovação</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px; \" id=\"aprovacao\" name=\"aprovacao\" type=\"date\" value=\"".$aprovacao."\"></div>
+                                
                             </div>";
 
                             echo "<div class=\"item2\">
                             
                                 <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Data de Início</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"inicio\" name=\"inicio\" required  type=\"date\" value=\"".$inicio."\"></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px;\" id=\"inicio\" name=\"inicio\" type=\"date\" value=\"".$inicio."\"></div>
                                 
-                                <div class=\"leg-id2\" style=\"margin-left: 5px; margin-right: -5px;\" ><b>Data de Aprovação</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"aprovacao\" name=\"aprovacao\" required  type=\"date\" value=\"".$aprovacao."\"></div>
-                            
+                                <div class=\"leg-id2 ab resp\" id=\"resp\" ><b>Previa do término</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px;\" id=\"previa\" name=\"previa\" type=\"date\" value=\"".$previa."\"></div>
+                                
                             </div>";
 
-                            echo "<div class=\"item2\">
+                            echo "<div class=\"item2\">";
 
-                                <div class=\"leg-id2 ab\" style=\"margin-right: 1px;\"><b>Previa do término</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"previa\" required name=\"previa\" type=\"date\" value=\"".$previa."\"></div>
+                                if($concluido=='s')
+                                { echo "
+                                <div class=\"leg-id2\" style=\" margin-left: -30px;margin-right:35px;\"><b>Custo final (R$)</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" id=\"c_final\"class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
                                 
-                                <button type=\"submit\" style=\"margin-top: -5px;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
-                                <button type=\"submit\" style=\"margin-top: -5px;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
-                        
-                                </div><br><br>
+                                <div class=\"leg-id2 ab\" style=\"margin-left: 40px; margin-right:-30px;\"><b>Data do término</b></div>
+                                <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px;\" id=\"fim\" name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
+                                
+                                </div>";}
 
-                            ";
+                                echo "<div class=\"item2\">
+                                <button type=\"submit\" style=\"margin-top: -5px; margin-left:310px; cursor: pointer;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\"><i class=\"fas fa-check\"></i></button>
+                                <button type=\"submit\" style=\"margin-top: -5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\"><i class=\"fas fa-times\"></i></button>
+                                
+                                </div></div>";
 
                         ?>
 
                         <div class="botoes">
 
-                            <button type="submit" value="<?php echo $id; ?>" name="conclui" class="novo" style="cursor: pointer;margin-left:100px;">Concluír Projeto</button>
-                            <button type="submit" value="<?php echo $id; ?>" name="req" class="req" style="cursor: pointer;">Abrir Requisitos</button>
-                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir Projeto</button>
+                            <?php
+                                if($concluido=='n')
+                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"conclui\" class=\"novo\" style=\"cursor: pointer;margin-left:100px;\">Concluír</button>
+                                        <button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;\">Requisitos</button>
+                                "; }
+                                else
+                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;margin-left:280px;\">Requisitos</button>";}
+                            ?>
+
+                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir</button>
                         
                         </div>
 
