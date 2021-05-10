@@ -1,5 +1,14 @@
 function verifica()
 {  
+	var rg = document.getElementById('rg').value;
+	var uf = document.getElementById('uf').value;
+	var nrg = uf + "-" + rg;
+	if(jsbrasil.validateBr.rg(nrg) == false)
+	{
+		alert('RG inválido! Por favor, confirme seu RG.' + nrg);
+		document.getElementById('rg').focus();
+		return false;
+	}
 	if(jsbrasil.validateBr.cep(document.getElementById('cep').value) == false)
 	{
 		alert('CEP inválido! Por favor, confirme seu CEP.');
