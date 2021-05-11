@@ -1,7 +1,6 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-    
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +13,126 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <link rel="stylesheet" href="../../styles/funcs/funcionarios.css">
+        <link rel="stylesheet" href="../../styles/projetos/menu.css">
+        <link rel="stylesheet" href="../../styles/results/resultados.css">
+
+        <!--Gráficos..............................................................................................................-->
+        <!--Consumo antes e depois............................................................................................-->
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                    ['Year', 'Sales', 'Expenses'],
+                    ['2004',  1000,      400],
+                    ['2005',  1170,      460],
+                    ['2006',  660,       1120],
+                    ['2007',  1030,      540]
+                    ]);
+
+                    var options = {
+                    title: 'Consumo antes e depois',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                    };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        <!--Gasto por projeto..............................................................................................................-->
+            <script type="text/javascript">
+                google.charts.load("current", {packages:['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ["Element", "Density", { role: "style" } ],
+                        ["Copper", 8.94, "#b87333"],
+                        ["Silver", 10.49, "silver"],
+                        ["Gold", 19.30, "gold"],
+                        ["Platinum", 21.45, "color: #e5e4e2"]
+                    ]);
+
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1,
+                                    { calc: "stringify",
+                                        sourceColumn: 1,
+                                        type: "string",
+                                        role: "annotation" },
+                                    2]);
+
+                    var options = {
+                        title: "Gasto por projeto",
+                        width: 400,
+                        height: 200,
+                        bar: {groupWidth: "95%"},
+                        legend: { position: "none" },
+                    };
+                    var chart = new google.visualization.ColumnChart(document.getElementById("chart_div2"));
+                    chart.draw(view, options);
+                }
+            </script>
+        <!--Consumo por equipamento depois..............................................................................................................-->
+            <script type="text/javascript">
+
+                // Load the Visualization API and the corechart package.
+                google.charts.load('current', {'packages':['corechart']});
+
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawChart);
+
+                // Callback that creates and populates a data table,
+                // instantiates the pie chart, passes in the data and
+                // draws it.
+                function drawChart() {
+
+                    // Create the data table.
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Topping');
+                    data.addColumn('number', 'Slices');
+                    data.addRows([
+                    ['Mushrooms', 3],
+                    ['Onions', 1],
+                    ['Olives', 1],
+                    ['Zucchini', 1],
+                    ['Pepperoni', 2]
+                    ]);
+
+                    // Set chart options
+                    var options = {'title':'Consumo por equipamento - Smart grid',
+                                pieSliceText: 'none',
+                                'width':400,
+                                'height':300};
+
+                    // Instantiate and draw our chart, passing in some options.
+                    var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
+                    chart.draw(data, options);
+                }
+            </script>
+        <!--Tabela inteligente..............................................................................................................-->
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['table']});
+                google.charts.setOnLoadCallback(drawTable);
+
+                function drawTable() {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Name');
+                    data.addColumn('number', 'Salary');
+                    data.addColumn('boolean', 'Full Time Employee');
+                    data.addRows([
+                    ['Mike',  {v: 10000, f: '$10,000'}, true],
+                    ['Jim',   {v:8000,   f: '$8,000'},  false],
+                    ['Alice', {v: 12500, f: '$12,500'}, true],
+                    ['Bob',   {v: 7000,  f: '$7,000'},  true]
+                    ]);
+
+                    var table = new google.visualization.Table(document.getElementById('tabela'));
+
+                    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+                }
+            </script>
         <title>Smart Grid</title>
     </head>
 
@@ -37,8 +155,27 @@
                 </ul>
             </div>
 
-            <div class="conteudo">
-
+        <div class="conteudo">
+                <a href="../../back/results/gerar_relatorio.php"><p class="ir">Gerar PDF das estatísticas&#8594;</p></a>
+                <h1>Análise dos dados</h1>
+                <center>
+                    <p>Antes e depois - Consumo (gráfico de linhas com 3 linhas)</p><br>
+                    <p>Consumo por equipamento (gráfico de pizza, pra ver quando cada equipamento gasta)</p><br>
+                    <p>Gasto por projeto (gráfico de barras/pizza, pra ver quando foi gasto por projeto)</p><br>
+                    <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
+                </center>
+                <!--
+                <div class="graficos">
+                    <div id="chart_div1"></div>
+                    <div class="col-2">
+                        <div id="chart_div2"></div>
+                        <div id="chart_div3"></div>
+                    </div>
+                </div>
+                <div class="tabela">
+                    <div id="tabela"></div>
+                </div>
+                -->
             </div>
         </div>
     </body>
