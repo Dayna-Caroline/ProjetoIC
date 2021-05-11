@@ -4,9 +4,10 @@
     include "../../back/conexao_local.php";
 
     // Verifica o filtro usado na busca
+    // erro = 2; a pagina não foi encontrada, voce foi redirecionado para a pagina inicial;
 
         if(!@$_GET['pagina'])
-        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php?pagina=1&busca=".@$_GET['busca']."'>"; }
+        { header("location: ../../front/projetos/menu.php?pagina=1&busca=".@$_GET['busca'].""); die(); }
 
         if(@$_GET['busca'])
         {
@@ -39,7 +40,7 @@
         $row = mysqli_num_rows($result);
 
         if($row==0&&@$_GET['pagina']>1)
-        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php?pagina=1&busca=".$_GET['busca']."'>"; }
+        { header("location: ../../front/projetos/menu.php?pagina=1&busca=".$_GET['busca'].""); die(); }
     //
 
 ?>
@@ -111,12 +112,7 @@
                                 $pagina=$_GET['pagina'];
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
-                                {
-                                    echo '<script language="javascript">';
-                                    echo "alert('Página não encontrada.')";
-                                    echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php?pagina=1'>";
-                                }
+                                { header("location: ../../front/projetos/menu.php?pagina=1&erro=2"); die(); }
 
                                 $bot=(($pagina-1)*10)+1;
                                 $top=$pagina*10;
@@ -180,6 +176,11 @@
                             // Exibe resultados em lista
 
                             else{
+
+                                $pagina=$_GET['pagina'];
+
+                                if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
+                                { header("location: ../../front/projetos/menu.php?pagina=1&erro=2"); die(); }
 
                                 echo "<div class=\"botoes\">";
                                 if($row>1)

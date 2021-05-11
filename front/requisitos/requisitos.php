@@ -3,14 +3,21 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
+    $query = "SELECT * FROM requisitos WHERE md5(projeto) = '{$_GET['proj']}';";
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+
+    if($row==0)
+    { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
+
     // Verifica o filtro usado na busca
 
         if(!@$_GET['proj'])
-        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/projetos/menu.php'>"; }
+        { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
 
         if(!@$_GET['pagina'])
-        { echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".@$_GET['busca']."'>"; }
-
+        { header("location: ../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".@$_GET['busca'].""); die(); }
+        
         if(@$_GET['busca'])
         {
             $aux = $_GET['busca'];
@@ -41,7 +48,9 @@
         $row = mysqli_num_rows($result);
 
         if($row==0&&@$_GET['pagina']>1)
-        { echo "<<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."'>"; }
+        { 
+            header("location: ../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca'].""); die();
+        }
     //
 
 ?>
@@ -115,10 +124,7 @@
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina inesistente
                                 {
-                                    echo '<script language="javascript">';
-                                    echo "alert('Página não encontrada.')";
-                                    echo '</script>';
-                                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."'>";
+                                    header("location: ../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&erro=1"); die();
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -183,6 +189,13 @@
                             // Exibe resultados em lista
 
                             else{
+
+                                $pagina=$_GET['pagina'];
+
+                                if( (($pagina-1)*10)+1 > $row )//URL com pagina inesistente
+                                {
+                                    header("location: ../../front/requisitos/requisitos.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&erro=1"); die();
+                                }
 
                                 echo "<div class=\"botoes\">";
                                 if($row>1)

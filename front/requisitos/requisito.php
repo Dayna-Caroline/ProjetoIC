@@ -22,6 +22,7 @@
         $versao=$linha['versao'];
         $tipo=$linha['tipo'];
     }
+    else{ header("location: ../../front/requisitos/requisitos.php?erro=1&pagina=1&proj=".$_GET['id'].""); die(); }
 
 ?>
 
@@ -74,14 +75,19 @@
                     <form action="../../back/requisitos/requisitos.php" onchange="alterou()" method="post">
 
                         <?php
+
                             echo "<div class=\"item2\">
 
-                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Requisito</b></div>
+                                <div style=\"color:#999999;cursor:default;  margin-right:5px;\" class=\"leg-id2\"><b>ID Requisito</b></div>
                                 <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$id."\">".$id."</option></select></div>
 
-                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
+                            </div>";
+
+                            echo "<div class=\"item2\">
+
+                                <div style=\"color:#999999;cursor:default; margin-right:5px;\" class=\"leg-id2\"><b>ID Projeto</b></div>
                                 <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
-                                
+
                             </div>";
 
                             echo "<div class=\"item2\">
@@ -102,14 +108,14 @@
                             echo "<div class=\"item2\">
                             
                                 <div class=\"leg-id2\"><b>Cadastro</b></div>
-                                <div style=\"width:150px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\" value=\"".$cadastro."\"></div>
-                                <div class=\"leg-id2\" style=\"margin-right: 10px; width:150px;\"><b>Tipo</b></div>
+                                <div style=\"width:150px; margin-left: 5px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\" value=\"".$cadastro."\"></div>
+                                <div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>
                             </div>";
 
                             echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Versão</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" value=\"".$versao."\"></div>
+                                <div style=\"width:140px; margin-left: 5px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" value=\"".$versao."\"></div>
                                 
                                 <button type=\"submit\" value=\"".$id."\" id=\"altera\" name=\"altera\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
                                 <button type=\"submit\" value=\"".$id."\"  id=\"cancela\" name=\"cancela\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
@@ -120,12 +126,12 @@
 
                         <div class="botoes">
 
-                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer; margin-left:300px;" class="arq">Excluir Requisito</button>
-                           
+                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer; margin-left:300px;" class="arq">Excluir</button>
                         
                         </div>
 
                     </form>
+
                     <form action="../../front/mudancas/solic_mud.php"  method="post">
                         <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Solicitar Mudança</button>
                     </form>
@@ -133,6 +139,7 @@
                    <form action="../../front/mudancas/hist_mud.php?pagina=1&mudanca=<?php echo $id;?>" method="post">
                        <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Historico de mudanças</button>
                    </form>
+                   
                 </div>
 
             </div>

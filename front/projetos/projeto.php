@@ -2,9 +2,11 @@
 
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+
     $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND md5(id_projeto) = '{$_GET['id']}';";
 
     // executa a query
+    // erro = 1: não encontrou o projeto;
 
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
@@ -26,6 +28,8 @@
         $ativo=$linha['ativo'];
         $concluido=$linha['concluido'];
     }
+    else
+    { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
 
     $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'AND profissional.ativo = 's';";
 
@@ -33,7 +37,6 @@
 
     $result2 = mysqli_query($conecta, $query2);
     $row2 = mysqli_num_rows($result2);
-
 
 ?>
 

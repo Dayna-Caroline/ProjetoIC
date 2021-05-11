@@ -6,13 +6,13 @@
     $query = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's';";
 
     // executa a query
+    // mensagem = 1: cadastre um funcionario antes de cadastrar um projeto;
 
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
 
-    if($row==0){
-        header("location: ../../front/funcs/cad_funcs.php");
-    }
+    if($row==0)
+    { header("location: ../../front/funcs/funcionarios.php?pagina=1&mensagem=1"); die(); }
 
 ?>
 

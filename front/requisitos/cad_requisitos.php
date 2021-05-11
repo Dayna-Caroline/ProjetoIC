@@ -3,6 +3,12 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
+    // erro = 3: erro; nao da pra cadastrar requisito de um projeto q nao existe
+
+    if(!$_GET['proj']){
+        header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die();
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -68,22 +74,18 @@
                         echo "<div class=\"item2\">
 
                         <div class=\"leg-id2\"><b>Cadastro</b></div>
-                        <div style=\"width:150px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\"></div>
-                        <div class=\"leg-id2\" style=\"margin-right: 10px; width:150px;\"><b>Tipo</b></div>
+                        <div style=\"width:150px; margin-left:5px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\"></div>
+                        <div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 15px; width:150px;\"><b>Tipo</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\"></div>
-                        </div>";
+                        </div>
 
-                        echo "<div class=\"item2\">
-                        <div class=\"leg-id2\"><b>Versão</b></div>
-                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\"></div>
-
-                        </div><br><br>
+                        <br><br>
                         ";
 
                     ?>
 
                     <br><div class="botoes">
-                        <button type="submit" value="<?php echo $_GET['proj'] ?>" name="cadastra" class="novo" style="cursor: pointer;margin-left:300px;">Concluír Cadastro</button>
+                        <button type="submit" value="<?php echo $_GET['proj'] ?>" name="cadastra" class="novo" style="cursor: pointer;margin-left:525px;">Concluír Cadastro</button>
                     </div>
 
                 </div>

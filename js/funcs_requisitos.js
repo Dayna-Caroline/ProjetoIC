@@ -5,14 +5,14 @@ function editar() {
     
     document.getElementById('processo').disabled=false;
     document.getElementById('descricao').disabled=false;
-    document.getElementById('versao').disabled=false;
+    document.getElementById('versao').disabled=true;
     document.getElementById('tipo').disabled=false;
     document.getElementById('cadastro').disabled=false;
     document.getElementById('titulo').disabled=false;
 
     document.getElementById('processo').style.cursor="text";
     document.getElementById('descricao').style.cursor="text";
-    document.getElementById('versao').style.cursor="text";
+    document.getElementById('versao').style.cursor="not-allowed";
     document.getElementById('tipo').style.cursor="text";
     document.getElementById('cadastro').style.cursor="text";
     document.getElementById('titulo').style.cursor="text";

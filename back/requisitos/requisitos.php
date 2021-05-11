@@ -4,9 +4,12 @@
     include "../conexao_local.php";
 
     // REDIRECIONA PRA PAGINA DO NOVO REQUISITO
+    
+    // sucesso = 1: operação bem sucedida; sucesso = 2: erro na alteração; sucesso = 3: erro de preenchimento dos campos;
+    // sucesso = 4: erro na conclusão; sucesso = 5: erro na exclusão;
 
     if(@$_POST['novo']){
-        header("location: ../../front/requisitos/cad_requisitos.php?proj=".$_POST['novo']."");
+        header("location: ../../front/requisitos/cad_requisitos.php?proj=".$_POST['novo'].""); die();
     }
 
     // CADASTRA REQUISITO
@@ -24,20 +27,19 @@
         $titulo=$_POST['titulo'];
         $processo=$_POST['processo'];
         $cadastro=$_POST['cadastro'];
-        $versao=$_POST['versao'];
+        $versao='1';
         $tipo=$_POST['tipo'];
 
         $sql2 = "INSERT INTO requisitos VALUES( null, '$projeto', '$titulo', '$processo', '$cadastro', '$versao', '$descricao', '$tipo');";
                 
         if (mysqli_query($conecta, $sql2)) 
         { 
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1");        
+            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&sucesso=1"); die();       
         } 
         
         else 
         {
-            echo '<script language=\"javascript\">alert(\'Não foi possível finalizar o cadastro, tente novamente em alguns minutos!\')</script>'; 
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1");        
+            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&sucesso=2"); die();      
         }
 
         mysqli_close($conecta);
@@ -67,12 +69,11 @@
             }
     
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1");
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
             }
     
             else{
-                echo '<script language=\"javascript\">alert(\'Não foi possível excluir os requisitos!\')</script>';
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1");
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=5"); die();
             }
     
         }
@@ -90,12 +91,11 @@
             $resultado = mysqli_query($conecta, $query);
     
             if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1");
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
             }
     
             else{
-                echo '<script language=\"javascript\">alert(\'Não foi possível excluir o requisito!\')</script>';
-                header("location: ../../front/requisitos/requisito.php?id=".$idaux."");
+                header("location: ../../front/requisitos/requisito.php?id=".$idaux."&sucesso=5"); die();
             }
     
         }
@@ -121,12 +121,11 @@
         $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', cadastro = '$cadastro', versao = '$versao', tipo = '$tipo' WHERE md5(id_requisito) = '$id';";
             
         if (mysqli_query($conecta, $sql))
-        { header("location: ../../front/requisitos/requisito.php?id=".$id."");} 
+        { header("location: ../../front/requisitos/requisito.php?id=".$id."&sucesso=1");  die(); } 
             
         else 
         {
-            echo '<script language=\"javascript\">alert(\'Não foi possível alterar os dados do requisito!\')</script>'; 
-            header("location: ../../front/requisitos/requisito.php?id=".$id."");
+            header("location: ../../front/requisitos/requisito.php?id=".$id."&sucesso=2");  die();
         } 
     
         mysqli_close($conecta);
@@ -137,7 +136,7 @@
 
     if(@$_POST['cancela']){
         $auxid=md5($_POST['cancela']);
-        { header("location: ../../front/requisitos/requisito.php?id=".$auxid."");} 
+        { header("location: ../../front/requisitos/requisito.php?id=".$auxid.""); die(); } 
     }
 
 ?>
