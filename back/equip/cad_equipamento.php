@@ -19,4 +19,5 @@
     } else {
         header("location: ../../front/equip/equipamentos.php?success=1");
     }
+    mysqli_close($conecta);
 ?>

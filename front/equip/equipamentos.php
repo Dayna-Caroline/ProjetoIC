@@ -191,8 +191,8 @@
                                 <div class=\"legenda\">
                                     <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>ID</b></div>
-                                    <div class=\"leg-desc\"><b>Equipamentos</b></div>
-                                    <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
+                                    <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
+                                    <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
@@ -221,8 +221,8 @@
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
                                 <div class=\"leg-id\"><b>ID</b></div>
-                                <div class=\"leg-desc\"><b>Equipamentos</b></div>
-                                <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
+                                <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
+                                <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                             </div>
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>

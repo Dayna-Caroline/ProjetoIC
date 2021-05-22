@@ -15,6 +15,7 @@
     }else{
         echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/funcs/escolha_func.php'>";
     }*/
+    
 ?>
 <!DOCTYPE html>
 

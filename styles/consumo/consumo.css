@@ -364,13 +364,12 @@ input[type=checkbox]
 
 /* BUSCA */
 
+.filtros{
+    display:inline;
+}
+
 .busca input[type=text]{
-    border: none;
-    width:745px; 
-    height:40px;
-    background-color: transparent;
-    font-size: 20px;
-    outline: 0;
+    
 }
 
 .icon{
@@ -383,11 +382,7 @@ input[type=checkbox]
 }
 
 .busca button{
-    border: 0px;
-    border-radius: 50%; 
-    width: 43px;
-    height: 43px;
-    outline-style:none;
+    
 }
 
 .busca input{
@@ -583,4 +578,6 @@ input[type=checkbox]
 
 input[type=checkbox]{
     transform: scale(2);
+}
+
 }
