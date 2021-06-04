@@ -319,6 +319,17 @@ input[type=checkbox]
     cursor:default;
 }
 
+.restaurar{
+    padding: 0px;
+    border: 0px; 
+    background-color: transparent;
+    font-size: 40px;
+    margin-left: 105px;
+    margin-top:20px;
+    color: rgb(112, 180, 112);
+    cursor: pointer;
+}
+
 .next{
     color: #000000;
     font-size: 25px;

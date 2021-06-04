@@ -141,7 +141,7 @@
         }
 
         else{
-
+            $id = $_POST['arquiva'];
             $idaux=md5($id);
                 $query = "UPDATE projeto SET ativo = 'n' WHERE md5(id_projeto) = '$idaux';";
                 $resultado2 = mysqli_query($conecta, $query);
@@ -157,6 +157,12 @@
         }  
               
     }
+
+    // REDIRECIONA PRA PAGINA DE RESTAURAR EXCLUIDOS
+    if(@$_POST['restaurar']){
+        header("location: ../../front/projetos/restaurar.php?pagina=1"); die();
+    }
+
 
     // REDIRECIONA PRA PAGINA DE CADASTRO DE FUNCIONARIOS
 

@@ -61,6 +61,8 @@
             <div class="conteudo">
 
                 <div  class="titulo">
+                    <?php echo "<a href=\"requisitos.php?proj=".md5($linha['projeto'])."\"><p class=\"volt alt\">
+                    &#8592;  Voltar</p></a>"; ?>
                     <h1>Detalhes do Requisito</h1>
                 </div>
 

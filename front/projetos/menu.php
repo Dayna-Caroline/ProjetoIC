@@ -17,11 +17,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
                     } 
                     else 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND  descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND  descricao LIKE '%{$_GET['busca']}%';";
                         break;
                     }
                 }
@@ -32,7 +32,7 @@
     // sem filtros
 
         else
-        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}';"; }
+        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s';"; }
     //
 
     // executa a query
@@ -244,8 +244,9 @@
                     ?>
 
                     <div class="botoes">
-                        <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo Projeto</button>
-                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir Selecionados</button>
+                        <button type="submit" value="novo" name="novo" class="novo" style="cursor: pointer;">Novo</button>
+                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir</button>
+                        <button type="submit" id="restaurar" value="restaurar" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
                     </div>
 
                 </form>

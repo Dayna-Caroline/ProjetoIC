@@ -88,8 +88,11 @@
 
             <div class="conteudo">
 
+
+                <?php echo "<a href=\"../projetos/projeto.php?id=".$_GET['proj']."\"><p class=\"volt alt\">&nbsp; &nbsp; &nbsp; &#8592;  Voltar</p></a>"; ?>
+
                 <h1>Requisitos do Projeto <?php 
-                
+
                     $sql = "SELECT id_projeto FROM projeto WHERE md5(id_projeto) = '{$_GET['proj']}';";
                     $resultado = mysqli_query($conecta, $sql);
                     $linha=mysqli_fetch_array($resultado);
@@ -259,8 +262,9 @@
                     ?>
 
                     <div class="botoes">
-                        <button type="submit" value="<?php echo $_GET['proj']; ?>" name="novo" class="novo" style="cursor: pointer;">Adiconar Requisito</button>
-                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir Selecionados</button>
+                        <button type="submit" value="<?php echo $_GET['proj']; ?>" name="novo" class="novo" style="cursor: pointer;">Novo</button>
+                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir</button>
+                        <button type="submit" id="restaurar" value="restaurar" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
                     </div>
 
                 </form>

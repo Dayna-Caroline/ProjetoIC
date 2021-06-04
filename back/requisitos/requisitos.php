@@ -139,4 +139,9 @@
         { header("location: ../../front/requisitos/requisito.php?id=".$auxid.""); die(); } 
     }
 
+    // REDIRECIONA PRA PAGINA DE RESTAURAR EXCLUIDOS
+    if(@$_POST['restaurar']){
+        header("location: ../../front/requisitos/restaurar.php?pagina=1"); die();
+    }
+
 ?>
