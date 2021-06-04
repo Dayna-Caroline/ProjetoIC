@@ -1,6 +1,7 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    
     $query = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'";
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
@@ -36,7 +37,7 @@
                     <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                     <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                     <li class="pag navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="../mudancas/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                    <li class="navitem"><a href="../consumo/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
@@ -54,29 +55,17 @@
                         echo"<div class=\"item3\">
                         <div class=\"leg-id2\"><b>Equipamento</b></div>
                         <div class=\"item-id2\">
-                        <select style=\"width:360px;\" name=\"equipamento\"";
+                        <select name=\"equipamento\" style=\"width:360px;\" required> ";
 
                         for($i=0;$i<$row;$i++){
                             $linha = mysqli_fetch_array($result);
-                            echo "<option name='select' value=".$linha['id_equipamento'].">".$linha['descricao']."</option>";
-                        }                                
-                        echo"</select>";
-                        echo"
+                            echo "<option value=".$linha['id_equipamento'].">".$linha['descricao']."</option>";
+                        }                             
+                        echo "
                         </select>
                         </div>
                         </div>";
-                        /*
-                        echo "<div class=\"item3\">
-                        <div class=\"leg-id2\"><b>Periodo</b></div>
-                        <div class=\"item-id2\">
-                        <select required type=\"text\" name=\"periodo\">
-                            <option value=\"diario\" selected>Diário</option>
-                            <option value=\"mensal\">Mensal</option>
-                            <option value=\"anual\">Anual</option>
-                        </select>
-                        </div>
-                        </div>";*/
-
+                        
                         echo "
                         <div class=\"item3\">
                         <div class=\"leg-id2\"><b>Inicio</b></div>
@@ -84,33 +73,10 @@
                         <div class=\"leg-id2\"><b>Fim</b></div>
                         <div class=\"item-id2\"><input type=\"time\" style=\"width:110px;\" name=\"horafinal\" required></div>
                         </div>";
-                        /* Se selecionar periodo muda pra um desses forms
-                        echo "<div class\"=mes\">
-                        <div class=\"item3\">
-                        <div class=\"leg-id2\"><b>Mês</b></div>
-                        <div class=\"item-id2\">
-                        <select type=\"text\" name=\"mes\">
-                            <option value=\"janeiro\">Janeiro</option>
-                            <option value=\"fevereiro\">Fevereiro</option>
-                            <option value=\"marco\">Março</option>
-                            <option value=\"abril\">Abril</option>
-                            <option value=\"maio\">Maio</option>
-                            <option value=\"junho\">Junho</option>
-                            <option value=\"julho\">Julho</option>
-                            <option value=\"agosto\">Agosto</option>
-                            <option value=\"setembro\">Setembro</option>
-                            <option value=\"outubro\">Outubro</option>
-                            <option value=\"novembro\">Novembro</option>
-                            <option value=\"dezembro\">Dezembro</option>
-                        </select>
-                        </div>
-                        <div class=\"item-id2\"><input required type=\"number\" class=\"i2\" placeholder=\"Ano\" oninput=\"this.value = Math.abs(this.value)\" min=\"\" id='ano' name=\"ano\"></div>
-                        </div>
-                        </div>"; */
                         
                         echo "<div class=\"item3\">
                             <div class=\"leg-id2 ab\"><b>Data</b></div>
-                            <div class=\"item-id2 ab\"><input style=\"width:170px;\" required autocomplete='off' name=\"data\" type=\"date\"></div>
+                            <div class=\"item-id2 ab\"><input style=\"width:180px;\" required autocomplete='off' name=\"data\" type=\"date\"></div>
                         
                             <div class=\"item-id2\"><input required type=\"number\" style=\"margin-left:95px; width:180px;\"  placeholder=\"Consumo(kWh)\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\" step=\"0.01\"></div>
                         </div>";

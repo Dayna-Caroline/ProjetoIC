@@ -5,8 +5,10 @@
 
     $equipamento = $_POST['equipamento'];
     $data = $_POST['data'];
-    $horaini = $_POST['horainicial'];
-    $horafim = $_POST['horafinal'];
+    $horainis = $_POST['horainicial'];
+    $horaini = date('h:i A', strtotime($horainis));
+    $horafims = $_POST['horafinal'];
+    $horafim = date('h:i A', strtotime($horafims));
     $consumo = $_POST['consumo'];
     $empresa = $_SESSION['id_empresa'];
 
