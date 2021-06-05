@@ -75,16 +75,21 @@
         else{
     
             $idaux=md5($_POST['arquiva']);
+
+            $sql = "SELECT projeto FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+            $resultado2 = mysqli_query($conecta, $sql);
+            $linha=mysqli_fetch_array($resultado2);
+            $projeto=md5($linha['projeto']);
     
             $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
             $resultado = mysqli_query($conecta, $query);
     
             if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
             }
     
             else{
-                header("location: ../../front/requisitos/requisito.php?id=".$_POST['arquiva']."&sucesso=5"); die();
+                header("location: ../../front/requisitos/requisito.php?id=".$projeto."&sucesso=5"); die();
             }
     
         }
