@@ -98,6 +98,7 @@ create table requisitos
     versao integer not null,
     descricao varchar(100) not null,
     tipo integer not null,
+    ativo varchar(1) not null,
     primary key(id_requisito),
     foreign key(projeto) references projeto(id_projeto)
 );

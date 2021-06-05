@@ -30,7 +30,7 @@
         $versao='1';
         $tipo=$_POST['tipo'];
 
-        $sql2 = "INSERT INTO requisitos VALUES( null, '$projeto', '$titulo', '$processo', '$cadastro', '$versao', '$descricao', '$tipo');";
+        $sql2 = "INSERT INTO requisitos VALUES( null, '$projeto', '$titulo', '$processo', '$cadastro', '$versao', '$descricao', '$tipo', 's');";
                 
         if (mysqli_query($conecta, $sql2)) 
         { 
@@ -55,25 +55,19 @@
             foreach(@$_POST['check_list'] as $id){
     
                 $idaux=md5($id);
-
-                $query2 = "SELECT * FROM requisitos WHERE md5(id_requisito) = '$idaux';";
-                $resultado2 = mysqli_query($conecta, $query2);
-                $linha=mysqli_fetch_array($resultado2);
-                $projeto= md5($linha['projeto']);
     
-    
-                $query = "DELETE FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+                $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
                 $resultado = mysqli_query($conecta, $query);
                 if ($resultado == true )$aux++;
     
             }
     
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=1"); die();
             }
     
             else{
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=5"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=5"); die();
             }
     
         }
@@ -81,21 +75,16 @@
         else{
     
             $idaux=md5($_POST['arquiva']);
-
-            $query2 = "SELECT * FROM requisitos WHERE md5(id_requisito) = '$idaux';";
-            $resultado2 = mysqli_query($conecta, $query2);
-            $linha=mysqli_fetch_array($resultado2);
-            $projeto= md5($linha['projeto']);
     
-            $query = "DELETE FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+            $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
             $resultado = mysqli_query($conecta, $query);
     
             if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=1"); die();
             }
     
             else{
-                header("location: ../../front/requisitos/requisito.php?id=".$idaux."&sucesso=5"); die();
+                header("location: ../../front/requisitos/requisito.php?id=".$_POST['arquiva']."&sucesso=5"); die();
             }
     
         }
@@ -141,7 +130,31 @@
 
     // REDIRECIONA PRA PAGINA DE RESTAURAR EXCLUIDOS
     if(@$_POST['restaurar']){
-        header("location: ../../front/requisitos/restaurar.php?pagina=1"); die();
+        header("location: ../../front/requisitos/restaurar.php?pagina=1&proj=".$_POST['restaurar'].""); die();
+    }
+
+    // RESTAURAR REQUISITOS EXCLUIDOS
+    if(@$_POST['restaura']){
+        if(@$_POST['check_list_restaurar']){
+
+            foreach(@$_POST['check_list_restaurar'] as $id){
+
+                $idaux=md5($id);
+                $query = "UPDATE requisitos SET ativo = 's' WHERE md5(id_requisito) = '$idaux';";
+                $resultado2 = mysqli_query($conecta, $query);
+                if ($resultado2 == true )$aux++;
+
+            }
+
+            if ( $aux>0 ){
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&sucesso=1&pagina=1"); die();
+            }
+
+            else{
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&sucesso=5&pagina=6"); die();
+            }
+
+        }
     }
 
 ?>

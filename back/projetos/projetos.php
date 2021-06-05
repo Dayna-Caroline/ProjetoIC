@@ -5,7 +5,7 @@
     include "valida_projeto.php";
 
     // sucesso = 1: operação bem sucedida; sucesso = 2: erro na alteração; sucesso = 3: erro de preenchimento dos campos;
-    // sucesso = 4: erro na conclusão; sucesso = 5: erro na exclusão;
+    // sucesso = 4: erro na conclusão; sucesso = 5: erro na exclusão; sucesso = 6: erro em restaurar;
 
     // REDIRECIONA PRA PAGINA DO NOVO PROJETO
 
@@ -156,6 +156,30 @@
 
         }  
               
+    }
+
+    // RESTAURAR PROJETOS EXCLUIDOS
+    if(@$_POST['restaura']){
+        if(@$_POST['check_list_restaurar']){
+
+            foreach(@$_POST['check_list_restaurar'] as $id){
+
+                $idaux=md5($id);
+                $query = "UPDATE projeto SET ativo = 's' WHERE md5(id_projeto) = '$idaux';";
+                $resultado2 = mysqli_query($conecta, $query);
+                if ($resultado2 == true )$aux++;
+
+            }
+
+            if ( $aux>0 ){
+                header("location: ../../front/projetos/menu.php?sucesso=1&pagina=1"); die();
+            }
+
+            else{
+                header("location: ../../front/projetos/menu.php?sucesso=5&pagina=6"); die();
+            }
+
+        }
     }
 
     // REDIRECIONA PRA PAGINA DE RESTAURAR EXCLUIDOS

@@ -319,6 +319,19 @@ input[type=checkbox]
     cursor:default;
 }
 
+.res{
+    border: 1px solid #555;
+    padding: 8px 0;
+    border-radius: 5px;
+    background-color: #7ad47e;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 300px;
+    padding: 10px;
+    height: 50px;
+    width: 170px;
+}
+
 .restaurar{
     padding: 0px;
     border: 0px; 

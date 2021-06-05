@@ -3,12 +3,18 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
-    $query = "SELECT * FROM requisitos WHERE md5(projeto) = '{$_GET['proj']}';";
+    $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND md5(id_projeto) = '{$_GET['proj']}';";
+
+    // executa a query
+    // erro = 1: não encontrou o projeto;
+
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
-
+    
     if($row==0)
-    { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
+    {
+        header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die();
+    }
 
     // Verifica o filtro usado na busca
 
@@ -26,11 +32,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%' AND projeto.id_projeto = requisitos.projeto;";
+                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='s' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%' AND projeto.id_projeto = requisitos.projeto;";
                     } 
                     else 
                     {
-                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;";
+                        $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='s' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;";
                         break;
                     }
                 }
@@ -40,7 +46,7 @@
 
     // sem filtros
         else
-        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;"; }
+        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='s' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;"; }
     //
 
     // executa a query
@@ -263,8 +269,8 @@
 
                     <div class="botoes">
                         <button type="submit" value="<?php echo $_GET['proj']; ?>" name="novo" class="novo" style="cursor: pointer;">Novo</button>
-                        <button type="submit" disabled id="arquiva" value="arquivar" name="arquiva" class="arq">Excluir</button>
-                        <button type="submit" id="restaurar" value="restaurar" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
+                        <button type="submit" disabled id="arquiva" value="<?php echo $_GET['proj']; ?>" name="arquiva" class="arq">Excluir</button>
+                        <button type="submit" id="restaurar" value="<?php echo $_GET['proj']; ?>" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
                     </div>
 
                 </form>
