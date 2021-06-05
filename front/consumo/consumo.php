@@ -1,9 +1,7 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-
-    $query = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'";
-    $result = mysqli_query($conecta, $query);
+   
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +26,7 @@
                 <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                 <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                 <li class="pag navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                <li class="navitem"><a href="../mudancas/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
+                <li class="navitem"><a href="../consumo/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Controle</span></a></li>
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
         </div>
@@ -38,29 +36,30 @@
                 <form class="busca" action="consumo.php?pagina=1" method="POST">
                     <div class="filtros">
                     <b>Equipamento</b>
-                    <select name='select'>
-                <!--    <option name='todos' value='todos'>Todos</option>; -->
+                    <select name='equipamento'>
+                    <option value='todos'>Todos</option>; -->
                     <?php
                     for($i=0;$i<$row;$i++){
                         $linha = mysqli_fetch_array($result);
-                        echo "<option name='select' value=".$linha['id_equipamento'].">".$linha['descricao']."</option>";
+                        echo "<option value=".$linha['id_equipamento'].">".$linha['descricao']."</option>";
                     }                                
                     echo"</select>";
                     ?>
                     <b>Mês</b>
                         <select name='mes'>
-                        <option name='mes' value='janeiro' selected>Janeiro</option>
-                        <option name='mes' value='fevereiro'>Fevereiro</option>
-                        <option name='mes' value='marco'>Março</option>
-                        <option name='mes' value='abril'>Abril</option>
-                        <option name='mes' value='maio'>Maio</option>
-                        <option name='mes' value='junho'>Junho</option>
-                        <option name='mes' value='julho'>Julho</option>
-                        <option name='mes' value='agosto'>Agosto</option>
-                        <option name='mes' value='setembro'>Setembro</option>
-                        <option name='mes' value='outubro'>Outubro</option>
-                        <option name='mes' value='novembro'>Novembro</option>
-                        <option name='mes' value='dezembro'>Dezembro</option></select>;
+                        <option name='mes' value=''>Mês</option>
+                        <option name='mes' value='01'>Janeiro</option>
+                        <option name='mes' value='02'>Fevereiro</option>
+                        <option name='mes' value='03'>Março</option>
+                        <option name='mes' value='04'>Abril</option>
+                        <option name='mes' value='05'>Maio</option>
+                        <option name='mes' value='06'>Junho</option>
+                        <option name='mes' value='07'>Julho</option>
+                        <option name='mes' value='08'>Agosto</option>
+                        <option name='mes' value='09'>Setembro</option>
+                        <option name='mes' value='10'>Outubro</option>
+                        <option name='mes' value='11'>Novembro</option>
+                        <option name='mes' value='12'>Dezembro</option></select>;
                     <b>Ano</b>
                         <input type="text" class="ano" value="" name="ano" id="ano" autocomplete="off">
                         <button type="submit">Aplicar Filtros</a>  
@@ -69,32 +68,40 @@
                 <!-- ------------------------------ TABELA ----------------------------- -->
                 <form action="../../back/consumo/consumo.php" method="POST">
                 <?php 
-                
-                    if(@$_POST['busca'])
+                    if(@$_POST['mes'])
                     {
-                        $aux = $_POST['busca'];
-                        for ($i = 0; $i < strlen($aux); $i++)
-                        {
-                            $char = $aux[$i];
-                            if (is_numeric($char)) 
-                            {
-                                $queryc = "SELECT id_equipamento, descricao, consumo FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}'  AND CAST(id_equipamento AS CHAR) LIKE '%{$_POST['busca']}%' OR CAST(descricao AS CHAR) LIKE '%{$_POST['busca']}%';";
-                            } 
-                            else 
-                            {
-                                $queryc = "SELECT id_equipamento, descricao, consumo FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'  AND descricao LIKE '%{$_POST['busca']}%';";
-                                break;
-                            }
-                        }
+                        $mes = $_POST['mes'];
+                        if($mes!=NULL)
+                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
+                    
                     }
+                    if(@$_POST['equipamento'])
+                    {
+                        $equip = $_POST['equipamento'];
+                        if($mes!='todos')
+                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND id_equipamento='$equipamento' ORDER BY consumo DESC;";
+                        else
+                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC;";
+                    }
+                    else if(@$_POST['ano'])
+                    {
+                        $ano = $_POST['ano'];
+                        if($mes!=NULL)
+                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
+
+                    }
+                    //Sem Filtros 
                     else
                     {
-                        $queryc = "SELECT id_consumo, dia, consumo FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ;";
+                        $query = "SELECT id_consumo, descricao,consumo dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC ;";
                     }
+                        
+                    
                     
 
-                    $resultc = mysqli_query($conecta,$queryc);
-                    $row = mysqli_num_rows($resultc);
+                    $result = mysqli_query($conecta,$query);
+                    $row = mysqli_num_rows($result);
+                    
                     if($row != 0)
                     {
                         // Caso não haja filtro ou existam mais de 11 projetos cadastrados, exibe resultados em páginas
@@ -183,7 +190,7 @@
                                 <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
                                 <div class=\"leg-id\"><b>ID</b></div>
                                 <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
-                                <div class=\"leg-consumo\"><b>C(kWh)</b></div>
+                                <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                             </div>";
 
                             for($i=0; $i<$row ; $i++ ){
@@ -209,17 +216,20 @@
 
                     else{
                         echo "
+                        <div class=\"titulo\">
+                            <b></b>
+                        </div>
                         <div class=\"legenda\">
                             <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
                             <div class=\"leg-id\"><b>ID</b></div>
-                            <div class=\"leg-desc\"><b>Equipamento</b></div>
-                            <div class=\"leg-consumo\"><b>Consumo(kWh)</b></div>
+                            <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
+                            <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                         </div>
                         <div class=\"item\">
                         <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
                         <div class=\"item-id\">---</div>
                         <div class=\"item-desc\">Nenhum Consumo Cadastrado</div>
-                        <div class=\"item-res\">--                        </div>
+                        <div class=\"item-consumo\">--</div>
                         </div>";
                     }
                 ?>
