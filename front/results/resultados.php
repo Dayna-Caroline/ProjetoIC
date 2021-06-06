@@ -1,6 +1,7 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    include "../../back/results/calculos.php";
 ?>
 
 <!DOCTYPE html>
@@ -43,38 +44,38 @@
                 }
             </script>
         <!--Gasto por projeto..............................................................................................................-->
-            <script type="text/javascript">
-                google.charts.load("current", {packages:['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ["Element", "Density", { role: "style" } ],
-                        ["Copper", 8.94, "#b87333"],
-                        ["Silver", 10.49, "silver"],
-                        ["Gold", 19.30, "gold"],
-                        ["Platinum", 21.45, "color: #e5e4e2"]
-                    ]);
+        <script>    
+            google.charts.load('current', {packages: ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawMaterial);
 
-                    var view = new google.visualization.DataView(data);
-                    view.setColumns([0, 1,
-                                    { calc: "stringify",
-                                        sourceColumn: 1,
-                                        type: "string",
-                                        role: "annotation" },
-                                    2]);
+            function drawMaterial() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Projeto', 'Custo'],
+                    ['New York City, NY', 8175000],
+                    ['Los Angeles, CA', 3792000],
+                    ['Chicago, IL', 2695000],
+                    ['Houston, TX', 2099000],
+                    ['Philadelphia, PA', 1526000]
+                ]);
 
-                    var options = {
-                        title: "Gasto por projeto",
-                        width: 400,
-                        height: 200,
-                        bar: {groupWidth: "95%"},
-                        legend: { position: "none" },
-                    };
-                    var chart = new google.visualization.ColumnChart(document.getElementById("chart_div2"));
-                    chart.draw(view, options);
-                }
-            </script>
-        <!--Consumo por equipamento depois..............................................................................................................-->
+                var materialOptions = {
+                    chart: {
+                    title: 'Population of Largest U.S. Cities'
+                    },
+                    hAxis: {
+                    title: 'Total Population',
+                    minValue: 0,
+                    },
+                    vAxis: {
+                    title: 'City'
+                    },
+                    bars: 'horizontal'
+                };
+                var materialChart = new google.charts.Bar(document.getElementById('column'));
+                materialChart.draw(data, materialOptions);
+            }
+        </script>
+        <!--Consumo por equipamento média..............................................................................................................-->
             <script type="text/javascript">
 
                 // Load the Visualization API and the corechart package.
@@ -101,7 +102,7 @@
                     ]);
 
                     // Set chart options
-                    var options = {'title':'Consumo por equipamento - Smart grid',
+                    var options = {'title':'Média de consumo por equipamento',
                                 pieSliceText: 'none',
                                 'width':400,
                                 'height':300};
@@ -164,6 +165,10 @@
                     <p>Gasto por projeto (gráfico de barras/pizza, pra ver quando foi gasto por projeto)</p><br>
                     <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
                 </center>
+
+                <div class="graficos">
+                    <div id="column"></div>
+                </div>
                 <!--
                 <div class="graficos">
                     <div id="chart_div1"></div>
