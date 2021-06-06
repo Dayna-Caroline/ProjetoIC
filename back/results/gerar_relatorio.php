@@ -6,12 +6,11 @@
     {
         function Header() {
             $this->Image('../../imgs/logo_pdf.JPG',15,10,50);
-            $this->Image('../../imgs/unesp_pdf.JPG',160,14,30);
             $this->Ln(40);
         }
 
         function rodape() {
-            $this->SetY(260);
+            $this->SetY(249);
             
             $this->Cell(68);
             $this->SetFont('Arial','i',11);
@@ -23,6 +22,10 @@
             $this->Ln(6);
         
             $this->Cell(0,10,'D. Caroline, E. Rodrigues, F. Modolo, Y. Masuyama, K. Rocha',0,0,'C');
+            $this->SetFont('Arial','i',11);
+
+            $this->LN(6);
+            $this->Cell(0,15,"Patrocinado pelo Conselho Nacional de Desenvolvimento - Iniciação Científica Ensino Médio (PIBIC-EM/CNPq).",0,0,'C');
         }
 
         function Title() {

@@ -140,7 +140,7 @@
                 <h2>Smart Grids</h2>
             </div>
             <div class="text">
-                Projeto de Iniciação científica da Universidade Estadual Paulista "Júlio de Mesquita Filho".
+                Patrocinado pelo Conselho Nacional de Desenvolvimento - Iniciação Científica Ensino Médio (PIBIC-EM/CNPq).
             </div>
         </div>
     </div>
