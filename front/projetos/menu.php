@@ -1,5 +1,5 @@
-﻿<?php
-
+<?php 
+    
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
