@@ -54,6 +54,18 @@
             <a href="desativados.php?pagina=1"><p class="ir">Funcionários desativados&#8594;</p></a>
                 <h1>Meus Funcionários</h1>
 
+                <!-- MENSAGEM -->
+                <?php
+                
+                    if(@$_GET['m']==1)
+                    {
+                        echo "<div class=\"mensagem1\">
+                            <p>Para cadastrar um projeto é necessário cadastrar ao menos um funcionário!</p>
+                        </div>";
+                    }
+                
+                ?>
+
                 <!-- ------------------------------- BUSCA ----------------------------- -->
                 <form class="projetos" action="../../front/funcs/funcionarios.php?pagina=1" method="post">
                     <div class="busca">

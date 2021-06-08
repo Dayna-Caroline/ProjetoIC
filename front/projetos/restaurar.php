@@ -17,11 +17,11 @@
                 $char = $aux[$i];
                 if (is_numeric($char)) 
                 {
-                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND CAST(projeto.id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(projeto.responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR projeto.descricao LIKE '%{$_GET['busca']}%';";
                 } 
                 else 
                 {
-                    $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n' AND  descricao LIKE '%{$_GET['busca']}%';";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND  projeto.descricao LIKE '%{$_GET['busca']}%';";
                     break;
                 }
             }
@@ -32,7 +32,7 @@
 // sem filtros
 
     else
-    { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='n';"; }
+    { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n';"; }
 //
 
 // executa a query
@@ -40,7 +40,7 @@
     $row = mysqli_num_rows($result);
 
     if($row==0&&@$_GET['pagina']>1)
-    { header("location: ../../front/projetos/menu.php?pagina=1&busca=".$_GET['busca'].""); die(); }
+    { header("location: ../../front/projetos/restaurar.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
 //
 
 
@@ -89,6 +89,35 @@
                     <h1>Projetos Excluidos</h1>
                 </div>
 
+                <!-- ERRO -->
+                <?php
+                    switch(@$_GET['e'])
+                    {
+                        case 2:
+                            echo "<div class=\"erro\">
+                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+                    }
+
+                    switch(@$_GET['s'])
+                    {
+                        case 6:
+                            echo "<div class=\"erro\">
+                                <p>Não foi possível restaurar os projetos!</p>
+                            </div>";
+                        break;
+
+                        case 9:
+                            echo "<div class=\"sucesso\">
+                                <p>Os projetos foram restaurados!</p>
+                            </div>";
+                        break;
+
+                    }
+                
+                ?>
+
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/projetos/restaurar.php" method="get">
                     <div class="busca">
@@ -114,7 +143,7 @@
                                 $pagina=$_GET['pagina'];
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
-                                { header("location: ../../front/projetos/restaurar.php?pagina=1&erro=2"); die(); }
+                                { header("location: ../../front/projetos/restaurar.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
 
                                 $bot=(($pagina-1)*10)+1;
                                 $top=$pagina*10;
@@ -182,7 +211,7 @@
                                 $pagina=$_GET['pagina'];
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
-                                { header("location: ../../front/projetos/restaurar.php?pagina=1&erro=2"); die(); }
+                                { header("location: ../../front/projetos/restaurar.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
 
                                 echo "<div class=\"botoes\">";
                                 if($row>1)

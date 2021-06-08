@@ -5,8 +5,8 @@
     include "valida_projeto.php";
 
     // sucesso = 1: operação bem sucedida; sucesso = 2: erro na alteração; sucesso = 3: erro de preenchimento dos campos;
-    // sucesso = 4: erro na conclusão; sucesso = 5: erro na exclusão; sucesso = 6: erro em restaurar;
-
+    // sucesso = 4: erro na conclusão; sucesso = 5: erro na exclusão; sucesso = 6: erro em restaurar; sucesso = 7: concluido com sucesso;
+    // sucesso = 8: exclusão bem sucedida; sucesso=9: restauração bem sucedida;
     // REDIRECIONA PRA PAGINA DO NOVO PROJETO
 
     if(@$_POST['novo']){
@@ -36,12 +36,12 @@
         
         if (mysqli_query($conecta, $sql)) 
         {   
-            header("location: ../../front/projetos/projeto.php?id=".$auxid."&sucesso=1"); die();
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=1"); die();
         } 
         
         else 
         {
-            header("location: ../../front/projetos/projeto.php?id=".$auxid."&sucesso=2"); die();
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=2"); die();
         } 
 
         mysqli_close($conecta);
@@ -77,10 +77,10 @@
         $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$previa', '$fim', '$c_final', '$empresa', '$ativo', '$concluido');";
                 
         if (mysqli_query($conecta, $sql)) 
-        { header("location: ../../front/projetos/menu.php?sucesso=1&pagina=1"); die(); }
+        { header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); }
         
         else 
-        { header("location: ../../front/projetos/cad_projeto.php?sucesso=2"); die(); }
+        { header("location: ../../front/projetos/cad_projeto.php?s=2"); die(); }
 
         mysqli_close($conecta);
 
@@ -106,11 +106,11 @@
         $resultado = mysqli_query($conecta, $query);
 
         if ( $resultado == true ){
-            header("location: ../../front/projetos/projeto.php?id=".$idaux."&sucesso=1"); die();
+            header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=7"); die();
         }
 
         else{
-            header("location: ../../front/projetos/projeto.php?id=".$idaux."&sucesso=4"); die();
+            header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=4"); die();
         }
 
     }
@@ -131,11 +131,11 @@
             }
 
             if ( $aux>0 ){
-                header("location: ../../front/projetos/menu.php?sucesso=1&pagina=1"); die();
+                header("location: ../../front/projetos/menu.php?s=8&pagina=1"); die();
             }
 
             else{
-                header("location: ../../front/projetos/menu.php?sucesso=5&pagina=5"); die();
+                header("location: ../../front/projetos/menu.php?s=5&pagina=5"); die();
             }
 
         }
@@ -147,11 +147,11 @@
                 $resultado2 = mysqli_query($conecta, $query);
 
             if ( $resultado2 == true ){
-                header("location: ../../front/projetos/menu.php?sucesso=1&pagina=1"); die();
+                header("location: ../../front/projetos/menu.php?s=8&pagina=1"); die();
             }
 
             else{
-                header("location: ../../front/projetos/projeto.php?id=".$idaux."&sucesso=5"); die();
+                header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=5"); die();
             }
 
         }  
@@ -172,11 +172,11 @@
             }
 
             if ( $aux>0 ){
-                header("location: ../../front/projetos/menu.php?sucesso=1&pagina=1"); die();
+                header("location: ../../front/projetos/restaurar.php?s=9&pagina=1"); die();
             }
 
             else{
-                header("location: ../../front/projetos/menu.php?sucesso=5&pagina=6"); die();
+                header("location: ../../front/projetos/restaurar.php?s=6&pagina=6"); die();
             }
 
         }

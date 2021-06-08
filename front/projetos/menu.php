@@ -17,11 +17,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%';";
                     } 
                     else 
                     {
-                        $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s' AND  descricao LIKE '%{$_GET['busca']}%';";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND  descricao LIKE '%{$_GET['busca']}%';";
                         break;
                     }
                 }
@@ -32,7 +32,7 @@
     // sem filtros
 
         else
-        { $query = "SELECT id_projeto, descricao, responsavel FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo='s';"; }
+        { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s';"; }
     //
 
     // executa a query
@@ -40,7 +40,7 @@
         $row = mysqli_num_rows($result);
 
         if($row==0&&@$_GET['pagina']>1)
-        { header("location: ../../front/projetos/menu.php?pagina=1&busca=".$_GET['busca'].""); die(); }
+        { header("location: ../../front/projetos/menu.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
     //
 
 ?>
@@ -87,6 +87,53 @@
                     <h1>Meus Projetos</h1>
                 </div>
 
+                <!-- ERRO -->
+                <?php
+                    switch(@$_GET['e'])
+                    {
+                        case 1:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                                <p>Projeto não encontrado! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+
+                        case 2:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+                        
+                        case 3:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                                <p>O projeto que você está tentando acessar foi desativado!</p>
+                            </div>";      
+                        break;
+                    }
+
+                    switch(@$_GET['s'])
+                    {
+                        case 1:
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s\">
+                                <p>Projeto cadastrado com sucesso! </p>
+                            </div>";
+                        break;
+
+                        case 8:
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s\">
+                                <p>O projeto foi excluído!</p>
+                            </div>";
+                        break;
+
+                        case 5:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                                <p>Não foi possível excluír o projeto!</p>
+                            </div>";
+                        break;
+                    
+                    }
+                
+                ?>
+
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/projetos/menu.php" method="get">
                     <div class="busca">
@@ -112,7 +159,7 @@
                                 $pagina=$_GET['pagina'];
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
-                                { header("location: ../../front/projetos/menu.php?pagina=1&erro=2"); die(); }
+                                { header("location: ../../front/projetos/menu.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
 
                                 $bot=(($pagina-1)*10)+1;
                                 $top=$pagina*10;
@@ -180,7 +227,7 @@
                                 $pagina=$_GET['pagina'];
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
-                                { header("location: ../../front/projetos/menu.php?pagina=1&erro=2"); die(); }
+                                { header("location: ../../front/projetos/menu.php?pagina=1&e=2&busca=".$_GET['busca'].""); die(); }
 
                                 echo "<div class=\"botoes\">";
                                 if($row>1)

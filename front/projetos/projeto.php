@@ -3,7 +3,7 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
-    $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND md5(id_projeto) = '{$_GET['id']}';";
+    $query = "SELECT * FROM projeto WHERE empresa = '{$_SESSION['id_empresa']}' AND ativo = 's' AND md5(id_projeto) = '{$_GET['id']}';";
 
     // executa a query
     // erro = 1: não encontrou o projeto;
@@ -29,8 +29,15 @@
         $concluido=$linha['concluido'];
     }
     else
-    { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
+    { header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die(); }
 
+    $query3 = "SELECT * FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND id_profissional='$linha[responsavel]';";
+    $result3 = mysqli_query($conecta, $query3);
+    $row3 = mysqli_num_rows($result3);
+    if($row3==0)
+    { header("location: ../../front/projetos/menu.php?pagina=1&e=3"); die(); }
+    
+    
     $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'AND profissional.ativo = 's';";
 
     // executa a query
@@ -91,6 +98,43 @@
                         <button id="visualizar" onclick="visualizar();" class="visualizar" style="cursor: pointer;">visualizar</button>
                         <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
+
+                    <?php
+                            switch(@$_GET['s'])
+                            {
+                                case 1:
+                                    echo "<div class=\"sucesso2\">
+                                        <p>Alterações salvas com sucesso!</p>
+                                    </div>";
+                                break;
+
+                                case 2:
+                                    echo "<div class=\"erro2\">
+                                        <p>Não foi possível concluír as alterações!</p>
+                                    </div>";
+                                break;
+
+                                case 7:
+                                    echo "<div class=\"sucesso2\">
+                                        <p>O projeto foi concluído!</p>
+                                    </div>";
+                                break;
+
+                                case 4:
+                                    echo "<div class=\"erro2\">
+                                        <p>Não foi possível concluír o projeto!</p>
+                                    </div>";
+                                break;
+
+                                case 5:
+                                    echo "<div class=\"erro2\">
+                                        <p>Não foi possível excluír o projeto!</p>
+                                    </div>";
+                                break;
+
+                            }
+                        
+                        ?>
 
                     <form action="../../back/projetos/projetos.php" onchange="alterou()" method="post">
 
@@ -161,7 +205,7 @@
                                 <button type=\"submit\" style=\"margin-top: -5px; margin-left:310px; cursor: pointer;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\"><i class=\"fas fa-check\"></i></button>
                                 <button type=\"submit\" style=\"margin-top: -5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\"><i class=\"fas fa-times\"></i></button>
                                 
-                                </div></div>";
+                            </div></div>";
 
                         ?>
 
@@ -169,7 +213,7 @@
 
                             <?php
                                 if($concluido=='n')
-                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"conclui\" class=\"novo\" style=\"cursor: pointer;margin-left:100px;\">Concluír</button>
+                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"conclui\" class=\"conclui\" style=\"cursor: pointer;\">Concluír</button>
                                         <button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;\">Requisitos</button>
                                 "; }
                                 else

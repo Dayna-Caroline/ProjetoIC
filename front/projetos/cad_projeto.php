@@ -12,7 +12,7 @@
     $row = mysqli_num_rows($result);
 
     if($row==0)
-    { header("location: ../../front/funcs/funcionarios.php?pagina=1&mensagem=1"); die(); }
+    { header("location: ../../front/funcs/funcionarios.php?pagina=1&m=1"); die(); }
 
 ?>
 
@@ -57,6 +57,20 @@
                     <a href="menu.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
                     <h1>Criar projeto</h1>
                 </div>
+
+                <?php
+                    switch(@$_GET['s'])
+                    {
+
+                        case 2:
+                            echo "<div class=\"erro\">
+                                <p>Não foi possível concluír o cadastro do projeto!</p>
+                            </div>";
+                        break;
+
+                    }
+                        
+                ?>
 
                 <form class="projetos2" method="post" action="../../back/projetos/projetos.php">
 
