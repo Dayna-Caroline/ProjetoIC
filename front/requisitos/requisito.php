@@ -2,7 +2,7 @@
 
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-
+    
     $query = "SELECT * FROM requisitos WHERE md5(id_requisito) = '{$_GET['id']}';";
 
     // executa a query
@@ -22,7 +22,15 @@
         $versao=$linha['versao'];
         $tipo=$linha['tipo'];
     }
-    else{ header("location: ../../front/requisitos/requisitos.php?erro=1&pagina=1&proj=".$_GET['id'].""); die(); }
+    else{ header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die(); }
+    $auxproj=md5($linha['projeto']);
+    $query2 = "SELECT projeto.id_projeto FROM projeto, profissional WHERE md5(projeto.id_projeto) = '$auxproj' AND projeto.ativo = 's' AND profissional.ativo='s' AND projeto.responsavel=profissional.id_profissional;";
+
+    // executa a query
+
+    $result2 = mysqli_query($conecta, $query2);
+    $row2 = mysqli_num_rows($result2);
+    if($row2==0){header("location: ../../front/projetos/menu.php?e=3&pagina=1"); die();}
 
 ?>
 

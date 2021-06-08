@@ -3,10 +3,20 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
 
-    // erro = 3: erro; nao da pra cadastrar requisito de um projeto q nao existe
-
     if(!$_GET['proj']){
-        header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die();
+        header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die();
+    }
+
+    $query = "SELECT * FROM projeto WHERE md5(id_projeto) = '{$_GET['proj']}';";
+
+    // executa a query
+
+    $result = mysqli_query($conecta, $query);
+    $row = mysqli_num_rows($result);
+
+    if($row==0)
+    {
+        header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die();
     }
 
 ?>

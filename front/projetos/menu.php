@@ -17,11 +17,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s') AND (CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%');";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND (CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%');";
                     } 
                     else 
                     {
-                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s') AND  (descricao LIKE '%{$_GET['busca']}%';)";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND  (descricao LIKE '%{$_GET['busca']}%');";
                         break;
                     }
                 }
@@ -32,7 +32,7 @@
     // sem filtros
 
         else
-        { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s';"; }
+        { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}';"; }
     //
 
     // executa a query

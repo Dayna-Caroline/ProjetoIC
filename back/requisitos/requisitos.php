@@ -34,12 +34,12 @@
                 
         if (mysqli_query($conecta, $sql2)) 
         { 
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&sucesso=1"); die();       
+            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&s=1"); die();       
         } 
         
         else 
         {
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&sucesso=2"); die();      
+            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&s=2"); die();      
         }
 
         mysqli_close($conecta);
@@ -63,11 +63,11 @@
             }
     
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&s=1"); die();
             }
     
             else{
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&sucesso=5"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&s=5"); die();
             }
     
         }
@@ -85,11 +85,11 @@
             $resultado = mysqli_query($conecta, $query);
     
             if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&sucesso=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&s=1"); die();
             }
     
             else{
-                header("location: ../../front/requisitos/requisito.php?id=".$projeto."&sucesso=5"); die();
+                header("location: ../../front/requisitos/requisito.php?id=".$projeto."&s=5"); die();
             }
     
         }
@@ -115,11 +115,11 @@
         $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', cadastro = '$cadastro', versao = '$versao', tipo = '$tipo' WHERE md5(id_requisito) = '$id';";
             
         if (mysqli_query($conecta, $sql))
-        { header("location: ../../front/requisitos/requisito.php?id=".$id."&sucesso=1");  die(); } 
+        { header("location: ../../front/requisitos/requisito.php?id=".$id."&s=1");  die(); } 
             
         else 
         {
-            header("location: ../../front/requisitos/requisito.php?id=".$id."&sucesso=2");  die();
+            header("location: ../../front/requisitos/requisito.php?id=".$id."&s=2");  die();
         } 
     
         mysqli_close($conecta);
@@ -152,11 +152,11 @@
             }
 
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&sucesso=1&pagina=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&s=1&pagina=1"); die();
             }
 
             else{
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&sucesso=5&pagina=6"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&s=5&pagina=6"); die();
             }
 
         }

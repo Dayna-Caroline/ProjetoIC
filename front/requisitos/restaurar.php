@@ -6,7 +6,7 @@
     // Verifica o filtro usado na busca
 
     if(!@$_GET['proj'])
-    { header("location: ../../front/projetos/menu.php?erro=1&pagina=1"); die(); }
+    { header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die(); }
 
     if(!@$_GET['pagina'])
     { header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".@$_GET['busca'].""); die(); }
@@ -19,11 +19,11 @@
                 $char = $aux[$i];
                 if (is_numeric($char)) 
                 {
-                    $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%' AND projeto.id_projeto = requisitos.projeto;";
+                    $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo='s' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.responsavel=profissional.id_profissional AND projeto.id_projeto = requisitos.projeto) AND (CAST(requisitos.id_requisito AS CHAR) LIKE '%{$_GET['busca']}%' OR requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%');";
                 } 
                 else 
                 {
-                    $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;";
+                    $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo='s' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.responsavel=profissional.id_profissional AND projeto.id_projeto = requisitos.projeto) AND (requisitos.titulo LIKE '%{$_GET['busca']}%' OR requisitos.descricao LIKE '%{$_GET['busca']}%');";
                     break;
                 }
             }
@@ -33,7 +33,7 @@
 
     // sem filtros
         else
-        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.id_projeto = requisitos.projeto;"; }
+        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo='s' AND requisitos.ativo='n' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.responsavel=profissional.id_profissional AND projeto.id_projeto = requisitos.projeto);"; }
     //
 
     // executa a query
@@ -42,7 +42,7 @@
 
         if($row==0&&@$_GET['pagina']>1)
         { 
-            header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca'].""); die();
+            header("location: ../../front/requisitos/restaurar.php?e=2&proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca'].""); die();
         }
     //
 
@@ -120,7 +120,7 @@
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina inesistente
                                 {
-                                    header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&erro=1"); die();
+                                    header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&e=2"); die();
                                 }
 
                                 $bot=(($pagina-1)*10)+1;
@@ -190,7 +190,7 @@
 
                                 if( (($pagina-1)*10)+1 > $row )//URL com pagina inesistente
                                 {
-                                    header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&erro=1"); die();
+                                    header("location: ../../front/requisitos/restaurar.php?proj=".$_GET['proj']."&pagina=1&busca=".$_GET['busca']."&e=2"); die();
                                 }
 
                                 echo "<div class=\"botoes\">";
