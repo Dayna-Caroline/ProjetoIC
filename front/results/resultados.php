@@ -50,26 +50,26 @@
 
             function drawMaterial() {
                 var data = google.visualization.arrayToDataTable([
-                    ['Projeto', 'Custo'],
-                    ['New York City, NY', 8175000],
-                    ['Los Angeles, CA', 3792000],
-                    ['Chicago, IL', 2695000],
-                    ['Houston, TX', 2099000],
-                    ['Philadelphia, PA', 1526000]
+                    ['Projeto', 'Orçamento', 'Custo'],
+                    <?php
+                        for($x3=0; $x3 < $ind_proj; $x3++){
+                            print_r("['".$projeto[$x3]."', ".$orcamento[$x3].", ".$custo[$x3]."],");
+                        }
+                    ?>
                 ]);
 
                 var materialOptions = {
                     chart: {
-                    title: 'Population of Largest U.S. Cities'
+                    title: 'Custo final de cada projeto'
                     },
                     hAxis: {
-                    title: 'Total Population',
+                    title: 'Valor',
                     minValue: 0,
                     },
                     vAxis: {
-                    title: 'City'
+                    title: 'Projeto'
                     },
-                    bars: 'horizontal'
+                    bars: 'hotizontal'
                 };
                 var materialChart = new google.charts.Bar(document.getElementById('column'));
                 materialChart.draw(data, materialOptions);
@@ -162,7 +162,6 @@
                 <center>
                     <p>Antes e depois - Consumo (gráfico de linhas com 3 linhas)</p><br>
                     <p>Consumo por equipamento (gráfico de pizza, pra ver quando cada equipamento gasta)</p><br>
-                    <p>Gasto por projeto (gráfico de barras/pizza, pra ver quando foi gasto por projeto)</p><br>
                     <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
                 </center>
 
