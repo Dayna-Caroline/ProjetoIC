@@ -94,11 +94,15 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                                 
                             </div>";
                     
+                            echo "<div class=\"item2\">
+                            <div class=\"leg-id2\"><b>ID Projeto</b></div>
+                            <div class=\"item-id2\"><input type=\"text\" id=\"id\" onkeypress=\"alterou()\" required name=\"projeto\" disabled  value=\"".$projeto."\"> </div>
+                        </div>";
+
                     /*echo "<div class=\"item2\">
                     <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
-                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"projeto\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
-                                
-                    </div>";*/
+                    <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"projeto\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
+                     </div>";*/
                     
                      echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Título</b></div>
@@ -108,21 +112,22 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                      echo "<div class=\"item2\">
                             
                 
-                                <div class=\"leg-id2\" style=\"margin-right: 10px; width:150px;\"><b>Tipo</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" disabled value=\"".$tipo."\"></div><div class=\"leg-id2\"><b>Versão</b></div>
+                                <div class=\"leg-id2\" style=\"margin-right: 45px; width:150px;\"><b>Tipo</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" disabled value=\"".$tipo."\"></div>
+                                <div class=\"leg-id2\"style=\"margin-right: 40px; width:150px;\"><b>Versão </b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" disabled value=\"".$versao."\"></div>
                                 
                             </div>";
 
                       echo "<div class=\"item2\">
-                        <div class=\"leg-id2\" style=\"margin-right: 10px; width:150px;\"><b>Custo(R$)</b></div>
+                        <div class=\"leg-id2\" style=\"margin-right: 45px; width:150px;\"><b>Custo(R$)</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"custo\">
-                        </div><div class=\"leg-id2\"><b>Data da solicitação</b></div>
-                        <div style=\"width:150px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"pedido\" required  type=\"date\"></div>
+                        </div><div class=\"leg-id2\"style=\"margin-right: 45px; width:150px;\"><b>Data da solicitação</b></div>
+                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"pedido\" required  type=\"date\"></div>
                         </div>";
                     
                     echo "<div class=\"item2\">
-                        <div class=\"leg-id2\"><b>Descrição da Mudança</b></div>
+                        <div class=\"leg-id2\"><b>Descrição </b></div>
                         <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"desc\"></div>
                         </div>";
                     
