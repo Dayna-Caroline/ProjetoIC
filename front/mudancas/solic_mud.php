@@ -52,8 +52,8 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../../styles/projetos/menu.css">
-        <link rel="stylesheet" href="../../styles/projetos/projeto.css">
+        <link rel="stylesheet" href="../../styles/mud/menu_mud.css">
+        <link rel="stylesheet" href="../../styles/mud/mud.css">
         <title>Smart Grid</title>
     </head>
 
@@ -91,11 +91,14 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
 
                                 <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Requisito</b></div>
                                 <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"id\" disabled > <option value=\"".$id_req."\">".$id_req."</option></select></div>
-
-                                <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
-                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"projeto\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
                                 
                             </div>";
+                    
+                    /*echo "<div class=\"item2\">
+                    <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Projeto</b></div>
+                                <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"projeto\" disabled > <option value=\"".$projeto."\">".$projeto."</option></select></div>
+                                
+                    </div>";*/
                     
                      echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Título</b></div>
@@ -125,7 +128,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                     
                    
                       echo "<div class=\"item2\">
-                            <div class=\"leg-id2\"><b>ID Solicitante</b></div>
+                            <div class=\"leg-id2\"><b> Solicitante</b></div>
                             <div class=\"item-id2\">
                                 <select name=\"solicitante\" style=\"cursor: pointer\" required id=\"profissional\">";
 
