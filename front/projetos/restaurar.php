@@ -17,11 +17,11 @@
                 $char = $aux[$i];
                 if (is_numeric($char)) 
                 {
-                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND CAST(projeto.id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(projeto.responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR projeto.descricao LIKE '%{$_GET['busca']}%';";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n') AND (CAST(projeto.id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(projeto.responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR projeto.descricao LIKE '%{$_GET['busca']}%');";
                 } 
                 else 
                 {
-                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND  projeto.descricao LIKE '%{$_GET['busca']}%';";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n') AND  (projeto.descricao LIKE '%{$_GET['busca']}%');";
                     break;
                 }
             }
