@@ -64,12 +64,12 @@
         if(valida_orcamento($orcamento)==false){ $erro .= "_4"; }
         if(valida_inicio($inicio)==false){ $erro .= "_5"; }
         if(valida_aprovacao($aprovacao)==false){ $erro .= "_6"; }
-        //if(valida_c_final($c_final)==false){ $erro .= "_7"; }
+        if(valida_c_final($c_final)==false){ $erro .= "_7"; }
         if(valida_previa($previa,$inicio)==false){ $erro .= "_8"; }
 
         if($erro!="")
         {
-            header("location: ../../front/projetos/projeto.php?id=".$auxid."&sucesso=3"."&e=".$erro.""); die(); 
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=3"."&e=".$erro.""); die(); 
         }
 
     }
@@ -89,7 +89,7 @@
 
         if($erro!="")
         {
-            header("location: ../../front/projetos/cad_projeto.php?sucesso=3&e=".$erro.""); die();
+            header("location: ../../front/projetos/cad_projeto.php?s=3&e=".$erro.""); die();
         }
 
     }

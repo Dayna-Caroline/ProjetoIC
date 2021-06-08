@@ -103,32 +103,49 @@
                             switch(@$_GET['s'])
                             {
                                 case 1:
-                                    echo "<div class=\"sucesso2\">
+                                    echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
                                         <p>Alterações salvas com sucesso!</p>
                                     </div>";
                                 break;
 
                                 case 2:
-                                    echo "<div class=\"erro2\">
+                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
                                         <p>Não foi possível concluír as alterações!</p>
                                     </div>";
                                 break;
 
-                                case 7:
-                                    echo "<div class=\"sucesso2\">
-                                        <p>O projeto foi concluído!</p>
-                                    </div>";
+                                case 3:
+                                    $campos=explode("_",$_GET['e']);
+                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
+                                        <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                                        foreach($campos as $aux){
+                                            if($aux=='1')echo"<p>Responsável</p>";
+                                            if($aux=='2')echo"<p> - Descrição</p><br>";
+                                            if($aux=='3')echo"<p> - Finalidade</p><br>";
+                                            if($aux=='4')echo"<p> - Orçamento</p><br>";
+                                            if($aux=='5')echo"<p> - Inicio</p><br>";
+                                            if($aux=='6')echo"<p> - Aprovação</p><br>";
+                                            if($aux=='7')echo"<p> - Custo Final</p><br>";
+                                            if($aux=='8')echo"<p> - Prévia do término</p><br>";
+                                        }
+                                    echo "</div>";
                                 break;
 
                                 case 4:
-                                    echo "<div class=\"erro2\">
+                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
                                         <p>Não foi possível concluír o projeto!</p>
                                     </div>";
                                 break;
 
                                 case 5:
-                                    echo "<div class=\"erro2\">
+                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
                                         <p>Não foi possível excluír o projeto!</p>
+                                    </div>";
+                                break;
+
+                                case 7:
+                                    echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
+                                        <p>O projeto foi concluído!</p>
                                     </div>";
                                 break;
 

@@ -94,7 +94,7 @@
                     switch(@$_GET['e'])
                     {
                         case 2:
-                            echo "<div class=\"erro\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
@@ -103,13 +103,13 @@
                     switch(@$_GET['s'])
                     {
                         case 6:
-                            echo "<div class=\"erro\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Não foi possível restaurar os projetos!</p>
                             </div>";
                         break;
 
                         case 9:
-                            echo "<div class=\"sucesso\">
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
                                 <p>Os projetos foram restaurados!</p>
                             </div>";
                         break;

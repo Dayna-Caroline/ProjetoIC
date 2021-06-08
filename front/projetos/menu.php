@@ -92,19 +92,19 @@
                     switch(@$_GET['e'])
                     {
                         case 1:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Projeto não encontrado! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
 
                         case 2:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
                         
                         case 3:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>O projeto que você está tentando acessar foi desativado!</p>
                             </div>";      
                         break;
@@ -113,19 +113,19 @@
                     switch(@$_GET['s'])
                     {
                         case 1:
-                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s\">
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
                                 <p>Projeto cadastrado com sucesso! </p>
                             </div>";
                         break;
 
                         case 8:
-                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s\">
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
                                 <p>O projeto foi excluído!</p>
                             </div>";
                         break;
 
                         case 5:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Não foi possível excluír o projeto!</p>
                             </div>";
                         break;

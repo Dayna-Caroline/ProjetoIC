@@ -63,11 +63,26 @@
                     {
 
                         case 2:
-                            echo "<div class=\"erro\">
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
                                 <p>Não foi possível concluír o cadastro do projeto!</p>
                             </div>";
                         break;
 
+                        case 3:
+                            $campos=explode("_",$_GET['e']);
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                                foreach($campos as $aux){
+                                    if($aux=='1')echo"<p>Responsável</p>";
+                                    if($aux=='2')echo"<p> - Descrição</p><br>";
+                                    if($aux=='3')echo"<p> - Finalidade</p><br>";
+                                    if($aux=='4')echo"<p> - Orçamento</p><br>";
+                                    if($aux=='5')echo"<p> - Inicio</p><br>";
+                                    if($aux=='6')echo"<p> - Aprovação</p><br>";
+                                    if($aux=='7')echo"<p> - Prévia do término</p><br>";
+                                }
+                            echo "</div>";
+                        break;
                     }
                         
                 ?>
@@ -130,6 +145,8 @@
             </div>
 
         </div>
+
+        <script src="../../js/funcs_cad_proj.js"></script>
 
     </body>
 

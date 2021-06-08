@@ -20,12 +20,12 @@ function editar() {
     document.getElementById('aprovacao').style.cursor="text";
 
     if(document.getElementById('fim')){
-        document.getElementById('fim').disabled=true;
+        document.getElementById('fim').disabled=false;
         document.getElementById('fim').style.cursor="text";
     }
 
     if(document.getElementById('c_final')){
-        document.getElementById('c_final').disabled=true;
+        document.getElementById('c_final').disabled=false;
         document.getElementById('c_final').style.cursor="text";
     }
 
