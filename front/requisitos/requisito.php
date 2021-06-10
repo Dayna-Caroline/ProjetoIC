@@ -110,8 +110,8 @@
                                 echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
                                     <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
                                     foreach($campos as $aux) {
-                                        if($aux=='1')echo"<p> - Titulo (deve conter entre 5 e 50 caracteres!)</p><br>";
-                                        if($aux=='2')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
+                                        if($aux=='2')echo"<p> - Titulo (deve conter entre 5 e 50 caracteres!)</p><br>";
+                                        if($aux=='1')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
                                         if($aux=='3')echo"<p> - Processo (deve conter entre 10 e 50 caracteres!)</p><br>";
                                         if($aux=='4')echo"<p> - Tipo inválido!</p><br>";
                                     }
