@@ -194,9 +194,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
-                                        <a href=\"\"\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <p><div class=\"item-id\">".$id."</div></p>
+                                        <p><div class=\"item-desc\">".$descricao."</div></p>
+                                        <p><div class=\"item-res\">".$responsavel."</div></p>
                                         </div>";
                                     }                                        
                             
@@ -244,9 +244,9 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
-                                        <a href=\"\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <p><div class=\"item-id\">".$id."</div></p>
+                                        <p><div class=\"item-desc\">".$descricao."</div></p>
+                                        <p><div class=\"item-res\">".$responsavel."</div></p>
                                         </div>";
                                 }
                             }

@@ -2,6 +2,7 @@
 
     include "../autenticacao.php";
     include "../conexao_local.php";
+    include "valida_requisitos.php";
 
     // REDIRECIONA PRA PAGINA DO NOVO REQUISITO
     
@@ -23,10 +24,12 @@
         $linha=mysqli_fetch_array($resultado);
         $projeto=$linha['id_projeto'];
 
+        verifica_erro_cad($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],md5($projeto));
+
         $descricao=$_POST['descricao'];
         $titulo=$_POST['titulo'];
         $processo=$_POST['processo'];
-        $cadastro=$_POST['cadastro'];
+        $cadastro=date("Y-m-d");
         $versao='1';
         $tipo=$_POST['tipo'];
 
@@ -39,7 +42,7 @@
         
         else 
         {
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&s=2"); die();      
+            header("location: ../../front/requisitos/cad_requisitos.php?proj=".$id."&s=2"); die();      
         }
 
         mysqli_close($conecta);
@@ -63,7 +66,7 @@
             }
     
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&s=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['arquiva']."&pagina=1&s=8"); die();
             }
     
             else{
@@ -85,7 +88,7 @@
             $resultado = mysqli_query($conecta, $query);
     
             if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&s=1"); die();
+                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&s=8"); die();
             }
     
             else{
@@ -104,15 +107,15 @@
 
         $id=md5($_POST['altera']);
 
+        verifica_erro_alt($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],$id,md5($_POST['projeto']));
+
         $descricao=$_POST['descricao'];
         $projeto=$_POST['projeto'];
         $titulo=$_POST['titulo'];
         $processo=$_POST['processo'];
-        $cadastro=$_POST['cadastro'];
-        $versao=$_POST['versao'];
         $tipo=$_POST['tipo'];
     
-        $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', cadastro = '$cadastro', versao = '$versao', tipo = '$tipo' WHERE md5(id_requisito) = '$id';";
+        $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', tipo = '$tipo' WHERE md5(id_requisito) = '$id';";
             
         if (mysqli_query($conecta, $sql))
         { header("location: ../../front/requisitos/requisito.php?id=".$id."&s=1");  die(); } 
@@ -152,11 +155,11 @@
             }
 
             if ( $aux>0 ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&s=1&pagina=1"); die();
+                header("location: ../../front/requisitos/restaurar.php?proj=".$_POST['restaura']."&s=9&pagina=1"); die();
             }
 
             else{
-                header("location: ../../front/requisitos/requisitos.php?proj=".$_POST['restaura']."&s=5&pagina=6"); die();
+                header("location: ../../front/requisitos/restaurar.php?proj=".$_POST['restaura']."&s=6&pagina=1"); die();
             }
 
         }

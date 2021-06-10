@@ -59,8 +59,37 @@
             <div class="conteudo">
 
                 <div  class="titulo">
+                    <?php echo "<a href=\"requisitos.php?proj=".$_GET['proj']."\"><p class=\"volt alt\">
+                    &#8592;  Voltar</p></a>"; ?>
                     <h1>Criar Requisito</h1>
                 </div>
+
+                <!-- ERRO -->
+                <?php
+                    switch(@$_GET['s'])
+                    {
+                        
+                        case 2:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Não foi possível terminar o cadastro do requisito, tente novamente em alguns instantes.</p>
+                            </div>";
+                        break;
+
+                        case 3:
+                            $campos=explode("_",$_GET['e']);
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                                foreach($campos as $aux) {
+                                    if($aux=='1')echo"<p> - Titulo (deve conter entre 5 e 50 caracteres!)</p><br>";
+                                    if($aux=='2')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
+                                    if($aux=='3')echo"<p> - Processo (deve conter entre 10 e 50 caracteres!)</p><br>";
+                                    if($aux=='4')echo"<p> - Tipo inválido!</p><br>";
+                                }
+                            echo "</div>";
+                        break;
+
+                    }
+                ?>
 
                 <form class="projetos2" method="post" action="../../back/requisitos/requisitos.php">
 
@@ -82,9 +111,6 @@
                         </div>";
 
                         echo "<div class=\"item2\">
-
-                        <div class=\"leg-id2\"><b>Cadastro</b></div>
-                        <div style=\"width:150px; margin-left:5px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\"></div>
                         <div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 15px; width:150px;\"><b>Tipo</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\"></div>
                         </div>
@@ -95,7 +121,7 @@
                     ?>
 
                     <br><div class="botoes">
-                        <button type="submit" value="<?php echo $_GET['proj'] ?>" name="cadastra" class="novo" style="cursor: pointer;margin-left:525px;">Concluír Cadastro</button>
+                        <button type="submit" value="<?php echo $_GET['proj'] ?>" name="cadastra" class="novo" style="cursor: pointer;margin-left:120px;">Concluír Cadastro</button>
                     </div>
 
                 </div>
@@ -103,6 +129,8 @@
             </div>
 
         </div>
+
+        <script src="../../js/funcs_cad_proj.js"></script>
 
     </body>
 

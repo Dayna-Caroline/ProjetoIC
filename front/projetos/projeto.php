@@ -120,8 +120,8 @@
                                         <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
                                         foreach($campos as $aux){
                                             if($aux=='1')echo"<p>Responsável</p>";
-                                            if($aux=='2')echo"<p> - Descrição</p><br>";
-                                            if($aux=='3')echo"<p> - Finalidade</p><br>";
+                                            if($aux=='2')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres)</p><br>";
+                                            if($aux=='3')echo"<p> - Finalidade (deve conter entre 10 e 100 caracteres)</p><br>";
                                             if($aux=='4')echo"<p> - Orçamento</p><br>";
                                             if($aux=='5')echo"<p> - Inicio</p><br>";
                                             if($aux=='6')echo"<p> - Aprovação</p><br>";

@@ -3,7 +3,7 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
     
-    $query = "SELECT * FROM requisitos WHERE md5(id_requisito) = '{$_GET['id']}';";
+    $query = "SELECT * FROM requisitos WHERE md5(id_requisito) = '{$_GET['id']}' AND ativo='s';";
 
     // executa a query
 
@@ -22,9 +22,9 @@
         $versao=$linha['versao'];
         $tipo=$linha['tipo'];
     }
-    else{ header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die(); }
-    $auxproj=md5($linha['projeto']);
-    $query2 = "SELECT projeto.id_projeto FROM projeto, profissional WHERE md5(projeto.id_projeto) = '$auxproj' AND projeto.ativo = 's' AND profissional.ativo='s' AND projeto.responsavel=profissional.id_profissional;";
+    else{ header("location: ../../front/requisitos/requisitos.php?e=1&pagina=1"); die(); }
+
+    $query2 = "SELECT projeto.id_projeto FROM projeto, profissional WHERE projeto.id_projeto = '$linha[projeto]' AND projeto.ativo = 's' AND profissional.ativo='s' AND projeto.responsavel=profissional.id_profissional;";
 
     // executa a query
 
@@ -81,6 +81,45 @@
                         <button id="visualizar" onclick="visualizar();" class="visualizar" style="cursor: pointer;">visualizar</button>
                         <button id="editar" onclick="editar()" class="editar" style="cursor: pointer;">editar</button>
                     </div>
+
+                    <!-- ERRO -->
+                    <?php
+                        switch(@$_GET['s'])
+                        {
+
+                            case 1:
+                                echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
+                                    <p>Alterações salvas com sucesso!</p>
+                                </div>";
+                            break;
+
+                            case 2:
+                                echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
+                                    <p>Não foi possível concluír as alterações!</p>
+                                </div>";
+                            break;
+
+                            case 5:
+                                echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
+                                    <p>Não foi possível excluír o requisito!</p>
+                                </div>";
+                            break;
+
+                            case 3:
+                                $campos=explode("_",$_GET['e']);
+                                echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
+                                    <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                                    foreach($campos as $aux) {
+                                        if($aux=='1')echo"<p> - Titulo (deve conter entre 5 e 50 caracteres!)</p><br>";
+                                        if($aux=='2')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
+                                        if($aux=='3')echo"<p> - Processo (deve conter entre 10 e 50 caracteres!)</p><br>";
+                                        if($aux=='4')echo"<p> - Tipo inválido!</p><br>";
+                                    }
+                                echo "</div>";
+                            break;
+
+                        }
+                    ?>
 
                     <form action="../../back/requisitos/requisitos.php" onchange="alterou()" method="post">
 

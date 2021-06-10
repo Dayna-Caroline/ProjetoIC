@@ -93,6 +93,39 @@
 
                 ?></h1>
 
+                <!-- ERRO -->
+                <?php
+
+                    switch(@$_GET['e'])
+                    {
+
+                        case 2:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+                    
+                    }
+
+                    switch(@$_GET['s'])
+                    {
+                        
+                        case 6:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Não foi possível restaurar os requisitos!</p>
+                            </div>";
+                        break;
+
+                        case 9:
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
+                                <p>Os requisitos foram restaurados!</p>
+                            </div>";
+                        break;
+
+                    }
+                    
+                ?>
+
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/requisitos/requisitos.php" method="get">
                     <div class="busca">
@@ -172,9 +205,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
-                                        <a href=\"\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <p><div class=\"item-id\">".$id."</div></p>
+                                        <p><div class=\"item-desc\">".$descricao."</div></p>
+                                        <p><div class=\"item-res\">".$titulo."</div></p>
                                         </div>";
                                     }                                        
                             
@@ -224,9 +257,9 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
-                                        <a href=\"\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <p><div class=\"item-id\">".$id."</div></p>
+                                        <p><div class=\"item-desc\">".$descricao."</div></p>
+                                        <p><div class=\"item-res\">".$titulo."</div></p>
                                         </div>";
                                 }
                             }

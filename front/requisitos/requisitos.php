@@ -46,7 +46,7 @@
 
     // sem filtros
         else
-        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.titulo FROM requisitos, projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo='s' AND requisitos.ativo='s' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.responsavel=profissional.id_profissional AND projeto.id_projeto = requisitos.projeto);"; }
+        { $query = "SELECT DISTINCT requisitos.id_requisito, requisitos.descricao, requisitos.projeto, requisitos.titulo FROM requisitos, projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo='s' AND requisitos.ativo='s' AND projeto.ativo='s' AND md5(projeto.id_projeto) = '{$_GET['proj']}' AND projeto.responsavel=profissional.id_profissional AND projeto.id_projeto = requisitos.projeto);"; }
     //
 
     // executa a query
@@ -105,6 +105,48 @@
                     echo $linha['id_projeto'];
                 
                 ?></h1>
+
+                <!-- ERRO -->
+                <?php
+                    switch(@$_GET['e'])
+                    {
+                        case 1:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Requisito não encontrado! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+
+                        case 2:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            </div>";
+                        break;
+                    
+                    }
+
+                    switch(@$_GET['s'])
+                    {
+                        case 1:
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
+                                <p>Requisito cadastrado com sucesso! </p>
+                            </div>";
+                        break;
+
+                        case 8:
+                            echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
+                                <p>O Requisito foi excluído!</p>
+                            </div>";
+                        break;
+
+                        case 5:
+                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
+                                <p>Não foi possível excluír o requisito!</p>
+                            </div>";
+                        break;
+                    
+                    }
+                
+                ?>
 
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/requisitos/requisitos.php" method="get">
@@ -175,6 +217,7 @@
                                 {
 
                                     $linha = mysqli_fetch_array($result);
+                                    $proj = md5($linha['projeto']);
                                     $id = $linha['id_requisito'];
                                     $descricao = $linha['descricao'];
                                     $titulo = $linha['titulo'];
@@ -185,9 +228,9 @@
                                         echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -230,6 +273,7 @@
                                 for($i=0; $i<$row ; $i++ ){
 
                                     $linha = mysqli_fetch_array($result);
+                                    $proj = md5($linha['projeto']);
                                     $id = $linha['id_requisito'];
                                     $descricao = $linha['descricao'];
                                     $titulo = $linha['titulo'];
@@ -237,9 +281,9 @@
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"requisito.php?id=".md5($id)."\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-id\">".$id."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-desc\">".$descricao."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                 }
                             }
