@@ -2,6 +2,11 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
     include "../../back/results/calculos.php";
+
+    $auxconpequip = 0;
+    $sql1 = "SELECT * FROM consumo ORDER BY dia DESC";
+    $resultado = mysqli_query($conecta, $sql1);
+    $qtde = mysqli_num_rows($resultado);
 ?>
 
 <!DOCTYPE html>
@@ -104,8 +109,8 @@
                     // Set chart options
                     var options = {'title':'Média de consumo por equipamento',
                                 pieSliceText: 'none',
-                                'width':400,
-                                'height':300};
+                                'width': 700,
+                                'height':600};
 
                     // Instantiate and draw our chart, passing in some options.
                     var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
@@ -168,17 +173,43 @@
                 <div class="graficos">
                     <div id="column"></div>
                 </div>
+                <center>
+                    <select name="pesq" onchange="reloadWithParam()" id="pesq">
+                        <?php
+                            if($qtde > 0)
+                            {
+                                for($cont=0; $cont < $qtde; $cont++)
+                                {
+                                    $linha=mysqli_fetch_array($resultado);
+                                    list($ano, $mes, $dia) = explode('-', $linha['dia']);
+                                    if($auxconpequip != $ano){
+                                        echo "<option value='".$ano."'>".$ano."</option>";
+                                        $auxconpequip = $ano;
+                                    }
+                                    //if($tipo_pesq == ) echo "selected >".ano."</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    <script>
+                        function reloadWithParam(){
+                            var d = document.getElementById("pesq").value;
+                            window.location.href="./produtos.php?pesq=" + d;
+                        }
+                    </script>
+                    <div id="chart_div3"></div>
+                </center>
                 <!--
-                <div class="graficos">
-                    <div id="chart_div1"></div>
-                    <div class="col-2">
-                        <div id="chart_div2"></div>
-                        <div id="chart_div3"></div>
+                    <div class="graficos">
+                        <div id="chart_div1"></div>
+                        <div class="col-2">
+                            <div id="chart_div2"></div>
+                            <div id="chart_div3"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="tabela">
-                    <div id="tabela"></div>
-                </div>
+                    <div class="tabela">
+                        <div id="tabela"></div>
+                    </div>
                 -->
             </div>
         </div>
