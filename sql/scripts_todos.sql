@@ -130,7 +130,13 @@ create table consumo
     horafim time not null,
     dia date,
     consumo float(24),
+    fase integer not null,
     primary key(id_consumo),
     foreign key(empresa) references empresa(id_empresa),
     foreign key(equipamento) references equipamentos(id_equipamento)
 );
+
+
+/*Inserts testes*/
+INSERT INTO `projeto`(`id_projeto`, `descricao`, `finalidade`, `orcamento`, `responsavel`, `aprovacao`, `inicio`, `previa`, `fim`, `c_final`, `empresa`, `ativo`, `concluido`) VALUES (default,'Teto solar','ajuste de pregos para teto solar',1500,1,'2021-06-19','2021-06-19','2021-06-19','2021-06-19',1000,1,'s', 's')
+INSERT INTO `consumo`(`id_consumo`, `empresa`, `equipamento`, `horaini`, `horafim`, `dia`, `consumo`, `fase`) VALUES (default,1,2,'13:04','15:03','2019-03-12',3000,1)

@@ -2,11 +2,6 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
     include "../../back/results/calculos.php";
-
-    $auxconpequip = 0;
-    $sql1 = "SELECT * FROM consumo ORDER BY dia DESC";
-    $resultado = mysqli_query($conecta, $sql1);
-    $qtde = mysqli_num_rows($resultado);
 ?>
 
 <!DOCTYPE html>
@@ -99,15 +94,15 @@
                     data.addColumn('string', 'Topping');
                     data.addColumn('number', 'Slices');
                     data.addRows([
-                    ['Mushrooms', 3],
-                    ['Onions', 1],
-                    ['Olives', 1],
-                    ['Zucchini', 1],
-                    ['Pepperoni', 2]
+                        <?php
+                            for($x3=0; $x3 < $ind_conequip; $x3++){
+                                print_r("['".$equipamento[$x3]."', ".$auxcon[$x3]."],");
+                            }
+                        ?>
                     ]);
 
                     // Set chart options
-                    var options = {'title':'Média de consumo por equipamento',
+                    var options = {'title':'Média de consumo por equipamento <?php echo $auxconpequip;?>',
                                 pieSliceText: 'none',
                                 'width': 700,
                                 'height':600};
@@ -166,7 +161,6 @@
                 <h1>Análise dos dados</h1>
                 <center>
                     <p>Antes e depois - Consumo (gráfico de linhas com 3 linhas)</p><br>
-                    <p>Consumo por equipamento (gráfico de pizza, pra ver quando cada equipamento gasta)</p><br>
                     <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
                 </center>
 
@@ -174,29 +168,6 @@
                     <div id="column"></div>
                 </div>
                 <center>
-                    <select name="pesq" onchange="reloadWithParam()" id="pesq">
-                        <?php
-                            if($qtde > 0)
-                            {
-                                for($cont=0; $cont < $qtde; $cont++)
-                                {
-                                    $linha=mysqli_fetch_array($resultado);
-                                    list($ano, $mes, $dia) = explode('-', $linha['dia']);
-                                    if($auxconpequip != $ano){
-                                        echo "<option value='".$ano."'>".$ano."</option>";
-                                        $auxconpequip = $ano;
-                                    }
-                                    //if($tipo_pesq == ) echo "selected >".ano."</option>";
-                                }
-                            }
-                        ?>
-                    </select>
-                    <script>
-                        function reloadWithParam(){
-                            var d = document.getElementById("pesq").value;
-                            window.location.href="./produtos.php?pesq=" + d;
-                        }
-                    </script>
                     <div id="chart_div3"></div>
                 </center>
                 <!--
