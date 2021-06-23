@@ -1,28 +1,28 @@
-.ir{
+.ir {
     font-size: 16px;
     color: #555;
     text-align: right;
     margin-right: 40px;
 }
 
-.col-2{
+.col-2 {
     display: flex;
 }
 
-#column{
+#column {
     width: 700px;
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
 }
 
-select{
+select {
     border-radius: 4px;
     padding: 8px 15px;
     margin-left: 550px;
     margin-top: 40px;
 }
 
-select:focus{
+select:focus {
     outline: none;
 }

@@ -2,6 +2,102 @@
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
     include "../../back/results/calculos.php";
+
+    /*Tabela inteligente*/
+    if(isset($_GET['pesq']))
+    {
+        $tipo_pesq = $_GET['pesq'];
+    }
+    else
+    {
+        $tipo_pesq = 1;
+    }
+
+    $id_proj = array();
+    $projetos = array();
+    $var = array();
+    $aux_id = 0;
+    $aux = 0;
+    $tipo = "";
+    $oq = "";
+
+    $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
+    $resultado = mysqli_query($conecta, $sql);
+    $qtde = mysqli_num_rows($resultado);
+
+    if($qtde > 0)
+    {
+        for($cont=0; $cont < $qtde; $cont++)
+        {
+            $linha=mysqli_fetch_array($resultado);
+            $projetos[$cont] = $linha['descricao'];
+        }
+    }
+
+    if($tipo_pesq == 1){
+        $tipo = "string";
+        $oq = "Profissional";
+        $sql = "SELECT projeto.*, profissional.nome
+        FROM projeto
+        INNER JOIN profissional ON projeto.responsavel = profissional.id_profissional AND projeto.empresa = ".$id_empresa;
+        $resultado = mysqli_query($conecta, $sql);
+        $qtde = mysqli_num_rows($resultado);
+        if($qtde > 0)
+        {
+            for($cont=0; $cont < $qtde; $cont++)
+            {
+                $linha=mysqli_fetch_array($resultado);
+                $var[$cont] = $linha['nome'];
+            }
+        }
+    }else if($tipo_pesq == 2){
+        $tipo = "number";
+        $oq = "Mudanças";
+        $sql = "SELECT projeto.*, mudancas.*
+        FROM projeto
+        INNER JOIN mudancas ON projeto.id_projeto = mudancas.projeto AND projeto.empresa = ".$id_empresa;
+        $resultado = mysqli_query($conecta, $sql);
+        $qtde = mysqli_num_rows($resultado);
+        if($qtde > 0)
+        {
+            for($cont=0; $cont < $qtde; $cont++)
+            {
+                $linha=mysqli_fetch_array($resultado);
+                if($linha['id_projeto'] == $aux_id){
+                    $aux++;
+                }else{
+                    $var[$aux_id] = $aux;
+                    $aux_id++;
+                    $aux = 1;
+                }
+            }
+        }
+    }else{
+        $tipo = "number";
+        $oq = "Requisitos";
+        $sql = "SELECT projeto.*, requisitos.*
+        FROM projeto
+        INNER JOIN requisitos ON projeto.id_projeto = requisitos.projeto AND projeto.empresa = ".$id_empresa;
+        $resultado = mysqli_query($conecta, $sql);
+        $qtde = mysqli_num_rows($resultado);
+        if($qtde > 0)
+        {
+            for($cont=0; $cont < $qtde; $cont++)
+            {
+                $linha=mysqli_fetch_array($resultado);
+                if($linha['id_projeto'] == $aux_id){
+                    $aux++;
+                }else{
+                    $var[$aux_id] = $aux;
+                    $aux_id++;
+                    $aux = 1;
+                }
+            }
+        }
+    }
+
+    ksort($projetos);
+    ksort($var);
 ?>
 
 <!DOCTYPE html>
@@ -25,15 +121,16 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Sales', 'Expenses'],
-                    ['2004',  1000,      400],
-                    ['2005',  1170,      460],
-                    ['2006',  660,       1120],
-                    ['2007',  1030,      540]
+                    ['Ano', 'Antes', 'Depois'],
+                        <?php
+                            for($x3=0; $x3 < count($conano); $x3++){
+                                print_r("['".$conano[$x3]."', ".$conant[$x3].", ".$condep[$x3]."],");
+                            }
+                        ?>
                     ]);
 
                     var options = {
-                    title: 'Consumo antes e depois',
+                    title: 'Consumo antes e depois da implementação da smart-grid.',
                     curveType: 'function',
                     legend: { position: 'bottom' }
                     };
@@ -102,7 +199,7 @@
                     ]);
 
                     // Set chart options
-                    var options = {'title':'Média de consumo por equipamento <?php echo $auxconpequip;?>',
+                    var options = {'title':'Média de consumo por equipamento em <?php echo $mesconpequip."/".$auxconpequip;?>',
                                 pieSliceText: 'none',
                                 'width': 700,
                                 'height':600};
@@ -118,15 +215,13 @@
                 google.charts.setOnLoadCallback(drawTable);
 
                 function drawTable() {
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Name');
-                    data.addColumn('number', 'Salary');
-                    data.addColumn('boolean', 'Full Time Employee');
-                    data.addRows([
-                    ['Mike',  {v: 10000, f: '$10,000'}, true],
-                    ['Jim',   {v:8000,   f: '$8,000'},  false],
-                    ['Alice', {v: 12500, f: '$12,500'}, true],
-                    ['Bob',   {v: 7000,  f: '$7,000'},  true]
+                    var data = google.visualization.arrayToDataTable([
+                        ['Projetos', '<?php echo $oq;?>'],
+                        <?php
+                            for($x3=0; $x3 < count($projetos); $x3++){
+                                print_r("['".$projetos[$x3]."', '".$var[$x3]."'],");
+                            }
+                        ?>
                     ]);
 
                     var table = new google.visualization.Table(document.getElementById('tabela'));
@@ -160,28 +255,31 @@
                 <a href="../../back/results/gerar_relatorio.php"><p class="ir">Gerar PDF das estatísticas&#8594;</p></a>
                 <h1>Análise dos dados</h1>
                 <center>
-                    <p>Antes e depois - Consumo (gráfico de linhas com 3 linhas)</p><br>
                     <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
                 </center>
 
                 <div class="graficos">
+                    <div id="chart_div1"></div>
+                    <center>
+                        <div id="chart_div3"></div>
+                    </center>
                     <div id="column"></div>
+
+                    <select name="pesq" onchange="reloadWithParam()" id="pesq">
+                        <option value="1" <?php if($tipo_pesq == 1) echo "selected"?>>Profissional</option>
+                        <option value="2" <?php if($tipo_pesq == 2) echo "selected"?>>Mudança</option>
+                        <option value="3" <?php if($tipo_pesq == 3) echo "selected"?>>Requisitos</option>
+                    </select>
+                    <script>
+                        function reloadWithParam(){
+                            var d = document.getElementById("pesq").value;
+                            window.location.href="resultados.php?pesq=" + d;
+                        }
+                    </script>
+                    <div id="tabela"></div>
+
+                    
                 </div>
-                <center>
-                    <div id="chart_div3"></div>
-                </center>
-                <!--
-                    <div class="graficos">
-                        <div id="chart_div1"></div>
-                        <div class="col-2">
-                            <div id="chart_div2"></div>
-                            <div id="chart_div3"></div>
-                        </div>
-                    </div>
-                    <div class="tabela">
-                        <div id="tabela"></div>
-                    </div>
-                -->
             </div>
         </div>
     </body>
