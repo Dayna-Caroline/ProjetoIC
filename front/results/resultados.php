@@ -3,23 +3,9 @@
     include "../../back/conexao_local.php";
     include "../../back/results/calculos.php";
 
-    /*Tabela inteligente*/
-    if(isset($_GET['pesq']))
-    {
-        $tipo_pesq = $_GET['pesq'];
-    }
-    else
-    {
-        $tipo_pesq = 1;
-    }
-
-    $id_proj = array();
+    /*Tabela PROJETOS E PROFISSIONAIS*/
     $projetos = array();
     $var = array();
-    $aux_id = 0;
-    $aux = 0;
-    $tipo = "";
-    $oq = "";
 
     $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
     $resultado = mysqli_query($conecta, $sql);
@@ -34,67 +20,20 @@
         }
     }
 
-    if($tipo_pesq == 1){
-        $tipo = "string";
-        $oq = "Profissional";
-        $sql = "SELECT projeto.*, profissional.nome
-        FROM projeto
-        INNER JOIN profissional ON projeto.responsavel = profissional.id_profissional AND projeto.empresa = ".$id_empresa;
-        $resultado = mysqli_query($conecta, $sql);
-        $qtde = mysqli_num_rows($resultado);
-        if($qtde > 0)
+    $sql = "SELECT projeto.*, profissional.nome
+    FROM projeto
+    INNER JOIN profissional ON projeto.responsavel = profissional.id_profissional AND projeto.empresa = ".$id_empresa;
+    $resultado = mysqli_query($conecta, $sql);
+    $qtde = mysqli_num_rows($resultado);
+    if($qtde > 0)
+    {
+        for($cont=0; $cont < $qtde; $cont++)
         {
-            for($cont=0; $cont < $qtde; $cont++)
-            {
-                $linha=mysqli_fetch_array($resultado);
-                $var[$cont] = $linha['nome'];
-            }
-        }
-    }else if($tipo_pesq == 2){
-        $tipo = "number";
-        $oq = "Mudanças";
-        $sql = "SELECT projeto.*, mudancas.*
-        FROM projeto
-        INNER JOIN mudancas ON projeto.id_projeto = mudancas.projeto AND projeto.empresa = ".$id_empresa;
-        $resultado = mysqli_query($conecta, $sql);
-        $qtde = mysqli_num_rows($resultado);
-        if($qtde > 0)
-        {
-            for($cont=0; $cont < $qtde; $cont++)
-            {
-                $linha=mysqli_fetch_array($resultado);
-                if($linha['id_projeto'] == $aux_id){
-                    $aux++;
-                }else{
-                    $var[$aux_id] = $aux;
-                    $aux_id++;
-                    $aux = 1;
-                }
-            }
-        }
-    }else{
-        $tipo = "number";
-        $oq = "Requisitos";
-        $sql = "SELECT projeto.*, requisitos.*
-        FROM projeto
-        INNER JOIN requisitos ON projeto.id_projeto = requisitos.projeto AND projeto.empresa = ".$id_empresa;
-        $resultado = mysqli_query($conecta, $sql);
-        $qtde = mysqli_num_rows($resultado);
-        if($qtde > 0)
-        {
-            for($cont=0; $cont < $qtde; $cont++)
-            {
-                $linha=mysqli_fetch_array($resultado);
-                if($linha['id_projeto'] == $aux_id){
-                    $aux++;
-                }else{
-                    $var[$aux_id] = $aux;
-                    $aux_id++;
-                    $aux = 1;
-                }
-            }
+            $linha=mysqli_fetch_array($resultado);
+            $var[$cont] = $linha['nome'];
         }
     }
+    
 
     ksort($projetos);
     ksort($var);
@@ -121,7 +60,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                    ['Ano', 'Antes', 'Depois'],
+                    ['Ano', 'S/ Smart-grid', 'C/ Smart-grid'],
                         <?php
                             for($x3=0; $x3 < count($conano); $x3++){
                                 print_r("['".$conano[$x3]."', ".$conant[$x3].", ".$condep[$x3]."],");
@@ -130,9 +69,18 @@
                     ]);
 
                     var options = {
-                    title: 'Consumo antes e depois da implementação da smart-grid.',
-                    curveType: 'function',
-                    legend: { position: 'bottom' }
+                        title: 'Consumo antes e depois da implementação da smart-grid.',
+                        titleTextStyle: {
+                            fontSize: 16,
+                            bold: true,
+                        },
+                        curveType: 'function',
+                        legend: { position: 'bottom' },
+                        lineWidth: 5,
+                        series: {
+                            0: { color: '#43459d' },
+                            1: { color: '#6f9654' },
+                        }
                     };
 
                     var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
@@ -155,9 +103,13 @@
                     ?>
                 ]);
 
-                var materialOptions = {
+                var options = {
                     chart: {
                     title: 'Custo final de cada projeto'
+                    },
+                    titleTextStyle: {
+                        fontSize: 16,
+                        bold: true,
                     },
                     hAxis: {
                     title: 'Valor',
@@ -169,7 +121,7 @@
                     bars: 'hotizontal'
                 };
                 var materialChart = new google.charts.Bar(document.getElementById('column'));
-                materialChart.draw(data, materialOptions);
+                materialChart.draw(data, options);
             }
         </script>
         <!--Consumo por equipamento média..............................................................................................................-->
@@ -201,6 +153,10 @@
                     // Set chart options
                     var options = {'title':'Média de consumo por equipamento em <?php echo $mesconpequip."/".$auxconpequip;?>',
                                 pieSliceText: 'none',
+                                titleTextStyle: {
+                                    fontSize: 16,
+                                    bold: true,
+                                },
                                 'width': 700,
                                 'height':600};
 
@@ -216,7 +172,7 @@
 
                 function drawTable() {
                     var data = google.visualization.arrayToDataTable([
-                        ['Projetos', '<?php echo $oq;?>'],
+                        ['Projetos', 'Profissional'],
                         <?php
                             for($x3=0; $x3 < count($projetos); $x3++){
                                 print_r("['".$projetos[$x3]."', '".$var[$x3]."'],");
@@ -226,7 +182,7 @@
 
                     var table = new google.visualization.Table(document.getElementById('tabela'));
 
-                    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+                    table.draw(data, {showRowNumber: true, width: '80%', height: '80%'});
                 }
             </script>
         <title>Smart Grid</title>
@@ -252,32 +208,19 @@
             </div>
 
         <div class="conteudo">
-                <a href="../../back/results/gerar_relatorio.php"><p class="ir">Gerar PDF das estatísticas&#8594;</p></a>
+                <a href="../../back/results/gerar_relatorio.php?id_empresa=<?php echo $id_empresa;?>"><p class="ir">Gerar PDF das estatísticas&#8594;</p></a>
                 <h1>Análise dos dados</h1>
-                <center>
-                    <p>Tabela/gráfico inteligente (o usuário define os dados q quer ver na tabela/gráfico)</p>
-                </center>
 
                 <div class="graficos">
                     <div id="chart_div1"></div>
                     <center>
                         <div id="chart_div3"></div>
                     </center>
-                    <div id="column"></div>
-
-                    <select name="pesq" onchange="reloadWithParam()" id="pesq">
-                        <option value="1" <?php if($tipo_pesq == 1) echo "selected"?>>Profissional</option>
-                        <option value="2" <?php if($tipo_pesq == 2) echo "selected"?>>Mudança</option>
-                        <option value="3" <?php if($tipo_pesq == 3) echo "selected"?>>Requisitos</option>
-                    </select>
-                    <script>
-                        function reloadWithParam(){
-                            var d = document.getElementById("pesq").value;
-                            window.location.href="resultados.php?pesq=" + d;
-                        }
-                    </script>
+                    <div id="column" style="margin-top: -60px;"></div>
+                    <br><br><br><br>
+                    <center>
                     <div id="tabela"></div>
-
+                    </center>
                     
                 </div>
             </div>
