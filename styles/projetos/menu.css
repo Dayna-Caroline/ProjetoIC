@@ -1,18 +1,18 @@
 /*TAGS*/
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
     background-color: rgb(64, 82, 95);
     height: 100%;
 }
 
-a{
+a {
     text-decoration: none;
     outline: 0;
 }
@@ -21,23 +21,23 @@ a{
 
 /* BARRA DE ROLAGEM */
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     max-width: 6px;
     max-height: 6px;
-    z-index:5;
+    z-index: 5;
 }
 
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
     background-color: rgb(53, 52, 52);
     border-radius: 10px;
-    z-index:4;
+    z-index: 4;
 }
 
-body::-webkit-scrollbar-thumb:hover{
+body::-webkit-scrollbar-thumb:hover {
     background-color: rgb(92, 91, 91);
 }
 
-body::-webkit-scrollbar-button{
+body::-webkit-scrollbar-button {
     width: 0;
     height: 0;
 }
@@ -46,7 +46,7 @@ body::-webkit-scrollbar-button{
 
 /* CABEÇALHO */
 
-.aba{
+.aba {
     width: 30%;
     height: 100%;
     min-height: 700px;
@@ -58,63 +58,64 @@ body::-webkit-scrollbar-button{
     border-bottom-right-radius: 0px;
 }
 
-.img-logo{
+.img-logo {
     width: 100px;
 }
 
-.logo{
+.logo {
     display: flex;
     margin-left: 45px;
     margin-right: 45px;
     margin-bottom: 50px;
 }
 
-.logo h2{
+.logo h2 {
     padding-top: 40px;
     margin-left: -10px;
 }
 
-li a{
+li a {
     color: black;
     font-size: 25px;
     margin-left: 40px;
 }
 
-li{
+li {
     margin-top: 40px;
 }
 
-li a:hover{
+li a:hover {
     color: #6cb6f3;
 }
 
-ul{
+ul {
     list-style-type: none;
     margin-left: 40px;
 }
 
-i{
+i {
     margin-right: 20px;
 }
 
-.fa-edit, .fa-chart-pie{
+.fa-edit,
+.fa-chart-pie {
     margin-left: 5px;
 }
 
-.pag a{
+.pag a {
     color: #6cb6f3;
 }
 
-.nav-text{
-    display:inline;
+.nav-text {
+    display: inline;
 }
 
-.menunav{
-        display:none;
+.menunav {
+    display: none;
 }
 
-.navitem{
-    display:flex;
+.navitem {
+    display: flex;
 }
 
 
@@ -122,13 +123,13 @@ i{
 
 /* CORPO */
 
-.tudo{
+.tudo {
     width: 1260px;
     height: 100%;
     margin: auto;
 }
 
-.erro{
+.erro {
     background-color: rgb(255, 140, 140);
     color: white;
     margin-left: 125px;
@@ -137,10 +138,10 @@ i{
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
-    
+
 }
 
-.sucesso{
+.sucesso {
     background-color: rgb(84, 245, 138);
     color: rgb(0, 0, 0);
     margin-left: 125px;
@@ -151,7 +152,7 @@ i{
     cursor: pointer;
 }
 
-.erro2{
+.erro2 {
     background-color: rgb(255, 140, 140);
     color: white;
     width: 720px;
@@ -161,7 +162,7 @@ i{
     cursor: pointer;
 }
 
-.sucesso2{
+.sucesso2 {
     background-color: rgb(84, 245, 138);
     color: rgb(0, 0, 0);
     width: 720px;
@@ -171,27 +172,27 @@ i{
     cursor: pointer;
 }
 
-.conteudo{
+.conteudo {
     width: 882px;
     height: 100%;
-    margin-left:378px;
+    margin-left: 378px;
     margin-top: 6px;
     padding-top: 50px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     padding-bottom: 30px;
     min-height: 700px;
     background-color: whitesmoke;
     border-radius: 10px;
     border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px; 
+    border-bottom-left-radius: 0px;
 }
 
-.conteudo h1{
-    margin-bottom:40px;
-    text-align:center;
+.conteudo h1 {
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-.projetos{
+.projetos {
     display: grid;
     margin-top: 10px;
     margin-left: 20px;
@@ -201,14 +202,15 @@ i{
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 10px;
-    padding-right: 10px;;
+    padding-right: 10px;
+    ;
 }
 
 /**/
 
 /* LEGENDA DA TABELA */
 
-.legenda{
+.legenda {
     display: inline-flex;
     border: 1px solid #ebebeb;
     border-radius: 5px;
@@ -221,14 +223,14 @@ i{
     text-align: center;
 }
 
-.leg-box{
+.leg-box {
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
     width: 50px;
 }
 
-.leg-id{
+.leg-id {
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -237,7 +239,7 @@ i{
     border-left: 1px solid white;
 }
 
-.leg-desc{
+.leg-desc {
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -245,7 +247,7 @@ i{
     border-right: 1px solid white;
 }
 
-.leg-res{
+.leg-res {
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -257,7 +259,7 @@ i{
 
 /* TABELA */
 
-.item{
+.item {
     display: inline-flex;
     border: 1px solid #ebebeb;
     border-radius: 5px;
@@ -269,11 +271,11 @@ i{
     text-align: center;
 }
 
-.item:hover{
+.item:hover {
     background-color: #ADD8E6;
 }
 
-.item-box{
+.item-box {
     padding-top: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -281,7 +283,7 @@ i{
     cursor: default;
 }
 
-.item-id{
+.item-id {
     cursor: pointer;
     padding-top: 5px;
     margin-top: 10px;
@@ -291,7 +293,7 @@ i{
     border-right: 1px solid rgb(201, 201, 201);
 }
 
-.item-desc{
+.item-desc {
     cursor: pointer;
     height: 30px;
     overflow-y: hidden;
@@ -304,7 +306,7 @@ i{
     border-right: 1px solid rgb(201, 201, 201);
 }
 
-.item-res{
+.item-res {
     cursor: pointer;
     padding-top: 5px;
     margin-top: 10px;
@@ -313,16 +315,19 @@ i{
     width: 150px;
 }
 
-.item a{
+.item a {
     color: black;
 }
 
-input[type=checkbox]
-{
-    -ms-transform: scale(1.5); /* IE */
-    -moz-transform: scale(1.5); /* FF */
-    -webkit-transform: scale(1.5); /* Safari and Chrome */
-    -o-transform: scale(1.5); /* Opera */
+input[type=checkbox] {
+    -ms-transform: scale(1.5);
+    /* IE */
+    -moz-transform: scale(1.5);
+    /* FF */
+    -webkit-transform: scale(1.5);
+    /* Safari and Chrome */
+    -o-transform: scale(1.5);
+    /* Opera */
     transform: scale(1.5);
     cursor: pointer;
 }
@@ -331,11 +336,11 @@ input[type=checkbox]
 
 /* BOTOES */
 
-.botoes{
+.botoes {
     display: inline-flex;
 }
 
-.novo{
+.novo {
     border: 1px solid #555;
     padding: 8px 0;
     border-radius: 5px;
@@ -348,7 +353,7 @@ input[type=checkbox]
     width: 170px;
 }
 
-.arq{
+.arq {
     border: 1px solid #555;
     padding: 8px 0;
     border-radius: 5px;
@@ -359,10 +364,10 @@ input[type=checkbox]
     padding: 10px;
     height: 50px;
     width: 170px;
-    cursor:default;
+    cursor: default;
 }
 
-.conclui{
+.conclui {
     border: 1px solid #555;
     padding: 8px 0;
     border-radius: 5px;
@@ -375,7 +380,7 @@ input[type=checkbox]
     width: 170px;
 }
 
-.res{
+.res {
     border: 1px solid #555;
     padding: 8px 0;
     border-radius: 5px;
@@ -388,54 +393,58 @@ input[type=checkbox]
     width: 170px;
 }
 
-.restaurar{
+.restaurar {
     padding: 0px;
-    border: 0px; 
+    border: 0px;
     background-color: transparent;
     font-size: 40px;
     margin-left: 105px;
-    margin-top:20px;
+    margin-top: 20px;
     color: rgb(112, 180, 112);
     cursor: pointer;
 }
 
-.next{
+.next {
     color: #000000;
     font-size: 25px;
-    margin-top:10px;
-    margin-left:10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.atual{
-    color: #000000; 
-    font-size:25px; 
-    margin-top:10px; 
+.atual {
+    color: #000000;
+    font-size: 25px;
+    margin-top: 10px;
     margin-right: 5px;
 }
 
-.exibir-resultados{
-    margin-top:15px; margin-left:190px;  margin-right:150px;
+.exibir-resultados {
+    margin-top: 15px;
+    margin-left: 190px;
+    margin-right: 150px;
 }
 
-.num-projetos{
-    display:inline;
-    color:blue; margin-left: 5px; margin-top:15px;
+.num-projetos {
+    display: inline;
+    color: blue;
+    margin-left: 5px;
+    margin-top: 15px;
 }
 
 /**/
 
 /* BUSCA */
 
-.busca input[type=text]{
+.busca input[type=text] {
     border: none;
-    width:745px; 
-    height:40px;
+    width: 745px;
+    height: 40px;
     background-color: transparent;
     font-size: 20px;
     outline: 0;
 }
 
-.icon{
+.icon {
     font-size: 25px;
     color: #016fc9;
     border: 1px solid #016fc9;
@@ -444,207 +453,208 @@ input[type=checkbox]
     cursor: pointer;
 }
 
-.busca button{
+.busca button {
     border: 0px;
-    border-radius: 50%; 
+    border-radius: 50%;
     width: 43px;
     height: 43px;
-    outline-style:none;
+    outline-style: none;
 }
 
-.busca input{
+.busca input {
     margin-left: 10px;
 }
 
-.busca button:hover{
-    background-color: #cce5fa;;
+.busca button:hover {
+    background-color: #cce5fa;
+    ;
 }
 
 /**/
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 800px) {
 
-/* CABEÇALHO */
+    /* CABEÇALHO */
 
-    .aba{
-        width:100%;
-        margin-right:6px;
-        height:120px;
+    .aba {
+        width: 100%;
+        margin-right: 6px;
+        height: 120px;
         border-radius: 0px;
-        position:fixed;
+        position: fixed;
         overflow-x: scroll;
         display: flex;
         min-height: 0px;
         min-width: 0px;
     }
 
-    ul{
+    ul {
         margin-left: 10px;
         display: flex;
     }
 
-    .logo{
+    .logo {
         margin-left: 0px;
         margin-right: 30px;
         margin-bottom: 10px;
     }
 
-    .img-logo{
-            height: 100px;
-            object-fit: contain;
-        }
-
-    .nav-text{
-        display:none;
+    .img-logo {
+        height: 100px;
+        object-fit: contain;
     }
 
-    li a{
+    .nav-text {
+        display: none;
+    }
+
+    li a {
         font-size: 35px;
         margin-left: 25px;
     }
 
-/**/
+    /**/
 
-/* CORPO */
+    /* CORPO */
 
-    .tudo{
+    .tudo {
         width: 823px;
     }
 
-    .conteudo{
+    .conteudo {
         width: 823px;
-        margin-left:1px;
-        margin-right:1px;
+        margin-left: 1px;
+        margin-right: 1px;
         margin-top: 0px;
         margin-bottom: 0px;
-        min-height:900px;
+        min-height: 900px;
         border-radius: 10px;
     }
 
-    .projetos{
-        width:770px;
+    .projetos {
+        width: 770px;
     }
 
-    .conteudo h1{
-        margin-top:150px;
-        margin-bottom:50px;
-        font-size:60px;
+    .conteudo h1 {
+        margin-top: 150px;
+        margin-bottom: 50px;
+        font-size: 60px;
     }
 
-/**/
+    /**/
 
-/* TABELA */
+    /* TABELA */
 
-    .item{
-        width:745px;
-        height:65px;
-        font-size:30px;
+    .item {
+        width: 745px;
+        height: 65px;
+        font-size: 30px;
         overflow-y: hidden;
     }
 
-    input[type=checkbox]{
-        z-index:2;
-    }
-    
-    .item-box{
-        width:68px;
+    input[type=checkbox] {
+        z-index: 2;
     }
 
-    .item-id{
-        width:78px;
+    .item-box {
+        width: 68px;
     }
-        
-    .item-desc{
+
+    .item-id {
+        width: 78px;
+    }
+
+    .item-desc {
         width: 455px;
         height: 55px;
         padding-bottom: 10px;
         overflow-y: scroll;
     }
 
-    .item-res{
+    .item-res {
         width: 50px;
-        padding-left:30px;
+        padding-left: 30px;
     }
 
-/**/
+    /**/
 
-/* BUSCA */
+    /* BUSCA */
 
-    .busca input[type=text]{
-        width:680px; 
-        height:70px;
-        font-size:30px;
+    .busca input[type=text] {
+        width: 680px;
+        height: 70px;
+        font-size: 30px;
     }
 
-/**/
+    /**/
 
 
-/* LEGENDA DA TABELA */
+    /* LEGENDA DA TABELA */
 
-    .legenda{
-        width:745px;
-        height:65px;
-        font-size:23px;
-        padding-right:20px
+    .legenda {
+        width: 745px;
+        height: 65px;
+        font-size: 23px;
+        padding-right: 20px
     }
 
-    .leg-box{
+    .leg-box {
         margin-top: 12px;
         width: 100px;
-        padding-top:5px;
+        padding-top: 5px;
     }
 
-    .leg-id{
+    .leg-id {
         margin-top: 12px;
         width: 120px;
-        padding-top:8px;
+        padding-top: 8px;
     }
 
-    .leg-desc{
+    .leg-desc {
         margin-top: 12px;
         margin-bottom: 10px;
         width: 700px;
-        padding-top:8px;
+        padding-top: 8px;
     }
 
-    .leg-res{
+    .leg-res {
         margin-top: 12px;
-        padding-top:8px;
+        padding-top: 8px;
         overflow-y: hidden;
-        overflow-x:scroll;
+        overflow-x: scroll;
     }
 
-/**/
+    /**/
 
-/* BOTÕES */
+    /* BOTÕES */
 
-    .exibir-resultados{
-        margin-right:260px;
-        font-size:25px;
-        margin-left:20px;
-        margin-top:20px;
-        margin-bottom:20px;
+    .exibir-resultados {
+        margin-right: 260px;
+        font-size: 25px;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
-    .next{
+    .next {
         font-size: 30px;
-        margin-top:17px;
-        margin-right:-10px;
+        margin-top: 17px;
+        margin-right: -10px;
     }
 
-    .atual{
+    .atual {
         margin-right: 0px;
         padding-top: 10px;
     }
 
-    .num-projetos{
-        display:none;
+    .num-projetos {
+        display: none;
     }
 
-/**/
+    /**/
 
-input[type=checkbox]{
-    transform: scale(2);
-}
+    input[type=checkbox] {
+        transform: scale(2);
+    }
 
 }

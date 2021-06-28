@@ -80,7 +80,9 @@
                         series: {
                             0: { color: '#43459d' },
                             1: { color: '#6f9654' },
-                        }
+                        },
+                        'width': 850,
+                        'height':400
                     };
 
                     var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
@@ -212,8 +214,8 @@
                 <h1>Análise dos dados</h1>
 
                 <div class="graficos">
-                    <div id="chart_div1"></div>
                     <center>
+                        <div id="chart_div1"></div>
                         <div id="chart_div3"></div>
                     </center>
                     <div id="column" style="margin-top: -60px;"></div>
@@ -221,7 +223,7 @@
                     <center>
                     <div id="tabela"></div>
                     </center>
-                    
+                    <br><br>
                 </div>
             </div>
         </div>
