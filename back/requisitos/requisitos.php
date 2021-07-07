@@ -19,12 +19,13 @@
 
         $id=$_POST['cadastra'];
 
-        $sql = "SELECT id_projeto FROM projeto WHERE md5(id_projeto) = '$id';";
+        $sql = "SELECT id_projeto, custo FROM projeto WHERE md5(id_projeto) = '$id';";
         $resultado = mysqli_query($conecta, $sql);
         $linha=mysqli_fetch_array($resultado);
+        $custo_proj=$linha['custo'];
         $projeto=$linha['id_projeto'];
 
-        verifica_erro_cad($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],md5($projeto));
+        verifica_erro_cad($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],md5($projeto),$_POST['custo']);
 
         $descricao=$_POST['descricao'];
         $titulo=$_POST['titulo'];
@@ -32,14 +33,24 @@
         $cadastro=date("Y-m-d");
         $versao='1';
         $tipo=$_POST['tipo'];
+        $custo=$_POST['custo'];
 
-        $sql2 = "INSERT INTO requisitos VALUES( null, '$projeto', '$titulo', '$processo', '$cadastro', '$versao', '$descricao', '$tipo', 's');";
-                
-        if (mysqli_query($conecta, $sql2)) 
-        { 
-            header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&s=1"); die();       
-        } 
+        $custo_proj+=$custo;
+        $query = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = md5('$projeto');";
         
+        if(mysqli_query($conecta, $query)){
+            $sql2 = "INSERT INTO requisitos VALUES( null, '$projeto', '$titulo', '$processo', '$cadastro', '$custo', '$versao', '$descricao', '$tipo', 's');";
+                
+            if (mysqli_query($conecta, $sql2)) 
+            { 
+                header("location: ../../front/requisitos/requisitos.php?proj=".$id."&pagina=1&s=1"); die();       
+            } 
+            
+            else 
+            {
+                header("location: ../../front/requisitos/cad_requisitos.php?proj=".$id."&s=2"); die();      
+            } 
+        } 
         else 
         {
             header("location: ../../front/requisitos/cad_requisitos.php?proj=".$id."&s=2"); die();      
@@ -52,17 +63,40 @@
     // EXCLUI REQUISITO
 
     if(@$_POST['arquiva']){
+
+        $id_proj=$_POST['arquiva'];
  
         if(@$_POST['check_list']){
     
             foreach(@$_POST['check_list'] as $id){
     
                 $idaux=md5($id);
-    
-                $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
-                $resultado = mysqli_query($conecta, $query);
-                if ($resultado == true )$aux++;
-    
+
+                $sql = "SELECT id_projeto, custo FROM projeto WHERE md5(id_projeto) = '$id_proj';";
+                echo $sql;
+                $resultado = mysqli_query($conecta, $sql);
+                $linha=mysqli_fetch_array($resultado);
+                $custo_proj=$linha['custo'];
+
+                $sql2 = "SELECT custo FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+                echo $sql2;  
+                $resultado2 = mysqli_query($conecta, $sql2);
+                $linha2=mysqli_fetch_array($resultado2);
+                $custo=$linha2['custo'];
+
+                $custo_proj=(float)$custo_proj-(float)$custo;
+                $query2 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$id_proj';";
+                echo $query2;
+
+                if(mysqli_query($conecta, $query2)){
+                    $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
+                    $resultado = mysqli_query($conecta, $query);
+                    if ($resultado == true )$aux++;else $aux=0;  
+                }
+                else{
+                    $aux=0;
+                }
+                
             }
     
             if ( $aux>0 ){
@@ -79,18 +113,31 @@
     
             $idaux=md5($_POST['arquiva']);
 
-            $sql = "SELECT projeto FROM requisitos WHERE md5(id_requisito) = '$idaux';";
-            $resultado2 = mysqli_query($conecta, $sql);
-            $linha=mysqli_fetch_array($resultado2);
+            $sql = "SELECT projeto, custo FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+            $resultado = mysqli_query($conecta, $sql);
+            $linha=mysqli_fetch_array($resultado);
             $projeto=md5($linha['projeto']);
-    
-            $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
-            $resultado = mysqli_query($conecta, $query);
-    
-            if ( $resultado == true ){
-                header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&s=8"); die();
+            $custo=$linha['custo'];
+
+            $sql2 = "SELECT custo FROM projeto WHERE md5(id_projeto) = '$projeto';";
+            $resultado2 = mysqli_query($conecta, $sql2);
+            $linha2=mysqli_fetch_array($resultado2);
+
+            $custo_proj=$linha2['custo']-$custo;
+            $query2 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$projeto';";
+                
+            if(mysqli_query($conecta, $query2)){
+                $query = "UPDATE requisitos SET ativo = 'n' WHERE md5(id_requisito) = '$idaux';";
+                $resultado = mysqli_query($conecta, $query);
+        
+                if ( $resultado == true ){
+                    header("location: ../../front/requisitos/requisitos.php?proj=".$projeto."&pagina=1&s=8"); die();
+                }
+        
+                else{
+                    header("location: ../../front/requisitos/requisito.php?id=".$projeto."&s=5"); die();
+                }
             }
-    
             else{
                 header("location: ../../front/requisitos/requisito.php?id=".$projeto."&s=5"); die();
             }
@@ -107,23 +154,54 @@
 
         $id=md5($_POST['altera']);
 
-        verifica_erro_alt($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],$id,md5($_POST['projeto']));
+        $sql3 = "SELECT projeto, custo FROM requisitos WHERE md5(id_requisito) = '$id';";
+        echo $sql3;
 
-        $descricao=$_POST['descricao'];
-        $projeto=$_POST['projeto'];
-        $titulo=$_POST['titulo'];
-        $processo=$_POST['processo'];
-        $tipo=$_POST['tipo'];
-    
-        $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', tipo = '$tipo' WHERE md5(id_requisito) = '$id';";
-            
-        if (mysqli_query($conecta, $sql))
-        { header("location: ../../front/requisitos/requisito.php?id=".$id."&s=1");  die(); } 
-            
-        else 
-        {
-            header("location: ../../front/requisitos/requisito.php?id=".$id."&s=2");  die();
-        } 
+        $resultado3 = mysqli_query($conecta, $sql3);
+        $linha3=mysqli_fetch_array($resultado3);
+        $projeto=md5($linha3['projeto']);
+        $custo_antes=$linha3['custo'];
+
+        $sql2 = "SELECT custo FROM projeto WHERE md5(id_projeto) = '$projeto';";
+        echo $sql2;
+        $resultado2 = mysqli_query($conecta, $sql2);
+        $linha2=mysqli_fetch_array($resultado2);
+        $custo_proj=(float)$linha2['custo']-(float)$custo_antes;
+
+        $query2 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$projeto';";
+        echo $query2;
+        if(mysqli_query($conecta, $query2)){
+
+            verifica_erro_alt($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],$id,$projeto, $_POST['custo']);
+
+            $descricao=$_POST['descricao'];
+            $titulo=$_POST['titulo'];
+            $processo=$_POST['processo'];
+            $custo=$_POST['custo'];
+            $tipo=$_POST['tipo'];
+
+            $custo_proj=(float)$custo_proj+(float)$custo;
+            $query3 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$projeto';";
+            echo $query3;
+            if(mysqli_query($conecta, $query3)){
+                $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', tipo = '$tipo', custo = '$custo' WHERE md5(id_requisito) = '$id';";
+                echo $sql;
+                if (mysqli_query($conecta, $sql))
+                { header("location: ../../front/requisitos/requisito.php?id=".$id."&s=1");  die(); 
+                } 
+                    
+                else 
+                {
+                    header("location: ../../front/requisitos/requisito.php?id=".$id."&s=2");  die();
+                } 
+            }
+            else{
+                header("location: ../../front/requisitos/requisito.php?id=".$id."&s=2");  die(); 
+            }
+        }
+        else{
+            header("location: ../../front/requisitos/requisito.php?id=".$id."&s=2");  die(); 
+        }
     
         mysqli_close($conecta);
         
@@ -148,9 +226,27 @@
             foreach(@$_POST['check_list_restaurar'] as $id){
 
                 $idaux=md5($id);
-                $query = "UPDATE requisitos SET ativo = 's' WHERE md5(id_requisito) = '$idaux';";
-                $resultado2 = mysqli_query($conecta, $query);
-                if ($resultado2 == true )$aux++;
+
+                $query = "SELECT projeto, custo FROM requisitos WHERE md5(id_requisito) = '$idaux';";
+                $resultado = mysqli_query($conecta, $query);
+                $linha=mysqli_fetch_array($resultado);
+                $custo=$linha['custo'];
+                $projeto=md5($linha['projeto']);
+
+                $query3 = "SELECT custo FROM projeto WHERE md5(id_projeto) = '$projeto';";
+                $resultado3 = mysqli_query($conecta, $query3);
+                $linha3=mysqli_fetch_array($resultado3);
+                $custo_proj=(float)$linha3['custo']+(float)$custo;
+                
+                $query4 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$projeto';";
+                if(mysqli_query($conecta, $query4)){
+                    $query2 = "UPDATE requisitos SET ativo = 's' WHERE md5(id_requisito) = '$idaux';";
+                    $resultado2 = mysqli_query($conecta, $query2);
+                    if ($resultado2 == true )$aux++;else $aux=0;
+                }
+                else{
+                    $aux=0;
+                }
 
             }
 

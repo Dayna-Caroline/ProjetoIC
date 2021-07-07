@@ -64,18 +64,18 @@
 
                         case 2:
                             echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Não foi possível concluír o cadastro do projeto!</p>
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Não foi possível concluír o cadastro do projeto!</p>
                             </div>";
                         break;
 
                         case 3:
                             $campos=explode("_",$_GET['e']);
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <br><p><b><i class=\"fas fa-exclamation-triangle\"></i> Atenção! Verifique os seguintes campos:</b></p><br>";
                                 foreach($campos as $aux){
-                                    if($aux=='1')echo"<p>Responsável</p>";
-                                    if($aux=='2')echo"<p> - Descrição</p><br>";
-                                    if($aux=='3')echo"<p> - Finalidade</p><br>";
+                                    if($aux=='1')echo"<p> - Responsável</p><br>";
+                                    if($aux=='2')echo"<p> - Descrição (entre 20 e 100 caracteres)</p><br>";
+                                    if($aux=='3')echo"<p> - Finalidade (entre 20 e 100 caracteres)</p><br>";
                                     if($aux=='4')echo"<p> - Orçamento</p><br>";
                                     if($aux=='5')echo"<p> - Inicio</p><br>";
                                     if($aux=='6')echo"<p> - Aprovação</p><br>";

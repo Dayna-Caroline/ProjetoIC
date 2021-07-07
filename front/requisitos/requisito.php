@@ -21,6 +21,7 @@
         $cadastro=$linha['cadastro'];
         $versao=$linha['versao'];
         $tipo=$linha['tipo'];
+        $custo=$linha['custo'];
     }
     else{ header("location: ../../front/requisitos/requisitos.php?e=1&pagina=1"); die(); }
 
@@ -114,6 +115,7 @@
                                         if($aux=='1')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
                                         if($aux=='3')echo"<p> - Processo (deve conter entre 10 e 50 caracteres!)</p><br>";
                                         if($aux=='4')echo"<p> - Tipo inválido!</p><br>";
+                                        if($aux=='5')echo"<p> - Custo inválido!</p><br>";
                                     }
                                 echo "</div>";
                             break;
@@ -158,17 +160,27 @@
                             
                                 <div class=\"leg-id2\"><b>Cadastro</b></div>
                                 <div style=\"width:150px; margin-left: 5px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\" value=\"".$cadastro."\"></div>
+                                
                                 <div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>
+                        
                             </div>";
 
                             echo "<div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Versão</b></div>
                                 <div style=\"width:140px; margin-left: 5px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" value=\"".$versao."\"></div>
                                 
-                                <button type=\"submit\" value=\"".$id."\" id=\"altera\" name=\"altera\" class=\"salvar\" style=\"cursor: pointer;\"><i class=\"fas fa-check\"></i></button>
-                                <button type=\"submit\" value=\"".$id."\"  id=\"cancela\" name=\"cancela\" class=\"cancelar\" style=\"cursor: pointer;\"><i class=\"fas fa-times\"></i></button>
-                                </div><br><br>
+                                <div class=\"leg-id2\" style=\" margin-left: 15px;margin-right:-5px;\"><b>Custo (R$)</b></div>
+                                <div style=\"width:100px;\" class=\"item-id3\"><input style=\"padding-left:10px;\" step=\".01\" id=\"custo\"class=\"numero\" type=\"number\" name=\"custo\" value=\"".$custo."\"></div>
+
+                                </div>
+                                
+                                <div class=\"item2\" style=\"width:400px;\">
+                                    <button type=\"submit\" style=\"margin-top: 5px; margin-left:250px; cursor: pointer;\" value=\"".$id."\" id=\"altera\" name=\"altera\" class=\"salvar\">Salvar&nbsp;&nbsp;<i class=\"fas fa-check\"></i></button>
+                                    <button type=\"submit\" style=\"margin-top: 5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancela\" name=\"cancela\" class=\"cancelar\">Cancelar&nbsp;&nbsp;<i class=\"fas fa-times\"></i></button>
+                                </div>
+                                
+                                <br><br>
                             ";
 
                         ?>

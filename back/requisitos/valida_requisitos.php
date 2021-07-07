@@ -24,7 +24,13 @@
         { return false; } else return true;
     }
 
-    function verifica_erro_alt($descricao,$titulo,$processo,$tipo,$auxid,$auxproj)
+    function valida_custo($custo_aux)
+    {
+        if( !$custo_aux || $custo_aux<0 )
+        { return false; } else return true;
+    }
+
+    function verifica_erro_alt($descricao,$titulo,$processo,$tipo,$auxid,$auxproj,$custo)
     {
 
         $erro="";
@@ -33,6 +39,7 @@
         if(valida_titulo($titulo)==false){ $erro .= "_2"; }
         if(valida_processo($processo)==false){ $erro .= "_3"; }
         if(valida_tipo($tipo)==false){ $erro .= "_4"; }
+        if(valida_custo($tipo)==false){ $erro .= "_5"; }
 
         if($erro!="")
         {
@@ -41,7 +48,7 @@
 
     }
 
-    function verifica_erro_cad($descricao,$titulo,$processo,$tipo,$auxproj)
+    function verifica_erro_cad($descricao,$titulo,$processo,$tipo,$auxproj,$custo)
     {
 
         $erro="";
@@ -50,6 +57,7 @@
         if(valida_titulo($titulo)==false){ $erro .= "_2"; }
         if(valida_processo($processo)==false){ $erro .= "_3"; }
         if(valida_tipo($tipo)==false){ $erro .= "_4"; }
+        if(valida_custo($tipo)==false){ $erro .= "_5"; }
 
         if($erro!="")
         {

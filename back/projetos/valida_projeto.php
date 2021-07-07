@@ -25,13 +25,7 @@
 
     function valida_orcamento($orcamento_aux)
     {
-        if( !$orcamento_aux )
-        { return false; } else return true;
-    }
-
-    function valida_inicio($inicio_aux)
-    {
-        if( !$inicio_aux )
+        if( !$orcamento_aux || $orcamento<0 )
         { return false; } else return true;
     }
 
@@ -40,20 +34,20 @@
         if( !$aprovacao_aux )
         { return false; } else return true;
     }
-
-    function valida_c_final($c_final_aux)
+    
+    function valida_inicio($inicio_aux, $aprovacao_aux)
     {
-        if( !$c_final_aux )
+        if( !$inicio_aux || $aprovacao_aux > $inicio_aux )
         { return false; } else return true;
     }
 
-    function valida_previa($previa_aux, $inicio_aux)
+    function valida_previa($previa_aux, $inicio_aux, $aprovacao_aux)
     {
-        if( !$previa_aux || $previa_aux < $inicio_aux )
+        if( !$previa_aux || $previa_aux < $inicio_aux || $aprovacao_aux > $previa_aux )
         { return false; } else return true;
     }
 
-    function verifica_erro_alt($responsavel,$descricao,$finalidade,$orcamento,$inicio,$aprovacao,$c_final,$previa,$auxid)
+    function verifica_erro_alt($responsavel,$descricao,$finalidade,$orcamento,$inicio,$aprovacao,$previa,$auxid)
     {
 
         $erro="";
@@ -62,10 +56,24 @@
         if(valida_descricao($descricao)==false){ $erro .= "_2"; }
         if(valida_finalidade($finalidade)==false){ $erro .= "_3"; }
         if(valida_orcamento($orcamento)==false){ $erro .= "_4"; }
-        if(valida_inicio($inicio)==false){ $erro .= "_5"; }
         if(valida_aprovacao($aprovacao)==false){ $erro .= "_6"; }
-        if(valida_c_final($c_final)==false){ $erro .= "_7"; }
-        if(valida_previa($previa,$inicio)==false){ $erro .= "_8"; }
+        if(valida_inicio( $inicio, $aprovacao )==false){ $erro .= "_5"; }
+        if(valida_previa($previa,$inicio,$aprovacao)==false){ $erro .= "_7"; }
+
+        if($erro!="")
+        {
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=3"."&e=".$erro.""); die(); 
+        }
+
+    }
+
+    function verifica_erro_alt_concluido($descricao,$finalidade,$auxid)
+    {
+
+        $erro="";
+
+        if(valida_descricao($descricao)==false){ $erro .= "_2"; }
+        if(valida_finalidade($finalidade)==false){ $erro .= "_3"; }
 
         if($erro!="")
         {
@@ -83,9 +91,9 @@
         if(valida_descricao($descricao)==false){ $erro .= "_2"; }
         if(valida_finalidade($finalidade)==false){ $erro .= "_3"; }
         if(valida_orcamento($orcamento)==false){ $erro .= "_4"; }
-        if(valida_inicio($inicio)==false){ $erro .= "_5"; }
         if(valida_aprovacao($aprovacao)==false){ $erro .= "_6"; }
-        if(valida_previa($previa,$inicio)==false){ $erro .= "_7"; }
+        if(valida_inicio( $inicio, $aprovacao )==false){ $erro .= "_5"; }
+        if(valida_previa($previa,$inicio,$aprovacao)==false){ $erro .= "_7"; }
 
         if($erro!="")
         {

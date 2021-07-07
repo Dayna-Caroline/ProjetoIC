@@ -20,13 +20,28 @@ function editar() {
     document.getElementById('aprovacao').style.cursor="text";
 
     if(document.getElementById('fim')){
-        document.getElementById('fim').disabled=false;
-        document.getElementById('fim').style.cursor="text";
+        document.getElementById('fim').disabled=true;
+        document.getElementById('fim').style.cursor="not-allowed";
+        document.getElementById('c_final').disabled=true;
+        document.getElementById('c_final').style.cursor="not-allowed";
+
+        document.getElementById('profissional').style.cursor="not-allowed";
+        document.getElementById('orcamento').style.cursor="not-allowed";
+        document.getElementById('previa').style.cursor="not-allowed";
+        document.getElementById('inicio').style.cursor="not-allowed";
+        document.getElementById('aprovacao').style.cursor="not-allowed";
+
+        document.getElementById('profissional').disabled=true;
+        document.getElementById('orcamento').disabled=true;
+        document.getElementById('previa').disabled=true;
+        document.getElementById('inicio').disabled=true;
+        document.getElementById('aprovacao').disabled=true;
     }
 
-    if(document.getElementById('c_final')){
-        document.getElementById('c_final').disabled=false;
-        document.getElementById('c_final').style.cursor="text";
+
+    if(document.getElementById('custo')){
+        document.getElementById('custo').disabled=true;
+        document.getElementById('custo').style.cursor="not-allowed";
     }
 
     document.getElementById('editar').disabled=true;
@@ -63,6 +78,11 @@ function visualizar() {
     if(document.getElementById('c_final')){
         document.getElementById('c_final').disabled=true;
         document.getElementById('c_final').style.cursor="not-allowed";
+    }
+
+    if(document.getElementById('custo')){
+        document.getElementById('custo').disabled=true;
+        document.getElementById('custo').style.cursor="not-allowed";
     }
 
     document.getElementById('salvar').style.visibility="hidden";

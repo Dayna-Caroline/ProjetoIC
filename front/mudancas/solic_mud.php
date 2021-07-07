@@ -88,7 +88,6 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                 <form action="../../back/mudancas/efetivar_mudanca.php"  method="post">
                  <?php
                 echo "<div class=\"item2\">
-
                                 <div style=\"color:#999999;cursor:default;\" class=\"leg-id2\"><b>ID Requisito</b></div>
                                 <div style=\"width:150px;cursor:not-allowed;\" class=\"item-id2\"><select style=\"cursor:not-allowed;\ name=\"id\" disabled > <option value=\"".$id_req."\">".$id_req."</option></select></div>
                                 
@@ -114,7 +113,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                 
                                 <div class=\"leg-id2\" style=\"margin-right: 45px; width:150px;\"><b>Tipo</b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" disabled value=\"".$tipo."\"></div>
-                                <div class=\"leg-id2\"style=\"margin-right: 40px; width:150px;\"><b>Versão </b></div>
+                                <div class=\"leg-id2\"style=\"margin-right: 45px; width:150px;\"><b>&nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Versão </b></div>
                                 <div style=\"width:140px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" disabled value=\"".$versao."\"></div>
                                 
                             </div>";
@@ -122,7 +121,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                       echo "<div class=\"item2\">
                         <div class=\"leg-id2\" style=\"margin-right: 45px; width:150px;\"><b>Custo(R$)</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"custo\">
-                        </div><div class=\"leg-id2\"style=\"margin-right: 45px; width:150px;\"><b>Data da solicitação</b></div>
+                        </div><div class=\"leg-id2\"style=\"margin-right: 45px; width:150px;\"><b>&nbspData da solicitação</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"pedido\" required  type=\"date\"></div>
                         </div>";
                     

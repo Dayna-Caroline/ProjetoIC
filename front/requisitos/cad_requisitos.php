@@ -84,6 +84,7 @@
                                     if($aux=='1')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres!)</p><br>";
                                     if($aux=='3')echo"<p> - Processo (deve conter entre 10 e 50 caracteres!)</p><br>";
                                     if($aux=='4')echo"<p> - Tipo inválido!</p><br>";
+                                    if($aux=='5')echo"<p> - Custo inválido!</p><br>";
                                 }
                             echo "</div>";
                         break;
@@ -97,24 +98,27 @@
 
                         echo "<div class=\"item2\">
                         <div class=\"leg-id2\"><b>Título</b></div>
-                        <div class=\"item-id2\"><input type=\"text\" id=\"titulo\" onkeypress=\"alterou()\" required name=\"titulo\"></div>
+                        <div class=\"item-id2\"><input type=\"text\" id=\"titulo\" required name=\"titulo\"></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                         <div class=\"leg-id2\"><b>Descrição</b></div>
-                        <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" onkeypress=\"alterou()\" required name=\"descricao\"></div>
+                        <div class=\"item-id2\"><input type=\"text\" id=\"descricao\" required name=\"descricao\"></div>
                         </div>";
 
                         echo "<div class=\"item2\">
                         <div class=\"leg-id2\"><b>Processo</b></div>
-                        <div class=\"item-id2\"><input type=\"text\" id=\"processo\" onkeypress=\"alterou()\" required name=\"processo\"></div>
+                        <div class=\"item-id2\"><input type=\"text\" id=\"processo\" required name=\"processo\"></div>
                         </div>";
 
                         echo "<div class=\"item2\">
-                        <div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 15px; width:150px;\"><b>Tipo</b></div>
-                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\"></div>
-                        </div>
+                        <div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
+                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required class=\"numero\" type=\"number\" name=\"tipo\"></div>
 
+                        <div class=\"leg-id2\" style=\"margin-right: 25px; margin-left: 25px; width:150px;\"><b>Custo (R$)</b></div>
+                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" step=\".01\" required class=\"numero\" type=\"number\" name=\"custo\"></div>
+
+                        </div>
                         <br><br>
                         ";
 

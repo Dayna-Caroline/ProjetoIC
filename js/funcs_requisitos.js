@@ -9,6 +9,7 @@ function editar() {
     document.getElementById('tipo').disabled=false;
     document.getElementById('cadastro').disabled=true;
     document.getElementById('titulo').disabled=false;
+    document.getElementById('custo').disabled=false;
 
     document.getElementById('processo').style.cursor="text";
     document.getElementById('descricao').style.cursor="text";
@@ -16,6 +17,7 @@ function editar() {
     document.getElementById('tipo').style.cursor="text";
     document.getElementById('cadastro').style.cursor="not-allowed";
     document.getElementById('titulo').style.cursor="text";
+    document.getElementById('custo').style.cursor="text";
 
     document.getElementById('editar').disabled=true;
     document.getElementById('visualizar').disabled=false;
@@ -33,6 +35,8 @@ function visualizar() {
     document.getElementById('tipo').disabled=true;
     document.getElementById('cadastro').disabled=true;
     document.getElementById('titulo').disabled=true;
+    document.getElementById('custo').disabled=true;
+
 
     document.getElementById('processo').style.cursor="not-allowed";
     document.getElementById('descricao').style.cursor="not-allowed";
@@ -40,6 +44,8 @@ function visualizar() {
     document.getElementById('tipo').style.cursor="not-allowed";
     document.getElementById('cadastro').style.cursor="not-allowed";
     document.getElementById('titulo').style.cursor="not-allowed";
+    document.getElementById('custo').style.cursor="not-allowed";
+
 
     document.getElementById('altera').style.visibility="hidden";
     document.getElementById('cancela').style.visibility="hidden";

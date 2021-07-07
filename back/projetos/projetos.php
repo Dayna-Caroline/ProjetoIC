@@ -21,7 +21,7 @@
 
         $auxid=md5($_POST['salvar']);
 
-        verifica_erro_alt($_POST['responsavel'],$_POST['descricao'],$_POST['finalidade'],$_POST['orcamento'],$_POST['inicio'],$_POST['aprovacao'],$_POST['c_final'],$_POST['previa'],$auxid);
+        verifica_erro_alt($_POST['responsavel'],$_POST['descricao'],$_POST['finalidade'],$_POST['orcamento'],$_POST['inicio'],$_POST['aprovacao'],$_POST['previa'],$auxid);
         
         $responsavel=$_POST['responsavel'];
         $descricao=$_POST['descricao']; 
@@ -29,10 +29,38 @@
         $orcamento=$_POST['orcamento'];
         $inicio=$_POST['inicio'];
         $aprovacao=$_POST['aprovacao'];
-        $c_final=$_POST['c_final'];
         $previa=$_POST['previa'];
 
-        $sql = "UPDATE projeto SET concluido = 's', descricao = '$descricao', finalidade = '$finalidade', orcamento = '$orcamento', responsavel = '$responsavel', aprovacao = '$aprovacao', inicio = '$inicio', previa = '$previa', c_final = '$c_final' WHERE id_projeto = $id;";
+        $sql = "UPDATE projeto SET descricao = '$descricao', finalidade = '$finalidade', orcamento = '$orcamento', responsavel = '$responsavel', aprovacao = '$aprovacao', inicio = '$inicio', previa = '$previa' WHERE id_projeto = $id;";
+        
+        if (mysqli_query($conecta, $sql)) 
+        {   
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=1"); die();
+        } 
+        
+        else 
+        {
+            header("location: ../../front/projetos/projeto.php?id=".$auxid."&s=2"); die();
+        } 
+
+        mysqli_close($conecta);
+
+    }
+    
+    // SALVAR ALTERAÇÕES NO PROJETO CONCLUIDO
+
+    if(@$_POST['salvar_concluido']){
+
+        $id=$_POST['salvar_concluido'];
+
+        $auxid=md5($_POST['salvar_concluido']);
+
+        verifica_erro_alt_concluido($_POST['descricao'],$_POST['finalidade'],$auxid);
+        
+        $descricao=$_POST['descricao']; 
+        $finalidade=$_POST['finalidade'];
+
+        $sql = "UPDATE projeto SET descricao = '$descricao', finalidade = '$finalidade' WHERE id_projeto = $id;";
         
         if (mysqli_query($conecta, $sql)) 
         {   
@@ -68,13 +96,14 @@
         $inicio=$_POST['inicio'];
         $aprovacao=$_POST['aprovacao'];
         $c_final="0";
+        $custo="0";
         $fim="0000-00-00";
         $previa=$_POST['previa'];
         $empresa=$_SESSION['id_empresa'];
         $ativo="s";
         $concluido="n";
 
-        $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$previa', '$fim', '$c_final', '$empresa', '$ativo', '$concluido');";
+        $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$previa', '$fim', '$custo' ,'$c_final', '$empresa', '$ativo', '$concluido');";
                 
         if (mysqli_query($conecta, $sql)) 
         { header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); }
@@ -101,7 +130,12 @@
         $idaux=md5($id);
         $fim=date("Y-m-d");
 
-        $query = "UPDATE projeto SET fim = '$fim', concluido = 's' WHERE md5(id_projeto) = '$idaux';";
+        $query2="SELECT custo FROM projeto WHERE md5(id_projeto) = '$idaux';";
+        $resultado2 = mysqli_query($conecta, $query2);
+        $linha2=mysqli_fetch_array($resultado2);
+        $custo=$linha2['custo'];
+
+        $query = "UPDATE projeto SET fim = '$fim', c_final='$custo', concluido = 's' WHERE md5(id_projeto) = '$idaux';";
 
         $resultado = mysqli_query($conecta, $query);
 
@@ -111,6 +145,27 @@
 
         else{
             header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=4"); die();
+        }
+
+    }
+
+    if(@$_POST['reabrir']){
+
+        $id=$_POST['reabrir'];
+        $idaux=md5($id);
+        $fim="0000-00-00";
+        $c_final="0";
+
+        $query = "UPDATE projeto SET fim = '$fim', c_final='$c_final', concluido = 'n' WHERE md5(id_projeto) = '$idaux';";
+
+        $resultado = mysqli_query($conecta, $query);
+
+        if ( $resultado == true ){
+            header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=8"); die();
+        }
+
+        else{
+            header("location: ../../front/projetos/projeto.php?id=".$idaux."&s=9"); die();
         }
 
     }

@@ -23,11 +23,13 @@
         $inicio=$linha['inicio'];
         $previa=$linha['previa'];
         $fim=$linha['fim'];
+        $custo=$linha['custo'];
         $c_final=$linha['c_final'];
         $id_empresa=$linha['empresa'];
         $ativo=$linha['ativo'];
         $concluido=$linha['concluido'];
     }
+    
     else
     { header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die(); }
 
@@ -37,9 +39,7 @@
     if($row3==0)
     { header("location: ../../front/projetos/menu.php?pagina=1&e=3"); die(); }
     
-    
     $query2 = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = '{$_SESSION['id_empresa']}'AND profissional.ativo = 's';";
-
     // executa a query
 
     $result2 = mysqli_query($conecta, $query2);
@@ -86,7 +86,7 @@
 
                 <div  class="titulo">
                     <a href="menu.php?pagina=1"><p class="volt alt">&#8592;  Voltar</p></a>
-                    <h1>Detalhes do projeto</h1>
+                    <h1>Detalhes do projeto - <?php echo $id;?></h1>
                 </div>
 
                 <div class="espaco" style="margin-bottom: -40px;"></div>
@@ -104,48 +104,59 @@
                             {
                                 case 1:
                                     echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
-                                        <p>Alterações salvas com sucesso!</p>
+                                        <p><i class=\"fas fa-check\"></i> Alterações salvas com sucesso!</p>
                                     </div>";
                                 break;
 
                                 case 2:
                                     echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
-                                        <p>Não foi possível concluír as alterações!</p>
+                                        <p><i class=\"fas fa-exclamation-triangle\"></i> Não foi possível concluír as alterações!</p>
                                     </div>";
                                 break;
 
                                 case 3:
                                     $campos=explode("_",$_GET['e']);
-                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
-                                        <br><p><b>Atenção! Verifique os seguintes campos:</b></p><br>";
+                                    echo "<div id=\"erro\" class=\"aviso2\" onclick=\"fecha_e()\">
+                                        <br><p><b><i class=\"fas fa-exclamation-triangle\"></i> Atenção! Verifique os seguintes campos:</b></p><br>";
                                         foreach($campos as $aux){
-                                            if($aux=='1')echo"<p>Responsável</p>";
+                                            if($aux=='1')echo"<p> - Responsável</p><br>";
                                             if($aux=='2')echo"<p> - Descrição (deve conter entre 10 e 100 caracteres)</p><br>";
                                             if($aux=='3')echo"<p> - Finalidade (deve conter entre 10 e 100 caracteres)</p><br>";
                                             if($aux=='4')echo"<p> - Orçamento</p><br>";
                                             if($aux=='5')echo"<p> - Inicio</p><br>";
                                             if($aux=='6')echo"<p> - Aprovação</p><br>";
-                                            if($aux=='7')echo"<p> - Custo Final</p><br>";
-                                            if($aux=='8')echo"<p> - Prévia do término</p><br>";
+                                            if($aux=='7')echo"<p> - Prévia do término</p><br>";
                                         }
                                     echo "</div>";
                                 break;
 
                                 case 4:
                                     echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
-                                        <p>Não foi possível concluír o projeto!</p>
+                                        <p><i class=\"fas fa-exclamation-triangle\"></i>Não foi possível concluír o projeto!</p>
                                     </div>";
                                 break;
 
                                 case 5:
                                     echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
-                                        <p>Não foi possível excluír o projeto!</p>
+                                        <p><i class=\"fas fa-exclamation-triangle\"></i>Não foi possível excluír o projeto!</p>
                                     </div>";
                                 break;
 
                                 case 7:
                                     echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
-                                        <p>O projeto foi concluído!</p>
+                                        <p><i class=\"fas fa-check\"></i> O projeto foi concluído!</p>
+                                    </div>";
+                                break;
+
+                                case 8:
+                                    echo "<div id=\"sucesso\" class=\"sucesso2\" onclick=\"fecha_s()\">
+                                        <p><i class=\"fas fa-check\"></i> O projeto foi reaberto!</p>
+                                    </div>";
+                                break;
+
+                                case 9:
+                                    echo "<div id=\"erro\" class=\"erro2\" onclick=\"fecha_e()\">
+                                        <p><i class=\"fas fa-exclamation-triangle\"></i>Não foi possível reabrir o projeto!</p>
                                     </div>";
                                 break;
 
@@ -203,7 +214,7 @@
                                 
                                 <div class=\"leg-id2 ab resp\" id=\"resp\" ><b>Previa do término</b></div>
                                 <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px;\" id=\"previa\" name=\"previa\" type=\"date\" value=\"".$previa."\"></div>
-                                
+
                             </div>";
 
                             echo "<div class=\"item2\">";
@@ -211,30 +222,43 @@
                                 if($concluido=='s')
                                 { echo "
                                 <div class=\"leg-id2\" style=\" margin-left: -30px;margin-right:35px;\"><b>Custo final (R$)</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" id=\"c_final\"class=\"numero\" type=\"number\" step=\".01\" name=\"c_final\" value=\"".$c_final."\"></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input style=\"padding-left:10px;\" id=\"c_final\"class=\"numero\" type=\"number\" name=\"c_final\" value=\"".$c_final."\"></div>
                                 
                                 <div class=\"leg-id2 ab\" style=\"margin-left: 40px; margin-right:-30px;\"><b>Data do término</b></div>
                                 <div style=\"width:150px;\" class=\"item-id2\"><input style=\"padding-left:10px; padding-right:3px;\" id=\"fim\" name=\"fim\" type=\"date\" value=\"".$fim."\"></div>
-                                
-                                </div>";}
+                                </div>
 
-                                echo "<div class=\"item2\">
-                                <button type=\"submit\" style=\"margin-top: -5px; margin-left:310px; cursor: pointer;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\"><i class=\"fas fa-check\"></i></button>
-                                <button type=\"submit\" style=\"margin-top: -5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\"><i class=\"fas fa-times\"></i></button>
+                                <div class=\"item2\" style=\"width:400px;\">
+                                    <button type=\"submit\" style=\"margin-top: 5px; margin-left:250px; cursor: pointer;\" value=\"".$id."\" id=\"salvar\" name=\"salvar_concluido\" class=\"salvar\">Salvar&nbsp;&nbsp;<i class=\"fas fa-check\"></i></button>
+                                    <button type=\"submit\" style=\"margin-top: 5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\">Cancelar&nbsp;&nbsp;<i class=\"fas fa-times\"></i></button>
+                                </div>
+
+                                ";}
+
+                                else
+                                { echo "
+                                <div class=\"leg-id2\" style=\" margin-left: -50px;margin-right:55px;\"><b>Custo (R$)</b></div>
+                                <div style=\"width:300px;\" class=\"item-id3\"><input style=\"padding-left:10px;\" id=\"custo\"class=\"numero\" type=\"number\" name=\"custo\" value=\"".$custo."\"></div>
                                 
-                            </div></div>";
+                                <button type=\"submit\" style=\"margin-top: -5px; margin-left:-80px; cursor: pointer;\" value=\"".$id."\" id=\"salvar\" name=\"salvar\" class=\"salvar\">Salvar&nbsp;&nbsp;<i class=\"fas fa-check\"></i></button>
+                                <button type=\"submit\" style=\"margin-top: -5px; cursor: pointer;\" value=\"".$id."\"  id=\"cancelar\" name=\"cancelar\" class=\"cancelar\">Cancelar&nbsp;&nbsp;<i class=\"fas fa-times\"></i></button>
+                                
+                                </div>";
+                            }
 
                         ?>
 
-                        <div class="botoes">
+                        <div class="botoes" style="margin-top:30px;">
 
                             <?php
                                 if($concluido=='n')
-                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"conclui\" class=\"conclui\" style=\"cursor: pointer;\">Concluír</button>
+                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"conclui\" class=\"conclui\" style=\"cursor: pointer; margin-left:100px;\">Concluír</button>
                                         <button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;\">Requisitos</button>
                                 "; }
                                 else
-                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;margin-left:280px;\">Requisitos</button>";}
+                                { echo "<button type=\"submit\" value=\"".$id."\" name=\"reabrir\" class=\"conclui\" style=\"cursor: pointer; margin-left:100px;\">Reabrir</button>
+                                        <button type=\"submit\" value=\"".$id."\" name=\"req\" class=\"req\" style=\"cursor: pointer;\">Requisitos</button>
+                                "; }
                             ?>
 
                             <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer;" class="arq">Excluir</button>

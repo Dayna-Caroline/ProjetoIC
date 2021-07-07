@@ -60,7 +60,7 @@
                     if(@$_GET['m']==1)
                     {
                         echo "<div class=\"mensagem1\">
-                            <p>Para cadastrar um projeto é necessário cadastrar ao menos um funcionário!</p>
+                            <p><i class=\"fas fa-exclamation-triangle\"></i> Para cadastrar um projeto é necessário cadastrar ao menos um funcionário!</p>
                         </div>";
                     }
                 

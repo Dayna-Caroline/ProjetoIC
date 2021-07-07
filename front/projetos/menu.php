@@ -9,6 +9,25 @@
         if(!@$_GET['pagina'])
         { header("location: ../../front/projetos/menu.php?pagina=1&busca=".@$_GET['busca'].""); die(); }
 
+        if(!@$_GET['filtro'])
+        { $_GET['filtro']="nofilter"; }
+
+        switch($_GET['filtro']){
+
+            case "nofilter":
+                $filtro="";
+            break;
+
+            case "pendente":
+                $filtro=" AND concluido='n' ";
+            break;
+
+            case "concluido":
+                $filtro=" AND concluido='s' ";
+            break;
+
+        }
+
         if(@$_GET['busca'])
         {
             $aux = $_GET['busca'];
@@ -17,11 +36,11 @@
                     $char = $aux[$i];
                     if (is_numeric($char)) 
                     {
-                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND (CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%');";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' $filtro AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND (CAST(id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR descricao LIKE '%{$_GET['busca']}%') ORDER BY id_projeto;";
                     } 
                     else 
                     {
-                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND  (descricao LIKE '%{$_GET['busca']}%');";
+                        $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}' $filtro AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}') AND  (descricao LIKE '%{$_GET['busca']}%') ORDER BY id_projeto;";
                         break;
                     }
                 }
@@ -32,7 +51,7 @@
     // sem filtros
 
         else
-        { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}';"; }
+        { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}' $filtro AND profissional.ativo = 's' AND projeto.ativo='s' AND projeto.responsavel = profissional.id_profissional AND profissional.empresa = '{$_SESSION['id_empresa']}' ORDER BY id_projeto;"; }
     //
 
     // executa a query
@@ -92,20 +111,20 @@
                     switch(@$_GET['e'])
                     {
                         case 1:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Projeto não encontrado! Você foi redirecionado para a primeira página.</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Projeto não encontrado! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
 
                         case 2:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Página não encontrada! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
                         
                         case 3:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>O projeto que você está tentando acessar foi desativado!</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> O projeto que você está tentando acessar foi desativado!</p>
                             </div>";      
                         break;
                     }
@@ -114,19 +133,19 @@
                     {
                         case 1:
                             echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
-                                <p>Projeto cadastrado com sucesso! </p>
+                                <p><i class=\"fas fa-check\"></i> Projeto cadastrado com sucesso! </p>
                             </div>";
                         break;
 
                         case 8:
                             echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
-                                <p>O projeto foi excluído!</p>
+                                <p><i class=\"fas fa-check\"></i> O projeto foi excluído!</p>
                             </div>";
                         break;
 
                         case 5:
                             echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Não foi possível excluír o projeto!</p>
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Não foi possível excluír o projeto!</p>
                             </div>";
                         break;
                     
@@ -136,13 +155,28 @@
 
                 <!--  BUSCA  -->
                 <form class="projetos" action="../../front/projetos/menu.php" method="get">
+                    
                     <div class="busca">
-                        <input type="text" class="busca" value="<?php if(@$_GET['busca']) echo $_GET['busca']; ?>" name="busca" id="busca" placeholder="Filtrar por ID, Descrição ou Responsável" autocomplete="off">
+                        <input type="text" class="busca" value="<?php if(@$_GET['busca']) echo $_GET['busca']; ?>" name="busca" id="busca" placeholder="Buscar por ID, Descrição ou Responsável(ID)" autocomplete="off">
                         <button type="submit"><i class="fa fa-search icon" aria-hidden="true"></i></a>
                         <input type="text" style="visibility:hidden; height:0px; width:0px;" value="<?php if(@$_GET['pagina']) echo $_GET['pagina']; ?>" name="pagina">
                     </div>
-                </form>
 
+                    <div class="radFiltro">
+
+                        <input type="radio" <?php if(@$_GET['filtro']=="nofilter") echo "checked"; ?> class="radItem" id="nofilter" name="filtro" value="nofilter">
+                        <label class="radLeg" for="nofilter">Todos</label><span class="divisor">&nbsp;&nbsp;&nbsp;|</span>
+
+                        <input type="radio" <?php if(@$_GET['filtro']=="pendente") echo "checked"; ?> class="radItem" id="pendente" name="filtro" value="pendente">
+                        <label class="radLeg" for="pendente">Pendentes</label><span class="divisor">&nbsp;&nbsp;&nbsp;|</span>
+
+                        <input type="radio" <?php if(@$_GET['filtro']=="concluido") echo "checked"; ?> class="radItem" id="concluido" name="filtro" value="concluido">
+                        <label class="radLeg" for="concluido">Concluídos</label>
+
+                    </div>
+
+                </form>
+                
                 <!--  TABELA  -->
                 <form class="projetos" action="../../back/projetos/projetos.php" method="post">
 
@@ -203,6 +237,7 @@
                                     $id = $linha['id_projeto'];
                                     $descricao = $linha['descricao'];
                                     $responsavel = $linha['responsavel'];
+                                    $nome = $linha['nome'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
@@ -212,7 +247,7 @@
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel." - ".$nome."</div></a>
                                         </div>";
                                     }                                        
                             
@@ -256,13 +291,14 @@
                                     $id = $linha['id_projeto'];
                                     $descricao = $linha['descricao'];
                                     $responsavel = $linha['responsavel'];
+                                    $nome = $linha['nome'];
 
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-id\">".$id."</div></a>
                                         <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel."</div></a>
+                                        <a href=\"projeto.php?id=".md5($id)."\"><div class=\"item-res\">".$responsavel." - ".$nome."</div></a>
                                         </div>";
                                 }
                             }

@@ -17,11 +17,11 @@
                 $char = $aux[$i];
                 if (is_numeric($char)) 
                 {
-                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional) AND (CAST(projeto.id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(projeto.responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR projeto.descricao LIKE '%{$_GET['busca']}%');";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional) AND (CAST(projeto.id_projeto AS CHAR) LIKE '%{$_GET['busca']}%' OR CAST(projeto.responsavel AS CHAR) LIKE '%{$_GET['busca']}%' OR projeto.descricao LIKE '%{$_GET['busca']}%');";
                 } 
                 else 
                 {
-                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional) AND  (projeto.descricao LIKE '%{$_GET['busca']}%');";
+                    $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE (projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional) AND  (projeto.descricao LIKE '%{$_GET['busca']}%');";
                     break;
                 }
             }
@@ -32,7 +32,7 @@
 // sem filtros
 
     else
-    { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional;"; }
+    { $query = "SELECT projeto.id_projeto, projeto.descricao, projeto.responsavel, profissional.nome FROM projeto, profissional WHERE projeto.empresa = '{$_SESSION['id_empresa']}'  AND profissional.empresa = '{$_SESSION['id_empresa']}' AND profissional.ativo = 's' AND projeto.ativo='n' AND projeto.responsavel = profissional.id_profissional;"; }
 //
 
 // executa a query
@@ -94,8 +94,8 @@
                     switch(@$_GET['e'])
                     {
                         case 2:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Página não encontrada! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
                     }
@@ -104,13 +104,13 @@
                     {
                         case 6:
                             echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Não foi possível restaurar os projetos!</p>
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Não foi possível restaurar os projetos!</p>
                             </div>";
                         break;
 
                         case 9:
                             echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
-                                <p>Os projetos foram restaurados!</p>
+                                <p><i class=\"fas fa-check\"></i> Os projetos foram restaurados!</p>
                             </div>";
                         break;
 
@@ -187,6 +187,7 @@
                                     $id = $linha['id_projeto'];
                                     $descricao = $linha['descricao'];
                                     $responsavel = $linha['responsavel'];
+                                    $nome = $linha['nome'];
 
                                 
                                     if($i>=$bot&&$i<=$top)
@@ -196,7 +197,7 @@
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
                                         <p><div class=\"item-id\">".$id."</div></p>
                                         <p><div class=\"item-desc\">".$descricao."</div></p>
-                                        <p><div class=\"item-res\">".$responsavel."</div></p>
+                                        <p><div class=\"item-res\">".$responsavel." - ".$nome."</div></p>
                                         </div>";
                                     }                                        
                             
@@ -240,14 +241,15 @@
                                     $id = $linha['id_projeto'];
                                     $descricao = $linha['descricao'];
                                     $responsavel = $linha['responsavel'];
+                                    $nome = $linha['nome'];
 
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list_restaurar[]\" type=\"checkbox\"> </div>
                                         <p><div class=\"item-id\">".$id."</div></p>
                                         <p><div class=\"item-desc\">".$descricao."</div></p>
-                                        <p><div class=\"item-res\">".$responsavel."</div></p>
-                                        </div>";
+                                        <p><div class=\"item-res\">".$responsavel." - ".$nome."</div></p>
+                                    </div>";
                                 }
                             }
 

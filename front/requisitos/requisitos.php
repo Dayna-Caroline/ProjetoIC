@@ -10,6 +10,8 @@
 
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
+    $linha_aux=mysqli_fetch_array($result);
+    $concluido=$linha_aux['concluido'];
     
     if($row==0)
     {
@@ -111,14 +113,14 @@
                     switch(@$_GET['e'])
                     {
                         case 1:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Requisito não encontrado! Você foi redirecionado para a primeira página.</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Requisito não encontrado! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
 
                         case 2:
-                            echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Página não encontrada! Você foi redirecionado para a primeira página.</p>
+                            echo "<div id=\"erro\" class=\"aviso\" onclick=\"fecha_e()\">
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Página não encontrada! Você foi redirecionado para a primeira página.</p>
                             </div>";
                         break;
                     
@@ -128,19 +130,19 @@
                     {
                         case 1:
                             echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
-                                <p>Requisito cadastrado com sucesso! </p>
+                                <p><i class=\"fas fa-check\"></i> Requisito cadastrado com sucesso! </p>
                             </div>";
                         break;
 
                         case 8:
                             echo "<div id=\"sucesso\" class=\"sucesso\" onclick=\"fecha_s()\">
-                                <p>O Requisito foi excluído!</p>
+                                <p><i class=\"fas fa-check\"></i> O Requisito foi excluído!</p>
                             </div>";
                         break;
 
                         case 5:
                             echo "<div id=\"erro\" class=\"erro\" onclick=\"fecha_e()\">
-                                <p>Não foi possível excluír o requisito!</p>
+                                <p><i class=\"fas fa-exclamation-triangle\"></i> Não foi possível excluír o requisito!</p>
                             </div>";
                         break;
                     
@@ -312,8 +314,12 @@
                     ?>
 
                     <div class="botoes">
-                        <button type="submit" value="<?php echo $_GET['proj']; ?>" name="novo" class="novo" style="cursor: pointer;">Novo</button>
-                        <button type="submit" disabled id="arquiva" value="<?php echo $_GET['proj']; ?>" name="arquiva" class="arq">Excluir</button>
+                        <?php
+                            if($concluido=='n'){
+                                echo "<button type=\"submit\" value=\"".$_GET['proj']."\" name=\"novo\" class=\"novo\" style=\"cursor: pointer;\">Novo</button>
+                                <button type=\"submit\" disabled id=\"arquiva\" value=\"".$_GET['proj']."\" name=\"arquiva\" class=\"arq\">Excluir</button>";
+                            }
+                        ?>
                         <button type="submit" id="restaurar" value="<?php echo $_GET['proj']; ?>" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
                     </div>
 
