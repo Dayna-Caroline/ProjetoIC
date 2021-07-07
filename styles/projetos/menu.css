@@ -123,6 +123,7 @@ i {
 
 /* CORPO */
 
+<<<<<<< HEAD
 .radFiltro{
     margin-top:15px;
     margin-bottom:10px;
@@ -145,6 +146,8 @@ i {
     cursor:pointer;
 }
 
+=======
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
 .tudo {
     width: 1260px;
     height: 100%;
@@ -194,6 +197,7 @@ i {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 .aviso {
     background-color: #ffcc00;
     color: rgb(0, 0, 0);
@@ -215,6 +219,8 @@ i {
     cursor: pointer;
 }
 
+=======
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
 .conteudo {
     width: 882px;
     height: 100%;
@@ -246,6 +252,10 @@ i {
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+<<<<<<< HEAD
+=======
+    ;
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
 }
 
 /**/
@@ -348,9 +358,12 @@ i {
 }
 
 .item-res {
+<<<<<<< HEAD
     height: 25px;
     overflow-x:hidden;
     overflow-y: hidden;
+=======
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
     cursor: pointer;
     padding-top: 5px;
     margin-top: 10px;
@@ -480,11 +493,17 @@ input[type=checkbox] {
 /* BUSCA */
 
 .busca input[type=text] {
+<<<<<<< HEAD
     border:0.5px solid #dbdbdb;
     border-radius:10px;
     padding-left:15px;
     width: 745px;
     height: 50px;
+=======
+    border: none;
+    width: 745px;
+    height: 40px;
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
     background-color: transparent;
     font-size: 20px;
     outline: 0;
@@ -502,8 +521,13 @@ input[type=checkbox] {
 .busca button {
     border: 0px;
     border-radius: 50%;
+<<<<<<< HEAD
     width: 45px;
     height: 45px;
+=======
+    width: 43px;
+    height: 43px;
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
     outline-style: none;
 }
 
@@ -511,6 +535,13 @@ input[type=checkbox] {
     margin-left: 10px;
 }
 
+<<<<<<< HEAD
+=======
+.busca button:hover {
+    background-color: #cce5fa;
+    ;
+}
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
 
 /**/
 
@@ -614,7 +645,10 @@ input[type=checkbox] {
     }
 
     .item-res {
+<<<<<<< HEAD
         height:55px;
+=======
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
         width: 50px;
         padding-left: 30px;
     }
@@ -622,6 +656,7 @@ input[type=checkbox] {
     /**/
 
     /* BUSCA */
+<<<<<<< HEAD
 
     .busca input[type=text] {
         width: 680px;
@@ -642,14 +677,27 @@ input[type=checkbox] {
         -webkit-transform: scale(2); /* Chrome, Safari, Opera */
         transform: scale(2);
     }
+=======
+
+    .busca input[type=text] {
+        width: 680px;
+        height: 70px;
+        font-size: 30px;
+    }
+
+    /**/
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
 
     .divisor{
         display:none;
     }
 
+<<<<<<< HEAD
     /**/
 
 
+=======
+>>>>>>> 1d9f7be040b1e1825df69e7f136941b8e747788c
     /* LEGENDA DA TABELA */
 
     .legenda {
