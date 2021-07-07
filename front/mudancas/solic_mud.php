@@ -121,7 +121,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
                       echo "<div class=\"item2\">
                         <div class=\"leg-id2\" style=\"margin-right: 45px; width:150px;\"><b>Custo(R$)</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"custo\">
-                        </div><div class=\"leg-id2\"style=\"margin-right: 45px; width:150px;\"><b>&nbspData da solicitação</b></div>
+                        </div><div class=\"leg-id2\"style=\"margin-left:20px;margin-right: 25px; width:150px;\"><b>&nbspData da solicitação</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"pedido\" required  type=\"date\"></div>
                         </div>";
                     
