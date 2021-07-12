@@ -7,6 +7,13 @@
         header("location: ../../front/projetos/menu.php?e=1&pagina=1"); die();
     }
 
+    $sqlaux="SELECT * FROM projeto WHERE md5(id_projeto) = '{$_GET['proj']}';";
+    $resultaux = mysqli_query($conecta, $sqlaux);
+    $linha = mysqli_fetch_array($resultaux);
+    if($linha['concluido']=='s'){
+        header("location: ../../front/requisitos/requisitos.php?e=2&proj=".$_GET['proj']."&pagina=1"); die();
+    }
+
     $query = "SELECT * FROM projeto WHERE md5(id_projeto) = '{$_GET['proj']}';";
 
     // executa a query

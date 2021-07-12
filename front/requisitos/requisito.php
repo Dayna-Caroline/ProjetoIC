@@ -25,11 +25,12 @@
     }
     else{ header("location: ../../front/requisitos/requisitos.php?e=1&pagina=1"); die(); }
 
-    $query2 = "SELECT projeto.id_projeto FROM projeto, profissional WHERE projeto.id_projeto = '$linha[projeto]' AND projeto.ativo = 's' AND profissional.ativo='s' AND projeto.responsavel=profissional.id_profissional;";
+    $query2 = "SELECT projeto.id_projeto, projeto.concluido FROM projeto, profissional WHERE projeto.id_projeto = '$linha[projeto]' AND projeto.ativo = 's' AND profissional.ativo='s' AND projeto.responsavel=profissional.id_profissional;";
 
     // executa a query
 
     $result2 = mysqli_query($conecta, $query2);
+    $linha2 = mysqli_fetch_array($result2);
     $row2 = mysqli_num_rows($result2);
     if($row2==0){header("location: ../../front/projetos/menu.php?e=3&pagina=1"); die();}
 
@@ -160,20 +161,38 @@
                             
                                 <div class=\"leg-id2\"><b>Cadastro</b></div>
                                 <div style=\"width:150px; margin-left: 5px;\" class=\"item-id2\"><input id=\"cadastro\" onkeypress=\"alterou()\" name=\"cadastro\" required  type=\"date\" value=\"".$cadastro."\"></div>
-                                
-                                <div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>
-                        
-                            </div>";
+                            ";
 
-                            echo "<div class=\"item2\">
+                            if($linha2['concluido']=='s'){
+                                echo "<div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" disabled class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>";
+                            }
+                            
+                            else{
+                                echo "<div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
+                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>";
+                            }
+                                
+                            echo "</div>
+
+                                <div class=\"item2\">
                                 <div class=\"leg-id2\"><b>Versão</b></div>
                                 <div style=\"width:140px; margin-left: 5px;\" class=\"item-id2\"><input id=\"versao\" required class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"versao\" value=\"".$versao."\"></div>
-                                
-                                <div class=\"leg-id2\" style=\" margin-left: 15px;margin-right:-5px;\"><b>Custo (R$)</b></div>
-                                <div style=\"width:100px;\" class=\"item-id3\"><input style=\"padding-left:10px;\" step=\".01\" id=\"custo\"class=\"numero\" type=\"number\" name=\"custo\" value=\"".$custo."\"></div>
+                            ";
 
-                                </div>
+                            if($linha2['concluido']=='s'){
+                                echo "<div class=\"leg-id2\" style=\" margin-left: 15px;margin-right:-5px;\"><b>Custo (R$)</b></div>
+                                <div style=\"width:100px;\" class=\"item-id3\"><input style=\"padding-left:10px;\" step=\".01\" id=\"custo2\"class=\"numero\" disabled type=\"number\" name=\"custo\" value=\"".$custo."\"></div>
+                                ";
+                            }
+
+                            else{
+                                echo "<div class=\"leg-id2\" style=\" margin-left: 15px;margin-right:-5px;\"><b>Custo (R$)</b></div>
+                                <div style=\"width:100px;\" class=\"item-id3\"><input style=\"padding-left:10px;\" step=\".01\" id=\"custo\"class=\"numero\" onkeypress=\"alterou()\" type=\"number\" name=\"custo\" value=\"".$custo."\"></div>
+                                ";
+                            }
+
+                            echo "</div>
                                 
                                 <div class=\"item2\" style=\"width:400px;\">
                                     <button type=\"submit\" style=\"margin-top: 5px; margin-left:250px; cursor: pointer;\" value=\"".$id."\" id=\"altera\" name=\"altera\" class=\"salvar\">Salvar&nbsp;&nbsp;<i class=\"fas fa-check\"></i></button>
@@ -185,17 +204,29 @@
 
                         ?>
 
-                        <div class="botoes">
-
-                            <button type="submit" value="<?php echo $id; ?>" name="arquiva" style="cursor: pointer; margin-left:300px;" class="arq">Excluir</button>
+                        <?php
+                    
+                            if($linha2['concluido']=='n'){
+                                echo "
+                                    <div class=\"botoes\"><button type=\"submit\" value=\"".$id."\" name=\"arquiva\" style=\"cursor: pointer; margin-left:300px;\" class=\"arq\">Excluir</button></div>
+                                ";
+                            }
                         
-                        </div>
+                        ?>
 
                     </form>
 
-                    <form action="../../front/mudancas/solic_mud.php"  method="post">
-                        <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Solicitar Mudança</button>
-                    </form>
+                    <?php 
+                    
+                        if($linha2['concluido']=='n'){
+                            echo "
+                                <form action=\"../../front/mudancas/solic_mud.php\"  method=\"post\">
+                                    <button type=\"submit\" value=\"".$id."\" name=\"mudanca\" style=\"cursor: pointer; margin-left:300px;\" class=\"arq\">Solicitar Mudança</button>
+                                </form>
+                            ";
+                        }
+                    
+                    ?>
                     
                    <form action="../../front/mudancas/hist_mud.php?pagina=1&mudanca=<?php echo $id;?>" method="post">
                        <button type="submit" value="<?php echo $id; ?>" name="mudanca" style="cursor: pointer; margin-left:300px;" class="arq">Historico de mudanças</button>

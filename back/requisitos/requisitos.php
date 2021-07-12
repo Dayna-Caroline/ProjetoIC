@@ -162,7 +162,7 @@
         $projeto=md5($linha3['projeto']);
         $custo_antes=$linha3['custo'];
 
-        $sql2 = "SELECT custo FROM projeto WHERE md5(id_projeto) = '$projeto';";
+        $sql2 = "SELECT custo, concluido FROM projeto WHERE md5(id_projeto) = '$projeto';";
         echo $sql2;
         $resultado2 = mysqli_query($conecta, $sql2);
         $linha2=mysqli_fetch_array($resultado2);
@@ -172,20 +172,29 @@
         echo $query2;
         if(mysqli_query($conecta, $query2)){
 
-            verifica_erro_alt($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],$id,$projeto, $_POST['custo']);
+            if($linha2['concluido']=='s'){
+                verifica_erro_alt_concluido($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$id,$projeto);
+                $descricao=$_POST['descricao'];
+                $titulo=$_POST['titulo'];
+                $processo=$_POST['processo'];
+                $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo' WHERE md5(id_requisito) = '$id';";
+            }
 
-            $descricao=$_POST['descricao'];
-            $titulo=$_POST['titulo'];
-            $processo=$_POST['processo'];
-            $custo=$_POST['custo'];
-            $tipo=$_POST['tipo'];
+            else{
+                verifica_erro_alt($_POST['descricao'],$_POST['titulo'],$_POST['processo'],$_POST['tipo'],$id,$projeto, $_POST['custo']);
+                $descricao=$_POST['descricao'];
+                $titulo=$_POST['titulo'];
+                $processo=$_POST['processo'];
+                $custo=$_POST['custo'];
+                $tipo=$_POST['tipo'];
+                $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', tipo = '$tipo', custo = '$custo' WHERE md5(id_requisito) = '$id';";
+            }
 
             $custo_proj=(float)$custo_proj+(float)$custo;
             $query3 = "UPDATE projeto SET custo = '$custo_proj' WHERE md5(id_projeto) = '$projeto';";
-            echo $query3;
+            
             if(mysqli_query($conecta, $query3)){
-                $sql = "UPDATE requisitos SET descricao = '$descricao', titulo = '$titulo', processo = '$processo', tipo = '$tipo', custo = '$custo' WHERE md5(id_requisito) = '$id';";
-                echo $sql;
+                
                 if (mysqli_query($conecta, $sql))
                 { header("location: ../../front/requisitos/requisito.php?id=".$id."&s=1");  die(); 
                 } 

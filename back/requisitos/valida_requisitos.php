@@ -48,6 +48,22 @@
 
     }
 
+    function verifica_erro_alt_concluido($descricao,$titulo,$processo,$auxid,$auxproj)
+    {
+
+        $erro="";
+
+        if(valida_descricao($descricao)==false){ $erro .= "_1"; }
+        if(valida_titulo($titulo)==false){ $erro .= "_2"; }
+        if(valida_processo($processo)==false){ $erro .= "_3"; }
+
+        if($erro!="")
+        {
+            header("location: ../../front/requisitos/requisito.php?id=".$auxid."&proj=".$auxproj."&s=3"."&e=".$erro.""); die(); 
+        }
+
+    }
+
     function verifica_erro_cad($descricao,$titulo,$processo,$tipo,$auxproj,$custo)
     {
 

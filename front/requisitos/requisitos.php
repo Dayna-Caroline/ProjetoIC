@@ -285,7 +285,7 @@
                                         <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-id\">".$id."</div></a>
                                         <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-desc\">".$descricao."</div></a>
-                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div class=\"item-res\">".$titulo."</div></a>
+                                        <a href=\"requisito.php?id=".md5($id)."&proj=".$proj."\"><div style=\"overflow-x:visible; overflow-y:visible;\" class=\"item-res\">".$titulo."</div></a>
                                         </div>";
                                 }
                             }
@@ -317,10 +317,11 @@
                         <?php
                             if($concluido=='n'){
                                 echo "<button type=\"submit\" value=\"".$_GET['proj']."\" name=\"novo\" class=\"novo\" style=\"cursor: pointer;\">Novo</button>
-                                <button type=\"submit\" disabled id=\"arquiva\" value=\"".$_GET['proj']."\" name=\"arquiva\" class=\"arq\">Excluir</button>";
+                                <button type=\"submit\" disabled id=\"arquiva\" value=\"".$_GET['proj']."\" name=\"arquiva\" class=\"arq\">Excluir</button>
+                                <button type=\"submit\" id=\"restaurar\" value=\"".$_GET['proj']."\" name=\"restaurar\" class=\"restaurar\"><i class=\"fas fa-trash-restore-alt\"></i></button>
+                                ";   
                             }
                         ?>
-                        <button type="submit" id="restaurar" value="<?php echo $_GET['proj']; ?>" name="restaurar" class="restaurar"><i class="fas fa-trash-restore-alt"></i></button>
                     </div>
 
                 </form>
