@@ -78,10 +78,13 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
 
             <div class="conteudo">
 
+                <div>
+                     <a href="../projetos/menu.php?pagina=1"><p class="volt alt">&nbsp; &nbsp; &nbsp; &#8592;  Voltar</p></a>
+                   
+                </div>
                 <div  class="titulo">
                     <h1>Solicitar Mudança</h1>
                 </div>
-                
                 
             <div class="projetos2">
             

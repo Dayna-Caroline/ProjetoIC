@@ -3,8 +3,10 @@
     //solicitação de mudança 
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    include "valida_mudanca.php";
 
     //recebe os dados do form
+  
     $req=$_POST['mudanca'];
     $solicitante=$_POST['solicitante'];
     $desc=$_POST['desc'];
@@ -59,13 +61,13 @@
 
             if (mysqli_query($conecta, $sql)) 
             {         
-                header("location: ../../front/mudancas/hist_mud.php?pagina=1&mudanca=".$req."");
+                header("location: ../../front/mudancas/hist_mud.php?pagina=1&mudanca=".$req.""); die();
                 //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
             } 
                 
             else 
             {
-                header("location: ../../front/mudancas/solic_mud.php?sucess=1");
+                header("location: ../../front/mudancas/solic_mud.php?sucess=1"); die();
                 //header("location: ../../front/projetos/projeto.php?proj=".$projeto."&pagina=1"); 
             }
 
