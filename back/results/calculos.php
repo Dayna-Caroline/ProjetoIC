@@ -19,7 +19,7 @@
     $orcamento = array();
     $ind_proj = 0;
 
-    $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa." AND projeto.ativo='s';";
+    $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
     $resultado = mysqli_query($conecta, $sql);
     $qtde = mysqli_num_rows($resultado);
 
