@@ -57,7 +57,7 @@ $sql = "SELECT id_profissional, nome, empresa FROM profissional WHERE empresa = 
         <title>Smart Grid</title>
     </head>
 
-    <body onload="visualizar()">
+    <body>
 
         <div class="tudo">
 

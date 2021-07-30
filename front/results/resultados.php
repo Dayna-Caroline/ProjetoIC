@@ -190,7 +190,7 @@
         <title>Smart Grid</title>
     </head>
 
-    <body onclick="verifica()" onload="verifica()">
+    <body>
 
         <div class="tudo">
 
@@ -209,7 +209,7 @@
                 </ul>
             </div>
 
-        <div class="conteudo" id="conteudo">
+        <div class="conteudo" id="conteudo" style="background-color:white;">
                 <a href="../../back/results/gerar_relatorio.php?id_empresa=<?php echo $id_empresa;?>"><p class="ir">Gerar PDF das estatísticas&#8594;</p></a>
                 <h1>Análise dos dados</h1>
 

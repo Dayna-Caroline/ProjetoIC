@@ -276,7 +276,7 @@
         $orcamento = array();
         $ind_proj = 0;
 
-        $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
+        $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa." AND projeto.ativo='s';";
         $resultado = mysqli_query($conecta, $sql);
         $qtde = mysqli_num_rows($resultado);
 
@@ -287,7 +287,7 @@
                 $linha=mysqli_fetch_array($resultado);
                 $projeto[$cont] = $linha['descricao'];
                 $orcamento[$cont] = $linha['orcamento'];
-                $custo[$cont] = $linha['c_final']; 
+                $custo[$cont] = $linha['custo']; 
                 $ind_proj ++;
             }
         }

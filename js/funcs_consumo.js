@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
       let newValue = window.getComputedStyle(b, null).getPropertyValue("height");
       document.getElementById('aba').style.height = newValue;
     }
+    else{
+      document.getElementById('aba').style.height = "120px";
+    }
   }, 500);
 }, false);
   
