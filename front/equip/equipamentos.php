@@ -34,7 +34,7 @@
 </head>
 <body onclick="verifica()" onload="verifica()">
     <div class="tudo">
-        <div class="aba">
+        <div class="aba" id="aba">
             <div class="logo">
                 <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                 <h2>Smart Grids</h2>
@@ -44,11 +44,11 @@
                 <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                 <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                 <li class="pag navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                <li class="navitem"><a href="../controle/controle.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
+                <li class="navitem"><a href="../controle/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
         </div>
-        <div class="conteudo">
+        <div class="conteudo" id="conteudo">
             <h1>Meus Equipamentos</h1>
                <!-- ------------------------------- BUSCA ----------------------------- -->
                <form class="projetos" action="../../front/equip/equipamentos.php?pagina=1" method="post">
@@ -236,7 +236,7 @@
 
                     <div class="botoes-1">
                         <button type="submit" value="enovo" name="enovo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button>  
-                        <button type="submit" value="<?php echo $id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
+                        <button id="arquiva" type="submit" value="<?php echo $id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
                         <button type="submit" value="ealtera" name="ealtera" class="alt" style="cursor: pointer;">Alterar Equipamentos</button>
                     </div>
 

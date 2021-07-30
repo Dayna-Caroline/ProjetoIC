@@ -12,11 +12,11 @@
     $consumo = $_POST['consumo'];
     $empresa = $_SESSION['id_empresa'];
 
-    $sql = "INSERT INTO consumo VALUES(null,'$empresa','$equipamento','$horaini','$horafim','$dia','$consumo')";
+    $sql = "INSERT INTO consumo VALUES(null,'$empresa','$equipamento','$horaini','$horafim','$data','$consumo')";
     if (mysqli_query($conecta, $sql)) {
-        header("location: ../../front/consumo/consumo.php");
+        header("location: ../../front/controle/consumo.php");
     } else {
-        header("location: ../../front/consumo/consumo.php?success=1");
+        header("location: ../../front/controle/consumo.php?success=1");
     }
     mysqli_close($conecta);
 ?>

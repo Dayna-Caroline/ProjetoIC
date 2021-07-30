@@ -16,7 +16,7 @@
 </head>
 <body onclick="verifica()" onload="verifica()">
     <div class="tudo">
-        <div class="aba">
+        <div class="aba" id="aba">
             <div class="logo">
                 <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                 <h2>Smart Grids</h2>
@@ -26,11 +26,11 @@
                 <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                 <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                 <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                <li class="pag navitem"><a href="../consumo/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
+                <li class="pag navitem"><a href="../controle/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
         </div>
-        <div class="conteudo">
+        <div class="conteudo" id="conteudo">
             <h1>Controle de Consumo</h1>
                <!-- ------------------------------- BUSCA ----------------------------- -->
                 <form class="busca" action="consumo.php?pagina=1" method="POST">
@@ -72,28 +72,28 @@
                     {
                         $mes = $_POST['mes'];
                         if($mes!=NULL)
-                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
+                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
                     
                     }
                     if(@$_POST['equipamento'])
                     {
                         $equip = $_POST['equipamento'];
                         if($mes!='todos')
-                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND id_equipamento='$equipamento' ORDER BY consumo DESC;";
+                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND id_equipamento='$equipamento' ORDER BY consumo DESC;";
                         else
-                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC;";
+                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC;";
                     }
                     else if(@$_POST['ano'])
                     {
                         $ano = $_POST['ano'];
                         if($mes!=NULL)
-                            $query = "SELECT id_consumo, descricao, consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
+                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
 
                     }
                     //Sem Filtros 
                     else
                     {
-                        $query = "SELECT id_consumo, descricao,consumo dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC ;";
+                        $query = "SELECT id_consumo, consumo dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC ;";
                     }
                         
                     
@@ -117,7 +117,7 @@
                                 echo '<script language="javascript">';
                                 echo "alert('Página não encontrada.')";
                                 echo '</script>';
-                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/consumo/consumo.php?pagina=1'>";
+                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/controle/consumo.php?pagina=1'>";
                             }
 
                             $bot=(($pagina-1)*10)+1;
@@ -198,7 +198,7 @@
                                 $linha = mysqli_fetch_array($result);
                                 $id = $linha['id_consumo'];
                                 $dia = $linha['dia'];
-                                $consumo = $linha['consumo'];
+                                @$consumo = $linha['consumo'];
 
                                 echo "
                                     <div class=\"item\">
@@ -236,7 +236,7 @@
                 
                     <div class="botoes">
                     <a href="cad_consumo.php"><button value="cnovo" name="cnovo" class="novo consumo" style="cursor: pointer;">Novo Consumo</button></a>
-                    <button type="submit" value="<?php echo $id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
+                    <button id="arquiva" type="submit" value="<?php echo $id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
                     </div>
                 </form>
         </div>

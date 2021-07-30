@@ -5,11 +5,11 @@
 
     //REDIRECIONAMENTO CADASTRO
     if(@$_POST['cnovo']){
-        header("location: ../../front/consumo/cad_consumo.php");
+        header("location: ../../front/controle/cad_consumo.php");
     }
 
     if(@$_POST['caltera']){
-        header("location: ../../front/consumo/escolha_consumo.php");
+        header("location: ../../front/controle/escolha_consumo.php");
     }
 
     //DELETA SELECIONADOS
@@ -20,27 +20,27 @@
             foreach(@$_POST['check_list'] as $id){
 
                 $idaux=md5($id);
-
-                $query = "DELETE FROM consumo WHERE id_equipamento='$id' AND empresa ='{$_SESSION['id_empresa']}';";
+                $query = "DELETE FROM consumo WHERE id_consumo='$id' AND empresa ='{$_SESSION['id_empresa']}';";
+                echo $query;
                 $resultado = mysqli_query($conecta, $query);
                 if ($resultado == true )
-                    $aux++;
-
+                $aux++;
+                
             }
             mysqli_close($conecta);
 
             if ( $aux>0 ){
-                header("location: ../../front/consumo/consumo.php");
+                header("location: ../../front/controle/consumo.php");
             }
 
             else{
-                header("location: ../../front/consumo/consumo.php?success=2");
+                header("location: ../../front/controle/consumo.php?success=2");
             }
 
         }
         else
         {
-            header("location: ../../front/consumo/consumo.php?success=2");
+            header("location: ../../front/controle/consumo.php?success=2");
         }
     }
 
