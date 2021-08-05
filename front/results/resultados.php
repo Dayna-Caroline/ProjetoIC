@@ -52,6 +52,12 @@
         <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <link rel="stylesheet" href="../../styles/results/resultados.css">
 
+        <style>
+            rect{
+                background-color: transparent;
+            }
+        </style>
+
         <!--Gráficos..............................................................................................................-->
         <!--Consumo antes e depois............................................................................................-->
             <script type="text/javascript">
@@ -215,7 +221,7 @@
 
                 <div class="graficos">
                     <center>
-                        <div id="chart_div1"></div>
+                        <div id="chart_div1" fill="transparent"></div>
                         <div id="chart_div3"></div>
                     </center>
                     <div id="column" style="margin-top: -60px;"></div>

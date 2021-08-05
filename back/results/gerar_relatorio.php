@@ -84,11 +84,11 @@
             $this->Ln(17);
 
             // Header
-            $this->Cell(45, 15, "", 0, 0, 'C', true);
+            $this->Cell(15, 15, "", 0, 0, 'C', true);
             $this->SetFillColor(150,255,140);
 
             foreach($header as $column)
-                $this->Cell(50, 8, $column, 1, 0, 'C', true);
+                $this->Cell(80, 8, $column, 1, 0, 'C', true);
             
             $this->Ln(8);
         }
@@ -108,13 +108,13 @@
                 //Color
                 
                 $this->SetFillColor(255,255,255);
-                $this->Cell(45, 8, "", 0, 0, 'C', true);
+                $this->Cell(15, 8, "", 0, 0, 'C', true);
                 $this->SetFillColor(255,255,255);
                 
 
                 $this->SetFont('Arial','b',11);
-                $this->Cell(50, 8, $a[$i], 1, 0, 'C', true);
-                $this->Cell(50, 8, $b[$i], 1, 0, 'C', true);
+                $this->Cell(80, 8, $a[$i], 1, 0, 'C', true);
+                $this->Cell(80, 8, $b[$i], 1, 0, 'C', true);
 
                 
                 $this->Ln();
@@ -212,7 +212,7 @@
                     $conano[$auxpos] = $ano;
 
                     if($linha['fase'] == 1){
-                        $auxtot += $linha['consumo'];
+                        $auxantot += $linha['consumo'];
                     }else{
                         $auxdeptot += $linha['consumo'];
                     }

@@ -125,7 +125,7 @@
                 $conano[$auxpos] = $ano;
 
                 if($linha['fase'] == 1){
-                    $auxtot += $linha['consumo'];
+                    $auxantot += $linha['consumo'];
                 }else{
                     $auxdeptot += $linha['consumo'];
                 }
