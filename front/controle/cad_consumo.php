@@ -1,10 +1,19 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-    
+
     $query = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'";
     $result = mysqli_query($conecta, $query);
     $row = mysqli_num_rows($result);
+
+    // executa a query
+    // e = 1: cadastre um equipamento antes de cadastrar um consumo;
+
+    if($row==0)
+    {header("location: ../../front/controle/consumo.php?pagina=1&a=1"); die(); }
+
+    
+   
 
 ?>
 <!DOCTYPE html>
@@ -36,8 +45,8 @@
                     <li class="navitem"><a href="../empresa/empresa.php"><i class="fas fa-city"></i><span class="nav-text">Empresa</span></a></li>
                     <li class="navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                     <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
-                    <li class="pag navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="../controle/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
+                    <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
+                    <li class="pag navitem"><a href="../controle/consumo.php"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
@@ -71,14 +80,19 @@
                         <div class=\"leg-id2\"><b>Inicio</b></div>
                         <div class=\"item-id2\"><input type=\"time\" style=\"width:110px;\" name=\"horainicial\" required></div>
                         <div class=\"leg-id2\"><b>Fim</b></div>
-                        <div class=\"item-id2\"><input type=\"time\" style=\"width:110px;\" name=\"horafinal\" required></div>
+                        <div class=\"item-id2\"><input type=\"time\" style=\"width:110px; margin-right:60px;\" name=\"horafinal\" required></div>
                         </div>";
                         
                         echo "<div class=\"item3\">
                             <div class=\"leg-id2 ab\"><b>Data</b></div>
-                            <div class=\"item-id2 ab\"><input style=\"width:180px;\" required autocomplete='off' name=\"data\" type=\"date\"></div>
+                            <div class=\"item-id2 ab\"><input style=\"width:180px;\" required autocomplete='off' name=\"data\" type=\"date\" min=\"2021-01-01\" max=\"2030-12-12\"></div>
                         
                             <div class=\"item-id2\"><input required type=\"number\" style=\"margin-left:95px; width:180px;\"  placeholder=\"Consumo(kWh)\" oninput=\"this.value = Math.abs(this.value)\" min=\"0\" name=\"consumo\" step=\"0.01\"></div>
+                        </div>";
+
+                        echo "<div class=\"item3\">
+                            <div class=\"leg-id2 ab\"><b>Smart Grid</b></div>
+                            <div class=\"item-id2 ab\"><input style=\" margin-left:20px; width:25px;\" autocomplete='off' name=\"fase\" value=\sim\" type=\"checkbox\"></div>
                         </div>";
                     ?>
                     <br><div class="botoes">

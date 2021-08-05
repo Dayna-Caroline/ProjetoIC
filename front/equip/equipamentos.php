@@ -236,7 +236,7 @@
 
                     <div class="botoes-1">
                         <button type="submit" value="enovo" name="enovo" class="novo equip" style="cursor: pointer;">Novo Equipamento</button>  
-                        <button id="arquiva" type="submit" value="<?php echo $id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
+                        <button type="submit" value="<?php echo @$id; ?>" name="edelete" style="cursor: pointer;" class="arq">Excluir Equipamentos</button>
                         <button type="submit" value="ealtera" name="ealtera" class="alt" style="cursor: pointer;">Alterar Equipamentos</button>
                     </div>
 

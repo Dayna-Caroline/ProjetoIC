@@ -1,7 +1,9 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
-   
+    $queryequip = "SELECT * FROM equipamentos WHERE empresa = '{$_SESSION['id_empresa']}'";
+    $resultequip = mysqli_query($conecta, $queryequip);
+    $rowequip = mysqli_num_rows($resultequip);
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +18,7 @@
 </head>
 <body onclick="verifica()" onload="verifica()">
     <div class="tudo">
-        <div class="aba" id="aba">
+        <div class="aba">
             <div class="logo">
                 <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                 <h2>Smart Grids</h2>
@@ -30,72 +32,91 @@
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
         </div>
-        <div class="conteudo" id="conteudo">
+        <div class="conteudo">
             <h1>Controle de Consumo</h1>
+             <!-- MENSAGEM -->
+             <?php
+                
+                if(@$_GET['a']==1)
+                {
+                    echo "<div class=\"mensagem\">
+                        <p>Para cadastrar um consumo é necessário cadastrar ao menos um equipamento!</p>
+                    </div>";
+                }
+            
+            ?>
                <!-- ------------------------------- BUSCA ----------------------------- -->
-                <form class="busca" action="consumo.php?pagina=1" method="POST">
-                    <div class="filtros">
-                    <b>Equipamento</b>
-                    <select name='equipamento'>
-                    <option value='todos'>Todos</option>; -->
-                    <?php
-                    for($i=0;$i<$row;$i++){
-                        $linha = mysqli_fetch_array($result);
-                        echo "<option value=".$linha['id_equipamento'].">".$linha['descricao']."</option>";
-                    }                                
-                    echo"</select>";
-                    ?>
-                    <b>Mês</b>
-                        <select name='mes'>
-                        <option name='mes' value=''>Mês</option>
-                        <option name='mes' value='01'>Janeiro</option>
-                        <option name='mes' value='02'>Fevereiro</option>
-                        <option name='mes' value='03'>Março</option>
-                        <option name='mes' value='04'>Abril</option>
-                        <option name='mes' value='05'>Maio</option>
-                        <option name='mes' value='06'>Junho</option>
-                        <option name='mes' value='07'>Julho</option>
-                        <option name='mes' value='08'>Agosto</option>
-                        <option name='mes' value='09'>Setembro</option>
-                        <option name='mes' value='10'>Outubro</option>
-                        <option name='mes' value='11'>Novembro</option>
-                        <option name='mes' value='12'>Dezembro</option></select>;
-                    <b>Ano</b>
-                        <input type="text" class="ano" value="" name="ano" id="ano" autocomplete="off">
-                        <button type="submit">Aplicar Filtros</a>  
+                <form action="consumo.php?pagina=1" method="POST">
+                    <div class="busca">
+                        <b>Equipamento</b>
+                        <select name='equipamento'>
+                            <option value='todos'>Todos</option>;
+                        <?php
+                        for($i=0;$i<$rowequip;$i++){
+                            $linhaequip = mysqli_fetch_array($resultequip);
+                            echo "<option value=".$linhaequip['id_equipamento'].">".$linhaequip['descricao']."</option>";
+                        }                                
+                        ?>
+                        </select>
+                        <b>Mês</b>
+                            <select name='mes'>
+                            <option value=''>Mês</option>
+                            <option value='01'>Janeiro</option>
+                            <option value='02'>Fevereiro</option>
+                            <option value='03'>Março</option>
+                            <option value='04'>Abril</option>
+                            <option value='05'>Maio</option>
+                            <option value='06'>Junho</option>
+                            <option value='07'>Julho</option>
+                            <option value='08'>Agosto</option>
+                            <option value='09'>Setembro</option>
+                            <option value='10'>Outubro</option>
+                            <option value='11'>Novembro</option>
+                            <option value='12'>Dezembro</option></select>
+                        <b>Ano</b>
+                            <input type="text" class="ano" value="" name="ano" id="ano" autocomplete="off">
+                            <button class="aplicar" type="submit">Aplicar Filtros</a>  
                    </div>  
                 </form>
                 <!-- ------------------------------ TABELA ----------------------------- -->
-                <form action="../../back/consumo/consumo.php" method="POST">
+                <form class="equipamentos" action="../../back/consumo/consumo.php" method="POST">
                 <?php 
+                    
+                    
+                    
+                    //Filtro de Equipamento
+                    $query = "SELECT consumo.id_consumo, consumo.consumo, consumo.dia, consumo.equipamento,equipamentos.id_equipamento,equipamentos.descricao FROM consumo INNER JOIN equipamentos ON consumo.empresa = '{$_SESSION['id_empresa']}'  AND consumo.equipamento = equipamentos.id_equipamento ";
+                    if(@$_POST['equipamento'])
+                    {
+                        $equip = $_POST['equipamento'];
+                         
+                        if($equip!='todos')
+                            $query .= "AND consumo.equipamento = '$equip' ";
+                        
+                        
+                         //JOIN equipamentos ON consumo.equipamento=equipamentos.id_equipamento AND consumo.empresa = '{$_SESSION['id_empresa']}' ORDER BY dia, consumo DESC;";      
+                        
+                    }
+                    //Filtro de mês
                     if(@$_POST['mes'])
                     {
                         $mes = $_POST['mes'];
                         if($mes!=NULL)
-                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
-                    
+                            $query .= "AND Month(consumo.dia)='$mes'";
+                       
                     }
-                    if(@$_POST['equipamento'])
-                    {
-                        $equip = $_POST['equipamento'];
-                        if($mes!='todos')
-                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND id_equipamento='$equipamento' ORDER BY consumo DESC;";
-                        else
-                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC;";
-                    }
-                    else if(@$_POST['ano'])
+                    //Filtro de Ano
+                    if(@$_POST['ano'])
                     {
                         $ano = $_POST['ano'];
-                        if($mes!=NULL)
-                            $query = "SELECT id_consumo,  consumo, dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' AND Month(dia)='$mes' ORDER BY consumo DESC ;";
-
+                        if($ano!=NULL)
+                            $query .= "AND Year(consumo.dia)='$ano'";
                     }
                     //Sem Filtros 
-                    else
-                    {
-                        $query = "SELECT id_consumo, consumo dia FROM consumo WHERE empresa = '{$_SESSION['id_empresa']}' ORDER BY consumo DESC ;";
-                    }
-                        
+                    $query .="ORDER BY consumo.dia, consumo.consumo DESC";
+                    
+                    if($query==NULL)
+                        $query = "SELECT consumo.id_consumo, consumo.consumo, consumo.dia, consumo.equipamento,equipamentos.id_equipamento,equipamentos.descricao FROM consumo INNER JOIN equipamentos ON consumo.equipamento=equipamentos.id_equipamento AND consumo.empresa = '{$_SESSION['id_empresa']}' ORDER BY dia, consumo DESC;";
                     
                     
 
@@ -104,7 +125,7 @@
                     
                     if($row != 0)
                     {
-                        // Caso não haja filtro ou existam mais de 11 projetos cadastrados, exibe resultados em páginas
+                        // Caso não haja filtro ou existam mais de 11 equipamentos cadastrados, exibe resultados em páginas
 
                         if( $row>10)
                         {
@@ -117,7 +138,7 @@
                                 echo '<script language="javascript">';
                                 echo "alert('Página não encontrada.')";
                                 echo '</script>';
-                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/controle/consumo.php?pagina=1'>";
+                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/consumo/consumo.php?pagina=1'>";
                             }
 
                             $bot=(($pagina-1)*10)+1;
@@ -148,7 +169,7 @@
                             echo "
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"></div>
-                                <div class=\"leg-id\"><b>ID</b></div>
+                                <div class=\"leg-id\"><b>DIA</b></div>
                                 <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
                                 <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                             </div>";
@@ -159,7 +180,8 @@
                             {
 
                                 $linha = mysqli_fetch_array($result);
-                                $id = $linha['id_equipamento'];
+                                $id = $linha['id_consumo'];
+                                $dia = date("D/M/Y",strtotime($linha['dia']));
                                 $descricao = $linha['descricao'];
                                 $consumo = $linha['consumo'];
 
@@ -170,7 +192,7 @@
                                     
                                     <div class=\"item\">
                                     <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                    <div class=\"item-id\">".$id."</div>
+                                    <div class=\"item-id\">".$dia."</div>
                                     <div class=\"item-desc\">".$descricao."</div>
                                     <div class=\"item-consumo\">".$consumo."</div>
                                     </div>";
@@ -188,7 +210,7 @@
                             echo "
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"> </div>
-                                <div class=\"leg-id\"><b>ID</b></div>
+                                <div class=\"leg-id\"><b>DIA</b></div>
                                 <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
                                 <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                             </div>";
@@ -197,14 +219,16 @@
 
                                 $linha = mysqli_fetch_array($result);
                                 $id = $linha['id_consumo'];
-                                $dia = $linha['dia'];
-                                @$consumo = $linha['consumo'];
+                                $dia = date("d/m/Y",strtotime($linha['dia']));
+                                $descricao = $linha['descricao'];
+                                $consumo = $linha['consumo'];
+
 
                                 echo "
                                     <div class=\"item\">
                                     <div class=\"item-box\"> <input id=".$id." value=".$id." name=\"check_list[]\" type=\"checkbox\"> </div>
-                                    <div class=\"item-id\">".$id."</div>
-                                    <div class=\"item-desc\">".$dia."</div>
+                                    <div class=\"item-id\">".$dia."</div>
+                                    <div class=\"item-desc\">".$descricao."</div>
                                     <div class=\"item-consumo\">".$consumo."</div>
                                     </div>";
                             }
@@ -221,7 +245,7 @@
                         </div>
                         <div class=\"legenda\">
                             <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
-                            <div class=\"leg-id\"><b>ID</b></div>
+                            <div class=\"leg-id\"><b>DIA</b></div>
                             <div class=\"leg-desc\"><b>EQUIPAMENTO</b></div>
                             <div class=\"leg-consumo\"><b>CONSUMO(kWh)</b></div>
                         </div>
@@ -235,8 +259,8 @@
                 ?>
                 
                     <div class="botoes">
-                    <a href="cad_consumo.php"><button value="cnovo" name="cnovo" class="novo consumo" style="cursor: pointer;">Novo Consumo</button></a>
-                    <button id="arquiva" type="submit" value="<?php echo $id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
+                    <a href="cad_consumo.php"><button value="cnovo" name="cnovo" class="novo" style="cursor: pointer;">Novo Consumo</button></a>
+                    <button type="submit" value="<?php echo @$id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
                     </div>
                 </form>
         </div>

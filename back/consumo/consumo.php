@@ -20,8 +20,8 @@
             foreach(@$_POST['check_list'] as $id){
 
                 $idaux=md5($id);
+
                 $query = "DELETE FROM consumo WHERE id_consumo='$id' AND empresa ='{$_SESSION['id_empresa']}';";
-                echo $query;
                 $resultado = mysqli_query($conecta, $query);
                 if ($resultado == true )
                 $aux++;
