@@ -18,6 +18,7 @@
     $custo = array();
     $orcamento = array();
     $ind_proj = 0;
+    $testa3 = 0;
 
     $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
     $resultado = mysqli_query($conecta, $sql);
@@ -33,6 +34,8 @@
             $custo[$cont] = $linha['custo']; 
             $ind_proj ++;
         }
+    }else if($qtde == 0){
+        $testa3 = 1;
     }
     ksort($projeto);
     ksort($orcamento);
@@ -44,6 +47,7 @@
     $auxconpequip = 0;
     $mesconpequip = 0;
     $ind_conequip = 0;
+    $testa2 = 0;
 
     $sql1 = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia DESC";
     $resultado = mysqli_query($conecta, $sql1);
@@ -54,6 +58,8 @@
         list($ano, $mes, $dia) = explode('-', $linha['dia']);         
         $auxconpequip = $ano;
         $mesconpequip = $mes;
+    }else if($qtde == 0){
+        $testa2 = 1;
     }
 
     $sql2 = "SELECT consumo.*, equipamentos.descricao
@@ -91,6 +97,7 @@
     $auxpos = 0;
     $test = 0;
     $ind_equip = 0;
+    $testa1 = 0;
 
     $sql = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia ASC";
     $resultado = mysqli_query($conecta, $sql);
@@ -100,6 +107,8 @@
         $linha=mysqli_fetch_array($resultado);
         list($ano, $mes, $dia) = explode('-', $linha['dia']);         
         $conano[0] = $ano;
+    }else if($qtde == 0){
+        $testa1 = 1;
     }
 
     $sql = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia ASC";

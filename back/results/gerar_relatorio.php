@@ -178,6 +178,7 @@
         $auxpos = 0;
         $test = 0;
         $ind_equip = 0;
+        $testa1 = 0;
 
         $sql = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia ASC";
         $resultado = mysqli_query($conecta, $sql);
@@ -187,6 +188,8 @@
             $linha=mysqli_fetch_array($resultado);
             list($ano, $mes, $dia) = explode('-', $linha['dia']);         
             $conano[0] = $ano;
+        }else if($qtde = 0){
+            $testa1 = 1;
         }
 
         $sql = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia ASC";
@@ -231,6 +234,7 @@
         $auxconpequip = 0;
         $mesconpequip = 0;
         $ind_conequip = 0;
+        $testa2 = 0;
 
         $sql1 = "SELECT * FROM consumo WHERE empresa = ".$id_empresa." ORDER BY dia DESC";
         $resultado = mysqli_query($conecta, $sql1);
@@ -241,6 +245,8 @@
             list($ano, $mes, $dia) = explode('-', $linha['dia']);         
             $auxconpequip = $ano;
             $mesconpequip = $mes;
+        }else if($qtde == 0){
+            $testa2 = 1;
         }
 
         $sql2 = "SELECT consumo.*, equipamentos.descricao
@@ -275,6 +281,7 @@
         $custo = array();
         $orcamento = array();
         $ind_proj = 0;
+        $testa3 = 0;
 
         $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa." AND projeto.ativo='s';";
         $resultado = mysqli_query($conecta, $sql);
@@ -290,6 +297,8 @@
                 $custo[$cont] = $linha['custo']; 
                 $ind_proj ++;
             }
+        }else if($qtde == 0){
+            $testa3 = 1;
         }
 
         ksort($projeto);
@@ -300,6 +309,7 @@
         $id_proj = array();
         $projetos = array();
         $var = array();
+        $testa4 = 0;
 
         $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
         $resultado = mysqli_query($conecta, $sql);
@@ -312,6 +322,8 @@
                 $linha=mysqli_fetch_array($resultado);
                 $projetos[$cont] = $linha['descricao'];
             }
+        }else if($qtde == 0){
+            $testa4 = 1;
         }
 
         $sql = "SELECT projeto.*, profissional.nome
@@ -344,14 +356,22 @@
     //Intro
     $pdf->AddPage();
         $pdf->Title();
-        $pdf->ReceiptHeader($table1, 'Consumo antes e depois da implementação da smart-grid.');
-        $pdf->ReceiptData($conano, $conant, $condep);
-        $pdf->ReceiptHeader2($table2, 'Média de consumo por equipamento no último mês.');
-        $pdf->ReceiptData2($equipamento, $auxcon);
-        $pdf->ReceiptHeader($table3, 'Orçamento e custo final por projeto.');
-        $pdf->ReceiptData($projeto, $orcamento, $custo);
-        $pdf->ReceiptHeader_prof($table4, 'Profissionais e projetos.');
-        $pdf->ReceiptData_prof($projetos, $var);
+        if($testa1 == 0){
+            $pdf->ReceiptHeader($table1, 'Consumo antes e depois da implementação da smart-grid.');
+            $pdf->ReceiptData($conano, $conant, $condep);
+        }
+        if($testa2 == 0){
+            $pdf->ReceiptHeader2($table2, 'Média de consumo por equipamento no último mês.');
+            $pdf->ReceiptData2($equipamento, $auxcon);
+        }
+        if($testa3 == 0){
+            $pdf->ReceiptHeader($table3, 'Orçamento e custo final por projeto.');
+            $pdf->ReceiptData($projeto, $orcamento, $custo);
+        }
+        if($testa4 == 0){
+            $pdf->ReceiptHeader_prof($table4, 'Profissionais e projetos.');
+            $pdf->ReceiptData_prof($projetos, $var);
+        }
     //Show
     $pdf->Output('I', 'Relatorio_SmartGrids.pdf');
 ?>

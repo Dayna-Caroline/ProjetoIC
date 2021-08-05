@@ -1,11 +1,13 @@
 <?php
     include "../../back/autenticacao.php";
     include "../../back/conexao_local.php";
+    include "../../back/results/testa_grafico.php";
     include "../../back/results/calculos.php";
 
     /*Tabela PROJETOS E PROFISSIONAIS*/
     $projetos = array();
     $var = array();
+    $testa4 = 0;
 
     $sql = "SELECT * FROM projeto WHERE empresa = ".$id_empresa;
     $resultado = mysqli_query($conecta, $sql);
@@ -18,6 +20,8 @@
             $linha=mysqli_fetch_array($resultado);
             $projetos[$cont] = $linha['descricao'];
         }
+    }else if($qtde == 0){
+        $testa4 = 1;
     }
 
     $sql = "SELECT projeto.*, profissional.nome
@@ -221,13 +225,13 @@
 
                 <div class="graficos">
                     <center>
-                        <div id="chart_div1" fill="transparent"></div>
-                        <div id="chart_div3"></div>
+                        <div id="chart_div1" <?php if($testa1 == 1) echo "hidden";?>></div>
+                        <div id="chart_div3" <?php if($testa2 == 1) echo "hidden";?>></div>
                     </center>
-                    <div id="column" style="margin-top: -60px;"></div>
+                    <div id="column" <?php if($testa3 == 1) echo "hidden";?>></div>
                     <br><br><br><br>
                     <center>
-                    <div id="tabela"></div>
+                    <div id="tabela" <?php if($testa4 == 1) echo "hidden";?>></div>
                     </center>
                     <br><br>
                 </div>
