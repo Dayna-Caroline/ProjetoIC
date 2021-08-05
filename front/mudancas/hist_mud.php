@@ -19,15 +19,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-        <link rel="stylesheet" href="../../styles/mud/mudancas.css">
+        <link rel="stylesheet" href="../../styles/mud/menu_mud.css">
+        <link rel="stylesheet" href="../../styles/mud/mud.css">
+        
         <title>Smart Grid</title>
     </head>
 
-    <body onclick="verifica()" onload="verifica()">
+    <body>
 
         <div class="tudo">
 
-        <div class="aba">
+        <div class="aba" id="aba">
                 <div class="logo">
                     <a href="../../front/projetos/menu.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                     <h2 class="nav-text">Smart Grids</h2>
@@ -37,12 +39,18 @@
                     <li class="pag navitem"><a href="../projetos/menu.php?pagina=1"><i class="fas fa-stream"></i><span class="nav-text">Projetos</span></a></li>
                     <li class="navitem"><a href="../funcs/funcionarios.php?pagina=1"><i class="fas fa-users"></i><span class="nav-text">Funcionários</span></a></li>
                     <li class="navitem"><a href="../equip/equipamentos.php"><i class="fas fa-battery-three-quarters"></i><span class="nav-text">Equipamentos</span></a></li>
-                    <li class="navitem"><a href="../controle/controle.php?pagina=1"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
+                    <li class="navitem"><a href="../controle/consumo.php?pagina=1"><i class="fas fa-cogs"></i><span class="nav-text">Consumo</span></a></li>
                     <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
                 </ul>
             </div>
+                
+            <div class="conteudo" id="conteudo">
 
-            <div class="conteudo">
+            <div>
+                    <a href="../projetos/menu.php?pagina=1"><p class="volt alt">&nbsp; &nbsp; &nbsp; &#8592;  Voltar</p></a>
+                   
+             </div>
+                
             <h1>CONTROLE DE MUDANÇAS</h1>
 
              <form class="projetos" action="" method="post">
@@ -52,7 +60,7 @@
                    return date("d/m/Y", strtotime($data));
                 }
                  
-            $query = "SELECT descricao, pedido FROM mudancas WHERE requisito = '$id_req' order by pedido;";
+            $query = "SELECT descricao, pedido, solicitante FROM mudancas WHERE requisito = '$id_req' order by pedido;";
 
 
                         $result = mysqli_query($conecta, $query);
@@ -106,6 +114,7 @@
                                     <div class=\"leg-box\"><input type=\"checkbox\" id=\"marcatodos\" onclick=\"marca(this)\"></div>
                                     <div class=\"leg-id\"><b>DATA</b></div>
                                     <div class=\"leg-desc\"><b>MUDANÇA</b></div>
+                                    <div  class=\"leg-res\"><b>SOLICITANTE</b></div>
                                 </div>";
 
                                 // Exibe os resultados
@@ -118,7 +127,19 @@
                                     $linha = mysqli_fetch_array($result);
                                     $data= data($linha['pedido']);
                                     $nome = $linha['descricao'];
+                                    $id_solic=$linha['solicitante'];
 
+                                    $querys = "SELECT nome FROM profissional WHERE id_profissional = '$id_solic';";
+                                    $results = mysqli_query($conecta, $querys);
+                                    $rows = mysqli_fetch_array($results);
+                                    
+                                        $nome_solic = $rows['nome'];
+                                    
+
+                                   /* $sqlso="select nome from profissional where id_profissional = '$id_solic';";
+                                    $result = mysqli_query($conecta, $sqlso);
+                                    $row = mysqli_num_rows($result);
+                                    $nome_solic = $row['nome'];*/
                                 
                                     if($i>=$bot&&$i<=$top)
                                     {
@@ -127,6 +148,7 @@
                                         <div class=\"item-box\"> <input id=".$data." value=".$data." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$data."</div>
                                         <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-res\">".$nome_solic."</div>
                                         </div>";
                                     }                                        
                             
@@ -156,6 +178,8 @@
                                     <div class=\"leg-box\"><input id=\"marcatodos\" type=\"checkbox\" onclick=\"marca(this)\"> </div>
                                     <div class=\"leg-id\"><b>DATA</b></div>
                                     <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
+                                    <div  class=\"leg-res\"><b>SOLICITANTE</b></div>
+                                    
                                 </div>";
 
                                 for($i=0; $i<$row ; $i++ ){
@@ -163,12 +187,25 @@
                                     $linha = mysqli_fetch_array($result);
                                     $data = data($linha['pedido']);
                                     $nome = $linha['descricao'];
+                                    $id_solic = $linha['solicitante'];
 
+                                    
+
+                                   $sqlso="select nome from profissional where id_profissional = '$id_solic';";
+                                    $results = mysqli_query($conecta, $sqlso);
+                                    $rows = mysqli_fetch_array($results);
+                                   
+                                    
+                                        $nome_solic = $rows['nome'];
+                                   
+                                   
+                                   // $nome_solic = $rows['nome'];
                                     echo "
                                         <div class=\"item\">
                                         <div class=\"item-box\"> <input id=".$data." value=".$data." name=\"check_list[]\" type=\"checkbox\"> </div>
                                         <div class=\"item-id\">".$data."</div>
                                         <div class=\"item-desc\">".$nome."</div>
+                                        <div class=\"item-res\">".$nome_solic."</div>
                                         </div>";
                                 }
                             }
@@ -182,7 +219,8 @@
                             <div class=\"legenda\">
                                 <div class=\"leg-box\"><input type=\"checkbox\" disabled></div>
                                 <div class=\"leg-id\"><b>DATA</b></div>
-                                <div class=\"leg-desc\"><b>mudanças</b></div>
+                                <div class=\"leg-desc\"><b>MUDANÇAS</b></div>
+                                <div  class=\"leg-res\"><b>SOLICITANTE</b></div>
                             </div>
                             <div class=\"item\">
                             <div class=\"item-box\"> <input id=\"\" value=\"\" name=\"selecionado\" disabled type=\"checkbox\"> </div>
