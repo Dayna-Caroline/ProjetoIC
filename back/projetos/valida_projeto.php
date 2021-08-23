@@ -25,7 +25,7 @@
 
     function valida_orcamento($orcamento_aux)
     {
-        if( !$orcamento_aux || $orcamento<0 )
+        if( !$orcamento_aux || $orcamento_aux<0 )
         { return false; } else return true;
     }
 
