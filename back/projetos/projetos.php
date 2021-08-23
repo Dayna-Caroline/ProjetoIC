@@ -104,12 +104,13 @@
         $concluido="n";
 
         $sql = "INSERT INTO projeto VALUES( null, '$descricao', '$finalidade','$orcamento', '$responsavel', '$aprovacao', '$inicio', '$previa', '$fim', '$custo' ,'$c_final', '$empresa', '$ativo', '$concluido');";
-                
+        
+        var_dump($sql);echo"<br>";
         if (mysqli_query($conecta, $sql)) 
-        { header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); }
+        { //header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); }
         
         else 
-        { header("location: ../../front/projetos/cad_projeto.php?s=2"); die(); }
+        { //header("location: ../../front/projetos/cad_projeto.php?s=2"); die(); }
 
         mysqli_close($conecta);
 
