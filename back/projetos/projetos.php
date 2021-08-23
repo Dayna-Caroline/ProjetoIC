@@ -107,10 +107,10 @@
         
         var_dump($sql);echo"<br>";
         if (mysqli_query($conecta, $sql)) 
-        { /*header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); */}
+        { header("location: ../../front/projetos/menu.php?s=1&pagina=1"); die(); }
         
         else 
-        { //header("location: ../../front/projetos/cad_projeto.php?s=2"); die(); 
+        { header("location: ../../front/projetos/cad_projeto.php?s=2"); die(); 
         }
 
         mysqli_close($conecta);
