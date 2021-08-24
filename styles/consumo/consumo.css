@@ -160,7 +160,7 @@ i{
     padding-top: 50px;
     margin-bottom:10px;
     padding-bottom: 20px;
-    min-height: 700px;
+    min-height: 900px;
     background-color: whitesmoke;
     border-radius: 10px;
     border-top-left-radius: 0px;
@@ -397,7 +397,10 @@ input[type=checkbox]
 }
 
 .busca input[type=text]{
-    width:30px; 
+    background-color: white;
+    border:1px solid black;
+    border-radius: 0px;
+    width:70px; 
     height:30px;
 }
 
