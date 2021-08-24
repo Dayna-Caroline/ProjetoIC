@@ -19,7 +19,7 @@
 </head>
 <body onclick="verifica()" onload="verifica()">
     <div class="tudo">
-        <div class="aba">
+        <div id="aba" class="aba">
             <div class="logo">
                 <a href="../../index.php"><img src="../../imgs/logo.png" alt="Logo da empresa" class="img-logo"></a>
                 <h2>Smart Grids</h2>
@@ -33,7 +33,7 @@
                 <li class="navitem"><a href="../results/resultados.php"><i class="fas fa-chart-pie"></i><span class="nav-text">Resultados</span></a></li>
             </ul>
         </div>
-        <div class="conteudo">
+        <div id="conteudo" class="conteudo">
             <h1>Controle de Consumo</h1>
              <!-- MENSAGEM -->
              <?php
@@ -261,8 +261,8 @@
                 ?>
                 
                     <div class="botoes">
-                    <a href="cad_consumo.php"><button value="cnovo" name="cnovo" class="novo" style="cursor: pointer;">Novo Consumo</button></a>
-                    <button type="submit" value="<?php echo @$id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
+                    <button value="cnovo" name="cnovo" class="novo" style="cursor: pointer;"><a href="cad_consumo.php">Novo Consumo</a></button>
+                    <button type="submit" value="<?php echo @$id; ?>" name="cdelete" id="arquiva" style="cursor: pointer;" class="arq">Excluir Consumo</button>
                     </div>
                 </form>
                 
