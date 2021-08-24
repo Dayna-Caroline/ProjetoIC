@@ -8,9 +8,9 @@ function marca(source) {
 document.addEventListener('DOMContentLoaded', function() {
   setInterval(function(){ 
     let b = document.getElementById('conteudo');
-    let cons = window.getComputedStyle(b, null).getPropertyValue("width");
+    let cons = window.getComputedStyle(b, "").getPropertyValue("width");
     if(cons>"823px"){
-      let newValue = window.getComputedStyle(b, null).getPropertyValue("height");
+      let newValue = window.getComputedStyle(b, "").getPropertyValue("height");
       document.getElementById('aba').style.height = newValue;
     }
     else{

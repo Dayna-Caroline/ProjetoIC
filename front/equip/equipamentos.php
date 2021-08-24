@@ -128,7 +128,7 @@
                                 else{
                                     echo "<div class=\"botoes\">";
                                         echo "<div class=\"num-projetos\">".$row." Equipamentos</div>";
-                                        echo "class=\"exibir-resultados\"><b>Exibindo Equipamentos ".$bot." até ".$top."</b></div>";    
+                                        echo "<div class=\"exibir-resultados\"><b>Exibindo Equipamentos ".$bot." até ".$top."</b></div>";    
                                         echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"equipamentos.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                         echo "<p class=\"atual\">...</p>";
                                         echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"equipamentos.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      

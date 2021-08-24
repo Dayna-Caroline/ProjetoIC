@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="../../styles/consumo/consumo.css">
+    <link rel="stylesheet" href="../../styles/projetos/menu.css">
     <title>Smart Grid</title>
 </head>
 <body onclick="verifica()" onload="verifica()">
@@ -67,6 +68,7 @@
                             <option value='04'>Abril</option>
                             <option value='05'>Maio</option>
                             <option value='06'>Junho</option>
+                
                             <option value='07'>Julho</option>
                             <option value='08'>Agosto</option>
                             <option value='09'>Setembro</option>
@@ -127,29 +129,30 @@
                     {
                         // Caso não haja filtro ou existam mais de 11 equipamentos cadastrados, exibe resultados em páginas
 
-                        if( $row>10)
+                        if( $row>8)
                         {
 
-                            $numpag=ceil($row/10);
-                            $pagina=$_GET['pagina'];
+                            $numpag=ceil($row/8);
+                            @$pagina=$_GET['pagina'];
+                            if(!$pagina)
+                                $pagina=1;
 
-                            if( (($pagina-1)*10)+1 > $row )//URL com pagina existente
+                            if( (($pagina-1)*8)+1 > $row )//URL com pagina existente
                             {
                                 echo '<script language="javascript">';
                                 echo "alert('Página não encontrada.')";
                                 echo '</script>';
-                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/consumo/consumo.php?pagina=1'>";
+                                echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../../front/controle/consumo.php?pagina=1'>";
                             }
 
-                            $bot=(($pagina-1)*10)+1;
-                            $top=$pagina*10;
+                            $bot=(($pagina-1)*8)+1;
+                            $top=$pagina*8;
 
                             // verifica a pagina atual
                             
                             if($top>$row){
                                 echo "<div class=\"botoes\">";
-                                    
-                                    echo "<div class=\"exibir-resultados\"><b>Exibindo Consumos ".$bot." até ".$row."</b></div>"; 
+                                echo "<div class=\"exibir-resultados\"><b>Exibindo Consumos ".$bot." até ".$row."</b></div>"; 
                                     echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"consumo.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                     echo "<p class=\"atual\">...</p>";
                                     echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"consumo.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";
@@ -158,8 +161,7 @@
 
                             else{
                                 echo "<div class=\"botoes\">";
-                                
-                                    echo "class=\"exibir-resultados\"><b>Exibindo consumos ".$bot." até ".$top."</b></div>";    
+                                    echo "<div class=\"exibir-resultados\"><b>Exibindo consumos ".$bot." até ".$top."</b></div>";    
                                     echo "<a style=\""; if($pagina==1) {echo"visibility: hidden;";} echo "\" href=\"consumo.php?pagina=".($pagina-1)."\" class=\"next\">".($pagina-1)." <i style=\"color: #2096f7;\" class=\"fas fa-chevron-left\"></i></a>";
                                     echo "<p class=\"atual\">...</p>";
                                     echo "<a style=\""; if($pagina==$numpag) {echo"visibility: hidden;";} echo "\" href=\"consumo.php?pagina=".($pagina+1)."\" class=\"next\"><i style=\"margin-right:0px; color: #2096f7\" class=\"fas fa-chevron-right\"></i>&nbsp;".($pagina+1)."</a>";                      
@@ -181,7 +183,7 @@
 
                                 $linha = mysqli_fetch_array($result);
                                 $id = $linha['id_consumo'];
-                                $dia = date("D/M/Y",strtotime($linha['dia']));
+                                $dia = date("d/m/Y",strtotime($linha['dia']));
                                 $descricao = $linha['descricao'];
                                 $consumo = $linha['consumo'];
 
@@ -263,10 +265,11 @@
                     <button type="submit" value="<?php echo @$id; ?>" name="cdelete" style="cursor: pointer;" class="arq">Excluir Consumo</button>
                     </div>
                 </form>
+                
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="../../js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-    <script src="../../js/funcs_equipamentos.js"></script>
+    <script src="../../js/funcs_consumo.js"></script>
 </body>
 </html>
