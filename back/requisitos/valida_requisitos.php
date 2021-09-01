@@ -39,7 +39,7 @@
         if(valida_titulo($titulo)==false){ $erro .= "_2"; }
         if(valida_processo($processo)==false){ $erro .= "_3"; }
         if(valida_tipo($tipo)==false){ $erro .= "_4"; }
-        if(valida_custo($tipo)==false){ $erro .= "_5"; }
+        if(valida_custo($custo)==false){ $erro .= "_5"; }
 
         if($erro!="")
         {
@@ -73,7 +73,7 @@
         if(valida_titulo($titulo)==false){ $erro .= "_2"; }
         if(valida_processo($processo)==false){ $erro .= "_3"; }
         if(valida_tipo($tipo)==false){ $erro .= "_4"; }
-        if(valida_custo($tipo)==false){ $erro .= "_5"; }
+        if(valida_custo($custo)==false){ $erro .= "_5"; }
 
         if($erro!="")
         {

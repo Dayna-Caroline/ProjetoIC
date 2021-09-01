@@ -47,6 +47,21 @@
         <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <link rel="stylesheet" href="../../styles/projetos/projeto.css">
         <title>Smart Grid</title>
+        <style>
+            select{
+                height: 40px;
+                font-size:15px;
+                width: 150px!important;
+                overflow: hidden;
+                outline: 0;
+                margin-left:-5px;
+            }
+
+            option{
+                overflow: hidden;
+            }
+
+        </style>
     </head>
 
     <body onload="visualizar()">
@@ -164,13 +179,47 @@
                             ";
 
                             if($linha2['concluido']=='s'){
-                                echo "<div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" disabled class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>";
+                                if($tipo==1){
+                                    echo "<div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
+
+                                    <div style=\"width:140px;\" class=\"item-id2\">
+                                        <select disabled style=\"padding-left:10px;\" name=\"tipo\" id=\"tipo\">
+                                            <option value=\"1\">Funcional</option>
+                                        </select>
+                                    </div>";
+                                }
+                                else{
+                                    echo "<div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
+
+                                    <div style=\"width:140px;\" class=\"item-id2\">
+                                        <select disabled style=\"padding-left:10px;\" name=\"tipo\" id=\"tipo\">
+                                            <option value=\"2\">Não Funcional</option>
+                                        </select>
+                                    </div>";
+                                }
                             }
                             
                             else{
-                                echo "<div class=\"leg-id2\" style=\"margin-right: 20px; margin-left: 20px; width:150px;\"><b>Tipo</b></div>
-                                <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required onkeypress=\"alterou()\" class=\"numero\" type=\"number\" name=\"tipo\" value=\"".$tipo."\"></div>";
+                                if($tipo==1){
+                                    echo "<div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
+
+                                    <div style=\"width:140px;\" class=\"item-id2\">
+                                        <select style=\"padding-left:10px;\" required name=\"tipo\" id=\"tipo\">
+                                            <option selected value=\"1\">Funcional</option>
+                                            <option value=\"2\">Não Funcional</option>
+                                        </select>
+                                    </div>";
+                                }
+                                else{
+                                    echo "<div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
+
+                                    <div style=\"width:140px;\" class=\"item-id2\">
+                                        <select style=\"padding-left:10px;\" required name=\"tipo\" id=\"tipo\">
+                                            <option value=\"1\">Funcional</option>
+                                            <option selected value=\"2\">Não Funcional</option>
+                                        </select>
+                                    </div>";
+                                }
                             }
                                 
                             echo "</div>

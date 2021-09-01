@@ -40,6 +40,22 @@
         <link rel="stylesheet" href="../../styles/projetos/menu.css">
         <link rel="stylesheet" href="../../styles/projetos/projeto.css">
         <title>Smart Grid</title>
+
+
+        <style>
+            select{
+                height: 40px;
+                font-size:15px;
+                width: 180px!important;
+                overflow: hidden;
+                outline: 0;
+            }
+
+            option{
+                overflow: hidden;
+            }
+
+        </style>
     </head>
 
     <body>
@@ -120,7 +136,14 @@
 
                         echo "<div class=\"item2\">
                         <div class=\"leg-id2\" style=\"margin-left:25px; margin-right: 20px; width:150px;\"><b>Tipo</b></div>
-                        <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" required class=\"numero\" type=\"number\" name=\"tipo\"></div>
+
+                        <div style=\"width:140px;\" class=\"item-id2\">
+                            <select style=\"padding-left:10px;\" required name=\"tipo\" id=\"tipo\">
+                                <option value=\"1\">Funcional</option>
+                                <option value=\"2\">Não Funcional</option>
+                            </select>
+                        </div>
+
 
                         <div class=\"leg-id2\" style=\"margin-right: 25px; margin-left: 25px; width:150px;\"><b>Custo (R$)</b></div>
                         <div style=\"width:140px;\" class=\"item-id2\"><input id=\"tipo\" step=\".01\" required class=\"numero\" type=\"number\" name=\"custo\"></div>
